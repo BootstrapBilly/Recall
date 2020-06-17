@@ -1,0 +1,53 @@
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.background_image {
+    background-image: url("../../Assets/Image/Auth_background.jpg");
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0.9;
+}
+
+.logo_container {
+    position: relative;
+    top: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    height: 170px;
+    width: 170px;
+}
+
+.recall {
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.button_container {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    bottom: 40px;
+    flex-direction: column;
+}
+
+.alt_text {
+    position: relative;
+    top: 12px;
+    font-weight: 400;
+    color: white;
+}
