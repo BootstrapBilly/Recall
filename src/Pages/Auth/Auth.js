@@ -10,6 +10,9 @@ import Form from "./Components/Form/Form"
 //util
 import colours from "../../util/colours"
 
+//external
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+
 export const Auth = () => {
 
     const [input_open, set_input_open] = useState(false)//state to determine whether or not the input is open
@@ -26,8 +29,47 @@ export const Auth = () => {
             case "signup":
 
                 return set_input_open("signup")//if it was by the signup button, open the signup input
+            default: return
         }
     }
+
+    //_Farcebook
+
+    const [is_logged_in, set_is_logged_in] = useState(false)
+    const [user_details, set_user_details] = useState({ name: "", email: "", picture: "" })
+
+    let facebook_content;
+
+    const handle_click = () => {
+
+        console.log("clicked")
+
+    }
+
+    const handle_response = response => {
+
+        console.log(response)
+
+    }
+
+    if (is_logged_in) {
+
+        facebook_content = null
+        console.log("logged in")
+    }
+
+    else {
+        facebook_content = <FacebookLogin
+            appId="703706777115834"
+            autoLoad={true}
+            fields="name,email,picture"
+            onClick={() => handle_click()}
+            callback={(data) => handle_response(data)}
+            render={renderProps => (
+                <Button text={"Connect with Facebook"} background_color="#1877f2" icon_name="facebook.svg" onClick={renderProps.onClick}/>
+            )} />
+    }
+
 
     return (
 
@@ -47,7 +89,8 @@ export const Auth = () => {
                 {/* Button container */}
                 <div className={[classes.button_container, input_open && classes.button_container_input_open].join(" ")}>
 
-                    <Button text={"Connect with Facebook"} background_color="#1877f2" icon_name="facebook.svg" />
+                    {/* <Button text={"Connect with Facebook"} background_color="#1877f2" icon_name="facebook.svg" /> */}
+                    {facebook_content}
                     <Button text={"Sign up for an account"} background_color={colours.primary} icon_name="user.svg" onClick={() => handle_open_input("signup")} />
 
                 </div>

@@ -1,3 +1,9 @@
+body{
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
+
 .container {
     height: 100%;
     display: flex;
@@ -5,6 +11,7 @@
     align-items: center;
     position: relative;
     transition: transform 1s ease-in-out;
+    overflow: hidden;
 }
 
 .container_input_open{
