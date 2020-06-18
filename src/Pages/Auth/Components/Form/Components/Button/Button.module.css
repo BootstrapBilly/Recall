@@ -1,0 +1,15 @@
+.container{
+    height: 40px;
+    width: 70%;
+    margin-top: 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text{
+    color: white;
+    font-size: 20px;
+    font-weight: 100;
+}

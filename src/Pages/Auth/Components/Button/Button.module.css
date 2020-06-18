@@ -7,7 +7,7 @@
     font-size: 20px;
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .icon{
@@ -17,3 +17,6 @@
     margin-right: 10px;
 }
 
+.text{
+    margin-top: 3px;
+}
