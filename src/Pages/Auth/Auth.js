@@ -1,75 +1,51 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 //css
 import classes from "./Auth.module.css"
 
 //components
 import Button from "./Components/Button/Button"
+import FacebookButton from "./Components/FacebookButton/FacebookButton"
 import Form from "./Components/Form/Form"
 
 //util
 import colours from "../../util/colours"
 
 //external
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { Redirect } from 'react-router'
+
+//redux hooks
+import { useDispatch, useSelector } from "react-redux"
+
+//redux action creators
+import { submit_form } from "../../Store/Actions/0_submit_form_action"
+
+//functions
+import toggle_input from "./Functions/toggle_input"
 
 export const Auth = () => {
 
+    //-config
+    const dispatch = useDispatch()//initialise the usedispatch hook
+
+    //?Selectors
+    const response = useSelector(state => state.form.response)//grab the form response from the reducer
+
+    //*states
     const [input_open, set_input_open] = useState(false)//state to determine whether or not the input is open
+    const [redirect, set_redirect] = useState(false)//used to redirect on successful authentication
+    // const [error_type, set_error_type] = useState(null)
 
-    const handle_open_input = type => {
+    //!effects
+    useEffect(() => {
 
-        switch (type) {//switch the type (way the input was opened)
+        if (response) {//if there is a form response
 
-            case "alt_text"://if it was the login/signup text
+            //and it is a 200 or 201, redirect the user to the dashboard
+            if (response.status === 200 || response.status === 201) { set_redirect("/dashboard") }
 
-                if (input_open) return set_input_open(false)//close the input
-                else return set_input_open("login");//open the login input
-
-            case "signup":
-
-                return set_input_open("signup")//if it was by the signup button, open the signup input
-            default: return
         }
-    }
-
-    //_Farcebook
-
-    const [is_logged_in, set_is_logged_in] = useState(false)
-    const [user_details, set_user_details] = useState({ name: "", email: "", picture: "" })
-
-    let facebook_content;
-
-    const handle_click = () => {
-
-        console.log("clicked")
-
-    }
-
-    const handle_response = response => {
-
-        console.log(response)
-
-    }
-
-    if (is_logged_in) {
-
-        facebook_content = null
-        console.log("logged in")
-    }
-
-    else {
-        facebook_content = <FacebookLogin
-            appId="703706777115834"
-            autoLoad={true}
-            fields="name,email,picture"
-            onClick={() => handle_click()}
-            callback={(data) => handle_response(data)}
-            render={renderProps => (
-                <Button text={"Connect with Facebook"} background_color="#1877f2" icon_name="facebook.svg" onClick={renderProps.onClick}/>
-            )} />
-    }
-
+    }, [response])//listen for any form response changes
 
     return (
 
@@ -90,13 +66,13 @@ export const Auth = () => {
                 <div className={[classes.button_container, input_open && classes.button_container_input_open].join(" ")}>
 
                     {/* <Button text={"Connect with Facebook"} background_color="#1877f2" icon_name="facebook.svg" /> */}
-                    {facebook_content}
-                    <Button text={"Sign up for an account"} background_color={colours.primary} icon_name="user.svg" onClick={() => handle_open_input("signup")} />
+                    <FacebookButton />
+                    <Button text={"Sign up for an account"} background_color={colours.primary} icon_name="user.svg" onClick={() => toggle_input("signup", input_open, set_input_open)} />
 
                 </div>
 
                 {/* Alt text, changes depending on what kind of input is open*/}
-                <div className={classes.alt_text} onClick={() => handle_open_input("alt_text")}>
+                <div className={classes.alt_text} onClick={() => toggle_input("alt_text", input_open, set_input_open)}>
 
                     <span className={[classes.login, input_open === "login" && classes.login_input_open].join(" ")}>Already have an account ? Log in</span>
                     <span className={[classes.signup, input_open === "login" && classes.signup_input_open].join(" ")}>Need to create an account ? Sign up</span>
@@ -105,12 +81,14 @@ export const Auth = () => {
 
             </div>
 
-            {/* Input section, hidden to start, opened by triggering the handle_open_input function */}
+            {/* Input section, hidden to start, opened by triggering the toggle_input function */}
             <div className={[classes.input_container, input_open && classes.input_container_open].join(" ")}>
 
-                <Form type={input_open}/>
+                <Form form_type={input_open} handle_submit={(details) => dispatch(submit_form(details, input_open === "signup" ? "user" : "login"))} />
 
             </div>
+
+            {redirect && <Redirect to={redirect} />}
 
         </React.Fragment>
 

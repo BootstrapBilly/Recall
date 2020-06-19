@@ -4,12 +4,14 @@ import React, { useState } from 'react'
 import classes from "./FacebookButton.module.css"
 
 //external
-import FacebookLogin from "react-facebook-login"
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+
+//components
+import Button from "../Button/Button"
 
 export const FacebookButton = () => {
 
     const [is_logged_in, set_is_logged_in] = useState(false)
-    const [user_details, set_user_details] = useState({ name: "", email: "", picture: "" })
 
     let facebook_content;
 
@@ -35,23 +37,19 @@ export const FacebookButton = () => {
         facebook_content = <FacebookLogin
             appId="703706777115834"
             autoLoad={true}
-            fields="name,email,picture"
+            fields="email"
             onClick={() => handle_click()}
             callback={(data) => handle_response(data)}
             render={renderProps => (
-                <button onClick={renderProps.onClick}>This is my custom FB button</button>
+                <Button text={"Connect with Facebook"} background_color="#1877f2" icon_name="facebook.svg" onClick={renderProps.onClick} />
             )} />
     }
 
 
     return (
 
-        <div className={classes.container}>
-
-            {facebook_content}
-
-        </div>
-
+            <div className={classes.container}>{facebook_content}</div>
+    
     )
 
 }

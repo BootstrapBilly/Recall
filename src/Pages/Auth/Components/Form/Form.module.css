@@ -19,3 +19,9 @@
         margin-top: 0px;
     }
 }
+
+.error_message{
+
+    color: red;
+    margin-top: 20px;
+}
