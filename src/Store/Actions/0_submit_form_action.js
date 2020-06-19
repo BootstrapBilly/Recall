@@ -1,6 +1,7 @@
 import send_request from "../../util/send_request"
 
 export const API_RESPONSE = "API_RESPONSE";
+export const CLEAR_RESPONSE = "CLEAR_RESPONSE";
 
 export const submit_form = (data, url, type) => {
 
@@ -27,3 +28,7 @@ export const submit_form = (data, url, type) => {
     }
 
 }
+
+export const clear_response = () => async dispatch => dispatch({ type: CLEAR_RESPONSE})
+
+

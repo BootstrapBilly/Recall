@@ -34,7 +34,6 @@ export const Auth = () => {
     //*states
     const [input_open, set_input_open] = useState(false)//state to determine whether or not the input is open
     const [redirect, set_redirect] = useState(false)//used to redirect on successful authentication
-    // const [error_type, set_error_type] = useState(null)
 
     //!effects
     useEffect(() => {
