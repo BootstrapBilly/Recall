@@ -60,6 +60,7 @@ export const Input = props => {
                 onFocus={() => handle_input_focus()}
                 onBlur={() => handle_input_blur()}
                 onChange={props.onChange}
+                value={props.value}
             />
 
         </div>

@@ -97,7 +97,7 @@ body{
 .input_container{
     background-color: #eaeff2;
     z-index: 2;
-    height: 400px;
+    min-height: 400px;
     width: 100%;
     position: absolute;
     top: 100%;

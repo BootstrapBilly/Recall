@@ -4,7 +4,8 @@ const toggle_input = (button, input_open, set_input_open) => {
 
         case "alt_text"://if it was the login/signup text
 
-            if (input_open) return set_input_open(false)//close the input
+            if (input_open === "signup") return set_input_open("login")//close the input
+            if(input_open === "login") return set_input_open(false)
             else return set_input_open("login");//open the login input
 
         case "signup":

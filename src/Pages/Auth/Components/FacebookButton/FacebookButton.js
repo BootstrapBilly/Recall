@@ -9,7 +9,7 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 //components
 import Button from "../Button/Button"
 
-export const FacebookButton = () => {
+export const FacebookButton = props => {
 
     const [is_logged_in, set_is_logged_in] = useState(false)
 
@@ -23,7 +23,7 @@ export const FacebookButton = () => {
 
     const handle_response = response => {
 
-        console.log(response)
+        props.handle_response(response)
 
     }
 
@@ -36,7 +36,7 @@ export const FacebookButton = () => {
     else {
         facebook_content = <FacebookLogin
             appId="703706777115834"
-            autoLoad={true}
+            autoLoad={false}
             fields="email"
             onClick={() => handle_click()}
             callback={(data) => handle_response(data)}

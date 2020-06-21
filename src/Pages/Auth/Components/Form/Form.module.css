@@ -11,7 +11,8 @@
 }
 
 .container_focused {
-    margin-top: 50px;
+    margin-top: 40vh;
+    padding-bottom: 20vh;
 }
 
 @supports (-webkit-touch-callout: none) {
@@ -25,4 +26,20 @@
     color: red;
     margin-top: 20px;
     width: 90%;
+}
+
+@media (min-height: 300px){
+
+    .container_focused {
+        margin-top: 15vh;
+        padding-bottom: 10vh;
+    }
+
+    @supports (-webkit-touch-callout: none) {
+        .container_focused {
+            margin-top: 0px;
+        }
+    }
+    
+
 }

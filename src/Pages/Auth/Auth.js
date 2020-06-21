@@ -34,6 +34,7 @@ export const Auth = () => {
     //*states
     const [input_open, set_input_open] = useState(false)//state to determine whether or not the input is open
     const [redirect, set_redirect] = useState(false)//used to redirect on successful authentication
+    const [facebook_response_data, set_facebook_response_data] = useState(null)
 
     //!effects
     useEffect(() => {
@@ -45,6 +46,28 @@ export const Auth = () => {
 
         }
     }, [response])//listen for any form response changes
+
+    const handle_facebook_response = (data) => {
+
+        console.log(data)
+        set_facebook_response_data(data)
+        set_input_open("facebook")
+    }
+
+    const handle_facebook_signup = (username) => {
+
+        const details = {
+
+            email:facebook_response_data.email,
+            username:username,
+            password:"facebook_signup",
+            repeat_password:"facebook_signup"
+
+        }
+
+        dispatch(submit_form(details, "user"))
+
+    }
 
     return (
 
@@ -65,7 +88,7 @@ export const Auth = () => {
                 <div className={[classes.button_container, input_open && classes.button_container_input_open].join(" ")}>
 
                     {/* <Button text={"Connect with Facebook"} background_color="#1877f2" icon_name="facebook.svg" /> */}
-                    <FacebookButton />
+                    <FacebookButton handle_response={(data)=> handle_facebook_response(data)}/>
                     <Button text={"Sign up for an account"} background_color={colours.primary} icon_name="user.svg" onClick={() => toggle_input("signup", input_open, set_input_open)} />
 
                 </div>
@@ -83,7 +106,10 @@ export const Auth = () => {
             {/* Input section, hidden to start, opened by triggering the toggle_input function */}
             <div className={[classes.input_container, input_open && classes.input_container_open].join(" ")}>
 
-                <Form form_type={input_open} handle_submit={(details) => dispatch(submit_form(details, input_open === "signup" ? "user" : "login"))} />
+                <Form form_type={input_open} 
+                handle_submit={(details) => dispatch(submit_form(details, input_open === "signup" ? "user" : "login"))}
+                handle_facebook_signup={(username)=> handle_facebook_signup(username)}
+                />
 
             </div>
 

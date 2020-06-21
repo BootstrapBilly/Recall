@@ -16,6 +16,7 @@ const handle_error_highlighting = (response, set_erroneous_field) => {
             return set_erroneous_field("PASSWORD")
         case "Your passwords must match":
             return set_erroneous_field("REPEAT PASSWORD")
+            
         default: return;
     }
 
