@@ -42,7 +42,7 @@ export const Auth = () => {
         if (response) {//if there is a form response
 
             //and it is a 200 or 201, redirect the user to the dashboard
-            if (response.status === 200 || response.status === 201) { set_redirect("/dashboard") }
+            if (response.data.message === "User created" || response.data.message === "Login successful") { set_redirect("/dashboard") }
 
         }
     }, [response])//listen for any form response changes

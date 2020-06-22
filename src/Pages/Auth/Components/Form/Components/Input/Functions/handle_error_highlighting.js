@@ -1,14 +1,17 @@
 const handle_error_highlighting = (response, set_erroneous_field) => {
 
+    console.log(response)
+
     switch (response.data.message) {
 
         case "Sorry, that email/username does not exist in our database":
             return set_erroneous_field("EMAIL OR USERNAME")
         case "Sorry, your password is incorrect":
             return set_erroneous_field("PASSWORD")
-        case "Sorry, that email in unavailable":
+        case "Sorry, that email is unavailable":
+            console.log("inside")
             return set_erroneous_field("EMAIL")
-        case "Sorry, that username in unavailable":
+        case "Sorry, that username is unavailable":
             return set_erroneous_field("USERNAME")
         case "Your password must be at least 8 characters":
             return set_erroneous_field("PASSWORD")

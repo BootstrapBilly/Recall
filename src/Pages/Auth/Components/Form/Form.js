@@ -9,9 +9,16 @@ import Button from "./Components/Button/Button"
 import NavigationButtons from "./Components/Navigation_buttons/Navigation_buttons"
 
 //redux hooks
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+
+//redux action creators
+import { submit_form, clear_response } from "../../../../Store/Actions/0_submit_form_action"
+
 
 export const Form = props => {
+
+    //-config
+    const dispatch = useDispatch()
 
     //?Selectors
     const response = useSelector(state => state.form.response)
@@ -46,19 +53,21 @@ export const Form = props => {
 
                     case "email":
                         if (user_details.email) return set_show_form_navigation_buttons("next");
-                        break;
+                        else return set_show_form_navigation_buttons(false)
+
 
                     case "username":
-console.log(1)
-                        if(!user_details.username) {
-                            console.log(2)
-                            return set_show_form_navigation_buttons("back");}
+                        if (!user_details.username) {
+
+                            return set_show_form_navigation_buttons("back");
+                        }
                         else return set_show_form_navigation_buttons("both");
-                        break;
+
 
                     case "password":
                         if (user_details.password && user_details.repeat_password) return set_show_form_navigation_buttons("submit")
-                        break;
+                        else return set_show_form_navigation_buttons("back_submit")
+
                 }
 
                 if (!user_details.email || !user_details.username || !user_details.password || !user_details.repeat_password) return set_show_submit_button(false)
@@ -72,32 +81,46 @@ console.log(1)
 
     }
 
-    console.log(manual_signup_step)
+    const handle_form_navigation = async direction => {
 
-    const handle_form_navigation = direction => {
+        console.log(direction)
 
         switch (manual_signup_step) {
 
             case "email":
-         
-                return set_manual_signup_step("username")
+
+                return dispatch(submit_form({ email: user_details.email }, "check_email"))
 
             case "username":
 
-                if(direction === "back"){
-                    console.log("triggered")
-                    return set_manual_signup_step("email") 
-                }
-                    else if(direction === "next"){
-                        set_manual_signup_step("password")
-                    }
+                direction === "back" ? set_manual_signup_step("email")
+                    : dispatch(submit_form({ username: user_details.username }, "check_username"))
+            break;
             case "password":
-                direction === "back" ? set_manual_signup_step("username") : direction === "next" && props.handle_submit.bind(this, user_details)
+                direction === "back" ? set_manual_signup_step("username")
+                    : dispatch(submit_form(user_details, "user"))
+                    break;
+
         }
     }
 
     //when the input changes, scan them and see whether or not to show the button
     useEffect(() => { scan_inputs() }, [user_details, manual_signup_step])
+
+
+    useEffect(() => {
+
+        if (response && response.data.message === "Email is okay") {
+            set_manual_signup_step("username")
+            dispatch(clear_response())
+        }
+
+        if (response && response.data.message === "Username is okay") {
+            set_manual_signup_step("password")
+            dispatch(clear_response())
+        }
+
+    }, [response])
 
     return (
 
@@ -152,13 +175,16 @@ console.log(1)
 
             {show_form_navigation_buttons === "next" ? <NavigationButtons type="next" on_click={(direction) => handle_form_navigation(direction)} />
                 : show_form_navigation_buttons === "back" ? <NavigationButtons type="back" on_click={(direction) => handle_form_navigation(direction)} />
-                : show_form_navigation_buttons === "both" ? <NavigationButtons type="both" on_click={(direction) => handle_form_navigation(direction)} />
-                    : show_form_navigation_buttons === "submit" && <NavigationButtons type="submit" on_click={(direction) => handle_form_navigation(direction)} />
+                    : show_form_navigation_buttons === "both" ? <NavigationButtons type="both" on_click={(direction) => handle_form_navigation(direction)} />
+                        : show_form_navigation_buttons === "back_submit" ? <NavigationButtons type="back" submit={true} on_click={(direction) => handle_form_navigation(direction)} />
+                            : show_form_navigation_buttons === "submit" && <NavigationButtons type="both" submit={true} on_click={(direction) => handle_form_navigation(direction)} />
+
             }
+
 
             {show_submit_button && <Button text={(props.form_type === "signup" || props.form_type === "facebook") ? "SIGN UP" : "LOG IN"} onClick={props.form_type === "facebook" ? props.handle_facebook_signup.bind(this, user_details.username) : props.handle_submit.bind(this, user_details)} />}
 
-            <span className={classes.error_message}>{response && response.data.message}</span>
+            <span className={classes.error_message} style={{ display: !response && "none" }}>{response && response.data.message}</span>
 
         </div>
 
