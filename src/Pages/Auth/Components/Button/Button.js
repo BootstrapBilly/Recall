@@ -8,7 +8,7 @@ export const Button = props => {
 
     return (
 
-        <div className={classes.container} style={{backgroundColor:props.background_color}} onClick={props.onClick}>
+        <div className={classes.container} style={{backgroundColor:props.background_color}} onClick={props.onClick} test_handle={props.test_handle}>
             
             <img src={require(`../../../../Assets/Icon/${props.icon_name}`)} alt="An icon" className={classes.icon} />
             <span className={classes.text}>{props.text}</span>

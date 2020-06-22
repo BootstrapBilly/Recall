@@ -89,15 +89,15 @@ export const Auth = () => {
 
                     {/* <Button text={"Connect with Facebook"} background_color="#1877f2" icon_name="facebook.svg" /> */}
                     <FacebookButton handle_response={(data)=> handle_facebook_response(data)}/>
-                    <Button text={"Sign up for an account"} background_color={colours.primary} icon_name="user.svg" onClick={() => toggle_input("signup", input_open, set_input_open)} />
+                    <Button test_handle="signup_button" text={"Sign up for an account"} background_color={colours.primary} icon_name="user.svg" onClick={() => toggle_input("signup", input_open, set_input_open)} />
 
                 </div>
 
                 {/* Alt text, changes depending on what kind of input is open*/}
                 <div className={classes.alt_text} onClick={() => toggle_input("alt_text", input_open, set_input_open)}>
 
-                    <span className={[classes.login, input_open === "login" && classes.login_input_open].join(" ")}>Already have an account ? Log in</span>
-                    <span className={[classes.signup, input_open === "login" && classes.signup_input_open].join(" ")}>Need to create an account ? Sign up</span>
+                    <span test_handle="login_text" className={[classes.login, input_open === "login" && classes.login_input_open].join(" ")}>Already have an account ? Log in</span>
+                    <span test_handle="signup_text" className={[classes.signup, input_open === "login" && classes.signup_input_open].join(" ")}>Need to create an account ? Sign up</span>
 
                 </div>
 

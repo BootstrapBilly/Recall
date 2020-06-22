@@ -46,15 +46,17 @@ export const Input = props => {
     }
 
     //if there is a response, call the error highlighting function to highlight any erroneous fields in red
-    useEffect(() => {response && handle_error_highlighting(response, set_erroneous_field)}, [response])
+    useEffect(() => { response && handle_error_highlighting(response, set_erroneous_field) }, [response])
 
     return (
 
-        <div className={classes.container} style={{ border: input_focused ? `1px solid ${colours.primary}` : erroneous_field === props.label && "3px solid red" }}>
+        <div className={classes.container} style={{ border: input_focused ? `1px solid ${colours.primary}` : erroneous_field === props.label && "3px solid red" }} >
 
             <span className={classes.label} style={{ color: colours.primary }}>{props.label}</span>
 
             <input
+
+                test_handle={props.test_handle}
                 className={classes.input}
                 type={props.type}
                 onFocus={() => handle_input_focus()}

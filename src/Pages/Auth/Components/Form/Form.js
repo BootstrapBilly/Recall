@@ -95,11 +95,11 @@ export const Form = props => {
 
                 direction === "back" ? set_manual_signup_step("email")
                     : dispatch(submit_form({ username: user_details.username }, "check_username"))
-            break;
+                break;
             case "password":
                 direction === "back" ? set_manual_signup_step("username")
                     : dispatch(submit_form(user_details, "user"))
-                    break;
+                break;
 
         }
     }
@@ -129,6 +129,7 @@ export const Form = props => {
             {props.form_type === "login" || (props.form_type === "signup" && manual_signup_step === "email") ?
                 <Input
 
+                    test_handle="form_email_input"
                     label={props.form_type === "login" ? "EMAIL OR USERNAME" : "EMAIL"}
                     type={"text"}
                     onChange={(e) => set_user_details({ ...user_details, email: e.target.value })}
@@ -141,6 +142,7 @@ export const Form = props => {
 
                 <Input
 
+                    test_handle="form_username_input"
                     label={"USERNAME"}
                     type={"text"}
                     onChange={(e) => set_user_details({ ...user_details, username: e.target.value })}
@@ -152,6 +154,7 @@ export const Form = props => {
             {props.form_type === "login" || (props.form_type === "signup" && manual_signup_step === "password") ?
                 <Input
 
+                    test_handle="form_password_input"
                     label={"PASSWORD"}
                     type={"password"}
                     onChange={(e) => set_user_details({ ...user_details, password: e.target.value })}
@@ -164,6 +167,7 @@ export const Form = props => {
 
                 <Input
 
+                    test_handle="form_repeat_password_input"
                     label={"REPEAT PASSWORD"}
                     type={"password"}
                     onChange={(e) => set_user_details({ ...user_details, repeat_password: e.target.value })}
@@ -182,9 +186,9 @@ export const Form = props => {
             }
 
 
-            {show_submit_button && <Button text={(props.form_type === "signup" || props.form_type === "facebook") ? "SIGN UP" : "LOG IN"} onClick={props.form_type === "facebook" ? props.handle_facebook_signup.bind(this, user_details.username) : props.handle_submit.bind(this, user_details)} />}
+            {show_submit_button && <Button test_handle="login_button" text={(props.form_type === "signup" || props.form_type === "facebook") ? "SIGN UP" : "LOG IN"} onClick={props.form_type === "facebook" ? props.handle_facebook_signup.bind(this, user_details.username) : props.handle_submit.bind(this, user_details)} />}
 
-            <span className={classes.error_message} style={{ display: !response && "none" }}>{response && response.data.message}</span>
+            <span test_handle="form_validation_error" className={classes.error_message} style={{ display: !response && "none" }}>{response && response.data.message}</span>
 
         </div>
 

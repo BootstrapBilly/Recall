@@ -10,7 +10,7 @@ export const Button = props => {
 
     return (
 
-        <div className={classes.container} style={{background:colours.primary}} onClick={props.onClick}>
+        <div test_handle={props.test_handle} className={classes.container} style={{background:colours.primary}} onClick={props.onClick}>
             
             <span className={classes.text}>{props.text}</span>
 

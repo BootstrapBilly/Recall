@@ -48,3 +48,19 @@
     
 
 }
+
+@media (min-width: 500px){
+
+    .container_focused {
+        margin-top: 0vh;
+        padding-bottom: 0vh;
+    }
+
+    @supports (-webkit-touch-callout: none) {
+        .container_focused {
+            margin-top: 0px;
+        }
+    }
+    
+
+}
