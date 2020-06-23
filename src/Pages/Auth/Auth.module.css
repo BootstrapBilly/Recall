@@ -20,19 +20,20 @@ body{
 }
 
 .background_image {
-    background-image: url("../../Assets/Image/Auth_background.jpg");
-    background-size: cover;
+    background-image: url("../../Assets/Image/Auth_background.svg");
+    background-size: auto;
     height: 100%;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
-    opacity: 0.9;
+    opacity: 0.4;
+
 }
 
 .logo_container {
     position: relative;
-    top: 60px;
+    top: 8vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -54,7 +55,7 @@ body{
     align-items: center;
     position: absolute;
     width: 100%;
-    bottom: 50px;
+    bottom: 10vh;
     flex-direction: column;
     transition: opacity 1s ease-in-out;
 }
@@ -65,9 +66,9 @@ body{
 
 .alt_text {
     position: absolute;
-    bottom: 30px;
-    font-weight: 400;
-    color: white;
+    bottom: 7vh;
+    font-weight: 500;
+    color: black;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -113,3 +114,159 @@ body{
 .input_container_open{
     transform: translateY(-400px);
 }
+
+.alt_text:hover{
+    cursor: pointer;
+    font-weight: 900;
+}
+
+/* Small landscape tablet */
+@media (min-height:400px) and (min-width: 800px) and (max-height: 499px) and (max-width: 1023px) {
+
+    .logo_container{
+        top:2vh
+    }
+
+    .button_container{
+        bottom: 7vh;
+    }
+
+    .alt_text{
+        bottom: 4vh;
+    }
+
+}
+
+
+/* medium portrait tablet */
+@media (min-height:700px) and (min-width: 500px) and (max-height: 1050px) and (max-width: 800px) {
+
+    .button_container{
+        bottom: 15vh;
+    }
+
+    .alt_text{
+        bottom: 12.5vh;
+        font-weight: bold;
+    }
+
+    .logo_container{
+        top:10vh
+    }
+
+    @supports (-webkit-touch-callout: none) {
+
+        .logo_container{
+            top:15vh
+        }
+
+        .button_container{
+            bottom: 20vh;
+        }
+
+        .alt_text{
+            bottom: 17.5vh;
+        }
+    }
+}
+
+/* medium landscape tablet */
+@media (min-height:501px) and (min-width: 800px) and (max-height: 750px) and (max-width: 1199px) {
+
+    .logo_container{
+        top:6vh
+    }
+
+    .button_container{
+        bottom: 12vh;
+    }
+
+    .alt_text{
+        bottom: 9vh;
+    }
+
+    @supports (-webkit-touch-callout: none) {
+
+    }
+}
+
+/* large portrait tablet */
+@media (min-height:1200px) and (min-width: 1000px) and (max-width: 1199px) {
+
+    .button_container{
+        bottom: 15vh;
+    }
+
+    .alt_text{
+        bottom: 12.5vh;
+        font-weight: bold;
+    }
+
+    .logo_container{
+        top:10vh
+    }
+
+    @supports (-webkit-touch-callout: none) {
+
+        .logo_container{
+            top:15vh
+        }
+
+        .button_container{
+            bottom: 20vh;
+        }
+
+        .alt_text{
+            bottom: 17.5vh;
+        }
+    }
+
+}
+
+/*Standard desktop */
+@media (min-width: 1200px) {
+
+    .logo_container{
+        top: 12vh;
+    }
+
+    .button_container{
+        bottom: 15vh;
+    }
+
+    .alt_text{
+        bottom: 11.5vh;
+    }
+
+}
+
+/*large  */
+@media (min-height: 900px) and (min-width:1200px) {
+
+    .logo_container{
+        top: 15vh;
+    }
+
+}
+
+
+/* large landscape tablet */
+@media (width:1366px) and (min-height:900px) {
+
+    .logo_container{
+        top:10vh
+    }
+
+    .button_container{
+        bottom: 15vh;
+    }
+
+    .alt_text{
+        bottom: 12vh;
+    }
+
+    @supports (-webkit-touch-callout: none) {
+
+    }
+}
+

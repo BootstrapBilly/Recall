@@ -25,6 +25,9 @@ import toggle_input from "./Functions/toggle_input"
 
 export const Auth = () => {
 
+    console.log(window.innerHeight)
+    console.log(window.innerWidth)
+
     //-config
     const dispatch = useDispatch()//initialise the usedispatch hook
 
@@ -81,6 +84,9 @@ export const Auth = () => {
                 <div className={classes.logo_container}>
 
                     <img src={require("../../Assets/Icon/logo.svg")} alt="logo" className={classes.logo} />
+
+                    <span className={classes.recall} style={{color:colours.primary}}>RECALL</span>
+                    <span className={classes.study_smarter} style={{color:colours.primary}}>STUDY SMARTER</span>
 
                 </div>
 
