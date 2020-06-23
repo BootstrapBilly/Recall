@@ -1,0 +1,25 @@
+.container{
+    background-color: white;
+    width: 43%;
+    height: 100px;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: 1px 1px 5px 0px rgba(128, 128, 128, 0.649);
+    border-radius: 5px;
+}
+
+.text{
+    position: absolute;
+    bottom:5%
+}
+
+.icon{
+    height: 40px;
+    width: 40px;
+    position: relative;
+    top:-5px
+}
