@@ -29,10 +29,10 @@ export const Navigation_buttons = props => {
 
                 test_handle="form_next_button"
                 className={[classes.next_button, classes.button].join(" ")}
-                onClick={props.type === "back" ? null : props.on_click.bind(this, "next")}
-                style={{ border: `3px solid ${props.type === "back" ? "grey" : colours.secondary}`, background: props.type === "back" ? "grey" : colours.secondary }}>
+                onClick={props.type === "back" || props.type ==="back_submit" ? null : props.on_click.bind(this, "next")}
+                style={{ border: `3px solid ${props.type === "back" || props.type ==="back_submit" ? "grey" : colours.secondary}`, background: props.type === "back" || props.type ==="back_submit" ? "grey" : colours.secondary }}>
 
-                {props.submit ? "Sign up" : "Next"}
+                {props.type ==="back_submit" || props.type ==="submit" ? "Sign up" : "Next"}
 
             </div>
 
