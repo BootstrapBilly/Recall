@@ -1,0 +1,33 @@
+.container {
+    height: 70%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 5%;
+}
+
+.option_container {
+    height: 175px;
+    width: 185px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 1px 1px 3px 1px rgba(128, 128, 128, 0.281);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.icon {
+    height: 90px;
+    width: 90px;
+    margin-bottom: 60px;
+}
+
+.text {
+    position: absolute;
+    bottom: 20px;
+    text-align: center;
+}

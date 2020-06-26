@@ -1,8 +1,15 @@
 .container{
 
     height: 100%;
-    width: 100%;
+    width: 0%;
+    position: absolute;
+    left: 0;
+    top: 0;
     
+}
+
+.container_open{
+    width: 100%;
 }
 
 .menu_container{
@@ -17,14 +24,15 @@
 .menu_button{
     writing-mode: vertical-lr;
     text-orientation: upright;
-    position: absolute;
+    position: relative;
     left: 0;
     padding: 15px 10px;
     padding-left: 5px;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     color: white;
-    transition: left 0.5s ease-in-out;
+    transition: left 0.2s ease-in-out;
+    z-index: 1;
 }
 
 .menu_button:hover{
@@ -36,9 +44,5 @@
     left: 250px;
 }
 
-/* .menu_icon{
-    height: 25px;
-    width: 25px;
-    margin: 10px;
-} */
+
 

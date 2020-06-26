@@ -11,6 +11,7 @@ import Button from "../Button/Button"
 
 export const FacebookButton = props => {
 
+    // eslint-disable-next-line
     const [is_logged_in, set_is_logged_in] = useState(false)
 
     let facebook_content;

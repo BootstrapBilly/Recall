@@ -4,8 +4,10 @@
     background-color: white;
     position: absolute;
     top: 0;
-    left: -300px;
-    transition: left 0.5s ease-in-out;
+    left: -251px;
+    transition: left 0.5s, opacity 0.8s ease-in-out;
+    z-index: 2;
+    border-right: 1px solid;
 }
 
 .container_open{
@@ -41,5 +43,42 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     margin-top: 10px;
-    
+
 }
+
+.toggle_button_container{
+    width: 40px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    left: 250px;
+    top: 0;
+}
+
+.toggle_button{
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    position: relative;
+    left: -2px;
+    padding: 15px 10px;
+    padding-left: 5px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    color: white;
+    z-index: 1;
+}
+
+.toggle_button:hover{
+    cursor: pointer;
+}
+/* 
+.toggle_button_container{
+    height: 100%;
+    background-color: purple;
+    position: absolute;
+    left: 250px;
+    top: 0;
+} */

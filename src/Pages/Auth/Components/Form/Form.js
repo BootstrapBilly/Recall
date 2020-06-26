@@ -41,12 +41,14 @@ export const Form = props => {
         repeat_password: ""
     })
 
+    //!effects
     //when the input changes, scan them and decide what navigation buttons to display
     useEffect(() => {
 
         handle_dynamic_button_display(props.form_type, user_details, set_show_submit_button, manual_signup_form_step, set_show_form_navigation_buttons)
-
+        // eslint-disable-next-line
     }, [user_details, manual_signup_form_step])
+
 
     //this effect listens for the check email and check username responses, then navigates to the next step upon successful reponse 
     useEffect(() => {
@@ -62,10 +64,9 @@ export const Form = props => {
             set_manual_signup_form_step("password")//move onto the next step
             dispatch(clear_response())//and clear the response
         }
-
+        // eslint-disable-next-line
     }, [response])
 
-    console.log(props.form_type)
     return (
 
         <div className={[classes.container, !props.form_type && classes.container_hidden, keyboard_open && classes.container_focused].join(" ")}>
@@ -89,15 +90,17 @@ export const Form = props => {
 
                 ((props.form_type === "signup" && manual_signup_form_step === "username") || props.form_type === "facebook") &&
 
-                <Input
+                <div>
+                    <Input
 
-                    test_handle="form_username_input"
-                    label={"USERNAME"}
-                    type={"text"}
-                    onChange={(e) => set_user_details({ ...user_details, username: e.target.value })}
-                    toggle_keyboard_open={(status) => set_keyboard_open(status)}
-                    value={user_details.username}
-                />
+                        test_handle="form_username_input"
+                        label={"USERNAME"}
+                        type={"text"}
+                        onChange={(e) => set_user_details({ ...user_details, username: e.target.value })}
+                        toggle_keyboard_open={(status) => set_keyboard_open(status)}
+                        value={user_details.username}
+                    />
+                </div>
             }
 
             {//password input

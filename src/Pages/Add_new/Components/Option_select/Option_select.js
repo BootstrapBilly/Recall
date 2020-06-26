@@ -1,0 +1,39 @@
+import React from 'react'
+
+//css
+import classes from "./Option_select.module.css"
+
+//assets
+import Notes from "../../../../Assets/Icon/NOTES.svg"
+import Note from "../../../../Assets/Icon/note.svg"
+import colours from '../../../../util/colours'
+
+export const Option_select = props => {
+
+    return (
+
+        <div className={classes.container}>
+
+            <div className={[classes.option_container, classes.note].join(" ")} onClick={props.handle_selection.bind(this, "note")}>
+
+                <img src={Note} alt="A note icon" className={classes.icon} />
+
+                <span className={classes.text} style={{ color: colours.secondary }}>Add a new note <br />( single )</span>
+
+            </div>
+
+            <div className={[classes.option_container, classes.collection].join(" ")} onClick={props.handle_selection.bind(this, "collection")}>
+
+                <img src={Notes} alt="A collection icon" className={classes.icon} />
+
+                <span className={classes.text} style={{ color: colours.secondary }}>Add a new collection <br />( of notes )</span>
+
+            </div>
+
+        </div>
+
+    )
+
+}
+
+export default Option_select

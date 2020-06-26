@@ -41,6 +41,8 @@ const handle_form_navigation = (direction, manual_signup_form_step, set_manual_s
 
             break;
 
+            default : return
+
     }
 }
 

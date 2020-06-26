@@ -5,6 +5,8 @@ export const CLEAR_RESPONSE = "CLEAR_RESPONSE";
 
 export const submit_form = (data, url, type) => {
 
+    console.log(data)
+
     let request = send_request(url, data) 
 
     if(type) {request = send_request(url, data, type)}

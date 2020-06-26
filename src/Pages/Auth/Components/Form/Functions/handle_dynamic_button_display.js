@@ -34,7 +34,9 @@ const handle_dynamic_button_display = (form_type, user_details, set_show_submit_
                     //otherwise, show the back button and a greyed out submit
                     else return set_show_form_navigation_buttons("back_submit")
 
+                default: return
             }
+
 
 
         case "facebook"://if it is a facebook form where they only enter their username
@@ -43,7 +45,10 @@ const handle_dynamic_button_display = (form_type, user_details, set_show_submit_
             if (!user_details.username) return set_show_submit_button(false)//do not show the submit button
             //otherwise if it is populated, show the button
             else return set_show_submit_button(true)
+
+        default: return
     }
+
 
 }
 

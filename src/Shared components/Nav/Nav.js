@@ -1,10 +1,7 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
 //css
 import classes from "./Nav.module.css"
-
-//Assets
-import MenuIcon from "../../Assets/Icon/nav_menu.svg"
 
 //util
 import colours from '../../util/colours'
@@ -18,20 +15,13 @@ export const Nav = props => {
 
     return (
 
-        <div className={classes.container}>
+        <React.Fragment>
 
-            {/* Hamburger menu */}
-            <div className={classes.menu_container}>
+            <div className={[classes.container, drawer_open && classes.container_open].join(" ")} onClick={() => drawer_open && set_drawer_open(false)}></div>
 
-                {/* <img src={MenuIcon} alt={"Navigation menu icon"} className={classes.menu_icon} onClick={()=> set_drawer_open(!drawer_open)} /> */}
-
-                <span className={[classes.menu_button,drawer_open && classes.menu_button_open].join(" ")} style={{background:colours.primary}} onClick={()=> set_drawer_open(!drawer_open)}>MENU</span>
-
-            </div>
-
-            <SideDrawer drawer_open={drawer_open}/>
-
-        </div>
+            <SideDrawer drawer_open={drawer_open} handle_toggle={() => set_drawer_open(!drawer_open)}/>
+            
+        </React.Fragment>
     )
 
 }
