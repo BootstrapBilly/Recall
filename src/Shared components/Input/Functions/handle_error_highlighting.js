@@ -1,5 +1,5 @@
 const handle_error_highlighting = (response, set_erroneous_field) => {
-
+    
     switch (response.data.message) {//switch the form response message
 
         case "Sorry, that email/username does not exist in our database":
@@ -22,6 +22,9 @@ const handle_error_highlighting = (response, set_erroneous_field) => {
 
         case "Your passwords must match":
             return set_erroneous_field("REPEAT PASSWORD")
+
+        case "You already have a note with that title, please choose another":
+            return set_erroneous_field("TITLE OF NOTE")
 
         default: return;
     }

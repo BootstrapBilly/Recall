@@ -1,12 +1,13 @@
 .container{
-    width: 300px;
-    height: 45px;
+    width: 225px;
     background-color: white;
-    padding: 5px;
+    padding: 8px 5px;
+    padding-top: 2px;
     box-shadow: 1px 1px 3px 1px rgba(128, 128, 128, 0.281);
     margin-top: 10px;
     position: relative;
     border-radius: 5px;
+    border: 1px solid;
 }
 
 .label{
@@ -14,17 +15,22 @@
 }
 
 .input{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 50%;
-    width: 90%;
-    margin-left: 2%;
-    outline: none;
     border: none;
+    outline: none;
+    display: flex;
     font-size: 14px;
     color: rgba(0, 0, 0, 0.826);
     background-color: transparent;
+}
+
+.text_area{
+    height: 130px;
+    border: none;
+    outline: none;
+    padding: 5px;
+    padding-left: 0;
+    font-size: 14px;
+    width: 95%;
 }
 
 @supports (-webkit-touch-callout: none) {

@@ -19,9 +19,15 @@ export const Side_drawer = props => {
 
     const [redirect, set_redirect] = useState(false)//state to hold the redirection (set by clicking a nav link)
 
+    const handle_navigation = (link) => {
+
+        set_redirect(link)
+        props.handle_toggle()
+
+    }
     return (
 
-        <div className={[classes.container, props.drawer_open && classes.container_open].join(" ")} style={{borderColor:colours.primary}}>
+        <div test_handle="nav_menu_container" className={[classes.container, props.drawer_open && classes.container_open].join(" ")} style={{borderColor:colours.primary}} >
 
             <div className={classes.top_bar} style={{ color: colours.secondary }} onClick={()=> set_redirect("/landing")}>
 
@@ -33,10 +39,10 @@ export const Side_drawer = props => {
             <div className={classes.square_container}>
 
                 {
-                    [["HOME", "dashboard"], ["ADD NEW", "add_new"], ["NOTES", "view_all"], ["SEARCH", "view_all"], ["FRIENDS", "friends"], ["ACCOUNT", "account"]]
+                    [["HOME", "dashboard", "dashboard_nav_square"], ["ADD NEW", "add_new", "add_new_nav_square"], ["NOTES", "view_all", "view_all_nav_square"], ["SEARCH", "view_all", "search_nav_square"], ["FRIENDS", "friends", "friends_nav_square"], ["ACCOUNT", "account", "account_nav_square"]]
                         .map(link =>
 
-                            <NavSquare text={link[0]} icon={link[0]} key={link[0]} onClick={()=> set_redirect(link[1])} />
+                            <NavSquare test_handle={link[2]} text={link[0]} icon={link[0]} key={link[0]} onClick={()=> handle_navigation(link[1])} />
 
                         )
                 }
@@ -45,7 +51,7 @@ export const Side_drawer = props => {
 
             <div className={classes.toggle_button_container}>
 
-                <div className={classes.toggle_button} onClick={props.handle_toggle} style={{background:colours.primary}}>Menu</div>
+                <div test_handle="menu_toggle" className={classes.toggle_button} onClick={props.handle_toggle} style={{background:colours.primary}}>Menu</div>
 
             </div>
 

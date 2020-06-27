@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 
 //css
 import classes from './Input.module.css'
-import colours from '../../../../../../util/colours'
+import colours from '../../util/colours'
 
 //redux action creators
-import { clear_response } from "../../../../../../Store/Actions/0_submit_form_action"
+import { clear_response } from "../../Store/Actions/0_submit_form_action"
 
 //redux hooks
 import { useDispatch, useSelector } from "react-redux"
@@ -29,7 +29,9 @@ export const Input = props => {
 
     const handle_input_focus = () => {
 
-        props.toggle_keyboard_open(true)//call the props toggle keyboard, to move the whole form down on mobile
+        (props.toggle_keyboard_open &&
+            props.toggle_keyboard_open(true))  //call the props toggle keyboard, to move the whole form down on mobile
+
         set_input_focused(true)//set the input focus true to highlight the field
 
         if (erroneous_field === props.label) {//if there is an error, and it is this input
@@ -41,7 +43,9 @@ export const Input = props => {
 
     const handle_input_blur = () => {
 
-        props.toggle_keyboard_open(false)//call the props toggle keyboard to remove the margin and put the page back to normal
+        (props.toggle_keyboard_open &&
+            props.toggle_keyboard_open(false))//call the props toggle keyboard to remove the margin and put the page back to normal
+
         set_input_focused(false)//set the input focus false to remove the colour from the input
     }
 
@@ -50,20 +54,33 @@ export const Input = props => {
 
     return (
 
-        <div className={classes.container} style={{ border: input_focused ? `1px solid ${colours.primary}` : erroneous_field === props.label && "3px solid red" }} >
+        <div className={classes.container}
 
-            <span className={classes.label} style={{ color: colours.primary }}>{props.label}</span>
+            style={{ border: props.grey && input_focused ? "1px solid grey" : input_focused ? `1px solid ${colours.primary}` : erroneous_field === props.label ? `3px solid red` : "transparent", marginTop: props.marginTop }}
 
-            <input
 
-                test_handle={props.test_handle}
-                className={classes.input}
-                type={props.type}
-                onFocus={() => handle_input_focus()}
-                onBlur={() => handle_input_blur()}
-                onChange={props.onChange}
-                value={props.value}
-            />
+        >
+
+            <span test_handle="form_input_label" className={classes.label}
+                style={{ color: props.grey ? "grey" : colours.primary }}
+            // style={{ color: colours.primary }}
+            >{props.label}</span>
+
+            {props.text_area ? <textarea test_handle={props.test_handle} value={props.value} type="text" className={classes.text_area} onChange={props.onChange}></textarea>
+
+                :
+
+                <input
+
+                    test_handle={props.test_handle}
+                    className={classes.input}
+                    type={props.type ? props.type : "text"}
+                    onFocus={() => handle_input_focus()}
+                    onBlur={() => handle_input_blur()}
+                    onChange={props.onChange}
+                    value={props.value}
+                />
+            }
 
         </div>
 

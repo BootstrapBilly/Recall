@@ -10,7 +10,7 @@ If it failed, the effect will show an error explaining why to the user
 
 The last step of the form submits a signup request with all the info, rather than validating one specific */
 
-import { submit_form } from "../../../Store/Actions/0_submit_form_action"
+import { submit_form, clear_response } from "../../../Store/Actions/0_submit_form_action"
 
 const handle_form_navigation = (direction, set_form_type, set_show_form_navigation_buttons, form_step, set_form_step, form_data, dispatch) => {
 
@@ -21,7 +21,8 @@ const handle_form_navigation = (direction, set_form_type, set_show_form_navigati
             if(direction === "back"){
                 set_show_form_navigation_buttons(null)
                 set_form_type(null)
-                return set_form_step("selection")
+                set_form_step("selection")
+                return dispatch(clear_response())
             }
 
             else return dispatch(submit_form({ title: form_data.title, user_id: "5eecd941331a770017a74e44" }, "check_note_title"))

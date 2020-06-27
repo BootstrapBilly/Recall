@@ -4,9 +4,9 @@ import React, { useState, useEffect } from 'react'
 import classes from './Form.module.css'
 
 //components
-import Input from "./Components/Input/Input"
+import Input from "../../../../Shared components/Input/Input"
 import Button from "./Components/Button/Button"
-import NavigationButtons from "./Components/Navigation_buttons/Navigation_buttons"
+import NavigationButtons from "../../../../Shared components/Navigation_buttons/Navigation_buttons"
 
 //redux hooks
 import { useSelector, useDispatch } from "react-redux"
@@ -79,7 +79,6 @@ export const Form = props => {
 
                     test_handle="form_email_input"
                     label={props.form_type === "login" ? "EMAIL OR USERNAME" : "EMAIL"}
-                    type={"text"}
                     onChange={(e) => set_user_details({ ...user_details, email: e.target.value })}
                     toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
                     value={user_details.email}
@@ -95,7 +94,6 @@ export const Form = props => {
 
                         test_handle="form_username_input"
                         label={"USERNAME"}
-                        type={"text"}
                         onChange={(e) => set_user_details({ ...user_details, username: e.target.value })}
                         toggle_keyboard_open={(status) => set_keyboard_open(status)}
                         value={user_details.username}

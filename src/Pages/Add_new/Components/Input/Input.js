@@ -12,7 +12,7 @@ export const Input = props => {
 
     return (
 
-        <div className={classes.container} style={{borderColor:props.grey  && selected ?  "grey" : selected ? colours.primary : "transparent", marginTop:props.marginTop, height:props.height}} onFocus={()=> set_selected(true)} onBlur={()=> set_selected(false)}> 
+        <div className={classes.container} style={{borderColor:props.grey  && selected ?  "grey" : selected ? colours.primary : "transparent", marginTop:props.marginTop}} onFocus={()=> set_selected(true)} onBlur={()=> set_selected(false)}> 
 
             <span className={classes.description} style={{color:props.grey ? "grey" : colours.primary}}>{props.description}</span>
 

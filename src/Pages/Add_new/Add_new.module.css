@@ -8,6 +8,17 @@
 
 .title{
     font-size: 25px;
-    margin-top: 35px;
+    margin-top: 45px;
+
+}
+
+.error_message{
+
+    color: red;
+    margin-top: 20px;
+    max-width: 60%;
+    text-align: center;
+    border: 1px solid red;
+    padding: 5px 20px;
 
 }

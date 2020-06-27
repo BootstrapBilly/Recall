@@ -5,9 +5,9 @@ import classes from "./Add_new.module.css"
 
 //components
 import Nav from "../../Shared components/Nav/Nav"
-import Input from "./Components/Input/Input"
+import Input from "../../Shared components/Input/Input"
 import OptionSelect from "./Components/Option_select/Option_select"
-import NavigationButtons from "../Auth/Components/Form/Components/Navigation_buttons/Navigation_buttons"
+import NavigationButtons from "../../Shared components/Navigation_buttons/Navigation_buttons"
 
 //util
 import colours from '../../util/colours'
@@ -21,6 +21,9 @@ import handle_dynamic_button_display from './Functions/handle_dynamic_button_dis
 
 //redux action creators
 import { clear_response } from "../../Store/Actions/0_submit_form_action"
+
+//external
+import Alert from "easyalert"
 
 export const Add_new = () => {
 
@@ -83,6 +86,24 @@ export const Add_new = () => {
 
     }
 
+    const reset_form = () => {
+
+        set_current_step("selection")
+        set_form_data({
+
+            title: null,
+            subject: null,
+            search_tags: [],
+            body: null,
+            syntax: null,
+            notes: []
+
+        })
+        set_form_type(null)
+        set_show_form_navigation_buttons(false)
+
+    }
+
     useEffect(() => { handle_dynamic_button_display(form_type, form_data, current_step, set_show_form_navigation_buttons) }, [form_data, current_step])
 
     //this effect listens for the check note title, then navigates to the next step upon successful response 
@@ -98,6 +119,20 @@ export const Add_new = () => {
         // eslint-disable-next-line
     }, [response])
 
+    useEffect(() => {
+
+        if (response && response.status === 201) {
+
+            reset_form()
+
+            clear_response()
+
+            Alert("Note added successfully", "success", { top: "100px" })//show the user an alert that their book has been deleted
+
+        }
+
+    }, [response])
+
     return (
 
         <div className={classes.container}>
@@ -109,26 +144,72 @@ export const Add_new = () => {
             {form_type &&
 
                 current_step === "title" ?
-                <Input description={data[1]} value={form_data.title} handle_input={e => set_form_data({ ...form_data, title: e.target.value })} />
+
+                <Input
+                    test_handle="title_input"
+                    label={data[1]}
+                    value={form_data.title}
+                    onChange={e => set_form_data({ ...form_data, title: e.target.value })}
+                    marginTop="30px" />
 
                 : current_step === "body" ?
 
-                    <Input description={data[1]} value={form_data.body} text_area handle_input={e => set_form_data({ ...form_data, body: e.target.value })} />
+                    <Input
+                        test_handle="body_input"
+                        label={data[1]}
+                        value={form_data.body}
+                        text_area
+                        onChange={e => set_form_data({ ...form_data, body: e.target.value })}
+                        marginTop="30px" />
 
                     : current_step === "optionals" ?
 
                         <div>
-                            <Input description={data[1]} grey value={form_data.subject} handle_input={e => set_form_data({ ...form_data, subject: e.target.value })} />
-                            <Input description={data[2]} grey marginTop="10px" value={form_data.search_tags} handle_input={e => set_form_data({ ...form_data, search_tags: e.target.value })} />
+
+                            <Input
+                                test_handle="subject_input"
+                                label={data[1]}
+                                grey
+                                value={form_data.subject}
+                                onChange={e => set_form_data({ ...form_data, subject: e.target.value })}
+                                marginTop="30px" />
+
+                            <Input
+                                test_handle="search_tags_input"
+                                label={data[2]}
+                                grey
+                                value={form_data.search_tags}
+                                onChange={e => set_form_data({ ...form_data, search_tags: e.target.value })}
+                            />
                         </div>
 
                         : current_step === "syntax" ?
 
-                            <Input description={data[1]} grey value={form_data.syntax} text_area handle_input={e => set_form_data({ ...form_data, body: e.target.value })} />
+                            <Input
+                                test_handle="syntax_input"
+                                label={data[1]}
+                                grey
+                                value={form_data.syntax}
+                                text_area onChange={e => set_form_data({ ...form_data, body: e.target.value })}
+                                marginTop="30px"
+                            />
 
                             : null}
 
+            {/* Error message */}
+
+            {response && response.status > 300 && //if there is a response, and it is above 300 (error)
+
+                <span test_handle="form_validation_error" className={classes.error_message}>
+
+                    {//display the error message
+                        response.data.message}
+
+                </span>
+            }
+
             {//Form navigation buttons
+
                 show_form_navigation_buttons &&//if the form has been selected
 
                 <NavigationButtons //show the navigation buttons
