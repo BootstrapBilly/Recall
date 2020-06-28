@@ -5,7 +5,7 @@ export const CLEAR_RESPONSE = "CLEAR_RESPONSE";
 
 export const submit_form = (data, url, type) => {
 
-    console.log(data)
+    // console.log(data)
 
     let request = send_request(url, data) 
 
@@ -16,7 +16,7 @@ export const submit_form = (data, url, type) => {
         try {
 
             const response = await request      
-            console.log(response)
+            // console.log(response)
             if (response.data) return dispatch({ type: API_RESPONSE, payload: response })
 
         }

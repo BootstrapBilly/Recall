@@ -42,6 +42,8 @@ export const Add_new = () => {
     const [show_form_navigation_buttons, set_show_form_navigation_buttons] = useState(false)//show different buttons depending on input
     const [form_type, set_form_type] = useState(null)//hold the type of form (note or collection) - set by the optionsSelect component
     const [notes_search_string, set_notes_search_string] = useState(null)//hold the string used to find notes when adding them to a collection
+    const [selected_notes, set_selected_notes] = useState([])//hold the selected notes (when adding a collection)
+
     const [form_data, set_form_data] = useState({// a state to hold the note information to be submitted to the backend
 
         title: null,
@@ -89,7 +91,7 @@ export const Add_new = () => {
 
     //This effect calls the helper function to dynamically set the navigation buttons, based on what the form step is and if the inputs are populated
     //gets called every time the form step changes or the inputs change
-    useEffect(() => { handle_dynamic_button_display(form_type, form_data, current_step, set_show_form_navigation_buttons) }, [form_data, current_step, form_type])
+    useEffect(() => { handle_dynamic_button_display(form_type, form_data, current_step, set_show_form_navigation_buttons, selected_notes) }, [form_data, current_step, form_type, selected_notes])
 
     //this effect listens for the check note title, then navigates to the next step upon successful response 
     useEffect(() => {
@@ -123,7 +125,7 @@ export const Add_new = () => {
 
         <div className={classes.container}>
 
-            <span className={classes.title} style={{ color: current_step === "optionals" || current_step === "syntax" ? "grey" : colours.primary }}>{data[0]}</span>
+            <span className={classes.title} style={{ color: current_step === "optionals" || current_step === "syntax" ? "grey" : colours.primary, marginTop: current_step === "selection" && "45px" }}>{data[0]}</span>
 
             {!form_type && <OptionSelect handle_selection={(option) => handle_selection(option)} />}
 
@@ -161,7 +163,13 @@ export const Add_new = () => {
 
                             />
                             
-                            <NotesSelect search_string={notes_search_string}/>
+                            <NotesSelect 
+                            search_string={notes_search_string} 
+                            selected_notes={selected_notes}
+                            reset_search_string={()=> set_notes_search_string(null)}
+                            handle_select_note={(note)=> set_selected_notes(selected_notes => [...selected_notes, note])}
+                            handle_remove_note={(note)=> set_selected_notes(selected_notes => [...selected_notes.filter(selected_note => selected_note !== note )])}
+                            />
 
                         </div>
 
@@ -194,7 +202,8 @@ export const Add_new = () => {
                                     label={data[1]}
                                     grey
                                     value={form_data.syntax}
-                                    text_area onChange={e => set_form_data({ ...form_data, body: e.target.value })}
+                                    text_area 
+                                    onChange={e => set_form_data({ ...form_data, syntax: e.target.value })}
                                     marginTop="30px"
                                 />
 
@@ -202,7 +211,8 @@ export const Add_new = () => {
 
             {/* Error message */}
 
-            {response && response.status > 300 && //if there is a response, and it is above 300 (error)
+            {/* if there is a response, and it is above 300 (error),        and it is not a search error */}
+            {response && response.status > 300 && response.data.message !== "A search string is required" && 
 
                 <span test_handle="form_validation_error" className={classes.error_message}>
 
@@ -218,9 +228,9 @@ export const Add_new = () => {
 
                 <NavigationButtons //show the navigation buttons
                     width="275px"
-                    marginTop="30px"
+                    marginTop={"30px"}
                     type={show_form_navigation_buttons}
-                    on_click={(direction) => handle_form_navigation(direction, form_type, set_form_type, set_show_form_navigation_buttons, current_step, set_current_step, form_data, dispatch)
+                    on_click={(direction) => handle_form_navigation(direction, form_type, set_form_type, set_show_form_navigation_buttons, current_step, set_current_step, form_data, dispatch, set_notes_search_string)
                     }
                 />
 

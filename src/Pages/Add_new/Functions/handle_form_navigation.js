@@ -12,7 +12,7 @@ The last step of the form submits a new note request with all the info */
 
 import { submit_form, clear_response } from "../../../Store/Actions/0_submit_form_action"
 
-const handle_form_navigation = (direction, form_type, set_form_type, set_show_form_navigation_buttons, form_step, set_form_step, form_data, dispatch) => {
+const handle_form_navigation = (direction, form_type, set_form_type, set_show_form_navigation_buttons, form_step, set_form_step, form_data, dispatch, set_notes_search_string) => {
 
     switch (form_step) {//switch the current step of the form
 
@@ -54,12 +54,36 @@ const handle_form_navigation = (direction, form_type, set_form_type, set_show_fo
 
             //and they are adding a note,
             else if (form_type === "note") return set_form_step("optionals")//navigate to the optionals form step
-            
+
             //otherise, if they are adding a collection
             else return set_form_step("notes")
 
+        case "notes":
+
+            if (direction === "back") {
+
+                set_notes_search_string(null)
+                return set_form_step("body")
+
+            }
+
+            else {
+
+                set_notes_search_string(null)
+                return set_form_step("optionals")//otherwise if its next/skip, navigate to the optionals step
+
+            }
+
+
         case "optionals"://if they are on the optionals step
 
+            if(form_type === "collection"){
+
+                if (direction === "back") return set_form_step("notes")    
+
+                else window.alert("yes")
+                
+            }
             //and they press the back button, navigate back to the body step
             if (direction === "back") return set_form_step("body")
 

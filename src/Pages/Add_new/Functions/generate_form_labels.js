@@ -24,7 +24,7 @@ const generate_form_labels = (form_step, form_type) => {
 
         case "notes"://only when adding a collection
 
-            return ["Add at least one note", `SEARCH FOR NOTES `]
+            return ["Add at least two notes", `SEARCH FOR NOTES `]
 
         default: return
     }

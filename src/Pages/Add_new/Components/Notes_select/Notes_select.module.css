@@ -1,7 +1,66 @@
-.container{
-    height: 80px;
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0px 5px;
+
+}
+
+
+.thumbnail_wrapper {
+    max-height: 105px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+    padding: 0 100px;
+    padding-bottom: 7px;
+    border-radius: 5px;
     width: 235px;
+    margin: auto;
+    margin-top: 5px;
+}
+
+.thumbnail_wrapper::-webkit-scrollbar, .selected_notes_container::-webkit-scrollbar {
+    display: none;
+}
+
+
+.scroll_prompt {
+    margin-top: 15px;
+    font-size: 13px;
+    text-align: center;
+    width: 100%;
+}
+
+.selected_notes_container{
+    width: 235px;
+    max-height: 125px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     background-color: white;
-    margin-top: 10px;
     box-shadow: 1px 1px 5px 0px rgba(128, 128, 128, 0.288);
+    padding: 5px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    margin: auto;
+    margin-top: 20px;
+
+}
+
+.selected_notes_title{
+    text-align: center;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 5px;
 }
