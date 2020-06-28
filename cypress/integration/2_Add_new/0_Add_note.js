@@ -194,18 +194,18 @@ describe("@@@@@ ADD NEW NOTE @@@@@", () => {
 
             cy.get('[test_handle="add_new_note_button"]').click()
 
-            cy.get('[test_handle="title_input"]').type("Yet another note")
+            cy.get('[test_handle="title_input"]').type("Creating an api")
 
             cy.get('[test_handle="form_next_button"]').click()
 
-            cy.get('[test_handle="body_input"]').type("Another body")
+            cy.get('[test_handle="body_input"]').type("Create a new project from the boilerplate")
 
             cy.get('[test_handle="form_next_button"]').click()
         })
 
         it("Enter search tags, then click next", () => {
 
-            cy.get('[test_handle="search_tags_input"]').type("Search tags")
+            cy.get('[test_handle="search_tags_input"]').type("API, Boilerplate")
             cy.get('[test_handle="form_next_button"]').click()
 
         })
@@ -226,19 +226,19 @@ describe("@@@@@ ADD NEW NOTE @@@@@", () => {
 
             cy.get('[test_handle="add_new_note_button"]').click()
 
-            cy.get('[test_handle="title_input"]').type("More another note")
+            cy.get('[test_handle="title_input"]').type("React router")
 
             cy.get('[test_handle="form_next_button"]').click()
 
-            cy.get('[test_handle="body_input"]').type("Another body")
+            cy.get('[test_handle="body_input"]').type("How to set up react router")
 
             cy.get('[test_handle="form_next_button"]').click()
         })
 
         it("Enter a subject and search tags, then click next", () => {
 
-            cy.get('[test_handle="subject_input"]').type("Subject")
-            cy.get('[test_handle="search_tags_input"]').type("Search tags")
+            cy.get('[test_handle="subject_input"]').type("React router")
+            cy.get('[test_handle="search_tags_input"]').type("Routing")
             cy.get('[test_handle="form_next_button"]').click()
 
         })
@@ -259,11 +259,11 @@ describe("@@@@@ ADD NEW NOTE @@@@@", () => {
 
             cy.get('[test_handle="add_new_note_button"]').click()
 
-            cy.get('[test_handle="title_input"]').type("Even more another note")
+            cy.get('[test_handle="title_input"]').type("Redux setup")
 
             cy.get('[test_handle="form_next_button"]').click()
 
-            cy.get('[test_handle="body_input"]').type("Another body")
+            cy.get('[test_handle="body_input"]').type("Install and import the modules, then wrap the provider in a")
 
             cy.get('[test_handle="form_next_button"]').click()
         })

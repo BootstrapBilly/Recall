@@ -3,9 +3,6 @@ import React, { useState } from 'react'
 //css
 import classes from "./Nav.module.css"
 
-//util
-import colours from '../../util/colours'
-
 //components
 import SideDrawer from "./Components/Side Drawer/Side_drawer"
 

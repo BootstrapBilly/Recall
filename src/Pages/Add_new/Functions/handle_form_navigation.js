@@ -2,54 +2,76 @@
 
 If the next button is pressed, it submits a request to the backend with the given information
 
-The response is then handled in form.js in the useeffect on LINE 45
+The response is then handled in add_new in the useeffect on LINE 105
 
-If the email/username was validated, the effect with navigate to the next step of the form
+If the title was validated, the effect with navigate to the next step of the form
 
-If it failed, the effect will show an error explaining why to the user
+If it failed, the input component (shared components) will detect the error and show it
 
-The last step of the form submits a signup request with all the info, rather than validating one specific */
+The last step of the form submits a new note request with all the info */
 
 import { submit_form, clear_response } from "../../../Store/Actions/0_submit_form_action"
 
-const handle_form_navigation = (direction, set_form_type, set_show_form_navigation_buttons, form_step, set_form_step, form_data, dispatch) => {
+const handle_form_navigation = (direction, form_type, set_form_type, set_show_form_navigation_buttons, form_step, set_form_step, form_data, dispatch) => {
 
     switch (form_step) {//switch the current step of the form
 
-        case "title"://if its title, 
+        case "title"://if they are on the title step
 
-            if(direction === "back"){
-                set_show_form_navigation_buttons(null)
-                set_form_type(null)
-                set_form_step("selection")
-                return dispatch(clear_response())
+            if (direction === "back") {//and they press the back button
+
+                set_show_form_navigation_buttons(null)//remove the navigation buttons
+                set_form_type(null)//reset the form type
+                set_form_step("selection")//set the step back to collection so they can choose note or colelction
+                return dispatch(clear_response())//clear the current response
+
             }
 
-            else return dispatch(submit_form({ title: form_data.title, user_id: "5eecd941331a770017a74e44" }, "check_note_title"))
+            /* Otherwise, if they pressed next */
 
-        case "body"://if its body
+            //and they are adding a note,
+            else if (form_type === "note") {
 
-        if(direction === "back"){
-            return set_form_step("title")
-        }
+                //submit the title to the backend, to see if it is valid and wait for the response 
+                //success (handled by line 105 add_new.js), error handled by the input component (line 53)
+                return dispatch(submit_form({ title: form_data.title, user_id: "5eecd941331a770017a74e44" }, "check_note_title"))
 
-        else return set_form_step("optionals")
+            }
 
-        case "optionals"://if its body
+            //otherwise, they are adding a collection
+            //submit the title to the backend to see if that note title is already in use, wait for the response
+            //success (handled by line 105 add_new.js), error handled by the input component (line 53)
+            else return dispatch(submit_form({ title: form_data.title, user_id: "5eecd941331a770017a74e44" }, "check_process_title"))
 
-        if(direction === "back"){
-            return set_form_step("body")
-        }
 
-        else return set_form_step("syntax")
 
-        case "syntax"://if its body
+        case "body"://if they are on the body step
 
-        if(direction === "back"){
-            return set_form_step("optionals")
-        }
+            //and they pressed back, navigate back to the title step
+            if (direction === "back") return set_form_step("title")
 
-        else return dispatch(submit_form({...form_data, user_id: "5eecd941331a770017a74e44" }, "notes"))
+            /* Otherwise, if they pressed next */
+
+            //and they are adding a note,
+            else if (form_type === "note") return set_form_step("optionals")//navigate to the optionals form step
+            
+            //otherise, if they are adding a collection
+            else return set_form_step("notes")
+
+        case "optionals"://if they are on the optionals step
+
+            //and they press the back button, navigate back to the body step
+            if (direction === "back") return set_form_step("body")
+
+            else return set_form_step("syntax")//otherwise if its next/skip, navigate to the syntax step
+
+        case "syntax"://if they are on the syntax step (note only)
+
+            //and they press the back button, navigate back to the optionals step
+            if (direction === "back") return set_form_step("optionals")
+
+            //otherwise, submit the request to add a new note
+            else return dispatch(submit_form({ ...form_data, user_id: "5eecd941331a770017a74e44" }, "notes"))
 
         default: return
 

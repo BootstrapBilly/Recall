@@ -14,7 +14,13 @@ export const Option_select = props => {
 
         <div className={classes.container}>
 
-            <div test_handle="add_new_note_button" className={[classes.option_container, classes.note].join(" ")} onClick={props.handle_selection.bind(this, "note")}>
+            <div
+
+                test_handle="add_new_note_button"
+                className={[classes.option_container, classes.note].join(" ")}
+                onClick={props.handle_selection.bind(this, "note")}
+
+            >
 
                 <img src={Note} alt="A note icon" className={classes.icon} />
 
@@ -22,7 +28,13 @@ export const Option_select = props => {
 
             </div>
 
-            <div test_handle="add_new_collection_button" className={[classes.option_container, classes.collection].join(" ")} onClick={props.handle_selection.bind(this, "collection")}>
+            <div
+
+                test_handle="add_new_collection_button"
+                className={[classes.option_container, classes.collection].join(" ")}
+                onClick={props.handle_selection.bind(this, "collection")}
+
+            >
 
                 <img src={Notes} alt="A collection icon" className={classes.icon} />
 

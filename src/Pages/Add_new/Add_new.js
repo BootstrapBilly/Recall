@@ -8,6 +8,7 @@ import Nav from "../../Shared components/Nav/Nav"
 import Input from "../../Shared components/Input/Input"
 import OptionSelect from "./Components/Option_select/Option_select"
 import NavigationButtons from "../../Shared components/Navigation_buttons/Navigation_buttons"
+import NotesSelect from "./Components/Notes_select/Notes_select"
 
 //util
 import colours from '../../util/colours'
@@ -25,6 +26,9 @@ import { clear_response } from "../../Store/Actions/0_submit_form_action"
 //external
 import Alert from "easyalert"
 
+//functions
+import generate_form_labels from "./Functions/generate_form_labels"
+
 export const Add_new = () => {
 
     //-config
@@ -37,74 +41,55 @@ export const Add_new = () => {
     const [current_step, set_current_step] = useState("selection")//state to hold the current step of the form
     const [show_form_navigation_buttons, set_show_form_navigation_buttons] = useState(false)//show different buttons depending on input
     const [form_type, set_form_type] = useState(null)//hold the type of form (note or collection) - set by the optionsSelect component
+    const [notes_search_string, set_notes_search_string] = useState(null)//hold the string used to find notes when adding them to a collection
     const [form_data, set_form_data] = useState({// a state to hold the note information to be submitted to the backend
 
         title: null,
         subject: null,
-        search_tags: [],//used to make searching easier and faster
+        search_tags: null,//used to make searching easier and faster
         body: null,
         syntax: null,//stores the syntax NOTE ONLY
         notes: []//holds an array of notes collection ONLY
 
     })
 
-    const handle_dynamic_data = form_step => {
+    const data = generate_form_labels(current_step, form_type)//call the function to generate the data based on what the form step is
 
-        switch (form_step) {
+    //_functions
 
-            case "selection":
+    const handle_selection = (option) => {//used to set the form type to note or collection (Called by the optionselect component)
 
-                return ["What would you like to add ?", null]
-
-            case "title":
-
-                return ["What's the title ?", `TITLE OF ${form_type.toUpperCase()}`]
-
-            case "body":
-
-                return ["What's it about ?", `BODY OF ${form_type.toUpperCase()}`]
-
-            case "optionals":
-
-                return ["Optional extra information", `SUBJECT OF ${form_type.toUpperCase()}`, `TAGS FOR EASIER SEARCHING`]
-
-            case "syntax":
-
-                return ["Optional syntax", `SYNTAX OF NOTE`]
-
-            default: return
-        }
-    }
-
-    const data = handle_dynamic_data(current_step)//call the function to generate the data based on what the form step is
-
-    const handle_selection = (option) => {
-
-        set_form_type(option)
-        set_current_step("title")
-        set_show_form_navigation_buttons("back")
+        set_form_type(option)//set the form type to either note or collection
+        set_current_step("title")//set the current step of the form to title(1st step)
+        set_show_form_navigation_buttons("back")//set the navigation buttons to show only back
 
     }
 
-    const reset_form = () => {
+    const reset_form = () => {//used to reset the form back to the type selection (1st screen note or collection)
 
-        set_current_step("selection")
-        set_form_data({
+        set_current_step("selection")//set the step back to selection
+
+        set_form_data({//reset all the form data to default
 
             title: null,
             subject: null,
-            search_tags: [],
+            search_tags: null,
             body: null,
             syntax: null,
             notes: []
 
         })
-        set_form_type(null)
-        set_show_form_navigation_buttons(false)
 
+        set_form_type(null)//reset the type of form so it can be selected again
+        set_show_form_navigation_buttons(false)//reset the navigation buttons so they do not show on the selection screen
+        set_notes_search_string(null)//reset the notes search input
     }
 
-    useEffect(() => { handle_dynamic_button_display(form_type, form_data, current_step, set_show_form_navigation_buttons) }, [form_data, current_step])
+    //!Effects
+
+    //This effect calls the helper function to dynamically set the navigation buttons, based on what the form step is and if the inputs are populated
+    //gets called every time the form step changes or the inputs change
+    useEffect(() => { handle_dynamic_button_display(form_type, form_data, current_step, set_show_form_navigation_buttons) }, [form_data, current_step, form_type])
 
     //this effect listens for the check note title, then navigates to the next step upon successful response 
     useEffect(() => {
@@ -119,15 +104,16 @@ export const Add_new = () => {
         // eslint-disable-next-line
     }, [response])
 
+    //This effect listens for a successful response, (generated upon submiting the form)
     useEffect(() => {
 
-        if (response && response.status === 201) {
+        if (response && response.status === 201) {//if a 201 is detected
 
-            reset_form()
+            reset_form()//reset the form
 
-            clear_response()
+            clear_response()//clear the response
 
-            Alert("Note added successfully", "success", { top: "100px" })//show the user an alert that their book has been deleted
+            Alert("Note added successfully", "success", { top: "100px" })//show the user an alert that their note was added successfully
 
         }
 
@@ -162,39 +148,57 @@ export const Add_new = () => {
                         onChange={e => set_form_data({ ...form_data, body: e.target.value })}
                         marginTop="30px" />
 
-                    : current_step === "optionals" ?
+                    : current_step === "notes" ? //this step is only for collections
 
-                        <div>
+                        <div className={classes.form_step_container}>
 
                             <Input
-                                test_handle="subject_input"
+                                test_handle="notes_search_bar"
                                 label={data[1]}
-                                grey
-                                value={form_data.subject}
-                                onChange={e => set_form_data({ ...form_data, subject: e.target.value })}
-                                marginTop="30px" />
+                                value={notes_search_string}
+                                onChange={e => set_notes_search_string(e.target.value)}
+                                marginTop="20px"
 
-                            <Input
-                                test_handle="search_tags_input"
-                                label={data[2]}
-                                grey
-                                value={form_data.search_tags}
-                                onChange={e => set_form_data({ ...form_data, search_tags: e.target.value })}
                             />
+                            
+                            <NotesSelect search_string={notes_search_string}/>
+
                         </div>
 
-                        : current_step === "syntax" ?
 
-                            <Input
-                                test_handle="syntax_input"
-                                label={data[1]}
-                                grey
-                                value={form_data.syntax}
-                                text_area onChange={e => set_form_data({ ...form_data, body: e.target.value })}
-                                marginTop="30px"
-                            />
+                        : current_step === "optionals" ? //this step is only for notes
 
-                            : null}
+                            <div>
+
+                                <Input
+                                    test_handle="subject_input"
+                                    label={data[1]}
+                                    grey
+                                    value={form_data.subject}
+                                    onChange={e => set_form_data({ ...form_data, subject: e.target.value })}
+                                    marginTop="30px" />
+
+                                <Input
+                                    test_handle="search_tags_input"
+                                    label={data[2]}
+                                    grey
+                                    value={form_data.search_tags}
+                                    onChange={e => set_form_data({ ...form_data, search_tags: e.target.value })}
+                                />
+                            </div>
+
+                            : current_step === "syntax" ?
+
+                                <Input
+                                    test_handle="syntax_input"
+                                    label={data[1]}
+                                    grey
+                                    value={form_data.syntax}
+                                    text_area onChange={e => set_form_data({ ...form_data, body: e.target.value })}
+                                    marginTop="30px"
+                                />
+
+                                : null}
 
             {/* Error message */}
 
@@ -216,7 +220,7 @@ export const Add_new = () => {
                     width="275px"
                     marginTop="30px"
                     type={show_form_navigation_buttons}
-                    on_click={(direction) => handle_form_navigation(direction, set_form_type, set_show_form_navigation_buttons, current_step, set_current_step, form_data, dispatch)
+                    on_click={(direction) => handle_form_navigation(direction, form_type, set_form_type, set_show_form_navigation_buttons, current_step, set_current_step, form_data, dispatch)
                     }
                 />
 

@@ -6,7 +6,7 @@ The response is then handled in form.js in the useeffect on LINE 45
 
 If the email/username was validated, the effect with navigate to the next step of the form
 
-If it failed, the effect will show an error explaining why to the user
+If it failed, the input component (shared components) will detect the error and show it
 
 The last step of the form submits a signup request with all the info, rather than validating one specific */
 
