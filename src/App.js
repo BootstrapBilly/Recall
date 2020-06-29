@@ -23,7 +23,7 @@ const App = () => {
         <Route path="/" exact component={Auth} />
         <Route path="/landing" component={Landing} />
         <Route path="/dashboard" component={Dashboard} />
-        <Route path="/add_new" component={AddNew} />
+        <Route path="/add_new" component={()=> <AddNew form_type="note"/>} />
         <Route path="/view_all" component={ViewAll} />
         <Route path="/friends" component={Friends} />
         <Route path="/account" component={Account} />

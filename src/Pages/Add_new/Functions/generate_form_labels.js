@@ -12,15 +12,15 @@ const generate_form_labels = (form_step, form_type) => {
 
         case "body":
 
-            return ["What's it about ?", `BODY OF ${form_type.toUpperCase()}`]
+            return ["What's it about ?", `CONTENT OF ${form_type.toUpperCase()}`]
 
         case "optionals":
 
-            return ["Optional extra information", `SUBJECT OF ${form_type.toUpperCase()}`, `TAGS FOR EASIER SEARCHING`]
+            return ["Additional information", `SUBJECT OF ${form_type.toUpperCase()}`, `TAGS FOR EASIER SEARCHING`]
 
         case "syntax"://only when adding a note
 
-            return ["Optional syntax", `SYNTAX OF NOTE`]
+            return ["Would you like to add some code ?", `SYNTAX OF NOTE`]
 
         case "notes"://only when adding a collection
 

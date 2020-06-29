@@ -21,6 +21,17 @@
     font-size: 14px;
     color: rgba(0, 0, 0, 0.826);
     background-color: transparent;
+    width: 100%;
+}
+
+.input::placeholder{
+    color: rgba(0, 0, 0, 0.258);
+    position: relative;
+    right: 2px;
+}
+
+.input:focus::placeholder{
+    color: transparent;
 }
 
 .text_area{
@@ -31,6 +42,14 @@
     padding-left: 0;
     font-size: 14px;
     width: 95%;
+}
+
+.text_area::placeholder{
+    color: rgba(0, 0, 0, 0.258);
+}
+
+.text_area:focus::placeholder{
+    color: transparent;
 }
 
 @supports (-webkit-touch-callout: none) {

@@ -12,7 +12,7 @@ The last step of the form submits a new note request with all the info */
 
 import { submit_form, clear_response } from "../../../Store/Actions/0_submit_form_action"
 
-const handle_form_navigation = (direction, form_type, set_form_type, set_show_form_navigation_buttons, form_step, set_form_step, form_data, dispatch, set_notes_search_string) => {
+const handle_form_navigation = (direction, form_type, set_show_form_navigation_buttons, form_step, set_form_step, form_data, dispatch, set_notes_search_string) => {
 
     switch (form_step) {//switch the current step of the form
 
@@ -20,10 +20,11 @@ const handle_form_navigation = (direction, form_type, set_form_type, set_show_fo
 
             if (direction === "back") {//and they press the back button
 
-                set_show_form_navigation_buttons(null)//remove the navigation buttons
-                set_form_type(null)//reset the form type
-                set_form_step("selection")//set the step back to collection so they can choose note or colelction
-                return dispatch(clear_response())//clear the current response
+                console.log("clicko")
+                // set_show_form_navigation_buttons(null)//remove the navigation buttons
+                // set_form_type(null)//reset the form type
+                // set_form_step("selection")//set the step back to collection so they can choose note or colelction
+                // return dispatch(clear_response())//clear the current response
 
             }
 

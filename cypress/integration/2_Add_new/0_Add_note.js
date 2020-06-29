@@ -14,7 +14,7 @@ describe("@@@@@ ADD NEW NOTE @@@@@", () => {
 
         it("Click the add single note button - should load add note form", () => {
 
-            cy.get('[test_handle="add_new_note_button"]').click()
+            // cy.get('[test_handle="add_new_note_button"]').click()
 
             cy.get('[test_handle="title_input"]').should("be.visible")
 
@@ -24,35 +24,35 @@ describe("@@@@@ ADD NEW NOTE @@@@@", () => {
 
         })
 
-        it("Click the back button - should navigate back to the option select page", () => {
+        // it("Click the back button - should navigate back to the option select page", () => {
 
-            cy.get('[test_handle="form_back_button"]').click()
+        //     cy.get('[test_handle="form_back_button"]').click()
 
-            cy.get('[test_handle="title_input"]').should("not.be.visible")
+        //     cy.get('[test_handle="title_input"]').should("not.be.visible")
 
-            cy.get('[test_handle="add_new_note_button"]').should("be.visible")
-        })
+        //     cy.get('[test_handle="add_new_note_button"]').should("be.visible")
+        // })
 
-        it("Click the add collection button - should load add collection form", () => {
+        // it("Click the add collection button - should load add collection form", () => {
 
-            cy.get('[test_handle="add_new_collection_button"]').click()
+        //     // cy.get('[test_handle="add_new_collection_button"]').click()
 
-            cy.get('[test_handle="title_input"]').should("be.visible")
+        //     cy.get('[test_handle="title_input"]').should("be.visible")
 
-            cy.get('[test_handle="form_next_button"]').should("have.css", "background-color", 'rgb(128, 128, 128)')
+        //     cy.get('[test_handle="form_next_button"]').should("have.css", "background-color", 'rgb(128, 128, 128)')
 
-            cy.get('[test_handle="form_input_label"]').should("have.text", "TITLE OF COLLECTION")
-        })
+        //     cy.get('[test_handle="form_input_label"]').should("have.text", "TITLE OF COLLECTION")
+        // })
 
 
-        it("Click the back button - should navigate back to the option select page", () => {
+        // it("Click the back button - should navigate back to the option select page", () => {
 
-            cy.get('[test_handle="form_back_button"]').click()
+        //     cy.get('[test_handle="form_back_button"]').click()
 
-            cy.get('[test_handle="title_input"]').should("not.be.visible")
+        //     cy.get('[test_handle="title_input"]').should("not.be.visible")
 
-            cy.get('[test_handle="add_new_note_button"]').should("be.visible")
-        })
+        //     cy.get('[test_handle="add_new_note_button"]').should("be.visible")
+        // })
 
     })
 
@@ -60,7 +60,7 @@ describe("@@@@@ ADD NEW NOTE @@@@@", () => {
 
         it("Navigate to add new note, then type something - button should turn blue", () => {
 
-            cy.get('[test_handle="add_new_note_button"]').click()
+            // cy.get('[test_handle="add_new_note_button"]').click()
 
             cy.get('[test_handle="title_input"]').type("A")
 
@@ -160,7 +160,7 @@ describe("@@@@@ ADD NEW NOTE @@@@@", () => {
 
         it("Complete form up until the optionals part", () => {
 
-            cy.get('[test_handle="add_new_note_button"]').click()
+            // cy.get('[test_handle="add_new_note_button"]').click()
 
             cy.get('[test_handle="title_input"]').type("Another note")
 
@@ -192,7 +192,7 @@ describe("@@@@@ ADD NEW NOTE @@@@@", () => {
 
         it("Complete form up until the optionals part", () => {
 
-            cy.get('[test_handle="add_new_note_button"]').click()
+            // cy.get('[test_handle="add_new_note_button"]').click()
 
             cy.get('[test_handle="title_input"]').type("Creating an api")
 
@@ -224,7 +224,7 @@ describe("@@@@@ ADD NEW NOTE @@@@@", () => {
 
         it("Complete form up until the optionals part", () => {
 
-            cy.get('[test_handle="add_new_note_button"]').click()
+            // cy.get('[test_handle="add_new_note_button"]').click()
 
             cy.get('[test_handle="title_input"]').type("React router")
 
@@ -257,7 +257,7 @@ describe("@@@@@ ADD NEW NOTE @@@@@", () => {
 
         it("Complete form up until the optionals part", () => {
 
-            cy.get('[test_handle="add_new_note_button"]').click()
+            // cy.get('[test_handle="add_new_note_button"]').click()
 
             cy.get('[test_handle="title_input"]').type("Redux setup")
 
