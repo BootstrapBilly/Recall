@@ -46,6 +46,7 @@ export const Add_new = props => {
     // const [form_type, set_form_type] = useState(null)//hold the type of form (note or collection) - set by the optionsSelect component
     const [notes_search_string, set_notes_search_string] = useState(null)//hold the string used to find notes when adding them to a collection
     const [selected_notes, set_selected_notes] = useState([])//hold the selected notes (when adding a collection)
+    const [keyboard_open, set_keyboard_open] = useState(false)//a state to detect when the keyboard is open on mobile
 
     const [form_data, set_form_data] = useState({// a state to hold the note information to be submitted to the backend
 
@@ -124,6 +125,7 @@ export const Add_new = props => {
 
     }, [response])
 
+
     return (
 
         <div className={classes.container}>
@@ -143,6 +145,7 @@ export const Add_new = props => {
                         label={data[1]}
                         value={form_data.title}
                         onChange={e => set_form_data({ ...form_data, title: e.target.value })}
+                        toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
                         marginTop="15px" />
 
                     : current_step === "body" ?
@@ -154,6 +157,7 @@ export const Add_new = props => {
                             value={form_data.body}
                             text_area
                             onChange={e => set_form_data({ ...form_data, body: e.target.value })}
+                            toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
                             marginTop="15px" />
 
                         : current_step === "notes" ? //this step is only for collections
@@ -165,12 +169,14 @@ export const Add_new = props => {
                                     label={data[1]}
                                     value={notes_search_string}
                                     onChange={e => set_notes_search_string(e.target.value)}
+                                    toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
                                     marginTop="20px"
 
                                 />
 
                                 <NotesSelect
                                     search_string={notes_search_string}
+                                    toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
                                     selected_notes={selected_notes}
                                     reset_search_string={() => set_notes_search_string(null)}
                                     handle_select_note={(note) => set_selected_notes(selected_notes => [...selected_notes, note])}
@@ -184,7 +190,7 @@ export const Add_new = props => {
 
                                 <React.Fragment>
 
-                                    <div className={classes.prompt_text} style={{ color: colours.primary }}>Tip: This step is optional and may be skipped</div>
+                                    <div className={classes.prompt_text} style={{ color: colours.primary }}>This step is optional and may be skipped</div>
 
                                     <Input
                                         test_handle="subject_input"
@@ -193,6 +199,7 @@ export const Add_new = props => {
                                         grey
                                         value={form_data.subject}
                                         onChange={e => set_form_data({ ...form_data, subject: e.target.value })}
+                                        toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
                                         marginTop="10px" />
 
                                     <Input
@@ -202,6 +209,7 @@ export const Add_new = props => {
                                         grey
                                         value={form_data.search_tags}
                                         onChange={e => set_form_data({ ...form_data, search_tags: e.target.value })}
+                                        toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
 
                                     />
 
@@ -211,7 +219,7 @@ export const Add_new = props => {
 
                                     <React.Fragment>
 
-                                        <div className={classes.prompt_text} style={{ color: colours.primary }}>Tip: This step is optional and may be skipped</div>
+                                        <div className={classes.prompt_text} style={{ color: colours.primary }}>This step is optional and may be skipped</div>
 
                                         <Input
                                             test_handle="syntax_input"
@@ -221,6 +229,7 @@ export const Add_new = props => {
                                             value={form_data.syntax}
                                             text_area
                                             onChange={e => set_form_data({ ...form_data, syntax: e.target.value })}
+                                            toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
                                             marginTop="10px"
                                         />
 
@@ -257,9 +266,9 @@ export const Add_new = props => {
 
             }
 
-            <div className={classes.bottom_section}>
+            <div className={classes.bottom_section} style={{display: window.innerHeight < 800 && keyboard_open && "none"}} >
 
-                <img src={man_on_computer} alt="a man on a computer" className={classes.bottom_image} />
+                <img src={man_on_computer} alt="a man on a computer" className={classes.bottom_image}  />
 
             </div>
 

@@ -1,5 +1,5 @@
 .container{
-    width: 225px;
+    width: 240px;
     background-color: white;
     padding: 8px 5px;
     padding-top: 2px;
@@ -26,8 +26,6 @@
 
 .input::placeholder{
     color: rgba(0, 0, 0, 0.258);
-    position: relative;
-    right: 2px;
 }
 
 .input:focus::placeholder{
@@ -35,7 +33,7 @@
 }
 
 .text_area{
-    height: 130px;
+    height: 120px;
     border: none;
     outline: none;
     padding: 5px;
@@ -56,4 +54,5 @@
     .input {
         margin-left: -1%;
     }
+
 }

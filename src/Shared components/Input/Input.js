@@ -66,7 +66,8 @@ export const Input = props => {
             // style={{ color: colours.primary }}
             >{props.label}</span>
 
-            {props.text_area ? <textarea test_handle={props.test_handle} value={props.value || ""} type="text" className={classes.text_area} onChange={props.onChange} placeholder={`${props.placeholder}`}></textarea>
+            {props.text_area ? <textarea test_handle={props.test_handle} value={props.value || ""} type="text" className={classes.text_area} onChange={props.onChange} placeholder={`e.g. ${props.placeholder}`} onFocus={() => handle_input_focus()}
+                onBlur={() => handle_input_blur()}></textarea>
 
                 :
 
@@ -79,7 +80,7 @@ export const Input = props => {
                     onBlur={() => handle_input_blur()}
                     onChange={props.onChange}
                     value={props.value || ""}
-                    placeholder={`${props.placeholder}`}
+                    placeholder={`e.g. ${props.placeholder}`}
                 />
             }
 

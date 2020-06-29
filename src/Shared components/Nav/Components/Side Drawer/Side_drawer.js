@@ -39,7 +39,7 @@ export const Side_drawer = props => {
             <div className={classes.square_container}>
 
                 {
-                    [["HOME", "dashboard", "dashboard_nav_square"], ["ADD NOTE", "add_new", "add_new_nav_square"], ["NOTES", "view_all", "view_all_nav_square"], ["SEARCH", "view_all", "search_nav_square"], ["FRIENDS", "friends", "friends_nav_square"], ["ACCOUNT", "account", "account_nav_square"]]
+                    [["HOME", "dashboard", "dashboard_nav_square"], ["ADD NOTE", "add_new", "add_new_nav_square"], ["VIEW NOTES", "view_all", "view_all_nav_square"], ["SEARCH", "view_all", "search_nav_square"], ["FRIENDS", "friends", "friends_nav_square"], ["ACCOUNT", "account", "account_nav_square"]]
                         .map(link =>
 
                             <NavSquare test_handle={link[2]} text={link[0]} icon={link[0]} key={link[0]} onClick={()=> handle_navigation(link[1])} />

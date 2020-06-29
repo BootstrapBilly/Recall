@@ -1,0 +1,29 @@
+.container{
+    width: 70%;
+    box-shadow: 1px 1px 3px 1px rgba(128, 128, 128, 0.488);
+    height: 78px;
+    padding: 10px 10px;
+    overflow: hidden;
+    position: relative;
+    background-color: white;
+    font-weight: 100;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.expand_container{
+    background-color: inherit;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    background-color: #EAEFF2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    font-weight: 400;
+    color: white;
+}

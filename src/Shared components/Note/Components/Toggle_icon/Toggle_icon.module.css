@@ -1,0 +1,22 @@
+.container {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+
+.arrow {
+    height: 22px;
+    width: 22px;
+    transform: rotate(135deg);
+    transition: transform 0.2s ease-in-out 0.5s;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+
+.arrow_expanded{
+
+    transform: rotate(315deg);
+}

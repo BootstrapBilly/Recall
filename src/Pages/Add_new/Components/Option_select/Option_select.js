@@ -4,7 +4,7 @@ import React from 'react'
 import classes from "./Option_select.module.css"
 
 //assets
-import Notes from "../../../../Assets/Icon/NOTES.svg"
+import Notes from "../../../../Assets/Icon/VIEW NOTES.svg"
 import Note from "../../../../Assets/Icon/note.svg"
 import colours from '../../../../util/colours'
 

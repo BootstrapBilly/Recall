@@ -14,7 +14,8 @@
 
 .text{
     position: absolute;
-    bottom:5%
+    bottom:5%;
+    font-size: 15px;
 }
 
 .icon{

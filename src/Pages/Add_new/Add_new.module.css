@@ -45,11 +45,24 @@
     height: 20%;
     position: absolute;
     top: 80%;
-    text-align: center;
+    z-index: 0;
 }
 
 .bottom_image{
-    height: 250px;
-    position: relative;
-    top: -150px;
+    height: 240px;
+    position: fixed;
+    bottom: 0px;
+    animation: fade-in 0.3s;
+}
+
+@keyframes fade-in {
+    0%{
+        opacity: 0;
+    }
+    90%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
 }
