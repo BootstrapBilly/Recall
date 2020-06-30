@@ -1,9 +1,13 @@
 import axios from "axios"
 
-//export const production = "http://localhost:4000/"//dev
-export const production = "https://get-recall.herokuapp.com/"//production
+export const production = "http://localhost:4000/"//dev
+//export const production = "https://get-recall.herokuapp.com/"//production
 
 const sendPost = (url, body, type) => {
+
+    console.log(url)
+    console.log(body)
+    console.log(type)
 
     //if the body is empty, log it to the console
     if (typeof body !== "object" || body === null) return console.log("\nSENDPOSTREQ - INVALID PARAMETER SUPPLIED : \nThe body(second) parameter must be an object")

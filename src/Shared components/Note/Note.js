@@ -1,80 +1,72 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 
-//css 
+//css
 import classes from "./Note.module.css"
 
 //util
-import capitalizeFirstChar from '../../util/capitalize_first'
 import gradients from "../../util/gradients"
-
-//assets
-import Arrow from "../../Assets/Icon/arrow.svg"
+import capitalise_first from "../../util/capitalize_first"
+import colours from '../../util/colours'
 
 //components
-import Buttons from "./Components/Buttons/Buttons"
-import ToggleIcon from "./Components/Toggle_icon/Toggle_icon"
-import Body from "./Components/Body/Body"
+import Buttons from "../Note/Components/Buttons/Buttons"
+import Body from "../Note/Components/Body/Body"
+import ToggleIcon from "../Note/Components/Toggle_icon/Toggle_icon"
 
-export const Note_detail = props => {
+//redux hooks
+import {useSelector} from "react-redux"
 
-    //-config
-    const main_colour = `#${gradients[props.index].split("#")[1].split(" ")[0]}`
+
+export const Note = props => {
+
+    //?selectors
+    const response = useSelector(state => state.form.response)
 
     const [expanded, set_expanded] = useState(false)
 
-    const handle_expand = () => {
+    const [height, set_height] = useState(0)
 
-        set_expanded(true)
-        console.log("called")
-    }
+    const ref = useRef(null)
 
-    const handle_collapse = () => {
+    useEffect(() => set_height(ref.current.clientHeight))
 
-        set_expanded(false)
-    }
-
+    // console.log(response)
     return (
 
-        <div className={[classes.container, expanded && classes.container_expanded].join(" ")} style={{ background: gradients[props.index] }}>
+        <div className={classes.container}
 
-            {/* white Overlay/wrapper that makes the gradient a border*/}
+            style={{ height: `${height}px`, background: "#fbfbf8", paddingBottom: expanded && "60px" }}
+        >
 
-            <div className={[classes.wrapper, expanded && classes.wrapper_expanded].join(" ")}></div>
+            <div className={classes.measuring_wrapper} ref={ref} >
 
-            {/* The information visible when the note is collapsed */}
+                <div className={classes.collapsed_content}>
 
-            <div className={classes.collapsed_content_container}>
-
-                <span className={classes.title}>{capitalizeFirstChar(props.details.title)}</span>
-
-                <span className={classes.subject} style={{color:props.details.subject && main_colour}}>{capitalizeFirstChar(props.details.subject || "No subject")}</span>
-
-            </div>
-
-            {/* The arrow which toggles the menu */}
-
-            <ToggleIcon expanded={expanded} handle_collapse={() => set_expanded(false)} handle_expand={() => set_expanded(true)} />
-
-
-            {//if the note has been expanded show the following 
-
-                expanded &&
-
-                <div className={classes.expanded_content_container}>
-
-                    <Body color={main_colour} index={props.index} />
-
-                    <Buttons />
+                    <div className={classes.title}>{capitalise_first(props.details.title)}</div>
+                    <div className={classes.subject}>{capitalise_first(props.details.subject || "No subject")}</div>
 
                 </div>
 
-            }
+                {expanded &&
+
+                    <div className={classes.expanded_content}>
+
+                        <Body text={props.details.body} />
+                        {props.details.syntax && <div className={classes.copy_button} style={{background:colours.green}}>COPY CODE</div>}
+                        <Buttons expanded={expanded} title={props.details.title}/>
+
+                    </div>
+
+                }
+
+                <ToggleIcon expanded={expanded} handle_collapse={() => set_expanded(false)} handle_expand={() => set_expanded(true)} />
+
+            </div>
 
         </div>
-
 
     )
 
 }
 
-export default Note_detail
+export default Note

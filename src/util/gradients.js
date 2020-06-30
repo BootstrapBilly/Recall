@@ -1,12 +1,14 @@
 const gradients = [
 
-    "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-    "linear-gradient(135deg,  #ee609c 0%, #b465da 100%)",
-    "linear-gradient(135deg, #48c6ef 0%, #6f86d6 100%)",
-    "linear-gradient(135deg, #0ba360 0%, #3cba92 100%)",
-    "linear-gradient(135deg, #c79081 0%, #dfa579 100%)",
-    "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-    "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+
+
+
+    "radial-gradient(circle 248px at center, #16d9e399 0%, #30c7ec99 47%, #46aef799 100%)",
+    "linear-gradient(135deg, #667eea99 0%, #764ba299 100%)",
+    "linear-gradient(135deg,  #ee609c99 0%, #b465da99 100%)",
+    "linear-gradient(135deg, #48c6ef99 0%, #6f86d699 100%)",
+    "linear-gradient(135deg, #0ba36099 0%, #3cba9299 100%)",
+    "linear-gradient(135deg, #c7908199 0%, #dfa57999 100%)",
 
 ]
 

@@ -12,8 +12,9 @@
     transform: rotate(135deg);
     transition: transform 0.2s ease-in-out 0.5s;
     position: absolute;
-    bottom: 15px;
+    bottom: 13px;
     right: 15px;
+    z-index: 5;
 }
 
 .arrow_expanded{

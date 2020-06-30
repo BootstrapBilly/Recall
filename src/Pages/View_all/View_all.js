@@ -1,17 +1,45 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 
 //css
 import classes from "./View_all.module.css"
 
 //components
 import Nav from "../../Shared components/Nav/Nav"
+import Note from "../../Shared components/Note/Note"
+
+//redux action creators
+import {submit_form} from "../../Store/Actions/0_submit_form_action"
+
+//redux hooks
+import {useSelector, useDispatch} from "react-redux"
 
 export const View_all = () => {
+
+    const dispatch = useDispatch()
+
+    const [notes, set_notes] = useState([])
+
+    const response = useSelector(state => state.form.response)
+
+    useEffect(() => {
+     
+        dispatch(submit_form({ user_id: "5eecd941331a770017a74e44"}, "get_notes",))
+
+    },[])
+
+    useEffect(()=> {
+
+        if(response){ set_notes(response.data.notes)}
+
+    }, [response])
+
+
 
     return (
 
         <div className={classes.container}>
-            View all
+
+           {notes && notes.map((note,index) => <Note index={index} details={note} />)}
 
             <Nav />
         </div>

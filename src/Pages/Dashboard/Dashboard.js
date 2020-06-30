@@ -33,8 +33,6 @@ export const Dashboard = () => {
 
     }, [response])
 
-    console.log(notes)
-
     return (
 
         <div className={classes.container}>

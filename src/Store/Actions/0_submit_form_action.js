@@ -11,12 +11,15 @@ export const submit_form = (data, url, type) => {
 
     if(type) {request = send_request(url, data, type)}
 
+    // console.log(request)
+
     return async dispatch => {
 
         try {
 
-            const response = await request      
-            // console.log(response)
+            const response = await request     
+
+             //console.log(response)
             if (response.data) return dispatch({ type: API_RESPONSE, payload: response })
 
         }

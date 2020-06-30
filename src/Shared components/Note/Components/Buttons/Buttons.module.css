@@ -3,11 +3,23 @@
     width: 75%;
     position: absolute;
     bottom: 0px;
+    left: 0;
     display: flex;
     align-items: center;
-    background-color: white;
-    width: 100%;
+    width: 90%;
     height: 50px;
+    justify-content: space-between;
+    margin-left: 5%;
+
+}
+
+.buttons{
+    display: flex;
+    width: 90%;
+    justify-content: space-evenly;
+    position: relative;
+    right: 5%;
+
 }
 
 .button{
@@ -19,6 +31,18 @@
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    margin-left: 14px;
-    
+}
+
+.arrow {
+    height: 22px;
+    width: 22px;
+    transform: rotate(135deg);
+    transition: transform 0.2s ease-in-out 0.5s;
+    margin-top: 4px;
+    display: none;
+}
+
+.arrow_expanded{
+
+    transform: rotate(315deg);
 }
