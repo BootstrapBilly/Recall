@@ -6,9 +6,9 @@ import classes from "./Add_new.module.css"
 //components
 import Nav from "../../Shared components/Nav/Nav"
 import Input from "../../Shared components/Input/Input"
-import OptionSelect from "./Components/Option_select/Option_select"
 import NavigationButtons from "../../Shared components/Navigation_buttons/Navigation_buttons"
 import NotesSelect from "./Components/Notes_select/Notes_select"
+import Note from "../../Shared components/Note/Note"
 
 //util
 import colours from '../../util/colours'
@@ -89,6 +89,7 @@ export const Add_new = props => {
         // set_form_type(null)//reset the type of form so it can be selected again
         set_show_form_navigation_buttons(false)//reset the navigation buttons so they do not show on the selection screen
         set_notes_search_string(null)//reset the notes search input
+        clear_response()//clear the response
     }
 
     //!Effects
@@ -115,11 +116,13 @@ export const Add_new = props => {
 
         if (response && response.status === 201) {//if a 201 is detected
 
-            reset_form()//reset the form
+            set_current_step("success")
 
-            clear_response()//clear the response
+            // reset_form()//reset the form
 
-            Alert("Note added successfully", "success", { top: "100px" })//show the user an alert that their note was added successfully
+            // clear_response()//clear the response
+
+            // Alert("Note added successfully", "success", { top: "100px" })//show the user an alert that their note was added successfully
 
         }
 
@@ -152,7 +155,7 @@ export const Add_new = props => {
 
                         <Input
                             test_handle="body_input"
-                            placeholder="A for each loop iterates through an array, calling the specified function on each element until the end of the array"
+                            placeholder="A for each loop iterates through an array calling a function on each element"
                             label={data[1]}
                             value={form_data.body}
                             text_area
@@ -237,6 +240,10 @@ export const Add_new = props => {
 
 
 
+                                    : current_step === "success" ?
+                                    
+                                    <Note details={form_data} />
+                                    
                                     : null}
 
             {/* Error message */}
@@ -262,6 +269,7 @@ export const Add_new = props => {
                     type={show_form_navigation_buttons}
                     on_click={(direction) => handle_form_navigation(direction, props.form_type, set_show_form_navigation_buttons, current_step, set_current_step, form_data, dispatch, set_notes_search_string)
                     }
+                    handle_reset={()=> reset_form()}
                 />
 
             }

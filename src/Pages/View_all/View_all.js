@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 
 //css
 import classes from "./View_all.module.css"
@@ -8,10 +8,13 @@ import Nav from "../../Shared components/Nav/Nav"
 import Note from "../../Shared components/Note/Note"
 
 //redux action creators
-import {submit_form} from "../../Store/Actions/0_submit_form_action"
+import { submit_form, clear_response } from "../../Store/Actions/0_submit_form_action"
 
 //redux hooks
-import {useSelector, useDispatch} from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+
+//external
+import Alert from "easyalert"
 
 export const View_all = () => {
 
@@ -22,24 +25,41 @@ export const View_all = () => {
     const response = useSelector(state => state.form.response)
 
     useEffect(() => {
-     
-        dispatch(submit_form({ user_id: "5eecd941331a770017a74e44"}, "get_notes",))
 
-    },[])
+        dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes",))
 
-    useEffect(()=> {
+    }, [])
 
-        if(response){ set_notes(response.data.notes)}
+    useEffect(() => {
+
+        if (response && response.data.notes) { set_notes(response.data.notes) }
 
     }, [response])
 
+
+    //This effect listens for a successful response, (generated upon submiting the form)
+    useEffect(() => {
+
+        if (response && response.data.message === "note deleted successfully") {
+
+            clear_response()//clear the response
+
+            Alert("Note deleted successfully", "success", { top: "80px" })//show the user an alert that their note was added successfully
+
+            dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes",))
+
+        }
+
+    }, [response])
 
 
     return (
 
         <div className={classes.container}>
 
-           {notes && notes.map((note,index) => <Note index={index} details={note} />)}
+            <div className={classes.background_image}></div>
+
+            {notes && notes.map((note, index) => <Note index={index} details={note} />)}
 
             <Nav />
         </div>

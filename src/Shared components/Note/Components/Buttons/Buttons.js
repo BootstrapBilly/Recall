@@ -21,6 +21,7 @@ export const Buttons = props => {
 
     const handle_delete = () => {
 
+        props.reset_expanded()
         dispatch(submit_form({ user_id: "5eecd941331a770017a74e44", title:props.title}, "delete_note"))
     }
 

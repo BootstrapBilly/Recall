@@ -1,13 +1,27 @@
+
 .container{
-    margin-top: 20px;
     height: 30px;
     transition: height 0.5s ease-in-out, padding 0.5s ease-in-out;
     width: 255px;
-    box-shadow: 1px 1px 3px 1px rgba(128, 128, 128, 0.988);
+    box-shadow: 1px 1px 3px 1px rgba(128, 128, 128, 0.488);
     padding: 10px;
-    margin-top: 10px;
     border-radius: 5px;
     position: relative;
+    background-color: white;
+    margin-top: 20px;
+    animation: fadein 0.2s forwards;
+    animation-delay: 0.3s;
+    opacity: 0;
+}
+
+@keyframes fadein{
+
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
 }
 
 .title {
@@ -16,6 +30,8 @@
     text-align: left;
     color: black;
     z-index: 3;
+    font-weight: 500;
+
 }
 
 .subject {

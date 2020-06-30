@@ -12,7 +12,7 @@ const generate_form_labels = (form_step, form_type) => {
 
         case "body":
 
-            return ["What's it about ?", `CONTENT OF ${form_type.toUpperCase()}`]
+            return ["What's it about ?", `DESCRIPTION OF ${form_type.toUpperCase()}`]
 
         case "optionals":
 
@@ -25,6 +25,10 @@ const generate_form_labels = (form_step, form_type) => {
         case "notes"://only when adding a collection
 
             return ["Add at least two notes", `SEARCH FOR NOTES `]
+
+        case "success": //when it has been added successfully
+
+        return ["Note added successfully !", null]
 
         default: return
     }

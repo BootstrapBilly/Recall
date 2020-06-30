@@ -46,6 +46,8 @@
     position: absolute;
     top: 80%;
     z-index: 0;
+    background-image: url("../../Assets/Image/Auth_background.svg");
+    background-size: auto;
 }
 
 .bottom_image{

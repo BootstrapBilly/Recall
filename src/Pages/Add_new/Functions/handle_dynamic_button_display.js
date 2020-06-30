@@ -29,6 +29,10 @@ const handle_dynamic_button_display = (form_type, form_data, form_step, set_show
         //show the add new button
         else return set_show_form_navigation_buttons("back")
 
+        case "success":
+
+        return set_show_form_navigation_buttons("success")
+
         default: return
     }
 

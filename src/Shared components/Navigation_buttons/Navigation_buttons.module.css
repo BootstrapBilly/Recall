@@ -34,3 +34,24 @@
 
     color: white;
 }
+
+.reset_button{
+    color: white;
+    width: 45%;
+    animation: fadein 0.2s forwards;
+    animation-delay: 0.8s;
+    opacity: 0;
+
+}
+
+
+@keyframes fadein{
+
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
