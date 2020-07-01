@@ -7,10 +7,10 @@ import classes from "./Buttons.module.css"
 import colours from "../../../../util/colours"
 
 //redux action creators
-import {submit_form} from "../../../../Store/Actions/0_submit_form_action"
+import { submit_form } from "../../../../Store/Actions/0_submit_form_action"
 
 //redux hooks
-import {useDispatch} from "react-redux"
+import { useDispatch } from "react-redux"
 
 export const Buttons = props => {
 
@@ -19,17 +19,28 @@ export const Buttons = props => {
     const handle_delete = () => {
 
         props.reset_expanded()
-        dispatch(submit_form({ user_id: "5eecd941331a770017a74e44", title:props.title}, "delete_note"))
+        dispatch(submit_form({ user_id: "5eecd941331a770017a74e44", title: props.title }, "delete_note"))
     }
 
     return (
 
         <div className={classes.container}>
 
-            <div className={classes.buttons} style={{visibility:!props.expanded && "hidden"}}>
+            <div className={classes.buttons} style={{ visibility: !props.expanded && "hidden" }}>
 
-                <div className={classes.button} style={{ background: "#ff3333" }} onClick={()=> handle_delete()}>DELETE</div>
-                <div className={classes.button} style={{ background: colours.secondary }}>EDIT</div>
+                <div className={classes.button} style={{ background: "#ff3333" }}
+
+                    onClick={props.edit_mode ? props.handle_cancel_click : () => handle_delete()}>
+                    {props.edit_mode ? "CANCEL" : "DELETE"}
+
+                </div>
+
+                <div className={classes.button} style={{ background: props.edit_mode ? colours.green : colours.secondary }}
+
+                    onClick={props.edit_mode ? () => console.log("saved") : props.handle_edit_click}>
+                    {props.edit_mode ? "SAVE" : "EDIT"}
+
+                </div>
 
             </div>
 

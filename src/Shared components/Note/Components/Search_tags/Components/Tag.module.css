@@ -1,7 +1,49 @@
 .container{
-    margin-left: 5px;
-    padding: 2px 10px;
+    margin-left: 10px;
+    padding: 2px 6px;
     color: white;
     font-size: 12px;
-    margin-top: 5px;
+    margin-top: 10px;
+    position: relative;
 }
+
+.cross{
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    background-color: red;
+    width: 9px;
+    height: 9px;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    padding: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input_wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.input{
+    font-size: 10px;
+    color: black;
+    
+}
+
+::-webkit-input-placeholder{
+    font-size: 10px;
+    color: black;
+    text-align: center;
+}
+
+input:focus::placeholder {
+    color: transparent;
+ 
+  }

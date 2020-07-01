@@ -10,6 +10,7 @@
     scrollbar-width: none;  /* Firefox */
     background-image: url("../../Assets/Image/bg50.svg");
     background-size: auto;
+    padding-top: 50px;
 
 }
 

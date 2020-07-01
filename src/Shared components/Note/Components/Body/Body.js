@@ -9,7 +9,10 @@ export const Body = props => {
     return (
         <div className={classes.container} style={{background:colours.white}}>
             
-            {props.text}
+            {props.value //used to set the size of the text area - color is transparent / css hack
+            }
+
+            <textarea className={classes.text_area} disabled={props.edit_mode ? false : true} style={{background: props.edit_mode && "wheat"}} onChange={props.handle_change.bind(this, "body")} value={props.value}></textarea>
 
         </div>
     )
