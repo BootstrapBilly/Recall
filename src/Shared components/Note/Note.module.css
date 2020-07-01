@@ -7,7 +7,7 @@
     padding: 10px;
     border-radius: 5px;
     position: relative;
-    background-color: white;
+    background-color: whitesmoke;
     margin-top: 20px;
     animation: fadein 0.2s forwards;
     animation-delay: 0.3s;
@@ -58,6 +58,10 @@
     display: block;
     border-radius: 0px;
 }
+
+.copy_button:hover{
+    cursor: pointer;
+    }
 
 @keyframes fadein{
     0%{

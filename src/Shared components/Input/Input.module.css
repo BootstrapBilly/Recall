@@ -1,6 +1,6 @@
 .container{
     width: 240px;
-    background-color: white;
+    background-color: whitesmoke;
     padding: 8px 5px;
     padding-top: 2px;
     box-shadow: 1px 1px 3px 1px rgba(128, 128, 128, 0.281);
@@ -40,6 +40,7 @@
     padding-left: 0;
     font-size: 14px;
     width: 95%;
+    background-color: whitesmoke;
 }
 
 .text_area::placeholder{

@@ -27,7 +27,7 @@ import { clear_response } from "../../Store/Actions/0_submit_form_action"
 import generate_form_labels from "./Functions/generate_form_labels"
 
 //assets
-import man_on_computer from "../../Assets/Abstract/compute_small.svg"
+import man_pointing from "../../Assets/Abstract/man-pointing.svg"
 
 export const Add_new = props => {
 
@@ -123,163 +123,185 @@ export const Add_new = props => {
 
         }
 
+        if (response && response.data.message === "note deleted successfully") {
+
+            clear_response()//clear the response
+
+            reset_form()
+
+        }
+
     }, [response])
 
+console.log(window.innerHeight)
+console.log(window.innerWidth)
 
     return (
 
-        <div className={classes.container}>
+        <React.Fragment>
 
-            <span className={classes.title} style={{ color: current_step === "optionals" || current_step === "syntax" ? "grey" : colours.primary, marginTop: current_step === "selection" && "45px" }}>{data[0]}</span>
+            <div className={classes.container}>
 
-            {/* {!form_type && <OptionSelect handle_selection={(option) => handle_selection(option)} />} */}
+                <div className={classes.background_overlay}></div>
 
-            {
-                //form_type &&
+                <div className={classes.form_wrapper}>
 
-                current_step === "title" ?
+                <img src={man_pointing} alt={"a man pointing to the form"} className={classes.man_pointing}/>
 
-                    <Input
-                        test_handle="title_input"
-                        placeholder="Writing a for each loop"
-                        label={data[1]}
-                        value={form_data.title}
-                        onChange={e => set_form_data({ ...form_data, title: e.target.value })}
-                        toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
-                        marginTop="15px" />
+                    <span className={classes.title} style={{ color: current_step === "optionals" || current_step === "syntax" ? "grey" : colours.primary, marginTop: current_step === "selection" && "45px" }}>{data[0]}</span>
 
-                    : current_step === "body" ?
+                    {/* {!form_type && <OptionSelect handle_selection={(option) => handle_selection(option)} />} */}
 
-                        <Input
-                            test_handle="body_input"
-                            placeholder="A for each loop iterates through an array calling a function on each element"
-                            label={data[1]}
-                            value={form_data.body}
-                            text_area
-                            onChange={e => set_form_data({ ...form_data, body: e.target.value })}
-                            toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
-                            marginTop="15px" />
+                    {
+                        //form_type &&
 
-                        : current_step === "notes" ? //this step is only for collections
+                        current_step === "title" ?
 
-                            <div className={classes.form_step_container}>
+                            <Input
+                                test_handle="title_input"
+                                placeholder="Writing a for each loop"
+                                label={data[1]}
+                                value={form_data.title}
+                                onChange={e => set_form_data({ ...form_data, title: e.target.value })}
+                                toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
+                                marginTop="15px" />
+
+                            : current_step === "body" ?
 
                                 <Input
-                                    test_handle="notes_search_bar"
+                                    test_handle="body_input"
+                                    placeholder="A for each loop iterates through an array calling a function on each element"
                                     label={data[1]}
-                                    value={notes_search_string}
-                                    onChange={e => set_notes_search_string(e.target.value)}
+                                    value={form_data.body}
+                                    text_area
+                                    onChange={e => set_form_data({ ...form_data, body: e.target.value })}
                                     toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
-                                    marginTop="20px"
+                                    marginTop="15px" />
 
-                                />
+                                : current_step === "notes" ? //this step is only for collections
 
-                                <NotesSelect
-                                    search_string={notes_search_string}
-                                    toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
-                                    selected_notes={selected_notes}
-                                    reset_search_string={() => set_notes_search_string(null)}
-                                    handle_select_note={(note) => set_selected_notes(selected_notes => [...selected_notes, note])}
-                                    handle_remove_note={(note) => set_selected_notes(selected_notes => [...selected_notes.filter(selected_note => selected_note !== note)])}
-                                />
-
-                            </div>
-
-
-                            : current_step === "optionals" ? //this step is only for notes
-
-                                <React.Fragment>
-
-                                    <div className={classes.prompt_text} style={{ color: colours.primary }}>This step is optional and may be skipped</div>
-
-                                    <Input
-                                        test_handle="subject_input"
-                                        placeholder="Array methods"
-                                        label={data[1]}
-                                        grey
-                                        value={form_data.subject}
-                                        onChange={e => set_form_data({ ...form_data, subject: e.target.value })}
-                                        toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
-                                        marginTop="10px" />
-
-                                    <Input
-                                        test_handle="search_tags_input"
-                                        placeholder="For Loop Array Foreach"
-                                        label={data[2]}
-                                        grey
-                                        value={form_data.search_tags}
-                                        onChange={e => set_form_data({ ...form_data, search_tags: e.target.value })}
-                                        toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
-
-                                    />
-
-                                </React.Fragment>
-
-                                : current_step === "syntax" ?
-
-                                    <React.Fragment>
-
-                                        <div className={classes.prompt_text} style={{ color: colours.primary }}>This step is optional and may be skipped</div>
+                                    <div className={classes.form_step_container}>
 
                                         <Input
-                                            test_handle="syntax_input"
-                                            placeholder={"array.forEach(element => console.log(element))"}
+                                            test_handle="notes_search_bar"
                                             label={data[1]}
-                                            grey
-                                            value={form_data.syntax}
-                                            text_area
-                                            onChange={e => set_form_data({ ...form_data, syntax: e.target.value })}
+                                            value={notes_search_string}
+                                            onChange={e => set_notes_search_string(e.target.value)}
                                             toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
-                                            marginTop="10px"
+                                            marginTop="20px"
+
                                         />
 
-                                    </React.Fragment>
+                                        <NotesSelect
+                                            search_string={notes_search_string}
+                                            toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
+                                            selected_notes={selected_notes}
+                                            reset_search_string={() => set_notes_search_string(null)}
+                                            handle_select_note={(note) => set_selected_notes(selected_notes => [...selected_notes, note])}
+                                            handle_remove_note={(note) => set_selected_notes(selected_notes => [...selected_notes.filter(selected_note => selected_note !== note)])}
+                                        />
+
+                                    </div>
+
+
+                                    : current_step === "optionals" ? //this step is only for notes
+
+                                        <React.Fragment>
+
+                                            <div className={classes.prompt_text} style={{ color: colours.primary }}>This step is optional and may be skipped</div>
+
+                                            <Input
+                                                test_handle="subject_input"
+                                                placeholder="Array methods"
+                                                label={data[1]}
+                                                grey
+                                                value={form_data.subject}
+                                                onChange={e => set_form_data({ ...form_data, subject: e.target.value })}
+                                                toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
+                                                marginTop="10px" />
+
+                                            <Input
+                                                test_handle="search_tags_input"
+                                                placeholder="For Loop Array Foreach"
+                                                label={data[2]}
+                                                grey
+                                                value={form_data.search_tags}
+                                                onChange={e => set_form_data({ ...form_data, search_tags: e.target.value })}
+                                                toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
+
+                                            />
+
+                                        </React.Fragment>
+
+                                        : current_step === "syntax" ?
+
+                                            <React.Fragment>
+
+                                                <div className={classes.prompt_text} style={{ color: colours.primary }}>This step is optional and may be skipped</div>
+
+                                                <Input
+                                                    test_handle="syntax_input"
+                                                    placeholder={"array.forEach(element => console.log(element))"}
+                                                    label={data[1]}
+                                                    grey
+                                                    value={form_data.syntax}
+                                                    text_area
+                                                    onChange={e => set_form_data({ ...form_data, syntax: e.target.value })}
+                                                    toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
+                                                    marginTop="10px"
+                                                />
+
+                                            </React.Fragment>
 
 
 
-                                    : current_step === "success" ?
-                                    
-                                    <Note details={form_data} />
-                                    
-                                    : null}
+                                            : current_step === "success" ?
 
-            {/* Error message */}
+                                                <Note details={form_data} />
 
-            {/* if there is a response, and it is above 300 (error),        and it is not a search error */}
-            {response && response.status > 300 && response.data.message !== "A search string is required" &&
+                                                : null}
 
-                <span test_handle="form_validation_error" className={classes.error_message}>
+                    {/* Error message */}
 
-                    {//display the error message
-                        response.data.message}
+                    {/* if there is a response, and it is above 300 (error),        and it is not a search error */}
+                    {response && response.status > 300 && response.data.message !== "A search string is required" &&
 
-                </span>
-            }
+                        <span test_handle="form_validation_error" className={classes.error_message}>
 
-            {//Form navigation buttons
+                            {//display the error message
+                                response.data.message}
 
-                show_form_navigation_buttons &&//if the form has been selected
-
-                <NavigationButtons //show the navigation buttons
-                    width="275px"
-                    marginTop={"20px"}
-                    type={show_form_navigation_buttons}
-                    on_click={(direction) => handle_form_navigation(direction, props.form_type, current_step, set_current_step, form_data, dispatch, set_notes_search_string)
+                        </span>
                     }
-                    handle_reset={()=> reset_form()}
-                />
 
-            }
+                    {//Form navigation buttons
 
-            <div className={classes.bottom_section} style={{display: window.innerHeight < 800 && keyboard_open && "none"}} >
+                        show_form_navigation_buttons &&//if the form has been selected
 
-                <img src={man_on_computer} alt="a man on a computer" className={classes.bottom_image}  />
+                        <NavigationButtons //show the navigation buttons
+                            width="275px"
+                            marginTop={"20px"}
+                            type={show_form_navigation_buttons}
+                            on_click={(direction) => handle_form_navigation(direction, props.form_type, current_step, set_current_step, form_data, dispatch, set_notes_search_string)
+                            }
+                            handle_reset={() => reset_form()}
+                        />
+
+                    }
+                </div>
 
             </div>
 
-            <Nav />
+            <div className={classes.bottom_section} >
 
-        </div>
+                {/* <img src={man_on_computer} alt="a man on a computer" className={classes.bottom_image} /> */}
+
+            </div>
+
+            
+
+            <Nav />
+        </React.Fragment>
 
     )
 

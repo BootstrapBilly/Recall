@@ -31,8 +31,9 @@ const handle_form_navigation = (direction, form_type, form_step, set_form_step, 
             /* Otherwise, if they pressed next */
 
             //and they are adding a note,
-            else if (form_type === "note") {
+            else if (form_type === "note" && form_data.title) {
 
+                console.log(form_data.title)
                 //submit the title to the backend, to see if it is valid and wait for the response 
                 //success (handled by line 105 add_new.js), error handled by the input component (line 53)
                 return dispatch(submit_form({ title: form_data.title, user_id: "5eecd941331a770017a74e44" }, "check_note_title"))
@@ -42,9 +43,9 @@ const handle_form_navigation = (direction, form_type, form_step, set_form_step, 
             //otherwise, they are adding a collection
             //submit the title to the backend to see if that note title is already in use, wait for the response
             //success (handled by line 105 add_new.js), error handled by the input component (line 53)
-            return dispatch(submit_form({ title: form_data.title, user_id: "5eecd941331a770017a74e44" }, "check_process_title"))
+            // else return dispatch(submit_form({ title: form_data.title, user_id: "5eecd941331a770017a74e44" }, "check_process_title"))
 
-
+            break;
 
         case "body"://if they are on the body step
 

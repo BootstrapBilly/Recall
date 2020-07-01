@@ -7,6 +7,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
   background-color: #eaeff2;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 code {
@@ -18,8 +24,14 @@ code {
 #root{
   height: 100%;
   font-family: 'Lato', sans-serif;
-  overflow-y: scroll;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
+
+#root::-webkit-scrollbar {
+  display: none;
+}
+
 html{
   height: 100%;
   overflow-y: scroll;

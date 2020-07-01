@@ -13,6 +13,10 @@
 
 }
 
+.container:hover{
+    cursor: pointer;
+    }
+
 .buttons{
     display: flex;
     width: 90%;

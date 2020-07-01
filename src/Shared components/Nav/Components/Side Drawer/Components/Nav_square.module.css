@@ -12,6 +12,10 @@
     border-radius: 5px;
 }
 
+.container:hover{
+    cursor: pointer;
+}
+
 .text{
     position: absolute;
     bottom:5%;

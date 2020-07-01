@@ -20,7 +20,7 @@ const generate_form_labels = (form_step, form_type) => {
 
         case "syntax"://only when adding a note
 
-            return ["Would you like to add some code ?", `SYNTAX OF NOTE`]
+            return ["Add some code ?", `SYNTAX OF NOTE`]
 
         case "notes"://only when adding a collection
 
@@ -28,7 +28,7 @@ const generate_form_labels = (form_step, form_type) => {
 
         case "success": //when it has been added successfully
 
-        return ["Note added successfully !", null]
+        return ["Added successfully !", null]
 
         default: return
     }

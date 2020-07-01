@@ -11,7 +11,7 @@
 }
 
 .container_open{
-   left: 0;
+   left: 0px;
 }
 
 .top_bar{
@@ -54,7 +54,7 @@
     align-items: center;
     flex-direction: column;
     position: absolute;
-    left: 250px;
+    left: 245px;
     top: 0;
 }
 
@@ -62,9 +62,9 @@
     writing-mode: vertical-lr;
     text-orientation: upright;
     position: relative;
-    left: -2px;
+    left: 4px;
     padding: 15px 10px;
-    padding-left: 5px;
+    padding-left: 10px;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     color: white;

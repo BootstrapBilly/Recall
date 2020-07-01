@@ -13,8 +13,6 @@ import { submit_form, clear_response } from "../../Store/Actions/0_submit_form_a
 //redux hooks
 import { useSelector, useDispatch } from "react-redux"
 
-//external
-import Alert from "easyalert"
 
 export const View_all = () => {
 
@@ -45,9 +43,9 @@ export const View_all = () => {
 
             clear_response()//clear the response
 
-            Alert("Note deleted successfully", "success", { top: "80px" })//show the user an alert that their note was added successfully
+            // Alert("Note deleted successfully", "success", { top: "80px" })//show the user an alert that their note was added successfully
 
-            dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes",))
+            dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes"))
 
         }
 // eslint-disable-next-line

@@ -5,7 +5,7 @@ const handle_dynamic_button_display = (form_type, form_data, form_step, set_show
         case "title"://title step
 
         //if the title is truish, show both buttons,                            if not, show only the back button
-        if (form_data.title) return set_show_form_navigation_buttons("both"); else return set_show_form_navigation_buttons("back")
+        if (form_data.title) return set_show_form_navigation_buttons("next"); else return set_show_form_navigation_buttons("grey_next")
 
         case "body"://body step
 
