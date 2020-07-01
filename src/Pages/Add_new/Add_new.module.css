@@ -42,8 +42,8 @@
 .title {
     font-size: 20px;
     margin-top: 15px;
-    font-weight: 100;
-    font-family: 'Trocchi', serif
+    font-weight: 500;
+    z-index: 3;
 }
 
 .error_message {
@@ -68,12 +68,13 @@
     width: 100%;
     margin-top: 8px;
     font-size: 14px;
+    z-index: 3;
 }
 
 .bottom_section {
     width: 100%;
     height: 30%;
-    position: relative;
+    position: fixed;
     z-index: 0;
     background-image: url("../../Assets/Image/Auth_background.svg");
     background-size: auto;

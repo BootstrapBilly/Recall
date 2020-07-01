@@ -11,6 +11,7 @@ import colours from '../../util/colours'
 import Buttons from "../Note/Components/Buttons/Buttons"
 import Body from "../Note/Components/Body/Body"
 import ToggleIcon from "../Note/Components/Toggle_icon/Toggle_icon"
+import SearchTags from "./Components/Search_tags/Search_tags"
 
 //redux hooks
 //import { useSelector } from "react-redux"
@@ -51,7 +52,11 @@ export const Note = props => {
                     <div className={classes.expanded_content}>
 
                         <Body text={props.details.body} />
+
                         {props.details.syntax && <div className={classes.copy_button} style={{ background: colours.green }}>COPY CODE</div>}
+
+                        {props.details.search_tags && <SearchTags search_tags={props.details.search_tags} />}
+
                         <Buttons expanded={expanded} title={props.details.title} reset_expanded={() => set_expanded(false)} />
 
                     </div>

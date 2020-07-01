@@ -9,7 +9,18 @@ body {
   background-color: #eaeff2;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+
 }
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+html{
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 
 html::-webkit-scrollbar {
   display: none;
@@ -26,13 +37,9 @@ code {
   font-family: 'Lato', sans-serif;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+  overflow: scroll;
 }
 
 #root::-webkit-scrollbar {
   display: none;
-}
-
-html{
-  height: 100%;
-  overflow-y: scroll;
 }

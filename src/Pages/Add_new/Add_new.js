@@ -133,9 +133,6 @@ export const Add_new = props => {
 
     }, [response])
 
-console.log(window.innerHeight)
-console.log(window.innerWidth)
-
     return (
 
         <React.Fragment>
@@ -257,7 +254,7 @@ console.log(window.innerWidth)
 
                                             : current_step === "success" ?
 
-                                                <Note details={form_data} />
+                                                <Note details={form_data}  />
 
                                                 : null}
 
