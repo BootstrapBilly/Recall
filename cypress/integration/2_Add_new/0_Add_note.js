@@ -146,12 +146,15 @@ describe("@@@@@ ADD NEW NOTE @@@@@", () => {
 
         })
 
-        it("Submit the form without entering syntax - should display a success alert", () => {
+        it("Submit the form without entering syntax - should display the note", () => {
 
             cy.get('[test_handle="form_next_button"]').click()
 
-            cy.get('[id="easy-alert"]').should("be.visible")
+            cy.get('[test_handle="note_container"]').should("be.visible")
 
+            cy.get('[test_handle="form_reset_button"]').click()
+
+            cy.get('[test_handle="title_input"]').should("be.visible")
         })
 
     })
@@ -178,11 +181,13 @@ describe("@@@@@ ADD NEW NOTE @@@@@", () => {
 
         })
 
-        it("Submit the form without entering syntax - should display a success alert", () => {
+        it("Submit the form without entering syntax - should display the note", () => {
 
             cy.get('[test_handle="form_next_button"]').click()
 
-            cy.get('[id="easy-alert"]').should("be.visible")
+            cy.get('[test_handle="note_container"]').should("be.visible")
+
+            cy.get('[test_handle="form_reset_button"]').click()
 
         })
 
@@ -210,11 +215,13 @@ describe("@@@@@ ADD NEW NOTE @@@@@", () => {
 
         })
 
-        it("Submit the form without entering syntax - should display a success alert", () => {
+        it("Submit the form without entering syntax - should display the note", () => {
 
             cy.get('[test_handle="form_next_button"]').click()
 
-            cy.get('[id="easy-alert"]').should("be.visible")
+            cy.get('[test_handle="note_container"]').should("be.visible")
+
+            cy.get('[test_handle="form_reset_button"]').click()
 
         })
 
@@ -243,11 +250,13 @@ describe("@@@@@ ADD NEW NOTE @@@@@", () => {
 
         })
 
-        it("Submit the form without entering syntax - should display a success alert", () => {
+        it("Submit the form without entering syntax - should display the note", () => {
 
             cy.get('[test_handle="form_next_button"]').click()
 
-            cy.get('[id="easy-alert"]').should("be.visible")
+            cy.get('[test_handle="note_container"]').should("be.visible")
+
+            cy.get('[test_handle="form_reset_button"]').click()
 
         })
 
@@ -274,13 +283,15 @@ describe("@@@@@ ADD NEW NOTE @@@@@", () => {
 
         })
 
-        it("Submit the form without entering syntax - should display a success alert", () => {
+        it("Submit the form without entering syntax - should display the note", () => {
 
             cy.get('[test_handle="syntax_input"]').type(`const handle_dynamic_button_display = (form_type, form_data, form_step, set_show_form_navigation_buttons) => `)
-            
+
             cy.get('[test_handle="form_next_button"]').click()
 
-            cy.get('[id="easy-alert"]').should("be.visible")
+            cy.get('[test_handle="note_container"]').should("be.visible")
+
+            cy.get('[test_handle="form_reset_button"]').click()
 
         })
 

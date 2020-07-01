@@ -23,14 +23,11 @@ import handle_dynamic_button_display from './Functions/handle_dynamic_button_dis
 //redux action creators
 import { clear_response } from "../../Store/Actions/0_submit_form_action"
 
-//external
-import Alert from "easyalert"
-
 //functions
 import generate_form_labels from "./Functions/generate_form_labels"
 
 //assets
-import man_on_computer from "../../Assets/Abstract/compute.svg"
+import man_on_computer from "../../Assets/Abstract/compute_small.svg"
 
 export const Add_new = props => {
 
@@ -267,7 +264,7 @@ export const Add_new = props => {
                     width="275px"
                     marginTop={"20px"}
                     type={show_form_navigation_buttons}
-                    on_click={(direction) => handle_form_navigation(direction, props.form_type, set_show_form_navigation_buttons, current_step, set_current_step, form_data, dispatch, set_notes_search_string)
+                    on_click={(direction) => handle_form_navigation(direction, props.form_type, current_step, set_current_step, form_data, dispatch, set_notes_search_string)
                     }
                     handle_reset={()=> reset_form()}
                 />

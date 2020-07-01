@@ -10,9 +10,9 @@ If it failed, the input component (shared components) will detect the error and 
 
 The last step of the form submits a new note request with all the info */
 
-import { submit_form, clear_response } from "../../../Store/Actions/0_submit_form_action"
+import { submit_form } from "../../../Store/Actions/0_submit_form_action"
 
-const handle_form_navigation = (direction, form_type, set_show_form_navigation_buttons, form_step, set_form_step, form_data, dispatch, set_notes_search_string) => {
+const handle_form_navigation = (direction, form_type, form_step, set_form_step, form_data, dispatch, set_notes_search_string) => {
 
     switch (form_step) {//switch the current step of the form
 
@@ -42,7 +42,7 @@ const handle_form_navigation = (direction, form_type, set_show_form_navigation_b
             //otherwise, they are adding a collection
             //submit the title to the backend to see if that note title is already in use, wait for the response
             //success (handled by line 105 add_new.js), error handled by the input component (line 53)
-            else return dispatch(submit_form({ title: form_data.title, user_id: "5eecd941331a770017a74e44" }, "check_process_title"))
+            return dispatch(submit_form({ title: form_data.title, user_id: "5eecd941331a770017a74e44" }, "check_process_title"))
 
 
 

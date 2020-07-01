@@ -26,8 +26,9 @@ export const View_all = () => {
 
     useEffect(() => {
 
-        dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes",))
+        dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes"))
 
+// eslint-disable-next-line
     }, [])
 
     useEffect(() => {
@@ -49,7 +50,7 @@ export const View_all = () => {
             dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes",))
 
         }
-
+// eslint-disable-next-line
     }, [response])
 
 
@@ -59,7 +60,7 @@ export const View_all = () => {
 
             <div className={classes.background_image}></div>
 
-            {notes && notes.map((note, index) => <Note index={index} details={note} />)}
+            {notes && notes.map((note, index) => <Note key={index} index={index} details={note} />)}
 
             <Nav />
         </div>

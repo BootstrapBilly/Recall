@@ -6,9 +6,6 @@ import classes from "./Buttons.module.css"
 //util
 import colours from "../../../../util/colours"
 
-//assets
-import Arrow from "../../../../Assets/Icon/arrow.svg"
-
 //redux action creators
 import {submit_form} from "../../../../Store/Actions/0_submit_form_action"
 
@@ -31,7 +28,7 @@ export const Buttons = props => {
 
             <div className={classes.buttons} style={{visibility:!props.expanded && "hidden"}}>
 
-                <div className={classes.button} style={{ background: "#ff3333" }} onClick={() => console.log("cli")} onClick={()=> handle_delete()}>DELETE</div>
+                <div className={classes.button} style={{ background: "#ff3333" }} onClick={()=> handle_delete()}>DELETE</div>
                 <div className={classes.button} style={{ background: colours.secondary }}>EDIT</div>
 
             </div>

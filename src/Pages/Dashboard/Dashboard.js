@@ -24,7 +24,7 @@ export const Dashboard = () => {
     useEffect(() => {
      
         dispatch(submit_form({ user_id: "5eecd941331a770017a74e44"}, "get_notes",))
-
+// eslint-disable-next-line
     },[])
 
     useEffect(()=> {
