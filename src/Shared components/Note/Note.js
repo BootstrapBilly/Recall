@@ -15,10 +15,15 @@ import SearchTags from "./Components/Search_tags/Search_tags"
 import Input from "./Components/Input/Input"
 
 //redux hooks
-//import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 
+//redux action creators
+import { submit_form } from "../../Store/Actions/0_submit_form_action"
 
 export const Note = props => {
+
+    //-config
+    const dispatch = useDispatch()
 
     //?selectors
     //const response = useSelector(state => state.form.response)
@@ -63,6 +68,23 @@ export const Note = props => {
 
     }
 
+    const send_update_request = () => {
+
+        return dispatch(submit_form(
+            {
+                user_id: "5eecd941331a770017a74e44",
+                title: props.details.title,
+                new_title:form_data.title,
+                new_subject:form_data.subject,
+                new_body:form_data.body,
+                new_search_tags: form_data.search_tags,
+                new_syntax: form_data.syntax
+            }
+
+            , "update_note"))
+
+    }
+
     return (
 
         <div className={classes.container} test_handle="note_container"
@@ -74,16 +96,16 @@ export const Note = props => {
 
                 <div className={classes.collapsed_content}>
 
-                    <Input value={form_data.title || props.details.title} 
-                    edit_mode={edit_mode} 
-                    type="title" 
-                    handle_change={(type, e)=> set_form_data({...form_data, [type] : e.target.value}) }/>
+                    <Input value={form_data.title || props.details.title}
+                        edit_mode={edit_mode}
+                        type="title"
+                        handle_change={(type, e) => set_form_data({ ...form_data, [type]: e.target.value })} />
 
-                    <Input value={form_data.subject || props.details.subject || "No subject"} 
-                    edit_mode={edit_mode} 
-                    style={{fontSize:"15px", color:"grey"}} 
-                    type="subject" 
-                    handle_change={(type, e)=> set_form_data({...form_data, [type] : e.target.value}) } />
+                    <Input value={form_data.subject || props.details.subject || "No subject"}
+                        edit_mode={edit_mode}
+                        style={{ fontSize: "15px", color: "grey" }}
+                        type="subject"
+                        handle_change={(type, e) => set_form_data({ ...form_data, [type]: e.target.value })} />
 
                 </div>
 
@@ -91,13 +113,21 @@ export const Note = props => {
 
                     <div className={classes.expanded_content}>
 
-                        <Body value={form_data.body || props.details.body}  edit_mode={edit_mode} handle_change={(type, e)=> set_form_data({...form_data, [type] : e.target.value}) }  />
+                        <Body value={form_data.body || props.details.body} edit_mode={edit_mode} handle_change={(type, e) => set_form_data({ ...form_data, [type]: e.target.value })} />
 
                         {props.details.syntax && <div className={classes.copy_button} style={{ background: colours.green }}>COPY CODE</div>}
 
                         {props.details.search_tags && <SearchTags search_tags={props.details.search_tags} edit_mode={edit_mode} />}
 
-                        <Buttons expanded={expanded} title={props.details.title} reset_expanded={() => set_expanded(false)} handle_edit_click={() => handle_edit_click()} edit_mode={edit_mode} handle_cancel_click={()=> handle_cancel_click()}/>
+                        <Buttons
+                            expanded={expanded}
+                            title={props.details.title}
+                            reset_expanded={() => set_expanded(false)}
+                            handle_edit_click={() => handle_edit_click()}
+                            edit_mode={edit_mode}
+                            handle_cancel_click={() => handle_cancel_click()}
+                            handle_save_click={() => send_update_request()}
+                        />
 
                     </div>
 

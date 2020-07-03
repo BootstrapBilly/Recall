@@ -37,7 +37,7 @@ export const Buttons = props => {
 
                 <div className={classes.button} style={{ background: props.edit_mode ? colours.green : colours.secondary }}
 
-                    onClick={props.edit_mode ? () => console.log("saved") : props.handle_edit_click}>
+                    onClick={props.edit_mode ? props.handle_save_click: props.handle_edit_click}>
                     {props.edit_mode ? "SAVE" : "EDIT"}
 
                 </div>
