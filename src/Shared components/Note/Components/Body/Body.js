@@ -7,7 +7,7 @@ import colours from '../../../../util/colours'
 export const Body = props => {
 
     return (
-        <div className={classes.container} style={{background:colours.white}}>
+        <div className={classes.container} style={{background:colours.white, height:props.value === "" && "22px"}}>
             
             {props.value //used to set the size of the text area - color is transparent / css hack
             }

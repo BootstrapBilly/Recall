@@ -23,7 +23,7 @@ export const Search_tags = props => {
 
             set_search_tags(search_tags => [...search_tags.filter(tag => tag !== "Add new")])
         }
-    
+    // eslint-disable-next-line
     },[props.edit_mode])
 
     return (

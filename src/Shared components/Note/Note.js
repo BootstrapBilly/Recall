@@ -26,7 +26,7 @@ export const Note = props => {
     const dispatch = useDispatch()
 
     //?selectors
-    //const response = useSelector(state => state.form.response)
+    const response = useSelector(state => state.form.response)
 
     const [expanded, set_expanded] = useState(false)
     const [height, set_height] = useState(0)
@@ -70,20 +70,39 @@ export const Note = props => {
 
     const send_update_request = () => {
 
-        return dispatch(submit_form(
-            {
-                user_id: "5eecd941331a770017a74e44",
-                title: props.details.title,
-                new_title:form_data.title,
-                new_subject:form_data.subject,
-                new_body:form_data.body,
-                new_search_tags: form_data.search_tags,
-                new_syntax: form_data.syntax
-            }
-
+        return dispatch(submit_form({
+            user_id: "5eecd941331a770017a74e44",
+            title: props.details.title,
+            new_title: form_data.title || props.details.title,
+            new_subject: form_data.subject || props.details.subject,
+            new_body: form_data.body || props.details.body,
+            new_search_tags: form_data.search_tags || props.details.search_tags,
+            new_syntax: form_data.syntax || props.details.syntax
+        }
             , "update_note"))
 
     }
+
+    useEffect(() => {
+
+        console.log(response)
+
+        if (response.data.message === "note updated successfully") {
+
+            set_form_data({
+                title: props.details.title,
+                subject: props.details.subject || "No subject",
+                search_tags: props.details.search_tags,//used to make searching easier and faster
+                body: props.details.body,
+                syntax: props.details.syntax,//stores the syntax NOTE ONLY
+                notes: []//holds an array of notes collection ONLY
+            })
+
+            set_edit_mode(false)
+
+        }
+
+    }, [response])
 
     return (
 
@@ -96,12 +115,12 @@ export const Note = props => {
 
                 <div className={classes.collapsed_content}>
 
-                    <Input value={form_data.title || props.details.title}
+                    <Input value={form_data.title === null ? props.details.title : form_data.title}
                         edit_mode={edit_mode}
                         type="title"
                         handle_change={(type, e) => set_form_data({ ...form_data, [type]: e.target.value })} />
 
-                    <Input value={form_data.subject || props.details.subject || "No subject"}
+                    <Input value={form_data.subject === null ? props.details.subject || "No subject" : form_data.subject}
                         edit_mode={edit_mode}
                         style={{ fontSize: "15px", color: "grey" }}
                         type="subject"
@@ -113,7 +132,7 @@ export const Note = props => {
 
                     <div className={classes.expanded_content}>
 
-                        <Body value={form_data.body || props.details.body} edit_mode={edit_mode} handle_change={(type, e) => set_form_data({ ...form_data, [type]: e.target.value })} />
+                        <Body value={form_data.body === null ? props.details.body : form_data.body} edit_mode={edit_mode} handle_change={(type, e) => set_form_data({ ...form_data, [type]: e.target.value })} />
 
                         {props.details.syntax && <div className={classes.copy_button} style={{ background: colours.green }}>COPY CODE</div>}
 
