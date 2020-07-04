@@ -12,7 +12,7 @@ export const Toggle_icon = props => {
 
         <div className={classes.container} onClick={() => props.expanded ? props.handle_collapse() : props.handle_expand()}>
                 
-        <img src={Arrow} alt="An arrow to expand the note"
+        <img src={Arrow} alt="An arrow to expand the note" test_handle="note_toggle_icon"
             className={[classes.arrow, props.expanded && classes.arrow_expanded].join(" ")}
             
         />

@@ -85,18 +85,18 @@ export const Note = props => {
 
     useEffect(() => {
 
-        console.log(response)
-
         if (response.data.message === "note updated successfully") {
 
-            set_form_data({
-                title: props.details.title,
-                subject: props.details.subject || "No subject",
-                search_tags: props.details.search_tags,//used to make searching easier and faster
-                body: props.details.body,
-                syntax: props.details.syntax,//stores the syntax NOTE ONLY
-                notes: []//holds an array of notes collection ONLY
-            })
+            // set_form_data({
+            //     title: props.details.title,
+            //     subject: props.details.subject || "No subject",
+            //     search_tags: props.details.search_tags,//used to make searching easier and faster
+            //     body: props.details.body,
+            //     syntax: props.details.syntax,//stores the syntax NOTE ONLY
+            //     notes: []//holds an array of notes collection ONLY
+            // })
+
+            dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes"))
 
             set_edit_mode(false)
 
@@ -124,7 +124,8 @@ export const Note = props => {
                         edit_mode={edit_mode}
                         style={{ fontSize: "15px", color: "grey" }}
                         type="subject"
-                        handle_change={(type, e) => set_form_data({ ...form_data, [type]: e.target.value })} />
+                        handle_change={(type, e) => set_form_data({ ...form_data, [type]: e.target.value })}
+                        handle_edit_missing_subject={()=> set_form_data({ ...form_data, subject: "" })} />
 
                 </div>
 
