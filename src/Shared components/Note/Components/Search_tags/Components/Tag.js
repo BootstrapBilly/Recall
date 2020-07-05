@@ -12,15 +12,17 @@ export const Tag = props => {
 
         <React.Fragment>
 
-            {props.text === "Add new" ?
+            {props.text === "Add new" ? //if the given array element (passed in by props) is the special "Add new" (Add new is added to the array during edit mode)
 
-                <div className={classes.input_wrapper}>
+                <div className={classes.input_wrapper}> {/* Make the search tag an input, to add a new search tag */}
 
-                    <input size="11" className={classes.input} placeholder={"ADD NEW TAG"} style={{border: "1px solid wheat", background:"wheat", fontSize:"12px", textAlign:"center", padding:"2px 0"}}/>
+                    <input size="11" className={classes.input} placeholder={"ADD NEW TAG"} style={{ border: "1px solid wheat", background: "wheat", fontSize: "12px", textAlign: "center", padding: "2px 0" }} />
 
                 </div>
 
-                : <div className={classes.container} style={{ border: `1px solid ${colours.primary}`, color: colours.primary }}>
+                : //otherwise, display the tag as normal
+
+                <div className={classes.container} style={{ border: `1px solid ${colours.primary}`, color: colours.primary }}>
 
                     {props.text.toUpperCase()}
 

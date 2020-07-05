@@ -6,6 +6,10 @@ import colours from '../../../../util/colours'
 
 export const Body = props => {
 
+    /* The following is an textarea wrapped inside a div, so that when the user selects edit mode, the wrapper div has it's background set to the size of the value inside it, rather than stretching to fill the div
+ 
+If edit mode is active, the textarea changes from disabled to not disabled to allow the user to edit the value*/
+
     return (
         <div className={classes.container} style={{ background: colours.white, height: props.value === "" && "22px" }} test_handle="note_body_wrapper">
 
