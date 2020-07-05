@@ -76,7 +76,7 @@
     height: 30%;
     position: fixed;
     z-index: 0;
-    background-image: url("../../Assets/Image/Auth_background.svg");
+    background-image: url("../../Assets/Backgrounds/BG-orange.svg");
     background-size: auto;
     display: flex;
     justify-content: center;

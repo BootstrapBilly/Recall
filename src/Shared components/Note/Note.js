@@ -32,9 +32,7 @@ export const Note = props => {
     const edit_mode_enabled_notes = useSelector(state => state.note.edit_mode_notes)//grab the array of expanded notes from the reducer
 
     //*states
-    //const [expanded, set_expanded] = useState(expanded_notes.find(note => note === props.details._id))//determine whether the note is expanded or not
     const [height, set_height] = useState(0)//dynamically set the height of the note to be animated upon expansion to fit content without a predefined height
-    //const [edit_mode, set_edit_mode] = useState(false)//Determine whether the note is in edit mode or not
 
     const [form_data, set_form_data] = useState({// a state to hold the note information to be submitted to the backend for editing purposes
 
@@ -89,8 +87,24 @@ export const Note = props => {
 
     }
 
+    const handle_tag_insertion = new_tag => {
+
+        set_height(ref.current.clientHeight + 20)//expand the form to fit the new tag (if needed)
+
+        set_form_data({
+
+            ...form_data,//keep the old form data
+
+            search_tags: props.details.search_tags ? //if there are existing search tags
+                [new_tag, ...props.details.search_tags]//Insert the new search tag, along with the old search tags
+                : [new_tag] //otherwise, just insert the new tag
+
+        })
+
+    }
+
     //!effects
-    
+
     // eslint-disable-next-line 
     //called everytime a note is expanded or collapsed, the height of the div is extracted and set in the height state
     useEffect(() => set_height(ref.current.clientHeight))
@@ -98,7 +112,7 @@ export const Note = props => {
     //used to update the note instantly after editing it
     useEffect(() => {
 
-        if (response && response.data.message === "note updated successfully") {//if a success message is detected
+        if (response && response.data.message === "note updated successfully" && response.data.id === props.details._id) {//if a success message is detected
 
             dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes"))//fetch the notes again with the new data
 
@@ -172,8 +186,19 @@ export const Note = props => {
                         {/* If theres syntax present, show a copy code button  */}
                         {props.details.syntax && <div className={classes.copy_button} style={{ background: colours.green }}>COPY CODE</div>}
 
-                        {/* If theres search tags present, show them  */}
-                        {props.details.search_tags && <SearchTags search_tags={props.details.search_tags} edit_mode={edit_mode_enabled_notes.find(note => note === props.details._id)} />}
+                        { /* If theres search tags present, show them  */
+
+                            (props.details.search_tags || edit_mode_enabled_notes.find(note => note === props.details._id)) &&
+
+                            <SearchTags
+
+                                search_tags={props.details.search_tags || []}
+                                edit_mode={edit_mode_enabled_notes.find(note => note === props.details._id)}
+                                handle_tag_insertion={(new_tag) => handle_tag_insertion(new_tag)}
+                                id={props.details._id}
+
+                            />
+                        }
 
                         <Buttons
 

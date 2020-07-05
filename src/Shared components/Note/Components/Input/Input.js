@@ -49,7 +49,7 @@ export const Input = props => {
                 disabled={props.edit_mode ? false : true}
                 style={props.style}
                 onChange={props.handle_change.bind(this, props.type)}
-                onClick={props.edit_mode && props.type === "subject" && props.value === "No subject" && props.handle_edit_missing_subject}
+                onClick={props.edit_mode && props.type === "subject" && props.value === "No subject" ? props.handle_edit_missing_subject : undefined}
 
             />
 
