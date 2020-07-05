@@ -10,10 +10,12 @@ import { Provider } from "react-redux"
 
 //reducers
 import SubmitFormReducer from "./Store/Reducers/0_submit_form_reducer"
+import NoteToggleReducer from "./Store/Reducers/1_handle_toggle_note_reducer"
 
 const rootReducer = combineReducers({ //combine all the state reducers into one root reducer
 
   form: SubmitFormReducer,
+  note_toggle: NoteToggleReducer
 
 })
 
