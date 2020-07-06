@@ -40,7 +40,6 @@ export const Add_new = props => {
     //*states
     const [current_step, set_current_step] = useState("title")//state to hold the current step of the form
     const [show_form_navigation_buttons, set_show_form_navigation_buttons] = useState(false)//show different buttons depending on input
-    // const [form_type, set_form_type] = useState(null)//hold the type of form (note or collection) - set by the optionsSelect component
     const [notes_search_string, set_notes_search_string] = useState(null)//hold the string used to find notes when adding them to a collection
     const [selected_notes, set_selected_notes] = useState([])//hold the selected notes (when adding a collection)
     const [keyboard_open, set_keyboard_open] = useState(false)//a state to detect when the keyboard is open on mobile
@@ -59,14 +58,6 @@ export const Add_new = props => {
     const data = generate_form_labels(current_step, props.form_type)//call the function to generate the data based on what the form step is
 
     //_functions
-
-    // const handle_selection = (option) => {//used to set the form type to note or collection (Called by the optionselect component)
-
-    //     set_form_type(option)//set the form type to either note or collection
-    //     set_current_step("title")//set the current step of the form to title(1st step)
-    //     set_show_form_navigation_buttons("back")//set the navigation buttons to show only back
-
-    // }
 
     const reset_form = () => {//used to reset the form back to the type selection (1st screen note or collection)
 
@@ -114,12 +105,6 @@ export const Add_new = props => {
         if (response && response.status === 201) {//if a 201 is detected
 
             set_current_step("success")
-
-            // reset_form()//reset the form
-
-            // clear_response()//clear the response
-
-            // Alert("Note added successfully", "success", { top: "100px" })//show the user an alert that their note was added successfully
 
         }
 
@@ -254,7 +239,7 @@ export const Add_new = props => {
 
                                             : current_step === "success" ?
 
-                                                <Note details={form_data}  />
+                                                <Note details={response.data.note} />
 
                                                 : null}
 

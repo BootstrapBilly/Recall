@@ -39,7 +39,7 @@ export const Input = props => {
 
         >
 
-            {props.value}
+            {<span style={{visiblity:"hidden"}}>{props.value}</span>}
 
             <input
 

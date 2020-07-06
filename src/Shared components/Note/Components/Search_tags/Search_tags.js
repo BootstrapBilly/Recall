@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 //css
 import classes from "./Search_tags.module.css"
@@ -6,78 +6,90 @@ import classes from "./Search_tags.module.css"
 //components
 import Tag from "./Components/Tag"
 
-//redux hooks
-import { useSelector } from "react-redux"
+//util
+import colours from "../../../../util/colours"
 
 export const Search_tags = props => {
 
-    //?selectors
-    const edit_mode_enabled_notes = useSelector(state => state.note.edit_mode_notes)//grab the array of expanded notes from the reducer
+    const [search_tags, set_search_tags] = useState(props.search_tags)
+    const [new_tag, set_new_tag] = useState("")
 
-    //*states
-    const [search_tags, set_search_tags] = useState(props.search_tags.filter(tag => tag !== ""))//a state to hold the search tags passed in by props, also removes any empty string search tags because they are seperated by spaces when entering them
+    const handle_tag_input = event => {
 
-    //!effects
+        if (event.target.value === " ") return
+
+        if (!/^\w+$/.test(event.target.value) && new_tag.length > 1) return //if the key being pressed is not 0-9/aA-zZ, do not update the value
+
+        set_new_tag(event.target.value)//otherwise, update the value
+
+    }
+
+    const handle_tag_insertion = () => {
+
+        set_search_tags(search_tags => [...search_tags, new_tag])
+
+        set_new_tag("")
+
+    }
+
+    const handle_tag_removal = search_tag => {
+
+        set_search_tags(search_tags => [...search_tags.filter(tag => tag !== search_tag)])
+
+    }
+
     useEffect(() => {
 
-        if (props.edit_mode) { //if edit mode is active
+        props.handle_tag_change(search_tags)
 
-            if (!search_tags.find(tag => tag === "Add new"))//and there isn't an element called "Add new"
-                set_search_tags(search_tags => [...search_tags, "Add new"])//Add it to the array of search tags
+    }, [search_tags])
 
+    useEffect(() => {
+
+        if (props.re_render_tags) {
+
+            console.log("triggered")
+
+            set_search_tags(props.search_tags)
+            props.reset_re_render()
         }
 
-        if (!props.edit_mode) {//otherwise if editmode is not active, remove the extra "Add new" tag
-
-            set_search_tags(search_tags => [...search_tags.filter(tag => tag !== "Add new")])
-        }
-
-        // eslint-disable-next-line
-    }, [props.edit_mode])
-
-    const handle_tag_insertion = new_tag => {
-
-        console.log(props.id)
-        
-        if (edit_mode_enabled_notes.find(note => note === props.id)) {
-
-            set_search_tags(search_tags => [new_tag, ...search_tags])
-
-            props.handle_tag_insertion(new_tag)
-
-        }
-    }
+    }, [props.re_render_tags])
 
     return (
 
-        <div className={classes.container} style={{ marginBottom: props.edit_mode && "1px" }}>
+        <React.Fragment>
 
-            {Array.isArray(props.search_tags) ?
+            <div className={classes.container}>
 
-                //If search tags is an array
+                {search_tags.map(tag => <Tag text={tag} edit_mode={props.edit_mode} handle_tag_removal={(tag) => handle_tag_removal(tag)} key={tag} />)}
 
-                search_tags//the state of search tags passed in by props (if edit mode is active, it has an extra "Add new tag")
+            </div>
 
-                    .map((tag, index) =>
+            {props.edit_mode &&
 
-                        <Tag key={index} text={tag} edit_mode={props.edit_mode} handle_tag_insertion={(new_tag) => handle_tag_insertion(new_tag)} />
+                <div className={classes.input_wrapper}> {/* Make the search tag an input, to add a new search tag */}
 
-                    )
+                    <input
 
-                :
+                        size="15"
+                        className={classes.input}
+                        placeholder={"ADD SEARCH TAG"}
+                        style={{ border: "1px solid wheat", background: "wheat", fontSize: "12px", textAlign: "center", padding: "2px 0" }}
+                        onChange={(event) => handle_tag_input(event)}
+                        value={new_tag}
+                        onKeyPress={(e) => e.key === "Enter" && new_tag.length && handle_tag_insertion()}
 
-                //if search tags is a string, (will be a string if the note is being displayed instantly after adding it)
+                    />
 
-                search_tags.split(" ")//split the string into an array
+                    <div className={classes.add_tag_button} style={{ borderColor: colours.green, color: colours.green }}
+                        onClick={() => new_tag.length && handle_tag_insertion()}
+                    >+</div>
 
-                    .map((tag, index) => //then map it as usual
+                </div>
+            }
 
-                        <Tag key={index} text={tag} edit_mode={props.edit_mode} handle_tag_insertion={(new_tag) => handle_tag_insertion(new_tag)} />
-
-                    )}
-
-        </div>
-
+        </React.Fragment>
     )
 
 }

@@ -33,6 +33,8 @@ export const Note = props => {
 
     //*states
     const [height, set_height] = useState(0)//dynamically set the height of the note to be animated upon expansion to fit content without a predefined height
+    const [re_render_tags, set_re_render_tags] = useState(false)
+    const [resize_note, set_resize_note] = useState(false)
 
     const [form_data, set_form_data] = useState({// a state to hold the note information to be submitted to the backend for editing purposes
 
@@ -52,18 +54,24 @@ export const Note = props => {
         dispatch(disable_edit_mode(props.details._id))
 
         set_form_data({//set the form data back to the initial values fetched from the database and passed in by the parent component
-            title: props.details.title,
-            subject: props.details.subject || "No subject",
-            search_tags: props.details.search_tags,
-            body: props.details.body,
-            syntax: props.details.syntax,
-            notes: []
+
+            title: null,
+            subject: null,
+            search_tags: null,//used to make searching easier and faster
+            body: null,
+            syntax: null,//stores the syntax NOTE ONLY
+            notes: []//holds an array of notes collection ONLY
+
         })
+
+        set_re_render_tags(true)
 
     }
 
     //This function is triggered when the user presses the save button during edit mode
     const handle_save_click = () => {
+
+        console.log(form_data.search_tags)
 
         return dispatch(submit_form({//the current values of the form are saved into the form_data state, then submited to the backend for processing
 
@@ -77,6 +85,7 @@ export const Note = props => {
         }
             , "update_note"))
 
+
     }
 
     const handle_delete_note = (title) => {
@@ -87,27 +96,27 @@ export const Note = props => {
 
     }
 
-    const handle_tag_insertion = new_tag => {
+    const handle_collapse = () => {
 
-        set_height(ref.current.clientHeight + 20)//expand the form to fit the new tag (if needed)
-
-        set_form_data({
-
-            ...form_data,//keep the old form data
-
-            search_tags: props.details.search_tags ? //if there are existing search tags
-                [new_tag, ...props.details.search_tags]//Insert the new search tag, along with the old search tags
-                : [new_tag] //otherwise, just insert the new tag
-
-        })
-
+        dispatch(disable_edit_mode(props.details._id))
+        dispatch(collapse_note(props.details._id))
     }
+
 
     //!effects
 
     // eslint-disable-next-line 
     //called everytime a note is expanded or collapsed, the height of the div is extracted and set in the height state
     useEffect(() => set_height(ref.current.clientHeight))
+
+    useEffect(() => {
+
+        if (resize_note) {
+            set_height(ref.current.clientHeight)
+            set_resize_note(false)
+        }
+
+    }, [resize_note])
 
     //used to update the note instantly after editing it
     useEffect(() => {
@@ -137,6 +146,15 @@ export const Note = props => {
         }
         // eslint-disable-next-line
     }, [response])
+
+
+
+    const handle_tag_change = tags => {
+
+        set_form_data({ ...form_data, search_tags: tags })
+        set_resize_note(true)
+
+    }
 
     return (
 
@@ -188,16 +206,31 @@ export const Note = props => {
 
                         { /* If theres search tags present, show them  */
 
-                            (props.details.search_tags || edit_mode_enabled_notes.find(note => note === props.details._id)) &&
+                            props.details.search_tags ?
 
-                            <SearchTags
+                                <SearchTags
 
-                                search_tags={props.details.search_tags || []}
-                                edit_mode={edit_mode_enabled_notes.find(note => note === props.details._id)}
-                                handle_tag_insertion={(new_tag) => handle_tag_insertion(new_tag)}
-                                id={props.details._id}
+                                    search_tags={props.details.search_tags}
+                                    edit_mode={edit_mode_enabled_notes.find(note => note === props.details._id)}
+                                    handle_tag_change={(tags) => handle_tag_change(tags)}
+                                    re_render_tags={re_render_tags}
+                                    reset_re_render={()=> set_re_render_tags(false)}
 
-                            />
+                                />
+
+                                : !props.details.search_tags && edit_mode_enabled_notes.find(note => note === props.details._id) ?
+
+                                    <SearchTags
+
+                                        search_tags={[]}
+                                        edit_mode={true}
+                                        handle_tag_change={(tags) => handle_tag_change(tags)}
+                                        re_render_tags={re_render_tags}
+                                        reset_re_render={()=> set_re_render_tags(false)}
+
+                                    />
+
+                                    : undefined
                         }
 
                         <Buttons
@@ -217,7 +250,7 @@ export const Note = props => {
 
                 }
 
-                <ToggleIcon expanded={expanded_notes.find(note => note === props.details._id)} handle_collapse={() => { dispatch(collapse_note(props.details._id)) }} handle_expand={() => dispatch(expand_note(props.details._id))} />
+                <ToggleIcon expanded={expanded_notes.find(note => note === props.details._id)} handle_collapse={() => handle_collapse()} handle_expand={() => dispatch(expand_note(props.details._id))} />
 
             </div>
 
