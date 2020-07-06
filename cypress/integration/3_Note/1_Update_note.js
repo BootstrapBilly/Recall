@@ -124,6 +124,223 @@ describe("@@@@@ UPDATE NOTE @@@@@", () => {
 
             cy.get('[test_handle="note_save_button"]').click()
 
+            cy.get('[test_handle="note_toggle_icon"]').eq(1).click()
+
+        })
+
+    })
+
+    context("Search tag testing", () => {
+
+        it("Add a tag to a note which has no tags, then cancel it - should not render it", () => {
+
+            cy.get('[test_handle="note_toggle_icon"]').eq(0).click()
+
+            cy.get('[test_handle="note_edit_button"]').eq(0).click()
+
+            cy.get('[test_handle="search_tag_input"]').eq(0).click().type("test")
+
+            cy.get('[test_handle="add_tag_button"]').eq(0).click()
+
+            cy.get('[test_handle="note_cancel_button"]').click()
+
+            cy.get('[test_handle="TEST"]').should("not.be.visible")
+
+            cy.get('[test_handle="note_toggle_icon"]').eq(0).click()
+
+        })
+
+        it("Add a tag to a note which has some tags, then cancel it - should not render it and other tags should be rendered", () => {
+
+            cy.get('[test_handle="note_toggle_icon"]').eq(2).click()
+
+            cy.get('[test_handle="note_edit_button"]').eq(0).click()
+
+            cy.get('[test_handle="search_tag_input"]').eq(0).click().type("test")
+
+            cy.get('[test_handle="add_tag_button"]').eq(0).click()
+
+            cy.get('[test_handle="note_cancel_button"]').click()
+
+            cy.get('[test_handle="API,"]').should("be.visible")
+            cy.get('[test_handle="BOILERPLATE"]').should("be.visible")
+
+            cy.get('[test_handle="TEST"]').should("not.be.visible")
+
+            cy.get('[test_handle="note_toggle_icon"]').eq(2).click()
+        })
+
+
+        it("Delete a tag, leaving none left then cancel it - should still be rendered", () => {
+
+            cy.get('[test_handle="note_toggle_icon"]').eq(3).click()
+
+            cy.get('[test_handle="note_edit_button"]').eq(0).click()
+
+            cy.get('[test_handle="ROUTING"]').click()
+
+            cy.get('[test_handle="ROUTING"]').should("not.be.visible")
+
+            cy.get('[test_handle="note_cancel_button"]').click()
+
+            cy.get('[test_handle="ROUTING"]').should("be.visible")
+
+            cy.get('[test_handle="note_toggle_icon"]').eq(3).click()
+
+        })
+
+        it("Delete a tag, leaving some left then cancel it - should still be rendered", () => {
+
+            cy.get('[test_handle="note_toggle_icon"]').eq(2).click()
+
+            cy.get('[test_handle="note_edit_button"]').eq(0).click()
+
+            cy.get('[test_handle="API,"]').click()
+
+            cy.get('[test_handle="API,"]').should("not.be.visible")
+
+            cy.get('[test_handle="note_cancel_button"]').click()
+
+            cy.get('[test_handle="API,"]').should("be.visible")
+
+            cy.get('[test_handle="BOILERPLATE"]').should("be.visible")
+
+            cy.get('[test_handle="note_toggle_icon"]').eq(2).click()
+
+        })
+
+
+        it("Add a tag to a note which has no tags, then delete it and save - should not render it", () => {
+
+            cy.get('[test_handle="note_toggle_icon"]').eq(0).click()
+
+            cy.get('[test_handle="note_edit_button"]').eq(0).click()
+
+            cy.get('[test_handle="search_tag_input"]').eq(0).click().type("test")
+
+            cy.get('[test_handle="add_tag_button"]').eq(0).click()
+
+            cy.get('[test_handle="TEST"]').click()
+
+            cy.get('[test_handle="note_save_button"]').click()
+
+            cy.get('[test_handle="TEST"]').should("not.be.visible")
+
+            cy.get('[test_handle="note_toggle_icon"]').eq(0).click()
+
+        })
+
+
+        it("Add a tag to a note which has no tags, then save - should render it", () => {
+
+            cy.get('[test_handle="note_toggle_icon"]').eq(0).click()
+
+            cy.get('[test_handle="note_edit_button"]').eq(0).click()
+
+            cy.get('[test_handle="search_tag_input"]').eq(0).click().type("test")
+
+            cy.get('[test_handle="add_tag_button"]').eq(0).click()
+
+            cy.get('[test_handle="note_save_button"]').click()
+
+            cy.get('[test_handle="TEST"]').should("be.visible")
+
+            cy.get('[test_handle="note_toggle_icon"]').eq(0).click()
+
+        })
+
+        it("Add multiple tags to a note which has no tags, then save - should render them", () => {
+
+            cy.get('[test_handle="note_toggle_icon"]').eq(1).click()
+
+            cy.get('[test_handle="note_edit_button"]').eq(0).click()
+
+            cy.get('[test_handle="search_tag_input"]').eq(0).click().type("test")
+
+            cy.get('[test_handle="add_tag_button"]').eq(0).click()
+
+            cy.get('[test_handle="search_tag_input"]').eq(0).click().type("another")
+
+            cy.get('[test_handle="add_tag_button"]').eq(0).click()
+
+            cy.get('[test_handle="note_save_button"]').click()
+
+            cy.get('[test_handle="TEST"]').should("be.visible")
+            cy.get('[test_handle="ANOTHER"]').should("be.visible")
+
+            cy.get('[test_handle="note_toggle_icon"]').eq(1).click()
+
+        })
+
+        
+        it("Add a tag to a note which has some tags, then save - should render it", () => {
+
+            cy.get('[test_handle="note_toggle_icon"]').eq(0).click()
+
+            cy.get('[test_handle="note_edit_button"]').eq(0).click()
+
+            cy.get('[test_handle="search_tag_input"]').eq(0).click().type("more")
+
+            cy.get('[test_handle="add_tag_button"]').eq(0).click()
+
+            cy.get('[test_handle="note_save_button"]').click()
+
+            cy.get('[test_handle="TEST"]').should("be.visible")
+            cy.get('[test_handle="MORE"]').should("be.visible")
+
+            cy.get('[test_handle="note_toggle_icon"]').eq(0).click()
+
+        })
+        
+        it("Add multiple tags to a note which has some tags, then save - should render it", () => {
+
+            cy.get('[test_handle="note_toggle_icon"]').eq(0).click()
+
+            cy.get('[test_handle="note_edit_button"]').eq(0).click()
+
+            cy.get('[test_handle="search_tag_input"]').eq(0).click().type("even")
+
+            cy.get('[test_handle="add_tag_button"]').eq(0).click()
+
+            cy.get('[test_handle="search_tag_input"]').eq(0).click().type("moar")
+
+            cy.get('[test_handle="add_tag_button"]').eq(0).click()
+
+            cy.get('[test_handle="note_save_button"]').click()
+
+            cy.get('[test_handle="TEST"]').should("be.visible")
+            cy.get('[test_handle="MORE"]').should("be.visible")
+            cy.get('[test_handle="EVEN"]').should("be.visible")
+            cy.get('[test_handle="MOAR"]').should("be.visible")
+
+            cy.get('[test_handle="note_toggle_icon"]').eq(0).click()
+
+        })
+
+        it("Remove all the added tags", () => {
+
+            cy.get('[test_handle="note_toggle_icon"]').eq(0).click()
+            cy.get('[test_handle="note_edit_button"]').eq(0).click()
+            cy.get('[test_handle="TEST"]').click()
+            cy.get('[test_handle="MORE"]').click()
+            cy.get('[test_handle="EVEN"]').click()
+            cy.get('[test_handle="MOAR"]').click()
+            cy.get('[test_handle="note_save_button"]').click()
+            cy.get('[test_handle="TEST"]').should("not.be.visible")
+            cy.get('[test_handle="MORE"]').should("not.be.visible")
+            cy.get('[test_handle="EVEN"]').should("not.be.visible")
+            cy.get('[test_handle="MOAR"]').should("not.be.visible")
+            cy.get('[test_handle="note_toggle_icon"]').eq(0).click()
+
+            cy.get('[test_handle="note_toggle_icon"]').eq(1).click()
+            cy.get('[test_handle="note_edit_button"]').eq(0).click()
+            cy.get('[test_handle="TEST"]').click()
+            cy.get('[test_handle="ANOTHER"]').click()
+            cy.get('[test_handle="note_save_button"]').click()
+            cy.get('[test_handle="TEST"]').should("not.be.visible")
+            cy.get('[test_handle="ANOTHER"]').should("not.be.visible")
+            cy.get('[test_handle="note_toggle_icon"]').eq(1).click()
+
         })
 
     })

@@ -10,7 +10,7 @@ export const Tag = props => {
 
     return (
 
-        <div className={classes.container} style={{ border: `1px solid ${colours.primary}`, color: colours.primary }} onClick={props.edit_mode && props.handle_tag_removal.bind(this, props.text)} >
+        <div test_handle={`${props.text.toUpperCase()}`} className={classes.container} style={{ border: `1px solid ${colours.primary}`, color: colours.primary }} onClick={props.edit_mode && props.handle_tag_removal.bind(this, props.text)} >
 
             {props.text.toUpperCase()}
 

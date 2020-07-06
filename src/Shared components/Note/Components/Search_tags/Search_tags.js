@@ -70,7 +70,7 @@ export const Search_tags = props => {
 
                 <div className={classes.input_wrapper}> {/* Make the search tag an input, to add a new search tag */}
 
-                    <input
+                    <input test_handle="search_tag_input"
 
                         size="15"
                         className={classes.input}
@@ -83,7 +83,7 @@ export const Search_tags = props => {
                     />
 
                     <div className={classes.add_tag_button} style={{ borderColor: colours.green, color: colours.green }}
-                        onClick={() => new_tag.length && handle_tag_insertion()}
+                        onClick={() => new_tag.length && handle_tag_insertion()} test_handle="add_tag_button"
                     >+</div>
 
                 </div>
