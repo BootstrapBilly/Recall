@@ -9,15 +9,13 @@ import React, { useState, useRef, useEffect } from 'react'
 //css
 import classes from "./Note.module.css"
 
-//util
-import colours from '../../util/colours'
-
 //components
 import Buttons from "../Note/Components/Buttons/Buttons"
 import Body from "../Note/Components/Body/Body"
 import ToggleIcon from "../Note/Components/Toggle_icon/Toggle_icon"
 import SearchTags from "./Components/Search_tags/Search_tags"
 import Input from "./Components/Input/Input"
+import Syntax from "./Components/Syntax/Syntax"
 
 //redux hooks
 import { useSelector, useDispatch } from "react-redux"
@@ -91,14 +89,12 @@ export const Note = props => {
 
         if (response && response.data.message === "note deleted successfully") {
 
+            dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes"))
             clear_response()//clear the response
 
-            dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes"))
-
         }
-        // eslint-disable-next-line
+        //eslint-disable-next-line
     }, [response])
-
 
     return (
 
@@ -106,29 +102,31 @@ export const Note = props => {
 
             <div className={classes.measuring_wrapper} ref={ref} >
 
-                <div className={classes.collapsed_content}>
+                {props.details &&
 
-                    <Input
+                    <div className={classes.collapsed_content}>
 
-                        value={overwritten_values.title === null ? props.details.title : overwritten_values.title}
-                        edit_mode={edit_mode}
-                        type="title"
-                        handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
+                        <Input
 
-                    />
+                            value={overwritten_values.title === null ? props.details.title : overwritten_values.title}
+                            edit_mode={edit_mode}
+                            type="title"
+                            handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
 
-                    <Input
+                        />
 
-                        value={overwritten_values.subject === null ? props.details.subject || "No subject" : overwritten_values.subject}
-                        edit_mode={edit_mode}
-                        style={{ fontSize: "15px", color: "grey" }}
-                        type="subject"
-                        handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
-                        handle_edit_missing_subject={() => set_overwritten_values({ ...overwritten_values, subject: "" })}
+                        <Input
 
-                    />
+                            value={overwritten_values.subject === null ? props.details.subject || "No subject" : overwritten_values.subject}
+                            edit_mode={edit_mode}
+                            style={{ fontSize: "15px", color: "grey" }}
+                            type="subject"
+                            handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
+                            handle_edit_missing_subject={() => set_overwritten_values({ ...overwritten_values, subject: "" })}
 
-                </div>
+                        />
+
+                    </div>}
 
                 {expanded &&
 
@@ -143,7 +141,7 @@ export const Note = props => {
                         />
 
                         {/* If theres syntax present, show a copy code button  */}
-                        {props.details.syntax && <div className={classes.copy_button} style={{ background: colours.green }}>COPY CODE</div>}
+                        {props.details.syntax && <Syntax edit_mode={edit_mode} syntax={props.details.syntax} />}
 
                         {props.details.search_tags ? /* If theres search tags present, show them  */
 

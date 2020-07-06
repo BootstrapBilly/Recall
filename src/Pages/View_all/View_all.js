@@ -8,7 +8,7 @@ import Nav from "../../Shared components/Nav/Nav"
 import Note from "../../Shared components/Note/Note"
 
 //redux action creators
-import { submit_form, clear_response } from "../../Store/Actions/0_submit_form_action"
+import { submit_form } from "../../Store/Actions/0_submit_form_action"
 
 //redux hooks
 import { useSelector, useDispatch } from "react-redux"
@@ -38,8 +38,6 @@ export const View_all = () => {
 
     return (
 
-
-
             <div className={classes.container}>
 
                 {notes && notes.map((note, index) => <Note key={index} index={index} details={note} />)}
@@ -47,7 +45,6 @@ export const View_all = () => {
                 <Nav />
 
             </div>
-        
 
     )
 

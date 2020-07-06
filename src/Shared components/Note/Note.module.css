@@ -50,20 +50,6 @@
     align-items: center;
 }
 
-.copy_button{
-
-    width: 80%;
-    text-align: center;
-    color: white;
-    padding: 10px;
-    margin-top: 20px;
-    display: block;
-    border-radius: 0px;
-}
-
-.copy_button:hover{
-    cursor: pointer;
-    }
 
 @keyframes fadein{
     0%{

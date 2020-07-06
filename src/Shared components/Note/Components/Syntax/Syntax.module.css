@@ -1,0 +1,50 @@
+.container {
+    width: 100%;
+}
+
+.copy_button {
+    margin: auto;
+    width: 80%;
+    text-align: center;
+    color: white;
+    padding: 10px;
+    margin-top: 20px;
+    display: block;
+    border-radius: 0px;
+}
+
+.copy_button:hover {
+    cursor: pointer;
+}
+
+.editable_container {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 6;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.textarea {
+    background-color: wheat;
+    width: 92%;
+    height: 78%;
+    border-radius: 5px;
+    margin-top: 3%;
+    resize: none;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+    white-space: pre-wrap;
+}
+
+.textarea::-webkit-scrollbar {
+    display: none;
+}

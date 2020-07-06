@@ -1,0 +1,26 @@
+.container {
+    width: 100%;
+    position: absolute;
+    bottom: -4px;
+    left: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 10px 0;
+    padding-right: 3px;
+}
+
+.button {
+    width: 90px;
+    height: 35px;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.button:hover {
+    cursor: pointer;
+}

@@ -102,17 +102,21 @@ export const Add_new = props => {
     //This effect listens for a successful response, (generated upon submiting the form)
     useEffect(() => {
 
-        if (response && response.status === 201) {//if a 201 is detected
+        if (response && response.data.message === "Note added successfully") {//if a 201 is detected
 
             set_current_step("success")
+            clear_response()
 
         }
 
+    }, [response])
+
+    useEffect(() => {
+
         if (response && response.data.message === "note deleted successfully") {
 
-            clear_response()//clear the response
-
             reset_form()
+            clear_response()//clear the response  
 
         }
 
@@ -128,7 +132,7 @@ export const Add_new = props => {
 
                 <div className={classes.form_wrapper}>
 
-                <img src={man_pointing} alt={"a man pointing to the form"} className={classes.man_pointing}/>
+                    <img src={man_pointing} alt={"a man pointing to the form"} className={classes.man_pointing} />
 
                     <span className={classes.title} style={{ color: current_step === "optionals" || current_step === "syntax" ? "grey" : colours.primary, marginTop: current_step === "selection" && "45px" }}>{data[0]}</span>
 
@@ -274,13 +278,9 @@ export const Add_new = props => {
 
             </div>
 
-            <div className={classes.bottom_section} >
+            <div className={classes.bottom_section} ></div>
 
-                {/* <img src={man_on_computer} alt="a man on a computer" className={classes.bottom_image} /> */}
 
-            </div>
-
-            
 
             <Nav />
         </React.Fragment>
