@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 //css
 import classes from "./Syntax.module.css"
@@ -33,6 +33,23 @@ export const Syntax = props => {
 
     }
 
+    const handle_save_click = () => {
+
+        set_edit_enabled(false)
+        props.handle_syntax_change(syntax)
+
+    }
+
+    useEffect(() => {
+
+        if (props.re_render) {//if the user presses the cancel button, re-render in the parent component is set to true
+
+            set_syntax(props.syntax)//reset the syntax(because they cancelled and did not save)
+            props.reset_re_render()//reset the re-render state in the parent mode
+        }
+        // eslint-disable-next-line
+    }, [props.re_render])
+
     return (
 
         <React.Fragment>
@@ -44,7 +61,7 @@ export const Syntax = props => {
 
                         <textarea className={classes.textarea} value={syntax} onChange={(event)=> set_syntax(event.target.value)}></textarea>
                     
-                        <Buttons handle_cancel_click={()=> handle_cancel_click()}/>
+                        <Buttons handle_cancel_click={()=> handle_cancel_click()} handle_save_click={()=> handle_save_click()}/>
 
                     </div>
 

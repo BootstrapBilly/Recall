@@ -46,7 +46,7 @@ export const Note = props => {
 
     //*states
     const [height, set_height] = useState(0)//dynamically set the height of the note to be animated upon expansion to fit content without a predefined height
-    const [re_render_tags, set_re_render_tags] = useState(false)
+    const [re_render, set_re_render] = useState(false)
     const [resize_note, set_resize_note] = useState(false)
 
     const [overwritten_values, set_overwritten_values] = useState({// a state to hold the note information to be submitted to the backend for editing purposes
@@ -141,7 +141,18 @@ export const Note = props => {
                         />
 
                         {/* If theres syntax present, show a copy code button  */}
-                        {props.details.syntax && <Syntax edit_mode={edit_mode} syntax={props.details.syntax} />}
+                        {props.details.syntax &&
+
+                            <Syntax
+
+                                edit_mode={edit_mode}
+                                syntax={overwritten_values.syntax || props.details.syntax}
+                                handle_syntax_change={(syntax) => set_overwritten_values({ ...overwritten_values, syntax: syntax })}
+                                re_render={re_render}
+                                reset_re_render={() => set_re_render(false)}
+
+                            />
+                        }
 
                         {props.details.search_tags ? /* If theres search tags present, show them  */
 
@@ -150,8 +161,8 @@ export const Note = props => {
                                 search_tags={props.details.search_tags}
                                 edit_mode={edit_mode}
                                 handle_tag_change={(tags) => handle_tag_change(tags, set_overwritten_values, overwritten_values, set_resize_note)}
-                                re_render_tags={re_render_tags}
-                                reset_re_render={() => set_re_render_tags(false)}
+                                re_render={re_render}
+                                reset_re_render={() => set_re_render(false)}
 
                             />
 
@@ -162,8 +173,8 @@ export const Note = props => {
                                     search_tags={[]}
                                     edit_mode={true}
                                     handle_tag_change={(tags) => handle_tag_change(tags, set_overwritten_values, overwritten_values, set_resize_note)}
-                                    re_render_tags={re_render_tags}
-                                    reset_re_render={() => set_re_render_tags(false)}
+                                    re_render={re_render}
+                                    reset_re_render={() => set_re_render(false)}
 
                                 />
 
@@ -177,7 +188,7 @@ export const Note = props => {
                             reset_expanded={() => dispatch(collapse_note(props.details._id))}
                             handle_edit_click={() => dispatch(enable_edit_mode(props.details._id))}
                             edit_mode={edit_mode}
-                            handle_cancel_click={() => handle_cancel_click(dispatch, props.details._id, set_overwritten_values, set_re_render_tags)}
+                            handle_cancel_click={() => handle_cancel_click(dispatch, props.details._id, set_overwritten_values, set_re_render)}
                             handle_save_click={() => handle_save_click(dispatch, overwritten_values, props)}
                             handle_delete_click={(title) => handle_delete_click(title, dispatch, props)}
 

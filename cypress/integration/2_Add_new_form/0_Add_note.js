@@ -283,9 +283,9 @@
 
 //         })
 
-//         it("Submit the form without entering syntax - should display the note", () => {
+//         it("Submit the form after entering syntax - should display the note", () => {
 
-//             cy.get('[test_handle="syntax_input"]').type(`const handle_dynamic_button_display = (form_type, form_data, form_step, set_show_form_navigation_buttons) => `)
+//             cy.get('[test_handle="syntax_input"]').type("const [state, set_state] = (null)").type("{enter}Const var = 'variable'").type("{enter}Const var2 = 'variable2'")
 
 //             cy.get('[test_handle="form_next_button"]').click()
 

@@ -24,13 +24,13 @@ export const Search_tags = props => {
 
     useEffect(() => {
 
-        if (props.re_render_tags) {//if the user presses the cancel button, re-render in the parent component is set to true
+        if (props.re_render) {//if the user presses the cancel button, re-render in the parent component is set to true
 
             set_search_tags(props.search_tags)//reset the search tags (because they cancelled and did not save)
             props.reset_re_render()//reset the re-render state in the parent mode
         }
         // eslint-disable-next-line
-    }, [props.re_render_tags])
+    }, [props.re_render])
 
     return (
 
