@@ -3,9 +3,9 @@
     height: 35px;
     transition: height 0.5s ease-in-out, padding 0.5s ease-in-out;
     width: 255px;
-    box-shadow: 1px 1px 3px 1px rgba(128, 128, 128, 0.488);
+    box-shadow: 1px 1px 10px -2px rgba(128, 128, 128, 0.488);
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 3px;
     position: relative;
     background-color: whitesmoke;
     margin-top: 20px;

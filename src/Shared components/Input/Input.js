@@ -56,7 +56,7 @@ export const Input = props => {
 
         <div className={classes.container}
 
-            style={{ border: props.grey && input_focused ? "1px solid grey" : input_focused ? `1px solid ${colours.primary}` : erroneous_field === props.label ? `3px solid red` : "transparent", marginTop: props.marginTop }}
+            style={{ border: props.grey && input_focused ? "1px solid grey" : input_focused ? `1px solid ${colours.primary}` : erroneous_field === props.label ? `3px solid red` : "transparent", marginTop: props.marginTop, ...props.style }}
 
 
         >

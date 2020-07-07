@@ -1,0 +1,49 @@
+.container {
+    position: absolute;
+    right: 15px;
+    margin-top: 2px;
+    transition: width 0.2s ease-in-out;
+    width: 20px;
+}
+
+.container_expanded{
+
+    transition: width 0.2s ease-in-out;
+    width: 140px;
+
+}
+
+.input{
+    width: 140px;
+    height: 100%;
+    font-size: 14px;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    position: relative;
+    right: 50px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+    padding-bottom: 3px;
+    top: 1px;
+    font-size: 17px;
+}
+
+.search_icon {
+    width: 20px;
+    height: 20px;
+    position: fixed;
+    right: 15px;
+    top: 23px;
+    transition: right 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.search_icon:hover{
+    cursor: pointer;
+    transform: rotate(90deg);
+}
+
+.search_icon_expanded{
+
+    right: 209px;
+    transform: rotate(90deg);
+}

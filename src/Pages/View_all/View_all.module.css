@@ -1,4 +1,4 @@
-.container{
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,18 +6,16 @@
     padding-bottom: 50px;
     overflow: scroll;
     width: 100%;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-    background-image: url("../../Assets/Backgrounds/BG-blue.svg");
-    background-size: auto;
-    padding-top: 50px;
-
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }
 
-
-
-.container::-webkit-scrollbar  {
+.container::-webkit-scrollbar {
     display: none;
-  }
-  
-  
+}
+
+.note_container{
+    margin-top: 50px;
+}

@@ -13,3 +13,4 @@ const handle_search_tag_input = (event, form_data, set_form_data) => {
 }
 
 export default handle_search_tag_input
+

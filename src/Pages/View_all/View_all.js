@@ -6,6 +6,7 @@ import classes from "./View_all.module.css"
 //components
 import Nav from "../../Shared components/Nav/Nav"
 import Note from "../../Shared components/Note/Note"
+import TopBar from "./Components/Top_bar/Top_bar"
 
 //redux action creators
 import { submit_form } from "../../Store/Actions/0_submit_form_action"
@@ -35,16 +36,29 @@ export const View_all = () => {
 
     }, [response])
 
+    const handle_filter_notes = string => {
+
+        if(!string) return dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes"))
+
+        dispatch(submit_form({ user_id: "5eecd941331a770017a74e44", search_string:string }, "search"))
+
+    }
 
     return (
 
-            <div className={classes.container}>
+        <div className={classes.container}>
+
+            <TopBar handle_search_input={(string)=> handle_filter_notes(string)} />
+
+            <div className={classes.note_container}>
 
                 {notes && notes.map((note, index) => <Note key={index} index={index} details={note} />)}
 
-                <Nav />
-
             </div>
+
+            <Nav />
+
+        </div>
 
     )
 

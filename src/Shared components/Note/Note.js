@@ -30,6 +30,7 @@ import handle_save_click from "./Functions/handle_save_click"
 import handle_delete_click from "./Functions/handle_delete_click"
 import handle_collapse from "./Functions/handle_collapse"
 import handle_tag_change from "./Functions/handle_tag_change"
+import colours from '../../util/colours'
 
 export const Note = props => {
 
@@ -112,6 +113,7 @@ export const Note = props => {
                             edit_mode={edit_mode}
                             type="title"
                             handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
+                            style={{color:colours.primary, fontWeight:"bold"}}
 
                         />
 

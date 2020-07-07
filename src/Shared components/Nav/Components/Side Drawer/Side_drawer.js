@@ -27,7 +27,7 @@ export const Side_drawer = props => {
     }
     return (
 
-        <div test_handle="nav_menu_container" className={[classes.container, props.drawer_open && classes.container_open].join(" ")} style={{borderColor:colours.primary}} >
+        <div test_handle="nav_menu_container" className={[classes.container, props.drawer_open && classes.container_open].join(" ")}>
 
             <div className={classes.top_bar} style={{ color: colours.secondary }} onClick={()=> set_redirect("/landing")}>
 
