@@ -19,12 +19,11 @@ import { useDispatch, useSelector } from "react-redux"
 //functions
 import handle_form_navigation from "./Functions/handle_form_navigation"
 import handle_dynamic_button_display from './Functions/handle_dynamic_button_display'
+import generate_form_labels from "./Functions/generate_form_labels"
+import handle_search_tag_input from "./Functions/handle_search_tag_input"
 
 //redux action creators
 import { clear_response } from "../../Store/Actions/0_submit_form_action"
-
-//functions
-import generate_form_labels from "./Functions/generate_form_labels"
 
 //assets
 import man_pointing from "../../Assets/Abstract/man-pointing.svg"
@@ -212,7 +211,7 @@ export const Add_new = props => {
                                                 label={data[2]}
                                                 grey
                                                 value={form_data.search_tags}
-                                                onChange={e => set_form_data({ ...form_data, search_tags: e.target.value })}
+                                                onChange={e => handle_search_tag_input(e, form_data, set_form_data)}
                                                 toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
 
                                             />

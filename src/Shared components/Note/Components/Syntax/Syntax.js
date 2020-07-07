@@ -59,9 +59,9 @@ export const Syntax = props => {
 
                     <div className={classes.editable_container}>
 
-                        <textarea className={classes.textarea} value={syntax} onChange={(event)=> set_syntax(event.target.value)}></textarea>
-                    
-                        <Buttons handle_cancel_click={()=> handle_cancel_click()} handle_save_click={()=> handle_save_click()}/>
+                        <textarea className={classes.textarea} value={syntax} onChange={(event) => set_syntax(event.target.value)}></textarea>
+
+                        <Buttons handle_cancel_click={() => handle_cancel_click()} handle_save_click={() => handle_save_click()} />
 
                     </div>
 

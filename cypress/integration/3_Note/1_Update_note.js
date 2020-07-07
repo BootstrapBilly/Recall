@@ -162,7 +162,7 @@ describe("@@@@@ UPDATE NOTE @@@@@", () => {
 
             cy.get('[test_handle="note_cancel_button"]').click()
 
-            cy.get('[test_handle="API,"]').should("be.visible")
+            cy.get('[test_handle="API"]').should("be.visible")
             cy.get('[test_handle="BOILERPLATE"]').should("be.visible")
 
             cy.get('[test_handle="TEST"]').should("not.be.visible")
@@ -195,13 +195,13 @@ describe("@@@@@ UPDATE NOTE @@@@@", () => {
 
             cy.get('[test_handle="note_edit_button"]').eq(0).click()
 
-            cy.get('[test_handle="API,"]').click()
+            cy.get('[test_handle="API"]').click()
 
-            cy.get('[test_handle="API,"]').should("not.be.visible")
+            cy.get('[test_handle="API"]').should("not.be.visible")
 
             cy.get('[test_handle="note_cancel_button"]').click()
 
-            cy.get('[test_handle="API,"]').should("be.visible")
+            cy.get('[test_handle="API"]').should("be.visible")
 
             cy.get('[test_handle="BOILERPLATE"]').should("be.visible")
 
@@ -230,6 +230,30 @@ describe("@@@@@ UPDATE NOTE @@@@@", () => {
 
         })
 
+        it("Try to add a duplicate search tag - should not render it", () => {
+
+            cy.get('[test_handle="note_toggle_icon"]').eq(2).click()
+
+            cy.get('[test_handle="note_edit_button"]').eq(0).click()
+
+            cy.get('[test_handle="search_tag_input"]').eq(0).click().type("API")
+
+            cy.get('[test_handle="add_tag_button"]').eq(0).click()
+
+            cy.get('[test_handle="API"]').its("length").should("eq", 1)
+
+            cy.get('[test_handle="search_tag_input"]').eq(0).click().type("BOILERPLATE")
+
+            cy.get('[test_handle="add_tag_button"]').eq(0).click()
+
+            cy.get('[test_handle="BOILERPLATE"]').its("length").should("eq", 1)
+
+            cy.get('[test_handle="note_save_button"]').click()
+
+            cy.get('[test_handle="note_toggle_icon"]').eq(2).click()
+
+        })
+
 
         it("Add a tag to a note which has no tags, then save - should render it", () => {
 
@@ -255,11 +279,11 @@ describe("@@@@@ UPDATE NOTE @@@@@", () => {
 
             cy.get('[test_handle="note_edit_button"]').eq(0).click()
 
-            cy.get('[test_handle="search_tag_input"]').eq(0).click().type("test")
+            cy.get('[test_handle="search_tag_input"]').eq(0).click().type("TEST")
 
             cy.get('[test_handle="add_tag_button"]').eq(0).click()
 
-            cy.get('[test_handle="search_tag_input"]').eq(0).click().type("another")
+            cy.get('[test_handle="search_tag_input"]').eq(0).click().type("ANOTHER")
 
             cy.get('[test_handle="add_tag_button"]').eq(0).click()
 

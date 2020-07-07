@@ -56,7 +56,7 @@
 
 //     })
 
-//     context("Adding a new note - No optionals or syntax", () => {
+//     context("Adding a new note - No optionals or syntax (invalid search tags)", () => {
 
 //         it("Navigate to add new note, then type something - button should turn blue", () => {
 
@@ -142,6 +142,8 @@
 
 //         it("Skip the optionals step - should navigate to the syntax", () => {
 
+//             cy.get('[test_handle="search_tags_input"]').type(",")
+
 //             cy.get('[test_handle="form_next_button"]').click()
 
 //         })
@@ -210,7 +212,7 @@
 
 //         it("Enter search tags, then click next", () => {
 
-//             cy.get('[test_handle="search_tags_input"]').type("API, Boilerplate")
+//             cy.get('[test_handle="search_tags_input"]').type("API Boilerplate,")
 //             cy.get('[test_handle="form_next_button"]').click()
 
 //         })
