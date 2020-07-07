@@ -17,5 +17,30 @@
 }
 
 .note_container{
-    margin-top: 50px;
+    margin-top: 75px;
 }
+
+@media (orientation: landscape){
+
+    .note_container{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 10px;
+        grid-auto-rows: minmax(auto, auto);
+        background-color: aqua;
+    }
+}
+
+.my_masonry_grid {
+    display: -webkit-box; /* Not needed if autoprefixing */
+    display: -ms-flexbox; /* Not needed if autoprefixing */
+    display: flex;
+    margin-left: -30px; /* gutter size offset */
+    width: auto;
+    margin-top: 75px;
+  }
+  .my_masonry_grid_column {
+    padding-left: 30px; /* gutter size */
+    background-clip: padding-box;
+  }
+   
