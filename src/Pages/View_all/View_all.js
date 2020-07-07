@@ -14,41 +14,30 @@ import { submit_form } from "../../Store/Actions/0_submit_form_action"
 //redux hooks
 import { useSelector, useDispatch } from "react-redux"
 
+//functions
+import filter_notes_by_search from "./Functions/filter_notes_by_search"
 
 export const View_all = () => {
 
-    const dispatch = useDispatch()
+    //?selectors
+    const response = useSelector(state => state.form.response)//grab the response from the api
 
-    const [notes, set_notes] = useState([])
+    //-config
+    const dispatch = useDispatch()//initialise the usedispatch hook
 
-    const response = useSelector(state => state.form.response)
+    //*states
+    const [notes, set_notes] = useState([])//hold the notes to be displayed, all fetched initially, manipulated by searching and the toggle links
 
-    useEffect(() => {
+    //!Effects
+    useEffect(() => {dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes"))}, [])//fetch the notes on the first render of the page
+    useEffect(() => {if (response && response.data.notes) { set_notes(response.data.notes) }}, [response])//update the notes if the response changes
 
-        dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes"))
-
-        // eslint-disable-next-line
-    }, [])
-
-    useEffect(() => {
-
-        if (response && response.data.notes) { set_notes(response.data.notes) }
-
-    }, [response])
-
-    const handle_filter_notes = string => {
-
-        if(!string) return dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes"))
-
-        dispatch(submit_form({ user_id: "5eecd941331a770017a74e44", search_string:string }, "search"))
-
-    }
 
     return (
 
         <div className={classes.container}>
 
-            <TopBar handle_search_input={(string)=> handle_filter_notes(string)} />
+            <TopBar handle_search_input={(string)=> filter_notes_by_search(dispatch, string)} />
 
             <div className={classes.note_container}>
 
