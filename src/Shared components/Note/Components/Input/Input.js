@@ -30,7 +30,7 @@ export const Input = props => {
             style={{
                 ...props.style,
                 background: props.edit_mode && "wheat",
-                color: "transparent",
+                color: props.edit_mode ? "transparent" : props.color,
                 width: handle_empty_value("width"),
                 height: handle_empty_value("height")
             }}
@@ -39,15 +39,15 @@ export const Input = props => {
 
         >
 
-            {<span style={{visiblity:"hidden"}}>{props.value}</span>}
+            {<span>{capitalise_first(props.value)}</span>}
 
             <input
 
                 test_handle={props.type === "title" ? "note_title" : "note_subject"}
-                className={[classes.input].join(" ")}
+                className={classes.input}
                 value={capitalise_first(props.value)}
                 disabled={props.edit_mode ? false : true}
-                style={props.style}
+                style={{...props.style, color: props.edit_mode ? props.color : "transparent" }}
                 onChange={props.handle_change.bind(this, props.type)}
                 onClick={props.edit_mode && props.type === "subject" && props.value === "No subject" ? props.handle_edit_missing_subject : undefined}
 

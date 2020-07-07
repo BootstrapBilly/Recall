@@ -6,7 +6,7 @@
     padding: 5px;
     min-height: 50px;
     position: fixed;
-    z-index: 2;
+    z-index: 10;
 }
 
 .logo {
@@ -18,12 +18,15 @@
 
 .toggle_link_container {
     display: flex;
-    margin-left: 60px;
-    width: 180px;
+    margin-left: 50px;
     justify-content: space-evenly;
     font-size: 18px;
     margin-top: 10px;
     font-weight: bold;
+}
+
+.toggle_link{
+    margin-left: 10px;
 }
 
 .toggle_link:hover {

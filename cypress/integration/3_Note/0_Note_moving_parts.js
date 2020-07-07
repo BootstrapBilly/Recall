@@ -46,7 +46,7 @@
 
 //             start_edit_mode()
 
-//             cy.get('[test_handle="note_title"]').eq(0).click().type("{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}")
+//             cy.get('[test_handle="note_title"]').eq(0).click({force: true}).type("{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}")
 
 //             cy.get('[test_handle="input_wrapper"]').eq(0).should("have.css", "color", "rgba(0, 0, 0, 0)").should("have.css", "background-color", "rgb(245, 222, 179)").should("have.css", "width", "1px").should("have.css", "height", "22px")
 

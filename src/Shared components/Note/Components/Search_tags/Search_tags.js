@@ -60,7 +60,7 @@ export const Search_tags = props => {
                         size="15"
                         className={classes.input}
                         placeholder={"ADD SEARCH TAG"}
-                        style={{ border: "1px solid wheat", background: "wheat", fontSize: "12px", textAlign: "center", padding: "2px 0" }}
+                        style={{ border: "1px solid wheat", background: "wheat", fontSize: "12px", textAlign: "center", padding: "2px 15px" }}
                         onChange={(event) => handle_tag_input(event, new_tag, set_new_tag)}
                         value={new_tag}
                         onKeyPress={(e) => e.key === "Enter" && new_tag.length && handle_tag_insertion(search_tags, set_search_tags, new_tag, set_new_tag)}

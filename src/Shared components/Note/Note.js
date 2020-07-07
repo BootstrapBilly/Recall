@@ -113,7 +113,7 @@ export const Note = props => {
                             edit_mode={edit_mode}
                             type="title"
                             handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
-                            style={{color:colours.primary, fontWeight:"bold"}}
+                            color={colours.primary}
 
                         />
 
@@ -121,10 +121,11 @@ export const Note = props => {
 
                             value={overwritten_values.subject === null ? props.details.subject || "No subject" : overwritten_values.subject}
                             edit_mode={edit_mode}
-                            style={{ fontSize: "15px", color: "grey" }}
+                            style={{ fontSize: "15px" }}
                             type="subject"
                             handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
                             handle_edit_missing_subject={() => set_overwritten_values({ ...overwritten_values, subject: "" })}
+                            color={"grey"}
 
                         />
 
