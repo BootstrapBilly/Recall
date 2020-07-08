@@ -23,7 +23,8 @@ import generate_form_labels from "./Functions/generate_form_labels"
 import handle_search_tag_input from "./Functions/handle_search_tag_input"
 
 //redux action creators
-import { clear_response } from "../../Store/Actions/0_submit_form_action"
+import {submit_form, clear_response } from "../../Store/Actions/0_submit_form_action"
+import {disable_edit_mode } from "../../Store/Actions/1_note_action"
 
 //assets
 import man_pointing from "../../Assets/Abstract/man-pointing.svg"
@@ -42,6 +43,7 @@ export const Add_new = props => {
     const [notes_search_string, set_notes_search_string] = useState(null)//hold the string used to find notes when adding them to a collection
     const [selected_notes, set_selected_notes] = useState([])//hold the selected notes (when adding a collection)
     const [keyboard_open, set_keyboard_open] = useState(false)//a state to detect when the keyboard is open on mobile
+    const [note_details, set_note_details] = useState(null)
 
     const [form_data, set_form_data] = useState({// a state to hold the note information to be submitted to the backend
 
@@ -104,6 +106,7 @@ export const Add_new = props => {
         if (response && response.data.message === "Note added successfully") {//if a 201 is detected
 
             set_current_step("success")
+            set_note_details(response.data.note)
             clear_response()
 
         }
@@ -119,7 +122,17 @@ export const Add_new = props => {
 
         }
 
+        if(response && response.data.message === "note updated successfully"){
+
+            set_note_details({...response.data.note, title:response.data.title})
+
+            dispatch(disable_edit_mode(response.data.note._id))//remove the note from the array of edit mode enabled notes
+            
+            clear_response()
+        }
+
     }, [response])
+
 
     return (
 
@@ -241,8 +254,8 @@ export const Add_new = props => {
 
 
                                             : current_step === "success" ?
-
-                                                <Note details={response.data.note} />
+                        
+                                                <Note details={note_details} from_add_form/>
 
                                                 : null}
 

@@ -46,9 +46,22 @@ export const Note = props => {
     //-config
     const dispatch = useDispatch()//initialise the usedispatch hook
     const ref = useRef(null)//hold the reference to the height measurement div, to set the height dynamically (see line 33)
-    const edit_mode = edit_mode_enabled_notes.find(note => note === props.details._id)//Check if the instance of this note is in the array of edit mode notes
-    const expanded = expanded_notes.find(note => note === props.details._id)//Check if the instance of this note is in the array of expanded notes
-    const duplicate_title = duplicate_titles.find(title => title === props.details._id)//check if the instance of this note is in the array of duplicates
+
+    const fetch_note_id = () => {
+
+        if(response && response.data.message === "Note added successfully") return response.data.note._id
+
+        if(response && props.from_add_form &&response.data.message === "note updated successfully") return response.data.id
+        
+        if(props.from_add_form) return response.id
+
+        else return props.details._id
+
+    }
+
+    const edit_mode = edit_mode_enabled_notes.find(note => note === fetch_note_id())//Check if the instance of this note is in the array of edit mode notes
+    const expanded = expanded_notes.find(note => note === fetch_note_id())//Check if the instance of this note is in the array of expanded notes
+    const duplicate_title = duplicate_titles.find(title => title === fetch_note_id())//check if the instance of this note is in the array of duplicates
 
     //*states
     const [height, set_height] = useState(0)//dynamically set the height of the note to be animated upon expansion to fit content without a predefined height
@@ -82,41 +95,45 @@ export const Note = props => {
 
     }, [resize_note])
 
+    useEffect(() => {//this effect is triggered when they try to change a title to one that is already in use
 
-    useEffect(()=> {//this effect is triggered when they try to change a title to one that is already in use
-
-        if(response && response.data.message === "You already have a note with that title, please choose another"){
+        if (response && response.data.message === "You already have a note with that title, please choose another") {
 
             //if the id on the response matches the id on the note, add the note to the array of duplicate titles to be displayed
-            if(response.data.id === props.details._id){dispatch(set_duplicate_title(props.details._id))}
-            
+            if (response.data.id === fetch_note_id()) { dispatch(set_duplicate_title(fetch_note_id())) }
+
             alert("You already have a note with that title, please choose another", "error")
         }
-    // eslint-disable-next-line 
+        // eslint-disable-next-line 
     }, [response])
-
 
     //this is triggered upon a success response after editing/deleting a note //*success responses
     useEffect(() => {//used to update the note instantly after editing it
 
-        if (response && response.data.message === "note updated successfully" && response.data.id === props.details._id) {//if a success message is detected
+        if (!props.from_add_form) {
 
-            dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes"))//fetch the notes again with the new data
+            if (response && response.data.message === "note updated successfully" && response.data.id === fetch_note_id()) {//if a success message is detected
 
-            dispatch(disable_edit_mode(props.details._id))//remove the note from the array of edit mode enabled notes
+                dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes"))//fetch the notes again with the new data
 
-        }
+                dispatch(disable_edit_mode(fetch_note_id()))//remove the note from the array of edit mode enabled notes
 
-        if (response && response.data.message === "note deleted successfully") {
+            }
 
-            dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes"))
-            clear_response()//clear the response
+            if (response && response.data.message === "note deleted successfully") {
+
+                dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes"))
+                clear_response()//clear the response
+
+            }
 
         }
         //eslint-disable-next-line
     }, [response])
 
     // console.log(edit_mode)
+
+    // if(props.from_add_form) console.log(props.details)
 
     return (
 
@@ -135,10 +152,10 @@ export const Note = props => {
                             type="title"
                             handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
                             color={colours.primary}
-                            id={props.details._id}
+                            id={fetch_note_id()}
                             duplicate_title={duplicate_title}
                             //remove the title from the array of duplicate titles in the reducer
-                            handle_clear_duplicate_title={()=> dispatch(clear_duplicate_title(props.details._id))}
+                            handle_clear_duplicate_title={() => dispatch(clear_duplicate_title(fetch_note_id()))}
 
                         />
 
@@ -213,10 +230,10 @@ export const Note = props => {
 
                             expanded={expanded}
                             title={props.details.title}
-                            reset_expanded={() => dispatch(collapse_note(props.details._id))}
-                            handle_edit_click={() => dispatch(enable_edit_mode(props.details._id))}
+                            reset_expanded={() => dispatch(collapse_note(fetch_note_id()))}
+                            handle_edit_click={() => dispatch(enable_edit_mode(fetch_note_id()))}
                             edit_mode={edit_mode}
-                            handle_cancel_click={() => handle_cancel_click(dispatch, props.details._id, set_overwritten_values, set_re_render)}
+                            handle_cancel_click={() => handle_cancel_click(dispatch, fetch_note_id(), set_overwritten_values, set_re_render)}
                             handle_save_click={() => handle_save_click(dispatch, overwritten_values, props)}
                             handle_delete_click={(title) => handle_delete_click(title, dispatch, props)}
 
@@ -230,7 +247,7 @@ export const Note = props => {
 
                     expanded={expanded}
                     handle_collapse={() => handle_collapse(dispatch, props)}
-                    handle_expand={() => dispatch(expand_note(props.details._id))}
+                    handle_expand={() => dispatch(expand_note(fetch_note_id()))}
 
                 />
 

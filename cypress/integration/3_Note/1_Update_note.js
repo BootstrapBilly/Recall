@@ -82,19 +82,20 @@
 
 //         it("Update the title and subject - on the second note", () => {
 
-//             cy.get('[test_handle="note_toggle_icon"]').eq(1).click({force: true})
+//             cy.get('[test_handle="note_toggle_icon"]').eq(3).click({force: true})
 
 //             cy.get('[test_handle="note_edit_button"]').eq(0).click({force: true})
 
-//             cy.get('[test_handle="note_title"]').eq(1).click({force: true}).type("Change")
+//             cy.get('[test_handle="note_title"]').eq(3).click({force: true}).type("Change")
 
-//             cy.get('[test_handle="note_subject"]').eq(1).clear({force: true}).click({force: true}).type("Change")
+//             cy.get('[test_handle="note_subject"]').eq(3).clear({force: true}).click({force: true}).type("Change")
 
 //             cy.get('[test_handle="note_save_button"]').click({force: true})
 
-//             cy.get('[test_handle="note_subject"]').eq(1).should("have.value", "Change")
+//             cy.get('[test_handle="note_subject"]').eq(3).should("have.value", "Change")
 
-//             cy.get('[test_handle="note_title"]').eq(1).should("have.value", "Another notechange")
+//             cy.get('[test_handle="note_title"]').eq(3).should("have.value", "Another notechange")
+
 
 //         })
 
@@ -102,7 +103,7 @@
 
 //             cy.get('[test_handle="note_edit_button"]').eq(0).click({force: true})
 
-//             cy.get('[test_handle="note_title"]').eq(1).click({force: true}).type("Change")
+//             cy.get('[test_handle="note_title"]').eq(3).click({force: true}).type("Change")
 
 //             cy.get('[test_handle="note_body_input"]').eq(0).clear({force: true}).click({force: true}).type("Change")
 
@@ -110,7 +111,7 @@
 
 //             cy.get('[test_handle="note_body_input"]').eq(0).should("have.value", "Change")
 
-//             cy.get('[test_handle="note_title"]').eq(1).should("have.value", "Another notechangechange")
+//             cy.get('[test_handle="note_title"]').eq(3).should("have.value", "Another notechangechange")
 
 //         })
 
@@ -118,17 +119,17 @@
 
 //             cy.get('[test_handle="note_edit_button"]').eq(0).click({force: true})
 
-//             cy.get('[test_handle="note_title"]').eq(1).clear({force: true}).type("Another note")
-//             cy.get('[test_handle="note_subject"]').eq(1).clear({force: true}).type("Another subject")
+//             cy.get('[test_handle="note_title"]').eq(3).clear({force: true}).type("Another note")
+//             cy.get('[test_handle="note_subject"]').eq(3).clear({force: true}).type("Another subject")
 //             cy.get('[test_handle="note_body_input"]').eq(0).clear({force: true}).type("Another body")
 
 //             cy.get('[test_handle="note_save_button"]').click({force: true})
 
-//             cy.get('[test_handle="note_toggle_icon"]').eq(1).click({force: true})
+//             cy.get('[test_handle="note_toggle_icon"]').eq(3).click({force: true})
 
 //         })
 
-//     })
+//      })
 
 //     context("Search tag testing", () => {
 
@@ -152,7 +153,7 @@
 
 //         it("Add a tag to a note which has some tags, then cancel it - should not render it and other tags should be rendered", () => {
 
-//             cy.get('[test_handle="note_toggle_icon"]').eq(2).click({force: true})
+//             cy.get('[test_handle="note_toggle_icon"]').eq(1).click({force: true})
 
 //             cy.get('[test_handle="note_edit_button"]').eq(0).click({force: true})
 
@@ -167,13 +168,13 @@
 
 //             cy.get('[test_handle="TEST"]').should("not.be.visible")
 
-//             cy.get('[test_handle="note_toggle_icon"]').eq(2).click({force: true})
+//             cy.get('[test_handle="note_toggle_icon"]').eq(1).click({force: true})
 //         })
 
 
 //         it("Delete a tag, leaving none left then cancel it - should still be rendered", () => {
 
-//             cy.get('[test_handle="note_toggle_icon"]').eq(3).click({force: true})
+//             cy.get('[test_handle="note_toggle_icon"]').eq(4).click({force: true})
 
 //             cy.get('[test_handle="note_edit_button"]').eq(0).click({force: true})
 
@@ -185,13 +186,13 @@
 
 //             cy.get('[test_handle="ROUTING"]').should("be.visible")
 
-//             cy.get('[test_handle="note_toggle_icon"]').eq(3).click({force: true})
+//             cy.get('[test_handle="note_toggle_icon"]').eq(4).click({force: true})
 
 //         })
 
 //         it("Delete a tag, leaving some left then cancel it - should still be rendered", () => {
 
-//             cy.get('[test_handle="note_toggle_icon"]').eq(2).click({force: true})
+//             cy.get('[test_handle="note_toggle_icon"]').eq(1).click({force: true})
 
 //             cy.get('[test_handle="note_edit_button"]').eq(0).click({force: true})
 
@@ -205,7 +206,7 @@
 
 //             cy.get('[test_handle="BOILERPLATE"]').should("be.visible")
 
-//             cy.get('[test_handle="note_toggle_icon"]').eq(2).click({force: true})
+//             cy.get('[test_handle="note_toggle_icon"]').eq(1).click({force: true})
 
 //         })
 
@@ -232,7 +233,7 @@
 
 //         it("Try to add a duplicate search tag - should not render it", () => {
 
-//             cy.get('[test_handle="note_toggle_icon"]').eq(2).click({force: true})
+//             cy.get('[test_handle="note_toggle_icon"]').eq(1).click({force: true})
 
 //             cy.get('[test_handle="note_edit_button"]').eq(0).click({force: true})
 
@@ -250,7 +251,7 @@
 
 //             cy.get('[test_handle="note_save_button"]').click({force: true})
 
-//             cy.get('[test_handle="note_toggle_icon"]').eq(2).click({force: true})
+//             cy.get('[test_handle="note_toggle_icon"]').eq(1).click({force: true})
 
 //         })
 
@@ -275,7 +276,7 @@
 
 //         it("Add multiple tags to a note which has no tags, then save - should render them", () => {
 
-//             cy.get('[test_handle="note_toggle_icon"]').eq(1).click({force: true})
+//             cy.get('[test_handle="note_toggle_icon"]').eq(3).click({force: true})
 
 //             cy.get('[test_handle="note_edit_button"]').eq(0).click({force: true})
 
@@ -292,7 +293,7 @@
 //             cy.get('[test_handle="TEST"]').should("be.visible")
 //             cy.get('[test_handle="ANOTHER"]').should("be.visible")
 
-//             cy.get('[test_handle="note_toggle_icon"]').eq(1).click({force: true})
+//             cy.get('[test_handle="note_toggle_icon"]').eq(3).click({force: true})
 
 //         })
 
@@ -364,14 +365,14 @@
 
 //             cy.get('[test_handle="note_toggle_icon"]').eq(0).click({force: true})
 
-//             cy.get('[test_handle="note_toggle_icon"]').eq(1).click({force: true})
+//             cy.get('[test_handle="note_toggle_icon"]').eq(3).click({force: true})
 //             cy.get('[test_handle="note_edit_button"]').eq(0).click({force: true})
 //             cy.get('[test_handle="TEST"]').click()
 //             cy.get('[test_handle="ANOTHER"]').click({force: true})
 //             cy.get('[test_handle="note_save_button"]').click({force: true})
 //             cy.get('[test_handle="TEST"]').should("not.be.visible")
 //             cy.get('[test_handle="ANOTHER"]').should("not.be.visible")
-//             cy.get('[test_handle="note_toggle_icon"]').eq(1).click({force: true})
+//             cy.get('[test_handle="note_toggle_icon"]').eq(3).click({force: true})
 
 //         })
 //     })
