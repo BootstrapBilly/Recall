@@ -16,6 +16,7 @@ import { useSelector, useDispatch } from "react-redux"
 
 //functions
 import filter_notes_by_search from "./Functions/filter_notes_by_search"
+import handle_column_assignment from "./Functions/handle_column_assignment"
 
 //external
 import Masonry from 'react-masonry-css'
@@ -36,15 +37,6 @@ export const View_all = () => {
     useEffect(() => { dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes")) }, [])//fetch the notes on the first render of the page
     useEffect(() => { if (response && response.data.notes) { set_notes(response.data.notes) } }, [response])//update the notes if the response changes
 
-    const handle_column_assignment = {
-
-        default: 4,
-        1100: 3,
-        800: 2,
-        500: 1
-
-    }
-
     return (
 
         <div className={classes.container}>
@@ -55,18 +47,15 @@ export const View_all = () => {
 
 
                 <Masonry
-                    breakpointCols={handle_column_assignment}
+
+                    breakpointCols={handle_column_assignment(notes)}
                     className={classes.my_masonry_grid}
                     columnClassName={classes.my_masonry_grid_column}>
                     {notes.map((note, index) => <Note key={index} index={index} details={note} />)}
+                    
                 </Masonry>
+
             }
-
-            {/* <div className={classes.note_container}>
-
-                {notes && notes.map((note, index) => <Note key={index} index={index} details={note} />)}
-
-            </div> */}
 
             <Nav />
 
