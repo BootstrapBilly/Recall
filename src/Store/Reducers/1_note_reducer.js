@@ -1,4 +1,4 @@
-import { EXPAND_NOTE, COLLAPSE_NOTE, ENABLE_EDIT_MODE, DISABLE_EDIT_MODE, SET_DUPLICATE_TITLE, CLEAR_DUPLICATE_TITLE } from "../Actions/1_note_action"
+import { EXPAND_NOTE, COLLAPSE_NOTE, COLLAPSE_ALL, ENABLE_EDIT_MODE, DISABLE_EDIT_MODE, SET_DUPLICATE_TITLE, CLEAR_DUPLICATE_TITLE } from "../Actions/1_note_action"
 
 const initialState = {//set the initial state
 
@@ -19,6 +19,10 @@ const handle_note_toggle = (state = initialState, action) => {
         case COLLAPSE_NOTE:
 
             return { ...state, expanded_notes: [...state.expanded_notes.filter(note => note !== action.payload)]}
+
+        case COLLAPSE_ALL:
+
+            return { ...state, expanded_notes: []}
 
         case ENABLE_EDIT_MODE:
 

@@ -7,6 +7,7 @@ import classes from "./View_all.module.css"
 import Nav from "../../Shared components/Nav/Nav"
 import Note from "../../Shared components/Note/Note"
 import TopBar from "./Components/Top_bar/Top_bar"
+import SideMenu from "./Components/Side_menu/Side_menu"
 
 //redux action creators
 import { submit_form } from "../../Store/Actions/0_submit_form_action"
@@ -58,6 +59,8 @@ export const View_all = () => {
             }
 
             <Nav />
+
+            <SideMenu />
 
         </div>
 
