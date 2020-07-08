@@ -23,7 +23,7 @@ import generate_form_labels from "./Functions/generate_form_labels"
 import handle_search_tag_input from "./Functions/handle_search_tag_input"
 
 //redux action creators
-import {submit_form, clear_response } from "../../Store/Actions/0_submit_form_action"
+import {clear_response } from "../../Store/Actions/0_submit_form_action"
 import {disable_edit_mode } from "../../Store/Actions/1_note_action"
 
 //assets
@@ -42,7 +42,6 @@ export const Add_new = props => {
     const [show_form_navigation_buttons, set_show_form_navigation_buttons] = useState(false)//show different buttons depending on input
     const [notes_search_string, set_notes_search_string] = useState(null)//hold the string used to find notes when adding them to a collection
     const [selected_notes, set_selected_notes] = useState([])//hold the selected notes (when adding a collection)
-    const [keyboard_open, set_keyboard_open] = useState(false)//a state to detect when the keyboard is open on mobile
     const [note_details, set_note_details] = useState(null)
 
     const [form_data, set_form_data] = useState({// a state to hold the note information to be submitted to the backend
@@ -130,7 +129,7 @@ export const Add_new = props => {
             
             clear_response()
         }
-
+// eslint-disable-next-line
     }, [response])
 
 
@@ -161,8 +160,8 @@ export const Add_new = props => {
                                 label={data[1]}
                                 value={form_data.title}
                                 onChange={e => set_form_data({ ...form_data, title: e.target.value })}
-                                toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
-                                marginTop="15px" />
+                                marginTop="15px"
+                                add_new />
 
                             : current_step === "body" ?
 
@@ -173,8 +172,8 @@ export const Add_new = props => {
                                     value={form_data.body}
                                     text_area
                                     onChange={e => set_form_data({ ...form_data, body: e.target.value })}
-                                    toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
-                                    marginTop="15px" />
+                                    marginTop="15px"
+                                    add_new />
 
                                 : current_step === "notes" ? //this step is only for collections
 
@@ -185,18 +184,18 @@ export const Add_new = props => {
                                             label={data[1]}
                                             value={notes_search_string}
                                             onChange={e => set_notes_search_string(e.target.value)}
-                                            toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
                                             marginTop="20px"
+                                            add_new
 
                                         />
 
                                         <NotesSelect
                                             search_string={notes_search_string}
-                                            toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
                                             selected_notes={selected_notes}
                                             reset_search_string={() => set_notes_search_string(null)}
                                             handle_select_note={(note) => set_selected_notes(selected_notes => [...selected_notes, note])}
                                             handle_remove_note={(note) => set_selected_notes(selected_notes => [...selected_notes.filter(selected_note => selected_note !== note)])}
+                                            add_new
                                         />
 
                                     </div>
@@ -215,8 +214,9 @@ export const Add_new = props => {
                                                 grey
                                                 value={form_data.subject}
                                                 onChange={e => set_form_data({ ...form_data, subject: e.target.value })}
-                                                toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
-                                                marginTop="10px" />
+                                                marginTop="10px"
+                                                add_new
+                                                optionals />
 
                                             <Input
                                                 test_handle="search_tags_input"
@@ -225,7 +225,8 @@ export const Add_new = props => {
                                                 grey
                                                 value={form_data.search_tags}
                                                 onChange={e => handle_search_tag_input(e, form_data, set_form_data)}
-                                                toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
+                                                add_new
+                                                optionals
 
                                             />
 
@@ -245,8 +246,8 @@ export const Add_new = props => {
                                                     value={form_data.syntax}
                                                     text_area
                                                     onChange={e => set_form_data({ ...form_data, syntax: e.target.value })}
-                                                    toggle_keyboard_open={() => set_keyboard_open(!keyboard_open)}
                                                     marginTop="10px"
+                                                    add_new
                                                 />
 
                                             </React.Fragment>
@@ -290,7 +291,7 @@ export const Add_new = props => {
 
             </div>
 
-            <div className={classes.bottom_section} ></div>
+    
 
 
 

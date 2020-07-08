@@ -26,6 +26,7 @@
 
 .input::placeholder{
     color: rgba(0, 0, 0, 0.258);
+    font-size: 16px;
 }
 
 .input:focus::placeholder{
@@ -33,7 +34,10 @@
 }
 
 .text_area{
-    height: 120px;
+    line-height: 24px;
+    box-sizing: border-box;
+	overflow: auto;
+	height: auto;
     border: none;
     outline: none;
     padding: 5px;
@@ -41,10 +45,19 @@
     font-size: 14px;
     width: 95%;
     background-color: whitesmoke;
+    resize: none;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    position: relative;
 }
+
+.text_area::-webkit-scrollbar {
+    display: none;
+  }
 
 .text_area::placeholder{
     color: rgba(0, 0, 0, 0.258);
+    font-size: 16px;
 }
 
 .text_area:focus::placeholder{
