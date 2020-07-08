@@ -20,6 +20,7 @@ export const Top_bar = props => {
     const [search_value, set_search_value] = useState("")//Hold the value of the search input when it is expanded
 
     //!Effects
+    // eslint-disable-next-line
     useEffect(() => { props.handle_search_input(search_value) }, [search_value])//when the search value changes, call the parent function to re-render the notes
 
     return (
@@ -42,6 +43,7 @@ export const Top_bar = props => {
                         className={classes.toggle_link}
                         style={{ color: `${active_toggle_link === Link ? colours.secondary : `${colours.secondary}BF`}` }}
                         onClick={() => set_active_toggle_link(Link)}
+                        key={Link}
 
                     >
 

@@ -22,7 +22,7 @@ import { useSelector, useDispatch } from "react-redux"
 
 //redux action creators
 import { submit_form, clear_response } from "../../Store/Actions/0_submit_form_action"
-import { expand_note, collapse_note, enable_edit_mode, disable_edit_mode } from "../../Store/Actions/1_note_action"
+import { expand_note, collapse_note, enable_edit_mode, disable_edit_mode, set_duplicate_title, clear_duplicate_title } from "../../Store/Actions/1_note_action"
 
 //functions
 import handle_cancel_click from "./Functions/handle_cancel_click"
@@ -32,23 +32,28 @@ import handle_collapse from "./Functions/handle_collapse"
 import handle_tag_change from "./Functions/handle_tag_change"
 import colours from '../../util/colours'
 
+//external
+import alert from "easyalert"
+
 export const Note = props => {
 
     //?selectors
     const response = useSelector(state => state.form.response)//grab the response from the api
     const expanded_notes = useSelector(state => state.note.expanded_notes)//grab the array of expanded notes from the reducer
     const edit_mode_enabled_notes = useSelector(state => state.note.edit_mode_notes)//grab the array of expanded notes from the reducer
+    const duplicate_titles = useSelector(state => state.note.duplicate_titles)//grab any duplicate title attempts from the reducer
 
     //-config
     const dispatch = useDispatch()//initialise the usedispatch hook
     const ref = useRef(null)//hold the reference to the height measurement div, to set the height dynamically (see line 33)
     const edit_mode = edit_mode_enabled_notes.find(note => note === props.details._id)//Check if the instance of this note is in the array of edit mode notes
     const expanded = expanded_notes.find(note => note === props.details._id)//Check if the instance of this note is in the array of expanded notes
+    const duplicate_title = duplicate_titles.find(title => title === props.details._id)//check if the instance of this note is in the array of duplicates
 
     //*states
     const [height, set_height] = useState(0)//dynamically set the height of the note to be animated upon expansion to fit content without a predefined height
-    const [re_render, set_re_render] = useState(false)
-    const [resize_note, set_resize_note] = useState(false)
+    const [re_render, set_re_render] = useState(false)//used to re-render the syntax and search tags if the user modifies but doesn't save them
+    const [resize_note, set_resize_note] = useState(false)//used to resize the note if content gets added or deleted from it
 
     const [overwritten_values, set_overwritten_values] = useState({// a state to hold the note information to be submitted to the backend for editing purposes
 
@@ -77,7 +82,21 @@ export const Note = props => {
 
     }, [resize_note])
 
-    //this is triggered upon a success response after editing a note
+
+    useEffect(()=> {//this effect is triggered when they try to change a title to one that is already in use
+
+        if(response && response.data.message === "You already have a note with that title, please choose another"){
+
+            //if the id on the response matches the id on the note, add the note to the array of duplicate titles to be displayed
+            if(response.data.id === props.details._id){dispatch(set_duplicate_title(props.details._id))}
+            
+            alert("You already have a note with that title, please choose another", "error")
+        }
+    // eslint-disable-next-line 
+    }, [response])
+
+
+    //this is triggered upon a success response after editing/deleting a note //*success responses
     useEffect(() => {//used to update the note instantly after editing it
 
         if (response && response.data.message === "note updated successfully" && response.data.id === props.details._id) {//if a success message is detected
@@ -97,6 +116,8 @@ export const Note = props => {
         //eslint-disable-next-line
     }, [response])
 
+    // console.log(edit_mode)
+
     return (
 
         <div className={classes.container} test_handle="note_container" style={{ height: `${height}px`, paddingBottom: expanded && "70px" }}>
@@ -114,6 +135,10 @@ export const Note = props => {
                             type="title"
                             handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
                             color={colours.primary}
+                            id={props.details._id}
+                            duplicate_title={duplicate_title}
+                            //remove the title from the array of duplicate titles in the reducer
+                            handle_clear_duplicate_title={()=> dispatch(clear_duplicate_title(props.details._id))}
 
                         />
 

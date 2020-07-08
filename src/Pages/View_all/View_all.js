@@ -32,22 +32,18 @@ export const View_all = () => {
     const [notes, set_notes] = useState([])//hold the notes to be displayed, all fetched initially, manipulated by searching and the toggle links
 
     //!Effects
+    // eslint-disable-next-line
     useEffect(() => { dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes")) }, [])//fetch the notes on the first render of the page
     useEffect(() => { if (response && response.data.notes) { set_notes(response.data.notes) } }, [response])//update the notes if the response changes
 
-    // var items = [
-    //     { id: 1, name: 'My First Item' },
-    //     { id: 2, name: 'Another item' },
-    //     { id: 3, name: 'Third Item' },
-    //     { id: 4, name: 'Here is the Fourth' },
-    //     { id: 5, name: 'High Five' }
-    // ];
+    const handle_column_assignment = {
 
-    // // Convert array to JSX items
-    // items = items.map(function (item) {
-    //     return <div key={item.id}>{item.name}</div>
-    // });
+        default: 4,
+        1100: 3,
+        800: 2,
+        500: 1
 
+    }
 
     return (
 
@@ -59,7 +55,7 @@ export const View_all = () => {
 
 
                 <Masonry
-                    breakpointCols={3}
+                    breakpointCols={handle_column_assignment}
                     className={classes.my_masonry_grid}
                     columnClassName={classes.my_masonry_grid_column}>
                     {notes.map((note, index) => <Note key={index} index={index} details={note} />)}
