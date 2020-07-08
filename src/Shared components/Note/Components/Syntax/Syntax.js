@@ -77,7 +77,7 @@ export const Syntax = props => {
 
                         >
 
-                            {props.edit_mode ? "CHANGE CODE" : "COPY CODE"}
+                            {props.missing ? syntax ? "CHANGE CODE" : "ADD SOME CODE" : props.edit_mode ? "CHANGE CODE" : "COPY CODE"}
 
                         </div>
 

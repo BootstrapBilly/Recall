@@ -17,3 +17,4 @@ const sendPost = (url, body, type) => {
 }
 
 export default sendPost
+

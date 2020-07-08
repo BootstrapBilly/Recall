@@ -49,11 +49,11 @@ export const Note = props => {
 
     const fetch_note_id = () => {
 
-        if(response && response.data.message === "Note added successfully") return response.data.note._id
+        if (response && response.data.message === "Note added successfully") return response.data.note._id
 
-        if(response && props.from_add_form &&response.data.message === "note updated successfully") return response.data.id
-        
-        if(props.from_add_form) return response.id
+        if (response && props.from_add_form && response.data.message === "note updated successfully") return response.data.id
+
+        if (props.from_add_form) return response.id
 
         else return props.details._id
 
@@ -186,7 +186,7 @@ export const Note = props => {
                         />
 
                         {/* If theres syntax present, show a copy code button  */}
-                        {props.details.syntax &&
+                        {props.details.syntax ?
 
                             <Syntax
 
@@ -197,6 +197,21 @@ export const Note = props => {
                                 reset_re_render={() => set_re_render(false)}
 
                             />
+
+                            : !props.details.syntax && edit_mode ?
+
+                                <Syntax
+
+                                    edit_mode={edit_mode}
+                                    syntax={overwritten_values.syntax || ""}
+                                    handle_syntax_change={(syntax) => set_overwritten_values({ ...overwritten_values, syntax: syntax })}
+                                    re_render={re_render}
+                                    reset_re_render={() => set_re_render(false)}
+                                    missing
+
+                                />
+
+                                : undefined
                         }
 
                         {props.details.search_tags ? /* If theres search tags present, show them  */
