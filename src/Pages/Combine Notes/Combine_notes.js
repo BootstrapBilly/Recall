@@ -68,8 +68,6 @@ export const Combine_notes = () => {
         set_selected_notes(selected_notes => [...selected_notes.filter((selected_note, index) => index !== array_index)])
     }
 
-    console.log(selected_notes)
-
     return (
 
         <div className={classes.container}>

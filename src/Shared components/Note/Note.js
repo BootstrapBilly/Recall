@@ -30,6 +30,9 @@ import handle_save_click from "./Functions/handle_save_click"
 import handle_delete_click from "./Functions/handle_delete_click"
 import handle_collapse from "./Functions/handle_collapse"
 import handle_tag_change from "./Functions/handle_tag_change"
+import fetch_note_id from "./Functions/fetch_note_id"
+
+//util
 import colours from '../../util/colours'
 
 //external
@@ -47,26 +50,15 @@ export const Note = props => {
     const dispatch = useDispatch()//initialise the usedispatch hook
     const ref = useRef(null)//hold the reference to the height measurement div, to set the height dynamically (see line 33)
 
-    const fetch_note_id = () => {
-
-        if (response && response.data.message === "Note added successfully") return response.data.note._id
-
-        if (response && props.from_add_form && response.data.message === "note updated successfully") return response.data.id
-
-        if (props.from_add_form) return response.id
-
-        else return props.details._id
-
-    }
-
-    const edit_mode = edit_mode_enabled_notes.find(note => note === fetch_note_id())//Check if the instance of this note is in the array of edit mode notes
-    const expanded = expanded_notes.find(note => note === fetch_note_id())//Check if the instance of this note is in the array of expanded notes
-    const duplicate_title = duplicate_titles.find(title => title === fetch_note_id())//check if the instance of this note is in the array of duplicates
+    const edit_mode = edit_mode_enabled_notes.find(note => note === fetch_note_id(response, props))//Check if the instance of this note is in the array of edit mode notes
+    const expanded = expanded_notes.find(note => note === fetch_note_id(response, props))//Check if the instance of this note is in the array of expanded notes
+    const duplicate_title = duplicate_titles.find(title => title === fetch_note_id(response, props))//check if the instance of this note is in the array of duplicates
 
     //*states
     const [height, set_height] = useState(0)//dynamically set the height of the note to be animated upon expansion to fit content without a predefined height
     const [re_render, set_re_render] = useState(false)//used to re-render the syntax and search tags if the user modifies but doesn't save them
     const [resize_note, set_resize_note] = useState(false)//used to resize the note if content gets added or deleted from it
+    const [hover_border, set_hover_border] = useState(false)
 
     const [overwritten_values, set_overwritten_values] = useState({// a state to hold the note information to be submitted to the backend for editing purposes
 
@@ -100,7 +92,7 @@ export const Note = props => {
         if (response && response.data.message === "You already have a note with that title, please choose another") {
 
             //if the id on the response matches the id on the note, add the note to the array of duplicate titles to be displayed
-            if (response.data.id === fetch_note_id()) { dispatch(set_duplicate_title(fetch_note_id())) }
+            if (response.data.id === fetch_note_id(response, props)) { dispatch(set_duplicate_title(fetch_note_id(response, props))) }
 
             alert("You already have a note with that title, please choose another", "error")
         }
@@ -112,11 +104,11 @@ export const Note = props => {
 
         if (!props.from_add_form) {
 
-            if (response && response.data.message === "note updated successfully" && response.data.id === fetch_note_id()) {//if a success message is detected
+            if (response && response.data.message === "note updated successfully" && response.data.id === fetch_note_id(response, props)) {//if a success message is detected
 
                 dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes"))//fetch the notes again with the new data
 
-                dispatch(disable_edit_mode(fetch_note_id()))//remove the note from the array of edit mode enabled notes
+                dispatch(disable_edit_mode(fetch_note_id(response, props)))//remove the note from the array of edit mode enabled notes
 
             }
 
@@ -131,25 +123,34 @@ export const Note = props => {
         //eslint-disable-next-line
     }, [response])
 
-    // console.log(edit_mode)
 
-    // if(props.from_add_form) console.log(props.details)
 
     return (
 
-        <div className={classes.container} test_handle="note_container" style={{ height: `${height}px`, paddingBottom: expanded && "70px", backgroundColor: props.selected && colours.primary }}
-        // onClick={props.combine && props.handle_select.bind(this, props.details)}
+        <div className={classes.container} test_handle="note_container"
+
+            style={{
+                height: `${height}px`,
+                paddingBottom: expanded && "70px",
+                backgroundColor: props.selected && colours.primary,
+                border: hover_border && `1px solid ${colours.primary}`
+            }}
+
         >
 
-            {props.combine || props.selected ?
+            {props.combine || props.selected ? //if the note is being rendered on the combine notes page
 
-                <div className={classes.selected_clickable_area}
+                <div className={classes.selected_clickable_area}//asign a clickable area so it can still be expanded without selecting it
 
-                    onClick={props.combine ? props.handle_select.bind(this, props.details) : props.handle_remove.bind(this, props.details, props.index)}>
+                    onClick={props.combine ? props.handle_select.bind(this, props.details) : props.handle_remove.bind(this, props.details, props.index)}
+                    onMouseEnter={() => props.combine && set_hover_border(true)}//when hovered, show an orange border
+                    onMouseLeave={() => props.combine && set_hover_border(false)}//when un-hovered remove it
+
+                >
 
                 </div> : undefined
-                
-                
+
+
             }
 
             <div className={classes.measuring_wrapper} ref={ref} >
@@ -165,10 +166,10 @@ export const Note = props => {
                             type="title"
                             handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
                             color={props.selected ? "White" : colours.primary}
-                            id={fetch_note_id()}
+                            id={fetch_note_id(response, props)}
                             duplicate_title={duplicate_title}
                             //remove the title from the array of duplicate titles in the reducer
-                            handle_clear_duplicate_title={() => dispatch(clear_duplicate_title(fetch_note_id()))}
+                            handle_clear_duplicate_title={() => dispatch(clear_duplicate_title(fetch_note_id(response, props)))}
 
                         />
 
@@ -258,10 +259,10 @@ export const Note = props => {
 
                             expanded={expanded}
                             title={props.details.title}
-                            reset_expanded={() => dispatch(collapse_note(fetch_note_id()))}
-                            handle_edit_click={() => dispatch(enable_edit_mode(fetch_note_id()))}
+                            reset_expanded={() => dispatch(collapse_note(fetch_note_id(response, props)))}
+                            handle_edit_click={() => dispatch(enable_edit_mode(fetch_note_id(response, props)))}
                             edit_mode={edit_mode}
-                            handle_cancel_click={() => handle_cancel_click(dispatch, fetch_note_id(), set_overwritten_values, set_re_render)}
+                            handle_cancel_click={() => handle_cancel_click(dispatch, fetch_note_id(response, props), set_overwritten_values, set_re_render)}
                             handle_save_click={() => handle_save_click(dispatch, overwritten_values, props)}
                             handle_delete_click={(title) => handle_delete_click(title, dispatch, props)}
 
@@ -275,7 +276,7 @@ export const Note = props => {
 
                     expanded={expanded}
                     handle_collapse={() => handle_collapse(dispatch, props)}
-                    handle_expand={() => dispatch(expand_note(fetch_note_id()))}
+                    handle_expand={() => dispatch(expand_note(fetch_note_id(response, props)))}
                     selected={props.selected}
 
                 />
