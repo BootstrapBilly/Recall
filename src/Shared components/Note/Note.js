@@ -22,7 +22,7 @@ import { useSelector, useDispatch } from "react-redux"
 
 //redux action creators
 import { submit_form, clear_response } from "../../Store/Actions/0_submit_form_action"
-import { expand_note, collapse_note, enable_edit_mode, disable_edit_mode, set_duplicate_title, clear_duplicate_title } from "../../Store/Actions/1_note_action"
+import { expand_note, expand_selected_note, collapse_note, enable_edit_mode, disable_edit_mode, set_duplicate_title, clear_duplicate_title } from "../../Store/Actions/1_note_action"
 
 //functions
 import handle_cancel_click from "./Functions/handle_cancel_click"
@@ -42,7 +42,10 @@ export const Note = props => {
 
     //?selectors
     const response = useSelector(state => state.form.response)//grab the response from the api
+
     const expanded_notes = useSelector(state => state.note.expanded_notes)//grab the array of expanded notes from the reducer
+    const expanded_selected_notes = useSelector(state => state.note.expanded_selected_notes)//grab the array of expanded notes from the reducer
+
     const edit_mode_enabled_notes = useSelector(state => state.note.edit_mode_notes)//grab the array of expanded notes from the reducer
     const duplicate_titles = useSelector(state => state.note.duplicate_titles)//grab any duplicate title attempts from the reducer
 
@@ -51,7 +54,10 @@ export const Note = props => {
     const ref = useRef(null)//hold the reference to the height measurement div, to set the height dynamically (see line 33)
 
     const edit_mode = edit_mode_enabled_notes.find(note => note === fetch_note_id(response, props))//Check if the instance of this note is in the array of edit mode notes
-    const expanded = expanded_notes.find(note => note === fetch_note_id(response, props))//Check if the instance of this note is in the array of expanded notes
+
+    const expanded = props.selected ? expanded_selected_notes.find(note => note.id === fetch_note_id(response, props) && note.index === props.index)
+        : expanded_notes.find(note => note === fetch_note_id(response, props))//Check if the instance of this note is in the array of expanded notes
+
     const duplicate_title = duplicate_titles.find(title => title === fetch_note_id(response, props))//check if the instance of this note is in the array of duplicates
 
     //*states
@@ -232,6 +238,7 @@ export const Note = props => {
 
                             <SearchTags
 
+                                selected={props.selected}
                                 search_tags={props.details.search_tags}
                                 edit_mode={edit_mode}
                                 handle_tag_change={(tags) => handle_tag_change(tags, set_overwritten_values, overwritten_values, set_resize_note)}
@@ -244,6 +251,7 @@ export const Note = props => {
 
                                 <SearchTags
 
+                                    selected={props.selected}
                                     search_tags={[]}
                                     edit_mode={true}
                                     handle_tag_change={(tags) => handle_tag_change(tags, set_overwritten_values, overwritten_values, set_resize_note)}
@@ -255,18 +263,21 @@ export const Note = props => {
                                 : undefined
                         }
 
-                        <Buttons
+                        {props.selected ? undefined :
 
-                            expanded={expanded}
-                            title={props.details.title}
-                            reset_expanded={() => dispatch(collapse_note(fetch_note_id(response, props)))}
-                            handle_edit_click={() => dispatch(enable_edit_mode(fetch_note_id(response, props)))}
-                            edit_mode={edit_mode}
-                            handle_cancel_click={() => handle_cancel_click(dispatch, fetch_note_id(response, props), set_overwritten_values, set_re_render)}
-                            handle_save_click={() => handle_save_click(dispatch, overwritten_values, props)}
-                            handle_delete_click={(title) => handle_delete_click(title, dispatch, props)}
 
-                        />
+                            <Buttons
+
+                                expanded={expanded}
+                                title={props.details.title}
+                                reset_expanded={() => dispatch(collapse_note(fetch_note_id(response, props)))}
+                                handle_edit_click={() => dispatch(enable_edit_mode(fetch_note_id(response, props)))}
+                                edit_mode={edit_mode}
+                                handle_cancel_click={() => handle_cancel_click(dispatch, fetch_note_id(response, props), set_overwritten_values, set_re_render)}
+                                handle_save_click={() => handle_save_click(dispatch, overwritten_values, props)}
+                                handle_delete_click={(title) => handle_delete_click(title, dispatch, props)}
+
+                            />}
 
                     </div>
 
@@ -275,8 +286,19 @@ export const Note = props => {
                 <ToggleIcon
 
                     expanded={expanded}
-                    handle_collapse={() => handle_collapse(dispatch, props)}
-                    handle_expand={() => dispatch(expand_note(fetch_note_id(response, props)))}
+
+                    handle_collapse={() => handle_collapse(dispatch, props, props.selected,  props.index)}
+
+                    handle_expand={() => {
+
+                        props.selected ? dispatch(expand_selected_note(fetch_note_id(response, props), props.index))
+
+                            :
+
+                            dispatch(expand_note(fetch_note_id(response, props)))
+
+                    }}
+
                     selected={props.selected}
 
                 />

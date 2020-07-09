@@ -14,7 +14,7 @@ export const Tag = props => {
 
             test_handle={`${props.text.toUpperCase()}`}
             className={classes.container}
-            style={{ border: `1px solid ${colours.primary}`, color: colours.primary }}
+            style={{ border: `1px solid ${props.selected ? "white" : colours.primary}`, color: props.selected ? "white" : colours.primary }}
             onClick={props.edit_mode && props.handle_tag_removal.bind(this, props.text)}
 
         >

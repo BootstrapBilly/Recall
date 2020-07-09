@@ -46,6 +46,7 @@ export const Search_tags = props => {
                         edit_mode={props.edit_mode}
                         key={tag}
                         handle_tag_removal={(search_tag) => set_search_tags(search_tags => [...search_tags.filter(tag => tag !== search_tag)])}
+                        selected={props.selected}
 
                     />)}
 

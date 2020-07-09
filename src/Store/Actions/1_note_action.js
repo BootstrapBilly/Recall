@@ -1,5 +1,7 @@
 export const EXPAND_NOTE = "EXPAND_NOTE";
+export const EXPAND_SELECTED_NOTE = "EXPAND_SELECTED_NOTE";
 export const COLLAPSE_NOTE = "COLLAPSE_NOTE";
+export const COLLAPSE_SELECTED_NOTE = "COLLAPSE_SELECTED_NOTE";
 export const COLLAPSE_ALL = "COLLAPSE_ALL";
 export const ENABLE_EDIT_MODE = "ENABLE_EDIT_MODE";
 export const DISABLE_EDIT_MODE = "DISABLE_EDIT_MODE";
@@ -12,7 +14,27 @@ export const expand_note = (note_id) => {
 
         try {
 
-            return dispatch({ type: EXPAND_NOTE, payload: note_id })
+            return dispatch({ type: EXPAND_NOTE, payload: note_id})
+
+        }
+
+        catch (error) {
+
+            return console.log(error)
+
+        }
+
+    }
+
+}
+
+export const expand_selected_note = (note_id, index) => {
+
+    return async dispatch => {
+
+        try {
+
+            return dispatch({ type: EXPAND_SELECTED_NOTE, payload: {id:note_id, index:index}})
 
         }
 
@@ -33,6 +55,26 @@ export const collapse_note = (note_id) => {
         try {
 
             return dispatch({ type: COLLAPSE_NOTE, payload: note_id })
+
+        }
+
+        catch (error) {
+
+            return console.log(error)
+
+        }
+
+    }
+
+}
+
+export const collapse_selected_note = (note_id, index) => {
+
+    return async dispatch => {
+
+        try {
+
+            return dispatch({ type: COLLAPSE_SELECTED_NOTE, payload: {id:note_id, index:index }})
 
         }
 
