@@ -137,7 +137,20 @@ export const Note = props => {
 
     return (
 
-        <div className={classes.container} test_handle="note_container" style={{ height: `${height}px`, paddingBottom: expanded && "70px" }}>
+        <div className={classes.container} test_handle="note_container" style={{ height: `${height}px`, paddingBottom: expanded && "70px", backgroundColor: props.selected && colours.primary }}
+        // onClick={props.combine && props.handle_select.bind(this, props.details)}
+        >
+
+            {props.combine || props.selected ?
+
+                <div className={classes.selected_clickable_area}
+
+                    onClick={props.combine ? props.handle_select.bind(this, props.details) : props.handle_remove.bind(this, props.details, props.index)}>
+
+                </div> : undefined
+                
+                
+            }
 
             <div className={classes.measuring_wrapper} ref={ref} >
 
@@ -151,7 +164,7 @@ export const Note = props => {
                             edit_mode={edit_mode}
                             type="title"
                             handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
-                            color={colours.primary}
+                            color={props.selected ? "White" : colours.primary}
                             id={fetch_note_id()}
                             duplicate_title={duplicate_title}
                             //remove the title from the array of duplicate titles in the reducer
@@ -167,7 +180,7 @@ export const Note = props => {
                             type="subject"
                             handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
                             handle_edit_missing_subject={() => set_overwritten_values({ ...overwritten_values, subject: "" })}
-                            color={"grey"}
+                            color={props.selected ? "#ffffff99" : "grey"}
 
                         />
 
@@ -263,6 +276,7 @@ export const Note = props => {
                     expanded={expanded}
                     handle_collapse={() => handle_collapse(dispatch, props)}
                     handle_expand={() => dispatch(expand_note(fetch_note_id()))}
+                    selected={props.selected}
 
                 />
 

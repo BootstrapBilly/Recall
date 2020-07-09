@@ -21,7 +21,7 @@ export const Top_bar = props => {
 
     //!Effects
     // eslint-disable-next-line
-    useEffect(() => { props.handle_search_input(search_value) }, [search_value])//when the search value changes, call the parent function to re-render the notes
+    useEffect(() => { !props.no_search && props.handle_search_input(search_value) }, [search_value])//when the search value changes, call the parent function to re-render the notes
 
     return (
 

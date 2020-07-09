@@ -1,28 +1,35 @@
 .container {
 
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     z-index: 5;
+    height: 100%;
+    width: 22px;
+    position: absolute;
+    right: 0px;
+    width: 50px;
+    bottom: 0px;
+    
 }
-
-.container:hover{
-    cursor: pointer;
-    }
 
 .arrow {
     height: 22px;
     width: 22px;
     transform: rotate(135deg);
     transition: transform 0.2s ease-in-out 0.5s, bottom 0.2s ease-in-out;
-    position: absolute;
-    bottom: 13px;
-    right: 15px;
     z-index: 5;
+    position: relative;
+    top:-10px
 }
+
+.arrow:hover{
+    cursor: pointer;
+    }
 
 .arrow_expanded{
 
     transform: rotate(315deg);
-    bottom: 21px;
+    top:-20px
+
 }

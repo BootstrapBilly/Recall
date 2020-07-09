@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 
 //css
 import classes from './Search_box.module.css'
@@ -11,13 +11,12 @@ import colours from '../../../util/colours'
 
 export const Search_box = props => {
 
-    //=Refs
-    const input_ref = useRef(null)//initialise the input ref
-
     //*states
     const [input_focused, set_input_focused] = useState(false)
 
     const handle_input_blur = () => {
+
+        if(props.no_collapse) return
 
         set_input_focused(false)
         !props.no_collapse && props.handle_toggle()
@@ -25,13 +24,13 @@ export const Search_box = props => {
 
     }
 
-    //_Components
+    //=Components
     const input =
 
         <input
 
-            autoFocus
-            ref={input_ref}
+            test_handle="search_input"
+            autoFocus={props.no_collapse ? false : true}
             className={classes.input}
             placeholder="Search"
             value={props.value}
@@ -54,6 +53,7 @@ export const Search_box = props => {
 
             <img
 
+                test_handle="search_bar_icon"
                 src={search}
                 className={[classes.search_icon, props.expanded ? classes.search_icon_expanded : props.no_collapse && classes.search_icon_no_collapse].join(" ")}
                 alt="A search icon"

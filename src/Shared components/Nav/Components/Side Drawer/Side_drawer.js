@@ -15,12 +15,24 @@ import NavSquare from "./Components/Nav_square"
 //external
 import {Redirect} from "react-router-dom"
 
+//redux hooks
+import {useDispatch} from "react-redux"
+
+//redux action creators
+import {clear_response} from "../../../../Store/Actions/0_submit_form_action"
+import {collapse_all} from "../../../../Store/Actions/1_note_action"
+
 export const Side_drawer = props => {
+
+    //-config
+    const dispatch = useDispatch()
 
     const [redirect, set_redirect] = useState(false)//state to hold the redirection (set by clicking a nav link)
 
     const handle_navigation = (link) => {
 
+        dispatch(clear_response())
+        dispatch(collapse_all())
         set_redirect(link)
         props.handle_toggle()
 
