@@ -4,10 +4,10 @@ import React, { useState, useEffect } from 'react'
 import classes from "./Top_bar.module.css"
 
 //util
-import colours from '../../../../util/colours'
+import colours from '../../util/colours'
 
 //assets
-import logo from "../../../../Assets/Icon/logo.svg"
+import logo from "../../Assets/Icon/logo.svg"
 
 //components
 import SearchBox from "./Components/Search_box"
@@ -53,14 +53,19 @@ export const Top_bar = props => {
 
             </div>
 
-            <SearchBox
+            {props.no_search ? undefined :
 
-                handle_toggle={() => set_search_expanded(!search_expanded)}
-                expanded={search_expanded}
-                value={search_value}
-                handle_change={e => set_search_value(e.target.value)}
+                <SearchBox
 
-            />
+                    handle_toggle={() => set_search_expanded(!search_expanded)}
+                    expanded={props.no_collapse ? false : search_expanded}
+                    value={search_value}
+                    handle_change={e => set_search_value(e.target.value)}
+                    no_collapse={props.no_collapse}
+                    clear_input={()=> set_search_value("")}
+
+                />
+                }
 
         </div>
 

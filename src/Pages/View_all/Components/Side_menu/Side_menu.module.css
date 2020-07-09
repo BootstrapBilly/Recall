@@ -1,7 +1,6 @@
-.container{
-
+.container {
     position: fixed;
-    width:100px;
+    width: 100px;
     min-height: 100%;
     top: 0;
     right: 0;
@@ -9,10 +8,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    display: none;
 }
 
-.icon_container{
+.icon_container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,27 +20,29 @@
     margin-bottom: 10.5px;
 }
 
-.icon_container:hover{
+.icon_container:hover {
     cursor: pointer;
 }
 
-.collapse_icon{
-
+.collapse_icon {
     height: 25px;
     width: 25px;
     transform: rotate(315deg);
-
 }
 
-.add_new_icon{
-
+.add_new_icon {
     height: 25px;
     width: 25px;
-
 }
 
-.icon_text{
+.icon_text {
     font-size: 12px;
     margin-top: 8px;
     font-weight: bold;
+}
+
+@media (min-width:500px) {
+    .container {
+        display: flex;
+    }
 }

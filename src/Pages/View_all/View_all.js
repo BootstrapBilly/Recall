@@ -6,7 +6,7 @@ import classes from "./View_all.module.css"
 //components
 import Nav from "../../Shared components/Nav/Nav"
 import Note from "../../Shared components/Note/Note"
-import TopBar from "./Components/Top_bar/Top_bar"
+import TopBar from "../../Shared components/Top_bar/Top_bar"
 import SideMenu from "./Components/Side_menu/Side_menu"
 
 //redux action creators
@@ -16,8 +16,8 @@ import { submit_form } from "../../Store/Actions/0_submit_form_action"
 import { useSelector, useDispatch } from "react-redux"
 
 //functions
-import filter_notes_by_search from "./Functions/filter_notes_by_search"
-import handle_column_assignment from "./Functions/handle_column_assignment"
+import filter_notes_by_search from "../../util/filter_notes_by_search"
+import handle_column_assignment from "../../util/handle_column_assignment"
 
 //external
 import Masonry from 'react-masonry-css'

@@ -13,6 +13,12 @@
 
 }
 
+.container_no_collapse{
+
+    position: relative;
+    top: 20px;
+}
+
 .input{
     width: 140px;
     height: 100%;
@@ -49,8 +55,19 @@
 
 .search_icon_expanded{
 
-    right: 209px;
+    right: 199px;
     transform: rotate(90deg);
+}
+
+.search_icon_no_collapse{
+    position: relative;
+    top:-23px;
+    right:75px;
+    transform: rotate(0deg);
+}
+
+.search_icon_no_collapse:hover{
+    transform: rotate(0deg);
 }
 
 .search_icon_expanded:hover{
