@@ -5,7 +5,7 @@ import Auth from "./Pages/Auth/Auth"
 import Landing from "./Pages/Landing/Landing"
 import Dashboard from "./Pages/Dashboard/Dashboard"
 import AddNew from "./Pages/Add_new/Add_new"
-import CombineNotes from "./Pages/Combine Notes/Combine_notes"
+// import CombineNotes from "./Pages/Combine Notes/Combine_notes"
 import ViewAll from "./Pages/View_all/View_all"
 import Friends from "./Pages/Friends/Friends"
 import Account from "./Pages/Account/Account"
@@ -25,7 +25,7 @@ const App = () => {
         <Route path="/landing" component={Landing} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/add_new" component={()=> <AddNew form_type="note"/>} />
-        <Route path="/combine_notes" component={CombineNotes} />
+        <Route path="/combine_notes" component={()=> <AddNew form_type="collection"/>}  />
         <Route path="/view_all" component={ViewAll} />
         <Route path="/friends" component={Friends} />
         <Route path="/account" component={Account} />

@@ -4,9 +4,10 @@ import React from 'react'
 import classes from './Navigation_buttons.module.css'
 import colours from '../../util/colours'
 
-
 export const Navigation_buttons = props => {
 
+    console.log(props.type)
+    
     return (
 
         <div className={classes.container} style={{ width: props.width, marginTop: props.marginTop }}>

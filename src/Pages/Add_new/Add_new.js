@@ -4,10 +4,10 @@ import React, { useState, useEffect } from 'react'
 import classes from "./Add_new.module.css"
 
 //components
+import NoteSelection from "./Components/Note_selection/Note_selection"
 import Nav from "../../Shared components/Nav/Nav"
 import Input from "../../Shared components/Input/Input"
 import NavigationButtons from "../../Shared components/Navigation_buttons/Navigation_buttons"
-import NotesSelect from "./Components/Notes_select/Notes_select"
 import Note from "../../Shared components/Note/Note"
 
 //util
@@ -23,8 +23,8 @@ import generate_form_labels from "./Functions/generate_form_labels"
 import handle_search_tag_input from "./Functions/handle_search_tag_input"
 
 //redux action creators
-import {clear_response } from "../../Store/Actions/0_submit_form_action"
-import {disable_edit_mode } from "../../Store/Actions/1_note_action"
+import { clear_response } from "../../Store/Actions/0_submit_form_action"
+import { disable_edit_mode } from "../../Store/Actions/1_note_action"
 
 //assets
 import man_pointing from "../../Assets/Abstract/man-pointing.svg"
@@ -38,7 +38,7 @@ export const Add_new = props => {
     const response = useSelector(state => state.form.response)//grab the form submission response from the reducer
 
     //*states
-    const [current_step, set_current_step] = useState("title")//state to hold the current step of the form
+    const [current_step, set_current_step] = useState(props.form_type === "note" ? "title" : "note_selection")//state to hold the current step of the form
     const [show_form_navigation_buttons, set_show_form_navigation_buttons] = useState(false)//show different buttons depending on input
     const [notes_search_string, set_notes_search_string] = useState(null)//hold the string used to find notes when adding them to a collection
     const [note_details, set_note_details] = useState(null)
@@ -49,8 +49,8 @@ export const Add_new = props => {
         subject: null,
         search_tags: null,//used to make searching easier and faster
         body: null,
-        syntax: null//stores the syntax NOTE ONLY
-
+        syntax: null,//stores the syntax NOTE ONLY
+        selected_notes: []//stores the selected notes COLLECTION ONLY
     })
 
     const data = generate_form_labels(current_step, props.form_type)//call the function to generate the data based on what the form step is
@@ -67,7 +67,8 @@ export const Add_new = props => {
             subject: null,
             search_tags: null,
             body: null,
-            syntax: null
+            syntax: null,
+            selected_notes: []
 
         })
 
@@ -81,7 +82,7 @@ export const Add_new = props => {
 
     //This effect calls the helper function to dynamically set the navigation buttons, based on what the form step is and if the inputs are populated
     //gets called every time the form step changes or the inputs change
-    useEffect(() => { handle_dynamic_button_display(form_data, current_step, set_show_form_navigation_buttons) }, [form_data, current_step, props.form_type])
+    useEffect(() => { handle_dynamic_button_display(props.form_type, form_data, current_step, set_show_form_navigation_buttons, form_data.selected_notes) }, [form_data, current_step, props.form_type, form_data.selected_notes])
 
     //this effect listens for the check note title, then navigates to the next step upon successful response 
     useEffect(() => {
@@ -118,17 +119,23 @@ export const Add_new = props => {
 
         }
 
-        if(response && response.data.message === "note updated successfully"){
+        if (response && response.data.message === "note updated successfully") {
 
-            set_note_details({...response.data.note, title:response.data.title})
+            set_note_details({ ...response.data.note, title: response.data.title })
 
             dispatch(disable_edit_mode(response.data.note._id))//remove the note from the array of edit mode enabled notes
-            
+
             clear_response()
         }
-// eslint-disable-next-line
+        // eslint-disable-next-line
     }, [response])
 
+    const handle_note_selection_next_click = notes => {
+
+        set_form_data({...form_data, notes:notes})
+        set_current_step("title")
+
+    }
 
     return (
 
@@ -140,37 +147,44 @@ export const Add_new = props => {
 
                 <div className={classes.form_wrapper}>
 
-                    <img src={man_pointing} alt={"a man pointing to the form"} className={classes.man_pointing} />
+                    <img src={man_pointing} alt={"a man pointing to the form"} className={classes.man_pointing} style={{ display: current_step === "note_selection" && "none" }} />
 
-                    <span className={classes.title} style={{ color: current_step === "optionals" || current_step === "syntax" ? "grey" : colours.primary, marginTop: current_step === "selection" && "45px" }}>{data[0]}</span>
+                    <span className={classes.title} style={{ color: current_step === "optionals" || current_step === "syntax" ? "grey" : colours.primary, marginTop: current_step === "selection" && "45px", display: current_step === "note_selection" && "none" }}>{data[0]}</span>
 
                     {/* {!form_type && <OptionSelect handle_selection={(option) => handle_selection(option)} />} */}
 
                     {
                         //form_type &&
 
-                        current_step === "title" ?
 
-                            <Input
-                                test_handle="title_input"
-                                placeholder="Writing a for each loop"
-                                label={data[1]}
-                                value={form_data.title}
-                                onChange={e => set_form_data({ ...form_data, title: e.target.value })}
-                                marginTop="15px"
-                                add_new />
+                        current_step === "note_selection" ?
 
-                            : current_step === "body" ?
+                            <NoteSelection handle_next_click={(notes) => handle_note_selection_next_click(notes)} />
+
+                            :
+
+                            current_step === "title" ?
 
                                 <Input
-                                    test_handle="body_input"
-                                    placeholder="A for each loop iterates through an array calling a function on each element"
+                                    test_handle="title_input"
+                                    placeholder="Writing a for each loop"
                                     label={data[1]}
-                                    value={form_data.body}
-                                    text_area
-                                    onChange={e => set_form_data({ ...form_data, body: e.target.value })}
+                                    value={form_data.title}
+                                    onChange={e => set_form_data({ ...form_data, title: e.target.value })}
                                     marginTop="15px"
                                     add_new />
+
+                                : current_step === "body" ?
+
+                                    <Input
+                                        test_handle="body_input"
+                                        placeholder="A for each loop iterates through an array calling a function on each element"
+                                        label={data[1]}
+                                        value={form_data.body}
+                                        text_area
+                                        onChange={e => set_form_data({ ...form_data, body: e.target.value })}
+                                        marginTop="15px"
+                                        add_new />
 
                                     : current_step === "optionals" ? //this step is only for notes
 
@@ -226,8 +240,8 @@ export const Add_new = props => {
 
 
                                             : current_step === "success" ?
-                        
-                                                <Note details={note_details} from_add_form/>
+
+                                                <Note details={note_details} from_add_form />
 
                                                 : null}
 
@@ -246,7 +260,7 @@ export const Add_new = props => {
 
                     {//Form navigation buttons
 
-                        show_form_navigation_buttons &&//if the form has been selected
+                        (show_form_navigation_buttons && current_step !== "note_selection") &&//if the form has been selected
 
                         <NavigationButtons //show the navigation buttons
                             width="275px"
@@ -262,11 +276,8 @@ export const Add_new = props => {
 
             </div>
 
-    
-
-
-
             <Nav />
+
         </React.Fragment>
 
     )

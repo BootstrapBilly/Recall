@@ -2,6 +2,8 @@ const generate_form_labels = (form_step, form_type) => {
 
     switch (form_step) {
 
+        case "note_selection": return ["What notes would you like to combine ?"]
+
         case "selection":
 
             return ["What would you like to add ?", null]

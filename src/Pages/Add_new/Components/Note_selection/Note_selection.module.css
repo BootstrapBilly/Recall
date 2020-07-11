@@ -1,0 +1,146 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 100px;
+    overflow: scroll;
+    width: 100%;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+    min-height: 100%;
+}
+
+.container::-webkit-scrollbar {
+    display: none;
+}
+
+.sticky_top_section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    top: 0px;
+    background-color: #EAEFF2;
+    z-index: 2;
+}
+
+.title {
+    font-size: 25px;
+    margin-top: 75px;
+    font-weight: 500;
+    z-index: 3;
+    position: relative;
+    width: 80%;
+    text-align: center;
+}
+
+@media (orientation: landscape) {
+    .note_container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 10px;
+        grid-auto-rows: minmax(auto, auto);
+        background-color: aqua;
+    }
+}
+
+.my_masonry_grid {
+    display: -webkit-box;
+    /* Not needed if autoprefixing */
+    display: -ms-flexbox;
+    /* Not needed if autoprefixing */
+    display: flex;
+    margin-left: -30px;
+    /* gutter size offset */
+    width: auto;
+    margin-top: 0px;
+    position: relative;
+    top: 180px;
+}
+
+.my_masonry_grid_column {
+    padding-left: 30px;
+    /* gutter size */
+    background-clip: padding-box;
+}
+
+.button_container {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    padding-bottom: 20px;
+    padding-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #EAEFF2;
+}
+
+/* Small portrait tablet */
+
+@media (min-height:700px) and (min-width: 500px) and (max-height: 950px) and (max-width: 700px) {
+
+    .my_masonry_grid{
+        top: 75px;
+    }
+}
+
+/* Small landscape tablet */
+
+@media (min-height:400px) and (min-width: 800px) and (max-height: 500px) and (max-width: 1023px) {
+
+    .my_masonry_grid{
+        top: 150px;
+    }
+}
+
+/* medium portrait tablet */
+
+@media (min-height:700px) and (min-width: 500px) and (max-height: 1050px) and (max-width: 800px) {
+
+    .my_masonry_grid{
+        top: 75px;
+    }
+}
+
+/* medium landscape tablet */
+
+@media (min-height:501px) and (min-width: 800px) and (max-height: 750px) and (max-width: 1199px) {
+
+    .my_masonry_grid{
+        top: 75px;
+    }
+
+    @supports (-webkit-touch-callout: none) {
+
+        .my_masonry_grid{
+            top: 150px;
+           
+        }
+    }
+}
+
+/*Standard desktop */
+@media (min-width: 1200px) {
+    
+    .my_masonry_grid{
+        top: 60px;
+    }
+
+    .button_container{
+        padding-bottom: 50px;
+    }
+
+}
+
+/*large  */
+@media (min-height: 900px) and (min-width:1200px) {
+
+    .my_masonry_grid{
+        top: 30px;
+    }
+}
+

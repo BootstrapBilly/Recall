@@ -152,7 +152,7 @@ export const Note = props => {
                 <div className={classes.selected_clickable_area}//asign a clickable area so it can still be expanded without selecting it
 
                     onClick={props.combine ? props.handle_select.bind(this, props.details) : props.handle_remove.bind(this, props.details, props.index)}
-                    onMouseEnter={() => window.innerWidth > 500 && props.combine && set_hover_border(true)}//when hovered, show an orange border
+                    onMouseEnter={() => window.innerWidth > 1200 && props.combine && set_hover_border(true)}//when hovered, show an orange border
                     onMouseLeave={() => props.combine && set_hover_border(false)}//when un-hovered remove it
 
                 >
