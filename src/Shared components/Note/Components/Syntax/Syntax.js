@@ -65,23 +65,43 @@ export const Syntax = props => {
 
                     </div>
 
-                    :
+                    : props.combine ?
 
-                    <div className={classes.container}>
+                        <div className={classes.container}>
 
-                        <div
+                            <div
 
-                            className={classes.copy_button}
-                            style={{ background: props.edit_mode ? colours.secondary : colours.green }}
-                            onClick={() => handle_click()}
+                                className={classes.copy_button}
+                                style={{ background: colours.green }}
+                                onClick={() => handle_click()}
 
-                        >
+                            >
 
-                            {props.missing ? syntax ? "CHANGE CODE" : "ADD SOME CODE" : props.edit_mode ? "CHANGE CODE" : "COPY CODE"}
+                                {"VIEW CODE"}
+
+                            </div>
 
                         </div>
 
-                    </div>
+                        :
+
+                        <div className={classes.container}>
+
+                            <div
+
+                                className={classes.copy_button}
+                                style={{ background: props.edit_mode ? colours.secondary : colours.green }}
+                                onClick={() => handle_click()}
+
+                            >
+
+                                {props.missing ? syntax ? "CHANGE CODE" : "ADD SOME CODE" : props.edit_mode ? "CHANGE CODE" : "COPY CODE"}
+
+                            </div>
+
+                        </div>
+
+
             }
 
         </React.Fragment>

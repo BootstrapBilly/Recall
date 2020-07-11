@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from "react-redux"
 
 //functions
 import handle_form_navigation from "./Functions/handle_form_navigation"
-import handle_dynamic_button_display from './Functions/handle_dynamic_button_display'
+import handle_dynamic_button_display from '../../util/handle_dynamic_button_display'
 import generate_form_labels from "./Functions/generate_form_labels"
 import handle_search_tag_input from "./Functions/handle_search_tag_input"
 

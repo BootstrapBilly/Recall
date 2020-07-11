@@ -42,10 +42,8 @@ export const Note = props => {
 
     //?selectors
     const response = useSelector(state => state.form.response)//grab the response from the api
-
     const expanded_notes = useSelector(state => state.note.expanded_notes)//grab the array of expanded notes from the reducer
     const expanded_selected_notes = useSelector(state => state.note.expanded_selected_notes)//grab the array of expanded notes from the reducer
-
     const edit_mode_enabled_notes = useSelector(state => state.note.edit_mode_notes)//grab the array of expanded notes from the reducer
     const duplicate_titles = useSelector(state => state.note.duplicate_titles)//grab any duplicate title attempts from the reducer
 
@@ -55,8 +53,15 @@ export const Note = props => {
 
     const edit_mode = edit_mode_enabled_notes.find(note => note === fetch_note_id(response, props))//Check if the instance of this note is in the array of edit mode notes
 
-    const expanded = props.selected ? expanded_selected_notes.find(note => note.id === fetch_note_id(response, props) && note.index === props.index)
-        : expanded_notes.find(note => note === fetch_note_id(response, props))//Check if the instance of this note is in the array of expanded notes
+    //determine if the note is expanded
+    //expanded notes are set and fetched by redux, there is a seperate array for selected notes and normal notes (so expanding a selected note does not expand the unselected version at the same time)
+    const expanded =
+
+        props.selected ?//if its selected (pass in by the combine notes screen)
+
+            expanded_selected_notes.find(note => note.id === fetch_note_id(response, props) && note.index === props.index)//check the array of selected notes
+
+            : expanded_notes.find(note => note === fetch_note_id(response, props))//Check the array of normal notes
 
     const duplicate_title = duplicate_titles.find(title => title === fetch_note_id(response, props))//check if the instance of this note is in the array of duplicates
 
@@ -64,7 +69,7 @@ export const Note = props => {
     const [height, set_height] = useState(0)//dynamically set the height of the note to be animated upon expansion to fit content without a predefined height
     const [re_render, set_re_render] = useState(false)//used to re-render the syntax and search tags if the user modifies but doesn't save them
     const [resize_note, set_resize_note] = useState(false)//used to resize the note if content gets added or deleted from it
-    const [hover_border, set_hover_border] = useState(false)
+    const [hover_border, set_hover_border] = useState(false)//used to highlight a note when hovering it
 
     const [overwritten_values, set_overwritten_values] = useState({// a state to hold the note information to be submitted to the backend for editing purposes
 
@@ -129,8 +134,6 @@ export const Note = props => {
         //eslint-disable-next-line
     }, [response])
 
-
-
     return (
 
         <div className={classes.container} test_handle="note_container"
@@ -138,8 +141,8 @@ export const Note = props => {
             style={{
                 height: `${height}px`,
                 paddingBottom: expanded && "70px",
-                backgroundColor: props.selected && colours.primary,
-                border: hover_border && `1px solid ${colours.primary}`
+                backgroundColor: props.selected && colours.secondary,
+                border: hover_border && `1px solid ${colours.secondary}`
             }}
 
         >
@@ -149,7 +152,7 @@ export const Note = props => {
                 <div className={classes.selected_clickable_area}//asign a clickable area so it can still be expanded without selecting it
 
                     onClick={props.combine ? props.handle_select.bind(this, props.details) : props.handle_remove.bind(this, props.details, props.index)}
-                    onMouseEnter={() => props.combine && set_hover_border(true)}//when hovered, show an orange border
+                    onMouseEnter={() => window.innerWidth > 500 && props.combine && set_hover_border(true)}//when hovered, show an orange border
                     onMouseLeave={() => props.combine && set_hover_border(false)}//when un-hovered remove it
 
                 >
@@ -210,6 +213,7 @@ export const Note = props => {
 
                             <Syntax
 
+                                combine={(props.combine || props.selected) && true}
                                 edit_mode={edit_mode}
                                 syntax={overwritten_values.syntax || props.details.syntax}
                                 handle_syntax_change={(syntax) => set_overwritten_values({ ...overwritten_values, syntax: syntax })}
@@ -222,6 +226,7 @@ export const Note = props => {
 
                                 <Syntax
 
+                                    combine={(props.combine || props.selected) && true}
                                     edit_mode={edit_mode}
                                     syntax={overwritten_values.syntax || ""}
                                     handle_syntax_change={(syntax) => set_overwritten_values({ ...overwritten_values, syntax: syntax })}
@@ -263,15 +268,16 @@ export const Note = props => {
                                 : undefined
                         }
 
-                        {props.selected ? undefined :
-
+                        {props.selected || props.combine ? undefined :
 
                             <Buttons
 
                                 expanded={expanded}
                                 title={props.details.title}
                                 reset_expanded={() => dispatch(collapse_note(fetch_note_id(response, props)))}
+
                                 handle_edit_click={() => dispatch(enable_edit_mode(fetch_note_id(response, props)))}
+
                                 edit_mode={edit_mode}
                                 handle_cancel_click={() => handle_cancel_click(dispatch, fetch_note_id(response, props), set_overwritten_values, set_re_render)}
                                 handle_save_click={() => handle_save_click(dispatch, overwritten_values, props)}
@@ -287,7 +293,7 @@ export const Note = props => {
 
                     expanded={expanded}
 
-                    handle_collapse={() => handle_collapse(dispatch, props, props.selected,  props.index)}
+                    handle_collapse={() => handle_collapse(dispatch, props, props.selected, props.index)}
 
                     handle_expand={() => {
 

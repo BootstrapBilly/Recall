@@ -44,7 +44,6 @@ export const Combine_notes = () => {
     const data = generate_form_labels(current_step)//call the function to generate the data based on what the form step is
 
     //!Effects
-    // eslint-disable-next-line
     //this effect is used to render notes based on the search string
     useEffect(() => {
 
@@ -52,7 +51,7 @@ export const Combine_notes = () => {
 
         //otherwise, run the search query on the backend (the response is handled by the next effect)
         if (search_value) filter_notes_by_search(dispatch, search_value)
-
+        // eslint-disable-next-line
     }, [search_value])
 
     useEffect(() => { if (response && response.data.notes) { set_notes(response.data.notes) } }, [response])//update the notes if the response changes

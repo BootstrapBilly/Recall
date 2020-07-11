@@ -23,7 +23,8 @@ export const Toggle_icon = props => {
                 test_handle="note_toggle_icon"
                 className={[classes.arrow, props.expanded && classes.arrow_expanded].join(" ")}
                 onClick={() =>  props.expanded ? props.handle_collapse() : props.handle_expand()}
-                onMouseEnter={() => !props.selected && set_image(Arrow_orange)} onMouseLeave={() => !props.selected && set_image(Arrow)}
+                onMouseEnter={() => !props.selected && window.innerWidth > 500 && set_image(Arrow_orange)} 
+                onMouseLeave={() => !props.selected && window.innerWidth > 500  && set_image(Arrow)}
 
             />
 

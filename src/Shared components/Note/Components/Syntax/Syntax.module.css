@@ -1,5 +1,6 @@
 .container {
     width: 100%;
+    z-index: 7;
 }
 
 .copy_button {
