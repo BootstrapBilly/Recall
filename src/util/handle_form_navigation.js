@@ -10,7 +10,7 @@ If it failed, the input component (shared components) will detect the error and 
 
 The last step of the form submits a new note request with all the info */
 
-import { submit_form } from "../../../Store/Actions/0_submit_form_action"
+import { submit_form } from "../Store/Actions/0_submit_form_action"
 
 const handle_form_navigation = (direction, form_type, form_step, set_form_step, form_data, dispatch, set_notes_search_string) => {
 
@@ -36,6 +36,17 @@ const handle_form_navigation = (direction, form_type, form_step, set_form_step, 
                 //submit the title to the backend, to see if it is valid and wait for the response 
                 //success (handled by line 105 add_new.js), error handled by the input component (line 53)
                 return dispatch(submit_form({ title: form_data.title, user_id: "5eecd941331a770017a74e44" }, "check_note_title"))
+
+            }
+
+            //and they are adding a note,
+            else if (form_type === "collection" && form_data.title) {
+
+                //submit the title to the backend, to see if it is valid and wait for the response 
+                //success (handled by line 105 add_new.js), error handled by the input component (line 53)
+
+                console.log("Check handle_form_nav")
+                // return dispatch(submit_form({ title: form_data.title, user_id: "5eecd941331a770017a74e44" }, "check_collection_title"))
 
             }
 

@@ -23,6 +23,9 @@ import { useSelector, useDispatch } from "react-redux"
 import filter_notes_by_search from "../../util/filter_notes_by_search"
 import handle_column_assignment from "../../util/handle_column_assignment"
 import generate_form_labels from "./Functions/generate_form_labels_combine"
+import handle_dynamic_button_display from "../../util/handle_dynamic_button_display"
+import handle_form_navigation from "../../util/handle_form_navigation"
+
 
 //external
 import Masonry from 'react-masonry-css'
@@ -34,14 +37,14 @@ export const Combine_notes = () => {
 
     //*states
     const [notes, set_notes] = useState([])//hold the notes to be displayed, all fetched initially, manipulated by searching and the toggle links
-    const [current_step, set_current_step] = useState("initial")//determine the current step of the form
+    const [form_step, set_form_step] = useState("note_selection")//determine the current step of the form
     const [search_value, set_search_value] = useState("")//hold the value of the search bar
     const [selected_notes, set_selected_notes] = useState([])//an array to hold all the notes which have been selected
-    const [show_form_navigation_buttons, set_show_form_navigation_buttons] = useState(true)
+    const [show_form_navigation_buttons, set_show_form_navigation_buttons] = useState(null)
 
     //-config
     const dispatch = useDispatch()//initialise the usedispatch hook
-    const data = generate_form_labels(current_step)//call the function to generate the data based on what the form step is
+    const data = generate_form_labels(form_step)//call the function to generate the data based on what the form step is
 
     //!Effects
     //this effect is used to render notes based on the search string
@@ -56,16 +59,14 @@ export const Combine_notes = () => {
 
     useEffect(() => { if (response && response.data.notes) { set_notes(response.data.notes) } }, [response])//update the notes if the response changes
 
-    const handle_select_note = note => {
+    //This effect calls the helper function to dynamically set the navigation buttons, based on what the form step is and if the inputs are populated
+    //gets called every time the form step changes or the inputs change
+    useEffect(() => { handle_dynamic_button_display(null, form_step, set_show_form_navigation_buttons, selected_notes) }, [form_step, selected_notes])
 
-        set_selected_notes(selected_notes => [...selected_notes, note])//add the note to the array of selected notes
-    }
-
-    const handle_remove_note = (note, array_index) => {
-
-        //remove the given index of the note from the array of selected notes
-        set_selected_notes(selected_notes => [...selected_notes.filter((selected_note, index) => index !== array_index)])
-    }
+    const handle_select_note = note => set_selected_notes(selected_notes => [...selected_notes, note])//add the note to the array of selected notes
+    
+    const handle_remove_note = (note, array_index) => set_selected_notes(selected_notes => [...selected_notes.filter((selected_note, index) => index !== array_index)])   //remove the given index of the note from the array of selected notes
+    
 
     return (
 
@@ -75,7 +76,7 @@ export const Combine_notes = () => {
 
             <div className={classes.sticky_top_section}>
 
-                <span className={classes.title} style={{ color: current_step === "optionals" || current_step === "syntax" ? "grey" : colours.primary }}>{data[0]}</span>
+                <span className={classes.title} style={{ color: form_step === "optionals" || form_step === "syntax" ? "grey" : colours.primary }}>{data[0]}</span>
 
                 <SearchBox
 
@@ -121,7 +122,7 @@ export const Combine_notes = () => {
                     marginTop={"0px"}
                     type={show_form_navigation_buttons}
                     on_click={(direction) => console.log(direction)
-                        // handle_form_navigation(direction, props.form_type, current_step, set_current_step, form_data, dispatch, set_notes_search_string                
+                        // handle_form_navigation(direction, props.form_type, form_step, set_form_step, form_data, dispatch, set_notes_search_string                
                     }
                     handle_reset={() => console.log("reset")
                         //reset_form()

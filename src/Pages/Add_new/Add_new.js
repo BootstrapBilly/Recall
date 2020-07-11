@@ -17,7 +17,7 @@ import colours from '../../util/colours'
 import { useDispatch, useSelector } from "react-redux"
 
 //functions
-import handle_form_navigation from "./Functions/handle_form_navigation"
+import handle_form_navigation from "../../util/handle_form_navigation"
 import handle_dynamic_button_display from '../../util/handle_dynamic_button_display'
 import generate_form_labels from "./Functions/generate_form_labels"
 import handle_search_tag_input from "./Functions/handle_search_tag_input"
@@ -41,7 +41,6 @@ export const Add_new = props => {
     const [current_step, set_current_step] = useState("title")//state to hold the current step of the form
     const [show_form_navigation_buttons, set_show_form_navigation_buttons] = useState(false)//show different buttons depending on input
     const [notes_search_string, set_notes_search_string] = useState(null)//hold the string used to find notes when adding them to a collection
-    const [selected_notes, set_selected_notes] = useState([])//hold the selected notes (when adding a collection)
     const [note_details, set_note_details] = useState(null)
 
     const [form_data, set_form_data] = useState({// a state to hold the note information to be submitted to the backend
@@ -50,8 +49,7 @@ export const Add_new = props => {
         subject: null,
         search_tags: null,//used to make searching easier and faster
         body: null,
-        syntax: null,//stores the syntax NOTE ONLY
-        notes: []//holds an array of notes collection ONLY
+        syntax: null//stores the syntax NOTE ONLY
 
     })
 
@@ -69,8 +67,7 @@ export const Add_new = props => {
             subject: null,
             search_tags: null,
             body: null,
-            syntax: null,
-            notes: []
+            syntax: null
 
         })
 
@@ -84,7 +81,7 @@ export const Add_new = props => {
 
     //This effect calls the helper function to dynamically set the navigation buttons, based on what the form step is and if the inputs are populated
     //gets called every time the form step changes or the inputs change
-    useEffect(() => { handle_dynamic_button_display(props.form_type, form_data, current_step, set_show_form_navigation_buttons, selected_notes) }, [form_data, current_step, props.form_type, selected_notes])
+    useEffect(() => { handle_dynamic_button_display(form_data, current_step, set_show_form_navigation_buttons) }, [form_data, current_step, props.form_type])
 
     //this effect listens for the check note title, then navigates to the next step upon successful response 
     useEffect(() => {
@@ -174,32 +171,6 @@ export const Add_new = props => {
                                     onChange={e => set_form_data({ ...form_data, body: e.target.value })}
                                     marginTop="15px"
                                     add_new />
-
-                                : current_step === "notes" ? //this step is only for collections
-
-                                    <div className={classes.form_step_container}>
-
-                                        <Input
-                                            test_handle="notes_search_bar"
-                                            label={data[1]}
-                                            value={notes_search_string}
-                                            onChange={e => set_notes_search_string(e.target.value)}
-                                            marginTop="20px"
-                                            add_new
-
-                                        />
-
-                                        <NotesSelect
-                                            search_string={notes_search_string}
-                                            selected_notes={selected_notes}
-                                            reset_search_string={() => set_notes_search_string(null)}
-                                            handle_select_note={(note) => set_selected_notes(selected_notes => [...selected_notes, note])}
-                                            handle_remove_note={(note) => set_selected_notes(selected_notes => [...selected_notes.filter(selected_note => selected_note !== note)])}
-                                            add_new
-                                        />
-
-                                    </div>
-
 
                                     : current_step === "optionals" ? //this step is only for notes
 
