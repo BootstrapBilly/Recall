@@ -5,8 +5,6 @@ import classes from './Navigation_buttons.module.css'
 import colours from '../../util/colours'
 
 export const Navigation_buttons = props => {
-
-    console.log(props.type)
     
     return (
 

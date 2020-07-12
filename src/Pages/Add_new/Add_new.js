@@ -136,6 +136,7 @@ export const Add_new = props => {
         set_current_step("title")
 
     }
+    console.log(form_data.selected_notes)
 
     return (
 
@@ -159,7 +160,11 @@ export const Add_new = props => {
 
                         current_step === "note_selection" ?
 
-                            <NoteSelection handle_next_click={(notes) => handle_note_selection_next_click(notes)} />
+                            <NoteSelection handle_next_click={(notes) => handle_note_selection_next_click(notes)} selected_notes={form_data.selected_notes} handle_select_note={(note)=> set_form_data({...form_data, selected_notes: [...form_data.selected_notes, note] })}
+                            handle_remove_note={(note, array_index)=> set_form_data({...form_data, selected_notes: [...form_data.selected_notes.filter((selected_note, index) => index !== array_index)]
+                            
+                                // set_selected_notes(selected_notes => [...selected_notes.filter((selected_note, index) => index !== array_index)]
+                            })} />
 
                             :
 

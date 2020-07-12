@@ -33,7 +33,7 @@ export const Note_selection = props => {
     const [notes, set_notes] = useState([])//hold the notes to be displayed, all fetched initially, manipulated by searching and the toggle links
     const [form_step, set_form_step] = useState("note_selection")//determine the current step of the form
     const [search_value, set_search_value] = useState("")//hold the value of the search bar
-    const [selected_notes, set_selected_notes] = useState([])//an array to hold all the notes which have been selected
+    const [selected_notes, set_selected_notes] = useState(props.selected_notes)//an array to hold all the notes which have been selected
     const [show_form_navigation_buttons, set_show_form_navigation_buttons] = useState(null)
 
     //-config
@@ -57,15 +57,23 @@ export const Note_selection = props => {
     //gets called every time the form step changes or the inputs change
     useEffect(() => { handle_dynamic_button_display(null, null, form_step, set_show_form_navigation_buttons, selected_notes) }, [form_step, selected_notes])
 
-    const handle_select_note = note => set_selected_notes(selected_notes => [...selected_notes, note])//add the note to the array of selected notes
+    useEffect(()=> {
+
+        if(props.selected_notes)set_selected_notes(props.selected_notes)
+
+    },[props.selected_notes])
+
+    const handle_select_note = note => props.handle_select_note(note)//add the note to the array of selected notes
     
-    const handle_remove_note = (note, array_index) => set_selected_notes(selected_notes => [...selected_notes.filter((selected_note, index) => index !== array_index)])   //remove the given index of the note from the array of selected notes
+    const handle_remove_note = (note, array_index) => props.handle_remove_note(note, array_index)  //remove the given index of the note from the array of selected notes
 
     const handle_next_click = () => {
 
         props.handle_next_click(selected_notes)
 
     }
+
+    console.log(props.selected_notes)
 
     return (
 
@@ -95,7 +103,7 @@ export const Note_selection = props => {
                     breakpointCols={handle_column_assignment(selected_notes)}
                     className={classes.my_masonry_grid}
                     columnClassName={classes.my_masonry_grid_column}>
-                    {selected_notes.map((note, index) => <Note key={index} index={index} details={note} selected handle_remove={(note, index) => handle_remove_note(note, index)} />)}
+                    {selected_notes.map((note, index) => <Note key={index} index={index} details={note} selected handle_remove={(note, index) => handle_remove_note(note, index)} test_handle="selected_note" />)}
 
                 </Masonry>
 
