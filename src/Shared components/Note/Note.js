@@ -57,7 +57,7 @@ export const Note = props => {
     //expanded notes are set and fetched by redux, there is a seperate array for selected notes and normal notes (so expanding a selected note does not expand the unselected version at the same time)
     const expanded =
 
-        props.selected ?//if its selected (pass in by the combine notes screen)
+        props.selected ?//if its selected (passed in by the note_selection component)
 
             expanded_selected_notes.find(note => note.id === fetch_note_id(response, props) && note.index === props.index)//check the array of selected notes
 
@@ -139,15 +139,17 @@ export const Note = props => {
         <div className={classes.container} test_handle={props.test_handle || "note_container"}
 
             style={{
+
                 height: `${height}px`,
                 paddingBottom: expanded && "70px",
                 backgroundColor: props.selected && colours.secondary,
                 border: hover_border && `1px solid ${colours.secondary}`
+
             }}
 
         >
 
-            {props.combine || props.selected ? //if the note is being rendered on the combine notes page
+            {props.combine || props.selected ? //if the note is being rendered inside the note_selection component
 
                 <div className={classes.selected_clickable_area}//asign a clickable area so it can still be expanded without selecting it
 
@@ -210,6 +212,7 @@ export const Note = props => {
                         />
 
                         {/* If theres syntax present, show a copy code button  */}
+
                         {props.details.syntax ?
 
                             <Syntax
@@ -276,9 +279,7 @@ export const Note = props => {
                                 expanded={expanded}
                                 title={props.details.title}
                                 reset_expanded={() => dispatch(collapse_note(fetch_note_id(response, props)))}
-
                                 handle_edit_click={() => dispatch(enable_edit_mode(fetch_note_id(response, props)))}
-
                                 edit_mode={edit_mode}
                                 handle_cancel_click={() => handle_cancel_click(dispatch, fetch_note_id(response, props), set_overwritten_values, set_re_render)}
                                 handle_save_click={() => handle_save_click(dispatch, overwritten_values, props)}

@@ -19,7 +19,6 @@ import { useSelector, useDispatch } from "react-redux"
 import filter_notes_by_search from "../../../../util/filter_notes_by_search"
 import handle_column_assignment from "../../../../util/handle_column_assignment"
 import generate_form_labels from "./Functions/generate_form_labels_combine"
-import handle_dynamic_button_display from "../../../../util/handle_dynamic_button_display"
 
 //external
 import Masonry from 'react-masonry-css'
@@ -31,14 +30,12 @@ export const Note_selection = props => {
 
     //*states
     const [notes, set_notes] = useState([])//hold the notes to be displayed, all fetched initially, manipulated by searching and the toggle links
-    const [form_step, set_form_step] = useState("note_selection")//determine the current step of the form
     const [search_value, set_search_value] = useState("")//hold the value of the search bar
-    const [selected_notes, set_selected_notes] = useState(props.selected_notes)//an array to hold all the notes which have been selected
-    const [show_form_navigation_buttons, set_show_form_navigation_buttons] = useState(null)
+    const [selected_notes, set_selected_notes] = useState(props.selected_notes)//an array to hold all the notes which have been selected (handled by parent)
 
     //-config
     const dispatch = useDispatch()//initialise the usedispatch hook
-    const data = generate_form_labels(form_step)//call the function to generate the data based on what the form step is
+    const data = generate_form_labels("note_selection")//call the function to generate the data for the note_selection step
 
     //!Effects
     //this effect is used to render notes based on the search string
@@ -51,29 +48,11 @@ export const Note_selection = props => {
         // eslint-disable-next-line
     }, [search_value])
 
-    useEffect(() => { if (response && response.data.notes) { set_notes(response.data.notes) } }, [response])//update the notes if the response changes
+    //This is called when the search string, and therefore the response of non-selected notes changes, to render them
+    useEffect(() => { if (response && response.data.notes) { set_notes(response.data.notes) } }, [response])
 
-    //This effect calls the helper function to dynamically set the navigation buttons, based on what the form step is and if the inputs are populated
-    //gets called every time the form step changes or the inputs change
-    useEffect(() => { handle_dynamic_button_display(null, null, form_step, set_show_form_navigation_buttons, selected_notes) }, [form_step, selected_notes])
-
-    useEffect(()=> {
-
-        if(props.selected_notes)set_selected_notes(props.selected_notes)
-
-    },[props.selected_notes])
-
-    const handle_select_note = note => props.handle_select_note(note)//add the note to the array of selected notes
-    
-    const handle_remove_note = (note, array_index) => props.handle_remove_note(note, array_index)  //remove the given index of the note from the array of selected notes
-
-    const handle_next_click = () => {
-
-        props.handle_next_click(selected_notes)
-
-    }
-
-    console.log(props.selected_notes)
+    //This is called when selected notes changes in the parent, it updates the state in here to render them
+    useEffect(() => { if (props.selected_notes) set_selected_notes(props.selected_notes) }, [props.selected_notes])
 
     return (
 
@@ -83,7 +62,7 @@ export const Note_selection = props => {
 
             <div className={classes.sticky_top_section}>
 
-                <span className={classes.title} style={{ color: form_step === "optionals" || form_step === "syntax" ? "grey" : colours.primary }}>{data[0]}</span>
+                <span className={classes.title} style={{ color: colours.primary }}>{data[0]}</span>
 
                 <SearchBox
 
@@ -96,27 +75,44 @@ export const Note_selection = props => {
 
             </div>
 
-            {selected_notes &&
+            {selected_notes && //the selected notes (in blue)
 
                 <Masonry
 
                     breakpointCols={handle_column_assignment(selected_notes)}
                     className={classes.my_masonry_grid}
                     columnClassName={classes.my_masonry_grid_column}>
-                    {selected_notes.map((note, index) => <Note key={index} index={index} details={note} selected handle_remove={(note, index) => handle_remove_note(note, index)} test_handle="selected_note" />)}
+
+                    {
+
+                        selected_notes.map((note, index) =>
+
+                            <Note key={index} index={index} details={note} selected test_handle="selected_note"
+                                handle_remove={props.handle_remove_note.bind(this, note, index)}
+                            />)
+
+                    }
 
                 </Masonry>
 
             }
 
-            {notes &&
+            {notes && //the normal notes(render by the search string change in the search box)
 
                 <Masonry
 
                     breakpointCols={handle_column_assignment(notes)}
                     className={classes.my_masonry_grid}
                     columnClassName={classes.my_masonry_grid_column}>
-                    {notes.map((note, index) => <Note key={index} index={index} details={note} combine handle_select={(note) => handle_select_note(note)} />)}
+
+                    {
+                        notes.map((note, index) =>
+
+                            <Note key={index} index={index} details={note} combine
+                                handle_select={props.handle_select_note.bind(this, note)}
+                            />)
+
+                    }
 
                 </Masonry>
 
@@ -124,10 +120,10 @@ export const Note_selection = props => {
 
             <div className={classes.button_container}>
 
-                <NavigationButtons //show the navigation buttons
+                <NavigationButtons
                     width="275px"
-                    type={show_form_navigation_buttons}
-                    on_click={() => handle_next_click()}
+                    type={props.selected_notes.length >= 2 ? "next" : "grey_next"}
+                    on_click={props.handle_next_click}
                 />
 
             </div>

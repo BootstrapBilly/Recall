@@ -74,7 +74,12 @@ const handle_form_navigation = (direction, form_type, form_step, set_form_step, 
             //and they press the back button, navigate back to the body step
             if (direction === "back") return set_form_step("body")
 
-            else return dispatch(submit_form({ ...form_data, user_id: "5eecd941331a770017a74e44" }, "processes"))
+            
+
+            else 
+            
+            console.log(form_data)
+            return dispatch(submit_form({ ...form_data, user_id: "5eecd941331a770017a74e44" }, "processes"))
 
         case "syntax"://if they are on the syntax step (note only)
 
