@@ -127,11 +127,15 @@
 @media (min-width: 1200px) {
     
     .my_masonry_grid{
-        top: 60px;
+        top: 70px;
     }
 
     .button_container{
         padding-bottom: 50px;
+    }
+
+    .search_container{
+        margin-top: 10px;
     }
 
 }

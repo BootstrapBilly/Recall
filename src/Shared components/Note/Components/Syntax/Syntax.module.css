@@ -14,6 +14,21 @@
     border-radius: 0px;
 }
 
+.copy_button_animated {
+    animation: fade-in .6s ease-in forwards;
+    animation-delay: 0.1s;
+    opacity: 0;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 .copy_button:hover {
     cursor: pointer;
 }
@@ -25,11 +40,12 @@
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 6;
+    z-index: 11;
     border-radius: 5px;
     overflow: hidden;
     display: flex;
     justify-content: center;
+    background-color: rebeccapurple;
 }
 
 .textarea {

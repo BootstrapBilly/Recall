@@ -89,7 +89,7 @@ export const Syntax = props => {
 
                             <div
 
-                                className={classes.copy_button}
+                                className={[classes.copy_button, props.edit_mode && classes.copy_button_animated].join(" ")}
                                 style={{ background: props.edit_mode ? colours.secondary : colours.green }}
                                 onClick={() => handle_click()}
 

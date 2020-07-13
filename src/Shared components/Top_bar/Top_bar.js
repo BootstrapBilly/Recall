@@ -23,37 +23,44 @@ export const Top_bar = props => {
     // eslint-disable-next-line
     useEffect(() => { !props.no_search && props.handle_search_input(search_value) }, [search_value])//when the search value changes, call the parent function to re-render the notes
 
+    const handle_toggle_filter = link => {
+
+        console.log(link)
+
+        set_active_toggle_link(link)
+
+        props.handle_toggle(link)
+    }
+
     return (
 
         <div className={classes.container} style={{ background: colours.white }}>
 
             <img src={logo} className={classes.logo} alt="The recall logo" />
 
-            <div
+                <div
 
-                className={classes.toggle_link_container}
-                style={{ color: colours.secondary, visibility: search_expanded && window.innerWidth < 500 && "hidden" }}
+                    className={classes.toggle_link_container}
+                    style={{ color: colours.secondary, visibility: search_expanded && window.innerWidth < 500 && "hidden" }}
 
-            >
+                >
 
-                {["All", "Notes", "Collections"].map(Link =>
+                    {["All", "Notes", "Collections"].map(link =>
 
-                    <span
+                        <span
 
-                        className={classes.toggle_link}
-                        style={{ color: `${active_toggle_link === Link ? colours.secondary : `${colours.secondary}BF`}` }}
-                        onClick={() => set_active_toggle_link(Link)}
-                        key={Link}
+                            className={classes.toggle_link}
+                            style={{ color: `${active_toggle_link === link ? colours.secondary : `${colours.secondary}BF`}` }}
+                            onClick={() => handle_toggle_filter(link)}
+                            key={link}
 
-                    >
+                        >
 
-                        {Link}
+                            {link}
 
-                    </span>)}
+                        </span>)}
 
-            </div>
-
-            {props.no_search ? undefined :
+                </div>
 
                 <SearchBox
 
@@ -62,11 +69,10 @@ export const Top_bar = props => {
                     value={search_value}
                     handle_change={e => set_search_value(e.target.value)}
                     no_collapse={props.no_collapse}
-                    clear_input={()=> set_search_value("")}
+                    clear_input={() => set_search_value("")}
 
                 />
-                }
-
+            
         </div>
 
     )

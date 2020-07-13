@@ -8,7 +8,6 @@ import colours from "../../../../util/colours"
 
 //components
 import Note from "../../../../Shared components/Note/Note"
-import TopBar from "../../../../Shared components/Top_bar/Top_bar"
 import SearchBox from "../../../../Shared components/Top_bar/Components/Search_box"
 import NavigationButtons from "../../../../Shared components/Navigation_buttons/Navigation_buttons"
 
@@ -58,20 +57,22 @@ export const Note_selection = props => {
 
         <div className={classes.container}>
 
-            <TopBar no_search />
-
             <div className={classes.sticky_top_section}>
 
                 <span className={classes.title} style={{ color: colours.primary }}>{data[0]}</span>
 
-                <SearchBox
+                <div className={classes.search_container}>
 
-                    value={search_value}
-                    handle_change={e => set_search_value(e.target.value)}
-                    no_collapse
-                    clear_input={() => set_search_value("")}
+                    <SearchBox
 
-                />
+                        value={search_value}
+                        handle_change={e => set_search_value(e.target.value)}
+                        no_collapse
+                        clear_input={() => set_search_value("")}
+
+                    />
+
+                </div>
 
             </div>
 

@@ -16,6 +16,7 @@ import ToggleIcon from "../Note/Components/Toggle_icon/Toggle_icon"
 import SearchTags from "./Components/Search_tags/Search_tags"
 import Input from "./Components/Input/Input"
 import Syntax from "./Components/Syntax/Syntax"
+import CollectionNotes from "./Components/Collection_notes/Collection_notes"
 
 //redux hooks
 import { useSelector, useDispatch } from "react-redux"
@@ -44,24 +45,34 @@ export const Note = props => {
     const response = useSelector(state => state.form.response)//grab the response from the api
     const expanded_notes = useSelector(state => state.note.expanded_notes)//grab the array of expanded notes from the reducer
     const expanded_selected_notes = useSelector(state => state.note.expanded_selected_notes)//grab the array of expanded notes from the reducer
+    //selectors
+    const expanded_nested_notes = useSelector(state => state.note.expanded_nested_notes)//grab the array of expanded notes from the reducer
     const edit_mode_enabled_notes = useSelector(state => state.note.edit_mode_notes)//grab the array of expanded notes from the reducer
     const duplicate_titles = useSelector(state => state.note.duplicate_titles)//grab any duplicate title attempts from the reducer
 
     //-config
     const dispatch = useDispatch()//initialise the usedispatch hook
     const ref = useRef(null)//hold the reference to the height measurement div, to set the height dynamically (see line 33)
+    const is_a_collection = props.details.notes ? true : false//if its a has a notes property, its a collection, if not its
 
     const edit_mode = edit_mode_enabled_notes.find(note => note === fetch_note_id(response, props))//Check if the instance of this note is in the array of edit mode notes
+
 
     //determine if the note is expanded
     //expanded notes are set and fetched by redux, there is a seperate array for selected notes and normal notes (so expanding a selected note does not expand the unselected version at the same time)
     const expanded =
 
-        props.selected ?//if its selected (passed in by the note_selection component)
+        props.inside_collection ?
 
-            expanded_selected_notes.find(note => note.id === fetch_note_id(response, props) && note.index === props.index)//check the array of selected notes
+            expanded_nested_notes.find(note => note.id === props.details._id && note.index === props.index)
 
-            : expanded_notes.find(note => note === fetch_note_id(response, props))//Check the array of normal notes
+            :
+
+            props.selected ?//if its selected (passed in by the note_selection component)
+
+                expanded_selected_notes.find(note => note.id === fetch_note_id(response, props) && note.index === props.index)//check the array of selected notes
+
+                : expanded_notes.find(note => note === fetch_note_id(response, props))//Check the array of normal notes
 
     const duplicate_title = duplicate_titles.find(title => title === fetch_note_id(response, props))//check if the instance of this note is in the array of duplicates
 
@@ -117,7 +128,7 @@ export const Note = props => {
 
             if (response && response.data.message === "note updated successfully" && response.data.id === fetch_note_id(response, props)) {//if a success message is detected
 
-                dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes"))//fetch the notes again with the new data
+                dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_all"))//fetch the notes again with the new data
 
                 dispatch(disable_edit_mode(fetch_note_id(response, props)))//remove the note from the array of edit mode enabled notes
 
@@ -171,13 +182,13 @@ export const Note = props => {
 
                     <div className={classes.collapsed_content}>
 
-                        <Input
+                        <Input //title
 
                             value={overwritten_values.title === null ? props.details.title : overwritten_values.title}
                             edit_mode={edit_mode}
                             type="title"
                             handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
-                            color={props.selected ? "White" : colours.primary}
+                            color={props.selected ? "White" : is_a_collection ? colours.secondary : colours.primary}
                             id={fetch_note_id(response, props)}
                             duplicate_title={duplicate_title}
                             //remove the title from the array of duplicate titles in the reducer
@@ -185,7 +196,7 @@ export const Note = props => {
 
                         />
 
-                        <Input
+                        <Input //subject
 
                             value={overwritten_values.subject === null ? props.details.subject || "No subject" : overwritten_values.subject}
                             edit_mode={edit_mode}
@@ -224,9 +235,10 @@ export const Note = props => {
                                 re_render={re_render}
                                 reset_re_render={() => set_re_render(false)}
 
+
                             />
 
-                            : !props.details.syntax && edit_mode ?
+                            : !props.details.syntax && edit_mode && !is_a_collection ?
 
                                 <Syntax
 
@@ -237,6 +249,7 @@ export const Note = props => {
                                     re_render={re_render}
                                     reset_re_render={() => set_re_render(false)}
                                     missing
+
 
                                 />
 
@@ -268,8 +281,11 @@ export const Note = props => {
                                     reset_re_render={() => set_re_render(false)}
 
                                 />
+                                : is_a_collection ?
 
-                                : undefined
+                                    <CollectionNotes notes={props.details.notes}/>
+
+                                    : undefined
                         }
 
                         {props.selected || props.combine ? undefined :
@@ -295,15 +311,28 @@ export const Note = props => {
 
                     expanded={expanded}
 
-                    handle_collapse={() => handle_collapse(dispatch, props, props.selected, props.index)}
+                    handle_collapse={() =>
+
+                        props.inside_collection ?
+
+                            props.handle_collapse(props.details, props.index)
+
+                            : handle_collapse(dispatch, props, props.selected, props.index)}
 
                     handle_expand={() => {
 
-                        props.selected ? dispatch(expand_selected_note(fetch_note_id(response, props), props.index))
+                        props.inside_collection ?
+
+                            props.handle_expand(props.details, props.index)
 
                             :
 
-                            dispatch(expand_note(fetch_note_id(response, props)))
+
+                            props.selected ? dispatch(expand_selected_note(fetch_note_id(response, props), props.index))
+
+                                :
+
+                                dispatch(expand_note(fetch_note_id(response, props)))
 
                     }}
 
