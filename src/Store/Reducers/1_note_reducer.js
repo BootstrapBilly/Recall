@@ -36,11 +36,11 @@ const handle_note_toggle = (state = initialState, action) => {
 
         case COLLAPSE_SELECTED_NOTE:
 
-            return { ...state, expanded_selected_notes: [...state.expanded_selected_notes.filter(note => note.id !== action.payload.id && note.index !== action.payload.index)] }
+            return { ...state, expanded_selected_notes: [...state.expanded_selected_notes.filter(note => note.index !== action.payload.index)] }
 
         case COLLAPSE_NESTED_NOTE:
 
-            return { ...state, expanded_nested_notes: [...state.expanded_nested_notes.filter(note => note.id !== action.payload.id && note.index !== action.payload.index)] }
+            return { ...state, expanded_nested_notes: [...state.expanded_nested_notes.filter(note => note.index !== action.payload.index)] }
 
         case COLLAPSE_ALL:
 

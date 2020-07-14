@@ -32,29 +32,34 @@ export const View_all = () => {
 
     //*states
     const [notes, set_notes] = useState([])//hold the notes to be displayed, all fetched initially, manipulated by searching and the toggle links
-    const [filter, set_filter] = useState("all")
+    const [filter, set_filter] = useState("All")
 
     //!Effects
     // eslint-disable-next-line
     useEffect(() => { dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_all")) }, [])//fetch the notes on the first render of the page
-    useEffect(() => { if (response && response.data.notes) { 
-        
-        switch (filter) {
 
-            case "All": return set_notes(response.data.both)
-            case "Notes": return set_notes(response.data.notes)
-            case "Collections": return set_notes(response.data.processes)
-            default: return set_notes(response.data.both)
+    useEffect(() => {
+
+
+        if (response) {
+
+            switch (filter) {
+
+                case "All": return set_notes(response.data.both)
+                case "Notes": return set_notes(response.data.notes)
+                case "Collections": return set_notes(response.data.processes)
+                default: return set_notes(response.data.both)
+            }
+
         }
-    
-    
-    } }, [response, filter])//update the notes if the response changes
+
+    }, [response, filter])//update the notes if the response changes
 
     return (
 
         <div className={classes.container}>
 
-            <TopBar handle_search_input={(string) => filter_notes_by_search(dispatch, string)} handle_toggle={(link) => set_filter(link)} 
+            <TopBar handle_search_input={(string) => filter_notes_by_search(dispatch, string)} handle_toggle={(link) => set_filter(link)}
             />
 
             {notes &&
@@ -64,7 +69,7 @@ export const View_all = () => {
                     breakpointCols={handle_column_assignment(notes)}
                     className={classes.my_masonry_grid}
                     columnClassName={classes.my_masonry_grid_column}>
-                    {notes.map((note, index) => <Note key={index} index={index} details={note}  />)}
+                    {notes.map((note, index) => <Note key={index} index={index} details={note} />)}
 
                 </Masonry>
 

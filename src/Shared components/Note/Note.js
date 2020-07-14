@@ -23,7 +23,7 @@ import { useSelector, useDispatch } from "react-redux"
 
 //redux action creators
 import { submit_form, clear_response } from "../../Store/Actions/0_submit_form_action"
-import { expand_note, expand_selected_note, collapse_note, enable_edit_mode, disable_edit_mode, set_duplicate_title, clear_duplicate_title } from "../../Store/Actions/1_note_action"
+import { expand_note, expand_selected_note, expand_nested_note, collapse_note, enable_edit_mode, disable_edit_mode, set_duplicate_title, clear_duplicate_title } from "../../Store/Actions/1_note_action"
 
 //functions
 import handle_cancel_click from "./Functions/handle_cancel_click"
@@ -158,10 +158,9 @@ export const Note = props => {
                 height: `${height}px`,
                 transform: props.inside_collection && "scale(0.9)",
                 paddingBottom: expanded && "70px",
-                backgroundColor: props.selected && colours.secondary,
+                backgroundColor: props.selected ? colours.secondary : props.inside_collection && "transparent",
                 border: hover_border && `1px solid ${colours.secondary}`,
                 marginTop:props.inside_collection && "0px",
-                background:props.inside_collection && "transparent"
 
             }}
 
@@ -295,7 +294,7 @@ export const Note = props => {
                                     : undefined
                         }
 
-                        {props.selected || props.combine ? undefined :
+                        {props.selected || props.combine || props.inside_collection  ? undefined :
 
                             <Buttons
 
@@ -318,22 +317,13 @@ export const Note = props => {
 
                     expanded={expanded}
 
-                    handle_collapse={() =>
-
-                        props.inside_collection ?
-
-                            // dispatch(expand_nested_note(note._id, index))
-
-                            props.handle_collapse(props.details, props.index)
-
-                            : handle_collapse(dispatch, props, props.selected, props.index)}
+                    handle_collapse={() => handle_collapse(dispatch, props, props.selected, props.inside_collection, props.index)}
 
                     handle_expand={() => {
 
                         props.inside_collection ?
 
-                            //dispatch(collapse_nested_note(note._id, index))
-                            props.handle_expand(props.details, props.index)
+                            dispatch(expand_nested_note(props.details._id, props.index))
 
                             :
 

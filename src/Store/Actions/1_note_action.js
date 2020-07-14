@@ -93,6 +93,9 @@ export const collapse_note = (note_id) => {
 
 export const collapse_selected_note = (note_id, index) => {
 
+    console.log(note_id)
+    console.log(index)
+
     return async dispatch => {
 
         try {
@@ -171,6 +174,7 @@ export const enable_edit_mode = (note_id) => {
 
 }
 
+
 export const disable_edit_mode = (note_id) => {
 
     return async dispatch => {
@@ -190,6 +194,7 @@ export const disable_edit_mode = (note_id) => {
     }
 
 }
+
 
 export const set_duplicate_title = (note_id) => {
 

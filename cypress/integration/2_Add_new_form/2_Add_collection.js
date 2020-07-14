@@ -102,7 +102,7 @@
 
 //     it("Fill in the title", () => {
 
-//         cy.get('[test_handle="title_input"]').type("A collection")
+//         cy.get('[test_handle="title_input"]').type("z collection")
 
 //         cy.get('[test_handle="form_next_button"]').click()
 
