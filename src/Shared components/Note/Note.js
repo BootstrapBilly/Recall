@@ -154,13 +154,13 @@ export const Note = props => {
         <div className={classes.container} test_handle={props.test_handle || "note_container"}
 
             style={{
-
+                
                 height: `${height}px`,
                 transform: props.inside_collection && "scale(0.9)",
                 paddingBottom: expanded && "70px",
                 backgroundColor: props.selected ? colours.secondary : props.inside_collection && "transparent",
                 border: hover_border && `1px solid ${colours.secondary}`,
-                marginTop:props.inside_collection && "0px",
+                marginTop: props.inside_collection && "0px",
 
             }}
 
@@ -289,12 +289,12 @@ export const Note = props => {
                                 />
                                 : is_a_collection ?
 
-                                    <CollectionNotes notes={props.details.notes} handle_resize={()=> set_resize_note(true)}/>
+                                    <CollectionNotes notes={props.details.notes} handle_resize={() => set_resize_note(true)} />
 
                                     : undefined
                         }
 
-                        {props.selected || props.combine || props.inside_collection  ? undefined :
+                        {props.selected || props.combine || props.inside_collection ? undefined :
 
                             <Buttons
 

@@ -10,8 +10,24 @@
     background-color: whitesmoke;
     margin-top: 20px;
     padding-bottom: 15px;
+    transform: scale(0);
+    animation: explode 0.2s forwards;
+    animation-delay: 0.2s;
 }
 
+@keyframes explode{
+
+    0%{
+        transform: scale(0);
+    }
+
+    90%{
+        transform: scale(0.0);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
 
 .selected_clickable_area {
     width: 82%;

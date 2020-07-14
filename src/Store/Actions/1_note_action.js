@@ -93,9 +93,6 @@ export const collapse_note = (note_id) => {
 
 export const collapse_selected_note = (note_id, index) => {
 
-    console.log(note_id)
-    console.log(index)
-
     return async dispatch => {
 
         try {
