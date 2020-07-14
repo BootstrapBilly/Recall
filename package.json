@@ -6,6 +6,7 @@
     "axios": "^0.19.2",
     "easyalert": "^2.1.0",
     "react": "^16.13.1",
+    "react-collapsible": "^2.8.0",
     "react-dom": "^16.13.1",
     "react-facebook-login": "^4.1.1",
     "react-masonry-css": "^1.0.14",

@@ -1,53 +1,66 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 
 import classes from './Collection_notes.module.css'
 
-//components
 import Note from "../../Note"
-
-//redux hooks
-import { useDispatch } from "react-redux"
 
 //redux action creators
 import { expand_nested_note, collapse_nested_note } from "../../../../Store/Actions/1_note_action"
 
+//redux hooks
+import { useDispatch, useSelector } from "react-redux"
+
 export const Collection_notes = props => {
+
+
+    const expanded_nested_notes = useSelector(state => state.note.expanded_nested_notes)//grab the array of expanded notes from the reducer
+
+    const ref = useRef(0)
+
+    const [height, set_height] = useState(0)
 
     const dispatch = useDispatch()
 
-    const ref = useRef(null)
-
-    const [height, set_height] = useState(0)//dynamically set the height of the note to be animated upon expansion to fit content without a predefined height
-
     useEffect(() => {
 
-        set_height(ref.current.clientHeight)
-    })
+        setTimeout(() => {
+            set_height(ref.current.clientHeight)
+            props.handle_resize()
+        }, 301);
 
+    },[expanded_nested_notes])
 
-    const handle_expand_note = (note, index) => {
+    const handle_expand = (id, index) => {
 
-        dispatch(expand_nested_note(note._id, index))
-     
-    }
-
-    const handle_collapse_note = (note, index) => {
-
-
-        console.log(note._id)
-        console.log(index)
-        
-        dispatch(collapse_nested_note(note._id, index))
+        dispatch(expand_nested_note(id, index))
 
     }
+
+    const handle_collapse = (id, index) => {
+
+        dispatch(collapse_nested_note(id, index))
+
+    }
+
 
     return (
 
-        <div className={classes.container} style={{ height: `${height}px`, minHeight: `${props.notes.length * 100}px`}}>
+        <div className={classes.container} style={{ height: `${height}px` }}>
 
-            <div className={classes.measuring_wrapper} ref={ref} >
+            <div className={classes.measuring_wrapper} ref={ref}>
 
-                {props.notes.map((note, index) => <Note key={index} index={index} details={note} inside_collection handle_expand={(note, index) => handle_expand_note(note, index)} handle_collapse={(note, index) => handle_collapse_note(note, index)} />)}
+                {props.notes.map((note, index) =>
+
+                    <Note
+
+                        key={index}
+                        index={index}
+                        details={note}
+                        handle_expand={() => handle_expand(note._id, index)}
+                        handle_collapse={() => handle_collapse(note._id, index)}
+                        inside_collection
+
+                    />)}
 
             </div>
 

@@ -1,7 +1,7 @@
 .container {
     height: 35px;
-    transition: height 0.5s ease-in-out, padding 0.5s ease-in-out;
-    -webkit-transition: height 0.5s ease-in-out, padding 0.5s ease-in-out;
+    transition: height 0.2s ease-in, padding 0.2s ease-in;
+    -webkit-transition: height 0.2s ease-in, padding 0.2s ease-in;
     width: 255px;
     box-shadow: 1px 1px 10px -2px rgba(128, 128, 128, 0.488);
     padding: 10px;
@@ -71,6 +71,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 }
 
 @keyframes fadein {

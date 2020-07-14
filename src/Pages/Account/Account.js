@@ -40,7 +40,7 @@ export const Account = () => {
 
         <div className={classes.container}>
 
-            {notes.length && <CollectionNotes notes={notes[0].notes} handle_height_change={()=> console.log("")}/>}
+            {notes.length && <CollectionNotes notes={notes[0].notes} handle_height_change={()=> console.log("")} handle_resize={()=> console.log()}/>}
 
             <Nav />
         </div>

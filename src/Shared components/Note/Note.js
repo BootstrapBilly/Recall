@@ -41,22 +41,22 @@ import alert from "easyalert"
 
 export const Note = props => {
 
+    //=refs
+    const ref = useRef(null)//hold the reference to the height measurement div
+
     //?selectors
     const response = useSelector(state => state.form.response)//grab the response from the api
     const expanded_notes = useSelector(state => state.note.expanded_notes)//grab the array of expanded notes from the reducer
     const expanded_selected_notes = useSelector(state => state.note.expanded_selected_notes)//grab the array of expanded notes from the reducer
-    //selectors
     const expanded_nested_notes = useSelector(state => state.note.expanded_nested_notes)//grab the array of expanded notes from the reducer
     const edit_mode_enabled_notes = useSelector(state => state.note.edit_mode_notes)//grab the array of expanded notes from the reducer
     const duplicate_titles = useSelector(state => state.note.duplicate_titles)//grab any duplicate title attempts from the reducer
 
     //-config
     const dispatch = useDispatch()//initialise the usedispatch hook
-    const ref = useRef(null)//hold the reference to the height measurement div, to set the height dynamically (see line 33)
     const is_a_collection = props.details.notes ? true : false//if its a has a notes property, its a collection, if not its
 
     const edit_mode = edit_mode_enabled_notes.find(note => note === fetch_note_id(response, props))//Check if the instance of this note is in the array of edit mode notes
-
 
     //determine if the note is expanded
     //expanded notes are set and fetched by redux, there is a seperate array for selected notes and normal notes (so expanding a selected note does not expand the unselected version at the same time)
@@ -97,7 +97,11 @@ export const Note = props => {
 
     //called everytime a note is expanded or collapsed, the height of the div is extracted and set in the height state to resize the note
     // eslint-disable-next-line 
-    useEffect(() => set_height(ref.current.clientHeight))
+    useEffect(() => {
+
+        set_height(ref.current.clientHeight)
+
+    })
 
     // eslint-disable-next-line 
     useEffect(() => {//this is triggered by the handle_tag_change function which sets the resize state to true
@@ -152,9 +156,12 @@ export const Note = props => {
             style={{
 
                 height: `${height}px`,
+                transform: props.inside_collection && "scale(0.9)",
                 paddingBottom: expanded && "70px",
                 backgroundColor: props.selected && colours.secondary,
-                border: hover_border && `1px solid ${colours.secondary}`
+                border: hover_border && `1px solid ${colours.secondary}`,
+                marginTop:props.inside_collection && "0px",
+                background:props.inside_collection && "transparent"
 
             }}
 
@@ -283,7 +290,7 @@ export const Note = props => {
                                 />
                                 : is_a_collection ?
 
-                                    <CollectionNotes notes={props.details.notes}/>
+                                    <CollectionNotes notes={props.details.notes} handle_resize={()=> set_resize_note(true)}/>
 
                                     : undefined
                         }
@@ -315,6 +322,8 @@ export const Note = props => {
 
                         props.inside_collection ?
 
+                            // dispatch(expand_nested_note(note._id, index))
+
                             props.handle_collapse(props.details, props.index)
 
                             : handle_collapse(dispatch, props, props.selected, props.index)}
@@ -323,6 +332,7 @@ export const Note = props => {
 
                         props.inside_collection ?
 
+                            //dispatch(collapse_nested_note(note._id, index))
                             props.handle_expand(props.details, props.index)
 
                             :
