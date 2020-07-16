@@ -33,6 +33,7 @@ export const View_all = () => {
     //*states
     const [notes, set_notes] = useState([])//hold the notes to be displayed, all fetched initially, manipulated by searching and the toggle links
     const [filter, set_filter] = useState("All")
+    const [position_change, set_position_change] = useState(false)
 
     //!Effects
     // eslint-disable-next-line
@@ -41,7 +42,9 @@ export const View_all = () => {
     useEffect(() => {
 
 
-        if (response) {
+        if (response && response.data.notes) {
+
+            // console.log(response.data)
 
             switch (filter) {
 
@@ -54,6 +57,24 @@ export const View_all = () => {
         }
 
     }, [response, filter])//update the notes if the response changes
+
+    useEffect(() => {
+
+        if (position_change) {
+
+            set_position_change(false)
+
+            switch (filter) {
+
+                case "All": return set_notes(response.data.both)
+                case "Notes": return set_notes(response.data.notes)
+                case "Collections": return set_notes(response.data.processes)
+                default: return set_notes(response.data.both)
+            }
+
+        }
+        
+    },[position_change])
 
     return (
 
@@ -69,7 +90,7 @@ export const View_all = () => {
                     breakpointCols={handle_column_assignment(notes)}
                     className={classes.my_masonry_grid}
                     columnClassName={classes.my_masonry_grid_column}>
-                    {notes.map((note, index) => <Note key={index} index={index} details={note}/>)}
+                    {notes.map((note, index) => <Note key={index} filter={filter} index={index} details={note} handle_position_change={() => set_position_change(true)} />)}
 
                 </Masonry>
 

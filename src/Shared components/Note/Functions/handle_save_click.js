@@ -11,7 +11,8 @@ const handle_save_click = (dispatch, overwritten_values, props) => {
         new_subject: overwritten_values.subject || props.details.subject,
         new_body: overwritten_values.body || props.details.body,
         new_search_tags: overwritten_values.search_tags || props.details.search_tags,
-        new_syntax: overwritten_values.syntax || props.details.syntax
+        new_syntax: overwritten_values.syntax || props.details.syntax,
+        filter:props.filter
     }
         , "update_note"))
 

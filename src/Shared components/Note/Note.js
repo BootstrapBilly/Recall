@@ -128,20 +128,22 @@ export const Note = props => {
     //this is triggered upon a success response after editing/deleting a note //*success responses
     useEffect(() => {//used to update the note instantly after editing it
 
-            if (response && response.data.message === "note updated successfully" && response.data.id === fetch_note_id(response, props)) {//if a success message is detected
+        if (response && response.data.message === "note updated successfully" && response.data.id === fetch_note_id(response, props)) {//if a success message is detected
 
-                dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_all"))//fetch the notes again with the new data
+            if (response.data.position_changed) { props.handle_position_change() } //if the title has changed, meaning the notes position has changed, re-render every note
 
-                dispatch(disable_edit_mode(fetch_note_id(response, props)))//remove the note from the array of edit mode enabled notes
+            dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_all"))//fetch the notes again with the new data
 
-            }
+            dispatch(disable_edit_mode(fetch_note_id(response, props)))//remove the note from the array of edit mode enabled notes
 
-            if (response && response.data.message === "note deleted successfully") {
+        }
 
-                dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes"))
-                clear_response()//clear the response
+        if (response && response.data.message === "note deleted successfully") {
 
-            }
+            dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes"))
+            clear_response()//clear the response
+
+        }
 
         //eslint-disable-next-line
     }, [response])
@@ -151,7 +153,7 @@ export const Note = props => {
         <div className={classes.container} test_handle={props.test_handle || "note_container"}
 
             style={{
-                
+
                 height: `${height}px`,
                 paddingBottom: expanded && "70px",
                 backgroundColor: props.selected ? colours.secondary : props.inside_collection && "transparent",
