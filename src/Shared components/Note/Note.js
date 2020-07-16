@@ -17,6 +17,7 @@ import SearchTags from "./Components/Search_tags/Search_tags"
 import Input from "./Components/Input/Input"
 import Syntax from "./Components/Syntax/Syntax"
 import CollectionNotes from "./Components/Collection_notes/Collection_notes"
+import DeleteConfirmation from "./Components/Delete_confirmation/Delete_confirmation"
 
 //redux hooks
 import { useSelector, useDispatch } from "react-redux"
@@ -28,7 +29,6 @@ import { expand_note, expand_selected_note, expand_nested_note, collapse_note, e
 //functions
 import handle_cancel_click from "./Functions/handle_cancel_click"
 import handle_save_click from "./Functions/handle_save_click"
-import handle_delete_click from "./Functions/handle_delete_click"
 import handle_collapse from "./Functions/handle_collapse"
 import handle_tag_change from "./Functions/handle_tag_change"
 import fetch_note_id from "./Functions/fetch_note_id"
@@ -68,6 +68,7 @@ export const Note = props => {
     const [re_render, set_re_render] = useState(false)//used to re-render the syntax and search tags if the user modifies but doesn't save them
     const [resize_note, set_resize_note] = useState(false)//used to resize the note if content gets added or deleted from it
     const [hover_border, set_hover_border] = useState(false)//used to highlight a note when hovering it
+    const [show_delete_confimation, set_show_delete_confirmation] = useState(false)//determine whether to show the delete prompt after the user presses delete
 
     const [overwritten_values, set_overwritten_values] = useState({// a state to hold the note information to be submitted to the backend for editing purposes
 
@@ -202,9 +203,11 @@ export const Note = props => {
 
                     </div>}
 
-                {expanded &&
+                {expanded ?
 
-                    <div className={classes.expanded_content}>
+                    show_delete_confimation ? <DeleteConfirmation cancel_delete={()=> set_show_delete_confirmation(false)} title={show_delete_confimation} note_id={note_id}/>
+
+                    : <div className={classes.expanded_content}>
 
                         <Body
 
@@ -295,11 +298,11 @@ export const Note = props => {
                                 handle_cancel_click={() => handle_cancel_click(dispatch, note_id, set_overwritten_values, set_re_render, props.inside_collection, props.index)}
 
                                 handle_save_click={() => handle_save_click(dispatch, overwritten_values, props)}
-                                handle_delete_click={(title) => handle_delete_click(title, dispatch, props)}
+                                handle_delete_click={(title) => set_show_delete_confirmation(title)}
 
                             />}
 
-                    </div>
+                    </div> : undefined
 
                 }
 
