@@ -62,15 +62,15 @@ export const View_all = () => {
 
         if (position_change) {
 
-            set_position_change(false)
-
             switch (filter) {
 
-                case "All": return set_notes(response.data.both)
-                case "Notes": return set_notes(response.data.notes)
-                case "Collections": return set_notes(response.data.processes)
-                default: return set_notes(response.data.both)
+                case "All":  set_notes(response.data.both)
+                case "Notes":  set_notes(response.data.notes)
+                case "Collections":  set_notes(response.data.processes)
+                default:  set_notes(response.data.both)
             }
+
+            return set_position_change(false)
 
         }
         

@@ -25,8 +25,6 @@ export const Top_bar = props => {
 
     const handle_toggle_filter = link => {
 
-        console.log(link)
-
         set_active_toggle_link(link)
 
         props.handle_toggle(link)

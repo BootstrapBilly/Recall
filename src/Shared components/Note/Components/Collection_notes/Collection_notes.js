@@ -10,6 +10,7 @@ export const Collection_notes = props => {
 
     //?selectors
     const expanded_nested_notes = useSelector(state => state.note.expanded_nested_notes)//grab the array of expanded notes from the reducer
+    const edit_mode_enabled_nested_notes = useSelector(state => state.note.edit_mode_nested_notes)
 
     //=refs
     const ref = useRef(0)
@@ -20,15 +21,23 @@ export const Collection_notes = props => {
     //!effects
     useEffect(() => {
 
+        //the height and function call has to be done after a timeout because the height of the note is animated and cannot be calculated instantly
         setTimeout(() => {
 
-            set_height(ref.current.clientHeight)//the height and function call has to be done after a timeout because the height of the note is animated and cannot be calculated instantly
+            if (ref.current) { set_height(ref.current.clientHeight) }
+
             props.handle_resize()
 
         }, 301);
 
         // eslint-disable-next-line
-    }, [expanded_nested_notes])
+    }, [expanded_nested_notes, edit_mode_enabled_nested_notes])
+
+    const handle_position_change = () => {
+
+        props.handle_position_change()
+
+    }
 
     return (
 
@@ -44,6 +53,7 @@ export const Collection_notes = props => {
                         index={index}
                         details={note}
                         inside_collection
+                        handle_position_change={() => handle_position_change()}
 
                     />)}
 

@@ -23,7 +23,7 @@ import { useSelector, useDispatch } from "react-redux"
 
 //redux action creators
 import { submit_form, clear_response } from "../../Store/Actions/0_submit_form_action"
-import { expand_note, expand_selected_note, expand_nested_note, collapse_note, enable_edit_mode, disable_edit_mode, set_duplicate_title, clear_duplicate_title } from "../../Store/Actions/1_note_action"
+import { expand_note, expand_selected_note, expand_nested_note, collapse_note, enable_edit_mode, enable_edit_mode_nested, disable_edit_mode, disable_edit_mode_nested, set_duplicate_title, clear_duplicate_title } from "../../Store/Actions/1_note_action"
 
 //functions
 import handle_cancel_click from "./Functions/handle_cancel_click"
@@ -32,6 +32,8 @@ import handle_delete_click from "./Functions/handle_delete_click"
 import handle_collapse from "./Functions/handle_collapse"
 import handle_tag_change from "./Functions/handle_tag_change"
 import fetch_note_id from "./Functions/fetch_note_id"
+import check_if_note_is_expanded from "./Functions/check_if_note_is_expanded"
+import check_if_note_is_in_edit_mode from "./Functions/check_if_note_is_in_edit_mode"
 
 //util
 import colours from '../../util/colours'
@@ -50,31 +52,16 @@ export const Note = props => {
     const expanded_selected_notes = useSelector(state => state.note.expanded_selected_notes)//grab the array of expanded notes from the reducer
     const expanded_nested_notes = useSelector(state => state.note.expanded_nested_notes)//grab the array of expanded notes from the reducer
     const edit_mode_enabled_notes = useSelector(state => state.note.edit_mode_notes)//grab the array of expanded notes from the reducer
+    const edit_mode_enabled_nested_notes = useSelector(state => state.note.edit_mode_nested_notes)//grab the array of expanded (nested) notes from the reducer
     const duplicate_titles = useSelector(state => state.note.duplicate_titles)//grab any duplicate title attempts from the reducer
 
     //-config
     const dispatch = useDispatch()//initialise the usedispatch hook
     const is_a_collection = props.details.notes ? true : false//if its a has a notes property, its a collection, if not its
-
-    const edit_mode = edit_mode_enabled_notes.find(note => note === fetch_note_id(response, props))//Check if the instance of this note is in the array of edit mode notes
-
-    //determine if the note is expanded
-    //expanded notes are set and fetched by redux, there is a seperate array for selected notes and normal notes (so expanding a selected note does not expand the unselected version at the same time)
-    const expanded =
-
-        props.inside_collection ?
-
-            expanded_nested_notes.find(note => note.id === props.details._id && note.index === props.index)
-
-            :
-
-            props.selected ?//if its selected (passed in by the note_selection component)
-
-                expanded_selected_notes.find(note => note.id === fetch_note_id(response, props) && note.index === props.index)//check the array of selected notes
-
-                : expanded_notes.find(note => note === fetch_note_id(response, props))//Check the array of normal notes
-
-    const duplicate_title = duplicate_titles.find(title => title === fetch_note_id(response, props))//check if the instance of this note is in the array of duplicates
+    const note_id = fetch_note_id(response, props)//get the id of the note
+    const edit_mode = check_if_note_is_in_edit_mode(props, edit_mode_enabled_notes, edit_mode_enabled_nested_notes, note_id)
+    const expanded = check_if_note_is_expanded(props, expanded_nested_notes, expanded_selected_notes, expanded_notes, note_id)
+    const duplicate_title = duplicate_titles.find(title => title === note_id)//check if the instance of this note is in the array of duplicates
 
     //*states
     const [height, set_height] = useState(0)//dynamically set the height of the note to be animated upon expansion to fit content without a predefined height
@@ -118,7 +105,7 @@ export const Note = props => {
         if (response && response.data.message === "You already have a note with that title, please choose another") {
 
             //if the id on the response matches the id on the note, add the note to the array of duplicate titles to be displayed
-            if (response.data.id === fetch_note_id(response, props)) { dispatch(set_duplicate_title(fetch_note_id(response, props))) }
+            if (response.data.id === note_id) { dispatch(set_duplicate_title(note_id)) }
 
             alert("You already have a note with that title, please choose another", "error")
         }
@@ -128,13 +115,13 @@ export const Note = props => {
     //this is triggered upon a success response after editing/deleting a note //*success responses
     useEffect(() => {//used to update the note instantly after editing it
 
-        if (response && response.data.message === "note updated successfully" && response.data.id === fetch_note_id(response, props)) {//if a success message is detected
+        if (response && response.data.message === "note updated successfully" && response.data.id === note_id) {//if a success message is detected
 
             if (response.data.position_changed) { props.handle_position_change() } //if the title has changed, meaning the notes position has changed, re-render every note
 
             dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_all"))//fetch the notes again with the new data
 
-            dispatch(disable_edit_mode(fetch_note_id(response, props)))//remove the note from the array of edit mode enabled notes
+            props.inside_collection ? dispatch(disable_edit_mode_nested(note_id, props.index)) : dispatch(disable_edit_mode(note_id))//remove the note from the array of edit mode enabled notes
 
         }
 
@@ -194,10 +181,10 @@ export const Note = props => {
                             type="title"
                             handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
                             color={props.selected ? "White" : is_a_collection ? colours.secondary : colours.primary}
-                            id={fetch_note_id(response, props)}
+                            id={note_id}
                             duplicate_title={duplicate_title}
                             //remove the title from the array of duplicate titles in the reducer
-                            handle_clear_duplicate_title={() => dispatch(clear_duplicate_title(fetch_note_id(response, props)))}
+                            handle_clear_duplicate_title={() => dispatch(clear_duplicate_title(note_id))}
 
                         />
 
@@ -288,21 +275,25 @@ export const Note = props => {
                                 />
                                 : is_a_collection ?
 
-                                    <CollectionNotes notes={props.details.notes} handle_resize={() => set_resize_note(true)} />
+                                    <CollectionNotes notes={props.details.notes} handle_resize={() => set_resize_note(true)} handle_position_change={props.handle_position_change} />
 
                                     : undefined
                         }
 
-                        {props.selected || props.combine || props.inside_collection ? undefined :
+                        {props.selected || props.combine ? undefined :
 
                             <Buttons
 
                                 expanded={expanded}
                                 title={props.details.title}
-                                reset_expanded={() => dispatch(collapse_note(fetch_note_id(response, props)))}
-                                handle_edit_click={() => dispatch(enable_edit_mode(fetch_note_id(response, props)))}
+                                reset_expanded={() => dispatch(collapse_note(note_id))}
+
+                                handle_edit_click={() => props.inside_collection ? dispatch(enable_edit_mode_nested(note_id, props.index)) : dispatch(enable_edit_mode(note_id))}
+
                                 edit_mode={edit_mode}
-                                handle_cancel_click={() => handle_cancel_click(dispatch, fetch_note_id(response, props), set_overwritten_values, set_re_render)}
+
+                                handle_cancel_click={() => handle_cancel_click(dispatch, note_id, set_overwritten_values, set_re_render, props.inside_collection, props.index)}
+
                                 handle_save_click={() => handle_save_click(dispatch, overwritten_values, props)}
                                 handle_delete_click={(title) => handle_delete_click(title, dispatch, props)}
 
@@ -327,11 +318,11 @@ export const Note = props => {
                             :
 
 
-                            props.selected ? dispatch(expand_selected_note(fetch_note_id(response, props), props.index))
+                            props.selected ? dispatch(expand_selected_note(note_id, props.index))
 
                                 :
 
-                                dispatch(expand_note(fetch_note_id(response, props)))
+                                dispatch(expand_note(note_id))
 
                     }}
 

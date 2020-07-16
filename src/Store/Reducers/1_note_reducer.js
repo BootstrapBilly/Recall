@@ -1,4 +1,4 @@
-import { EXPAND_NOTE, EXPAND_SELECTED_NOTE, EXPAND_NESTED_NOTE, COLLAPSE_NOTE, COLLAPSE_SELECTED_NOTE, COLLAPSE_NESTED_NOTE, COLLAPSE_ALL, ENABLE_EDIT_MODE, DISABLE_EDIT_MODE, SET_DUPLICATE_TITLE, CLEAR_DUPLICATE_TITLE } from "../Actions/1_note_action"
+import { EXPAND_NOTE, EXPAND_SELECTED_NOTE, EXPAND_NESTED_NOTE, COLLAPSE_NOTE, COLLAPSE_SELECTED_NOTE, COLLAPSE_NESTED_NOTE, COLLAPSE_ALL, ENABLE_EDIT_MODE, ENABLE_EDIT_MODE_NESTED, DISABLE_EDIT_MODE, DISABLE_EDIT_MODE_NESTED, SET_DUPLICATE_TITLE, CLEAR_DUPLICATE_TITLE } from "../Actions/1_note_action"
 
 const initialState = {//set the initial state
 
@@ -7,6 +7,7 @@ const initialState = {//set the initial state
     expanded_nested_notes: [],
 
     edit_mode_notes: [],
+    edit_mode_nested_notes: [],
 
     duplicate_titles: [],
 
@@ -50,9 +51,17 @@ const handle_note_toggle = (state = initialState, action) => {
 
             return { ...state, edit_mode_notes: [...state.edit_mode_notes, action.payload] }
 
+        case ENABLE_EDIT_MODE_NESTED:
+
+            return { ...state, edit_mode_nested_notes: [...state.edit_mode_nested_notes, { id: action.payload.id, index: action.payload.index }] }
+
         case DISABLE_EDIT_MODE:
 
             return { ...state, edit_mode_notes: [...state.edit_mode_notes.filter(note => note !== action.payload)] }
+
+        case DISABLE_EDIT_MODE_NESTED:
+
+            return { ...state, edit_mode_nested_notes: [...state.edit_mode_nested_notes.filter(note => note.index !== action.payload.index)] }
 
         case SET_DUPLICATE_TITLE:
 

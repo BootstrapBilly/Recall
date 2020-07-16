@@ -1,10 +1,9 @@
-import {disable_edit_mode} from "../../../Store/Actions/1_note_action"
+import {disable_edit_mode, disable_edit_mode_nested} from "../../../Store/Actions/1_note_action"
 
 //this function is triggered by pressing the cancel button during edit mode
+const handle_cancel_click = (dispatch, id, set_overwritten_values, set_re_render_tags, inside_collection, index) => {
 
-const handle_cancel_click = (dispatch, id, set_overwritten_values, set_re_render_tags) => {
-
-    dispatch(disable_edit_mode(id))//remove the note from the array of edit mode enabled notes
+    inside_collection ? dispatch(disable_edit_mode_nested(id, index)) : dispatch(disable_edit_mode(id))//remove the note from the array of edit mode enabled notes
 
     set_overwritten_values({//set the form data back to the initial values fetched from the database and passed in by the parent component
 

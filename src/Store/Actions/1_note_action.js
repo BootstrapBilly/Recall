@@ -6,7 +6,9 @@ export const COLLAPSE_SELECTED_NOTE = "COLLAPSE_SELECTED_NOTE";
 export const COLLAPSE_NESTED_NOTE = "COLLAPSE_NESTED_NOTE";
 export const COLLAPSE_ALL = "COLLAPSE_ALL";
 export const ENABLE_EDIT_MODE = "ENABLE_EDIT_MODE";
+export const ENABLE_EDIT_MODE_NESTED = "ENABLE_EDIT_MODE_NESTED"
 export const DISABLE_EDIT_MODE = "DISABLE_EDIT_MODE";
+export const DISABLE_EDIT_MODE_NESTED = "DISABLE_EDIT_MODE_NESTED";
 export const SET_DUPLICATE_TITLE = "SET_DUPLICATE_TITLE";
 export const CLEAR_DUPLICATE_TITLE = "CLEAR_DUPLICATE_TITLE";
 
@@ -171,6 +173,26 @@ export const enable_edit_mode = (note_id) => {
 
 }
 
+export const enable_edit_mode_nested = (note_id, index) => {
+
+    return async dispatch => {
+
+        try {
+
+            return dispatch({ type: ENABLE_EDIT_MODE_NESTED, payload: {id:note_id, index:index}})
+
+        }
+
+        catch (error) {
+
+            return console.log(error)
+
+        }
+
+    }
+
+}
+
 
 export const disable_edit_mode = (note_id) => {
 
@@ -179,6 +201,26 @@ export const disable_edit_mode = (note_id) => {
         try {
 
             return dispatch({ type: DISABLE_EDIT_MODE, payload: note_id })
+
+        }
+
+        catch (error) {
+
+            return console.log(error)
+
+        }
+
+    }
+
+}
+
+export const disable_edit_mode_nested = (note_id, index) => {
+
+    return async dispatch => {
+
+        try {
+
+            return dispatch({ type: DISABLE_EDIT_MODE_NESTED, payload: {id:note_id, index:index}})
 
         }
 
