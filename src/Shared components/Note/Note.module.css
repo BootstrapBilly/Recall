@@ -10,22 +10,22 @@
     background-color: whitesmoke;
     margin-top: 20px;
     padding-bottom: 15px;
-    transform: scale(0);
-    animation: explode 0.2s forwards;
+    opacity: 0;
+    animation: fadein 0.2s forwards;
     animation-delay: 0.2s;
 }
 
 @keyframes explode{
 
     0%{
-        transform: scale(0);
+        opacity: 0;
     }
 
     90%{
-        transform: scale(0.0);
+        opacity: 0;
     }
     100%{
-        transform: scale(1);
+        opacity: 1;
     }
 }
 

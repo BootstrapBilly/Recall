@@ -128,8 +128,6 @@ export const Note = props => {
     //this is triggered upon a success response after editing/deleting a note //*success responses
     useEffect(() => {//used to update the note instantly after editing it
 
-        if (!props.from_add_form) {
-
             if (response && response.data.message === "note updated successfully" && response.data.id === fetch_note_id(response, props)) {//if a success message is detected
 
                 dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_all"))//fetch the notes again with the new data
@@ -145,7 +143,6 @@ export const Note = props => {
 
             }
 
-        }
         //eslint-disable-next-line
     }, [response])
 
@@ -156,11 +153,11 @@ export const Note = props => {
             style={{
                 
                 height: `${height}px`,
-                transform: props.inside_collection && "scale(0.9)",
                 paddingBottom: expanded && "70px",
                 backgroundColor: props.selected ? colours.secondary : props.inside_collection && "transparent",
                 border: hover_border && `1px solid ${colours.secondary}`,
-                marginTop: props.inside_collection && "0px",
+                marginTop: props.inside_collection && "10px",
+                transform: props.inside_collection && "scale(0.9)"
 
             }}
 

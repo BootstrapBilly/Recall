@@ -89,6 +89,13 @@ export const Add_new = props => {
 
         }
 
+        if (response && response.data.message === "process added successfully") {//if a 201 is detected
+
+            set_current_step("success")
+            set_note_details(response.data.process)
+
+        }
+
     }, [response])
 
     useEffect(() => {
@@ -225,7 +232,7 @@ export const Add_new = props => {
 
                                             : current_step === "success" ?
 
-                                                <Note details={note_details} from_add_form />
+                                                <Note details={note_details} />
 
                                                 : null}
 

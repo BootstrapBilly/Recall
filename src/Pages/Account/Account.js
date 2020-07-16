@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 //css
 import classes from "./Account.module.css"
 
 //components
 import Nav from "../../Shared components/Nav/Nav"
-
-import { useSelector, useDispatch } from "react-redux"
 
 
 export const Account = () => {

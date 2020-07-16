@@ -69,7 +69,7 @@ export const View_all = () => {
                     breakpointCols={handle_column_assignment(notes)}
                     className={classes.my_masonry_grid}
                     columnClassName={classes.my_masonry_grid_column}>
-                    {notes.map((note, index) => <Note key={index} index={index} details={note} />)}
+                    {notes.map((note, index) => <Note key={index} index={index} details={note}/>)}
 
                 </Masonry>
 
