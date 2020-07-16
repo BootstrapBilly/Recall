@@ -127,7 +127,7 @@ export const Note = props => {
 
         if (response && response.data.message === "note deleted successfully") {
 
-            dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_notes"))
+            dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_all"))
             clear_response()//clear the response
 
         }
