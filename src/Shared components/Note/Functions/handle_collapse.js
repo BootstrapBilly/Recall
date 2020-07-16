@@ -1,7 +1,9 @@
-import {disable_edit_mode, collapse_note, collapse_selected_note, collapse_nested_note } from "../../../Store/Actions/1_note_action"
+import {clear_duplicate_title, disable_edit_mode, collapse_note, collapse_selected_note, collapse_nested_note } from "../../../Store/Actions/1_note_action"
 
 //this function is triggered when the user presses the toggle button on an expanded note
-const handle_collapse = (dispatch, props, note_is_selected, note_is_nested_in_collection, selected_note_index) => {
+const handle_collapse = (dispatch, props, note_is_selected, note_is_nested_in_collection, selected_note_index, note_id) => {
+
+    dispatch(clear_duplicate_title(note_id))//remove the note from the array of duplicate titles so it doesn't stay red when collapsed
 
     if(note_is_nested_in_collection) return dispatch(collapse_nested_note(props.details._id, selected_note_index))
 

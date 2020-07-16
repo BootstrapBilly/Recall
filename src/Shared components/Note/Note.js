@@ -31,6 +31,7 @@ import handle_cancel_click from "./Functions/handle_cancel_click"
 import handle_save_click from "./Functions/handle_save_click"
 import handle_collapse from "./Functions/handle_collapse"
 import handle_tag_change from "./Functions/handle_tag_change"
+import handle_edit_click from "./Functions/handle_edit_click"
 import fetch_note_id from "./Functions/fetch_note_id"
 import check_if_note_is_expanded from "./Functions/check_if_note_is_expanded"
 import check_if_note_is_in_edit_mode from "./Functions/check_if_note_is_in_edit_mode"
@@ -126,6 +127,16 @@ export const Note = props => {
 
         }
 
+        if (response && response.data.message === "process updated successfully" && response.data.id === note_id) {//if a success message is detected
+
+            if (response.data.position_changed) { props.handle_position_change() } //if the title has changed, meaning the notes position has changed, re-render every note
+
+            dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_all"))//fetch the notes again with the new data
+
+            dispatch(disable_edit_mode(note_id))//remove the note from the array of edit mode enabled notes
+
+        }
+
         if (response && response.data.message === "note deleted successfully") {
 
             dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_all"))
@@ -205,104 +216,107 @@ export const Note = props => {
 
                 {expanded ?
 
-                    show_delete_confimation ? <DeleteConfirmation cancel_delete={()=> set_show_delete_confirmation(false)} title={show_delete_confimation} note_id={note_id}/>
+                    show_delete_confimation ? <DeleteConfirmation cancel_delete={() => set_show_delete_confirmation(false)} title={show_delete_confimation} note_id={note_id} />
 
-                    : <div className={classes.expanded_content}>
+                        : <div className={classes.expanded_content}>
 
-                        <Body
+                            <Body
 
-                            value={overwritten_values.body === null ? props.details.body : overwritten_values.body}
-                            edit_mode={edit_mode}
-                            handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
-
-                        />
-
-                        {/* If theres syntax present, show a copy code button  */}
-
-                        {props.details.syntax ?
-
-                            <Syntax
-
-                                combine={(props.combine || props.selected) && true}
+                                value={overwritten_values.body === null ? props.details.body : overwritten_values.body}
                                 edit_mode={edit_mode}
-                                syntax={overwritten_values.syntax || props.details.syntax}
-                                handle_syntax_change={(syntax) => set_overwritten_values({ ...overwritten_values, syntax: syntax })}
-                                re_render={re_render}
-                                reset_re_render={() => set_re_render(false)}
-
+                                handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
 
                             />
 
-                            : !props.details.syntax && edit_mode && !is_a_collection ?
+                            {/* If theres syntax present, show a copy code button  */}
+
+                            {props.details.syntax ?
 
                                 <Syntax
 
                                     combine={(props.combine || props.selected) && true}
                                     edit_mode={edit_mode}
-                                    syntax={overwritten_values.syntax || ""}
+                                    syntax={overwritten_values.syntax || props.details.syntax}
                                     handle_syntax_change={(syntax) => set_overwritten_values({ ...overwritten_values, syntax: syntax })}
                                     re_render={re_render}
                                     reset_re_render={() => set_re_render(false)}
-                                    missing
-
 
                                 />
 
-                                : undefined
-                        }
+                                : !props.details.syntax && edit_mode && !is_a_collection ?
 
-                        {props.details.search_tags ? /* If theres search tags present, show them  */
+                                    <Syntax
 
-                            <SearchTags
+                                        combine={(props.combine || props.selected) && true}
+                                        edit_mode={edit_mode}
+                                        syntax={overwritten_values.syntax || ""}
+                                        handle_syntax_change={(syntax) => set_overwritten_values({ ...overwritten_values, syntax: syntax })}
+                                        re_render={re_render}
+                                        reset_re_render={() => set_re_render(false)}
+                                        missing
 
-                                selected={props.selected}
-                                search_tags={props.details.search_tags}
-                                edit_mode={edit_mode}
-                                handle_tag_change={(tags) => handle_tag_change(tags, set_overwritten_values, overwritten_values, set_resize_note)}
-                                re_render={re_render}
-                                reset_re_render={() => set_re_render(false)}
 
-                            />
+                                    />
 
-                            : !props.details.search_tags && edit_mode ? /* If theres no search tags, but edit mode is active, show the add new tag input  */
+                                    : undefined
+                            }
+
+                            {props.details.search_tags ? /* If theres search tags present, show them  */
 
                                 <SearchTags
 
                                     selected={props.selected}
-                                    search_tags={[]}
-                                    edit_mode={true}
+                                    search_tags={props.details.search_tags}
+                                    edit_mode={edit_mode}
                                     handle_tag_change={(tags) => handle_tag_change(tags, set_overwritten_values, overwritten_values, set_resize_note)}
                                     re_render={re_render}
                                     reset_re_render={() => set_re_render(false)}
 
                                 />
-                                : is_a_collection ?
 
-                                    <CollectionNotes notes={props.details.notes} handle_resize={() => set_resize_note(true)} handle_position_change={props.handle_position_change} />
+                                : !props.details.search_tags && edit_mode ? /* If theres no search tags, but edit mode is active, show the add new tag input  */
+
+                                    <SearchTags
+
+                                        selected={props.selected}
+                                        search_tags={[]}
+                                        edit_mode={true}
+                                        handle_tag_change={(tags) => handle_tag_change(tags, set_overwritten_values, overwritten_values, set_resize_note)}
+                                        re_render={re_render}
+                                        reset_re_render={() => set_re_render(false)}
+
+                                    />
 
                                     : undefined
-                        }
+                            }
 
-                        {props.selected || props.combine ? undefined :
+                            {is_a_collection ?
 
-                            <Buttons
+                                <CollectionNotes notes={props.details.notes} handle_resize={() => set_resize_note(true)} handle_position_change={props.handle_position_change} /> : undefined
+                            
+                            }
 
-                                expanded={expanded}
-                                title={props.details.title}
-                                reset_expanded={() => dispatch(collapse_note(note_id))}
+                            {props.selected || props.combine ? undefined :
 
-                                handle_edit_click={() => props.inside_collection ? dispatch(enable_edit_mode_nested(note_id, props.index)) : dispatch(enable_edit_mode(note_id))}
+                                <Buttons
 
-                                edit_mode={edit_mode}
+                                    expanded={expanded}
+                                    title={props.details.title}
+                                    reset_expanded={() => dispatch(collapse_note(note_id))}
 
-                                handle_cancel_click={() => handle_cancel_click(dispatch, note_id, set_overwritten_values, set_re_render, props.inside_collection, props.index)}
+                                    handle_edit_click={() => handle_edit_click(props, note_id, dispatch)}
 
-                                handle_save_click={() => handle_save_click(dispatch, overwritten_values, props)}
-                                handle_delete_click={(title) => set_show_delete_confirmation(title)}
+                                    edit_mode={edit_mode}
 
-                            />}
+                                    handle_cancel_click={() => handle_cancel_click(dispatch, note_id, set_overwritten_values, set_re_render, props.inside_collection, props.index)}
 
-                    </div> : undefined
+                                    handle_save_click={() => handle_save_click(dispatch, overwritten_values, props, is_a_collection)}
+
+                                    handle_delete_click={(title) => set_show_delete_confirmation(title)}
+
+                                />}
+
+                        </div> : undefined
 
                 }
 
@@ -310,7 +324,7 @@ export const Note = props => {
 
                     expanded={expanded}
 
-                    handle_collapse={() => handle_collapse(dispatch, props, props.selected, props.inside_collection, props.index)}
+                    handle_collapse={() => handle_collapse(dispatch, props, props.selected, props.inside_collection, props.index, note_id)}
 
                     handle_expand={() => {
 
