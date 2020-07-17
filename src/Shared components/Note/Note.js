@@ -62,7 +62,7 @@ export const Note = props => {
     const note_id = fetch_note_id(response, props)//get the id of the note
     const edit_mode = check_if_note_is_in_edit_mode(props, edit_mode_enabled_notes, edit_mode_enabled_nested_notes, note_id)
     const expanded = check_if_note_is_expanded(props, expanded_nested_notes, expanded_selected_notes, expanded_notes, note_id)
-    const duplicate_title = duplicate_titles.find(title => title === note_id)//check if the instance of this note is in the array of duplicates
+    const duplicate_title = duplicate_titles.find(note => note.id === note_id && note.index === props.index)//check if the instance of this note is in the array of duplicates
 
     //*states
     const [height, set_height] = useState(0)//dynamically set the height of the note to be animated upon expansion to fit content without a predefined height
@@ -106,10 +106,14 @@ export const Note = props => {
 
         if (response && response.data.message === "You already have a note with that title, please choose another") {
 
+            console.log(response)
+
             //if the id on the response matches the id on the note, add the note to the array of duplicate titles to be displayed
-            if (response.data.id === note_id) { dispatch(set_duplicate_title(note_id)) }
+            if (response.data.id === note_id && response.data.index === props.index) { dispatch(set_duplicate_title(note_id, props.index)) }
 
             alert("You already have a note with that title, please choose another", "error")
+
+            dispatch(clear_response())
         }
         // eslint-disable-next-line 
     }, [response])
@@ -134,6 +138,17 @@ export const Note = props => {
             dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_all"))//fetch the notes again with the new data
 
             dispatch(disable_edit_mode(note_id))//remove the note from the array of edit mode enabled notes
+
+            set_overwritten_values({// a state to hold the note information to be submitted to the backend for editing purposes
+
+                title: null,
+                subject: null,
+                search_tags: null,
+                body: null,
+                syntax: null,
+                notes: []
+
+            })
 
         }
 
@@ -196,7 +211,7 @@ export const Note = props => {
                             id={note_id}
                             duplicate_title={duplicate_title}
                             //remove the title from the array of duplicate titles in the reducer
-                            handle_clear_duplicate_title={() => dispatch(clear_duplicate_title(note_id))}
+                            handle_clear_duplicate_title={() => dispatch(clear_duplicate_title(note_id, props.index))}
 
                         />
 
@@ -216,7 +231,7 @@ export const Note = props => {
 
                 {expanded ?
 
-                    show_delete_confimation ? <DeleteConfirmation cancel_delete={() => set_show_delete_confirmation(false)} title={show_delete_confimation} note_id={note_id} />
+                    show_delete_confimation ? <DeleteConfirmation cancel_delete={() => set_show_delete_confirmation(false)} title={show_delete_confimation} note_id={note_id} is_a_collection={is_a_collection} />
 
                         : <div className={classes.expanded_content}>
 
@@ -293,7 +308,7 @@ export const Note = props => {
                             {is_a_collection ?
 
                                 <CollectionNotes notes={props.details.notes} handle_resize={() => set_resize_note(true)} handle_position_change={props.handle_position_change} /> : undefined
-                            
+
                             }
 
                             {props.selected || props.combine ? undefined :
@@ -324,7 +339,7 @@ export const Note = props => {
 
                     expanded={expanded}
 
-                    handle_collapse={() => handle_collapse(dispatch, props, props.selected, props.inside_collection, props.index, note_id)}
+                    handle_collapse={() => handle_collapse(dispatch, props, props.selected, props.inside_collection, props.index, note_id, is_a_collection)}
 
                     handle_expand={() => {
 

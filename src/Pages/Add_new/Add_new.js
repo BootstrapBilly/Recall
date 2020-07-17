@@ -259,7 +259,7 @@ export const Add_new = props => {
                             marginTop={"20px"}
                             type={form_navigation_buttons}
                             on_click={(direction) => handle_form_navigation(direction, props.form_type, current_step, set_current_step, form_data, dispatch)}
-                            handle_reset={() => reset_form(set_current_step, set_form_data, set_form_navigation_buttons)}
+                            handle_reset={() => reset_form(set_current_step, set_form_data, set_form_navigation_buttons, form_data)}
                             
                         />
 

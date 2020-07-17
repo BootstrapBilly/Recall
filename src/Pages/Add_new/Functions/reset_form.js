@@ -1,6 +1,8 @@
-const reset_form = (set_current_step, set_form_data, set_show_form_navigation_buttons) => {//used to reset the form back to the type selection (1st screen note or collection)
+const reset_form = (set_current_step, set_form_data, set_show_form_navigation_buttons, form_data) => {//used to reset the form back to the type selection (1st screen note or collection)
 
-    set_current_step("title")//set the step back to selection
+    if (form_data.selected_notes.length) set_current_step("note_selection")//set the step back to selection
+
+    else set_current_step("title")//set the step back to selection
 
     set_form_data({//reset all the form data to default
 

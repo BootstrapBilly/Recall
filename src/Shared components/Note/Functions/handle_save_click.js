@@ -29,7 +29,8 @@ const handle_save_click = (dispatch, overwritten_values, props, is_a_collection)
         new_body: overwritten_values.body || props.details.body,
         new_search_tags: overwritten_values.search_tags || props.details.search_tags,
         new_syntax: overwritten_values.syntax || props.details.syntax,
-        filter: props.filter
+        filter: props.filter,
+        index:props.index
     }
         , "update_note"))
 

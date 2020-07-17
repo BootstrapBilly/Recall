@@ -39,8 +39,6 @@ export const Collection_notes = props => {
 
     }
 
-    console.log("render")
-    
     return (
 
         <div className={classes.container} style={{ height: `${height}px` }}>

@@ -60,7 +60,7 @@ input:focus::placeholder {
     position: relative;
     left: 10px;
     font-weight: 900;
-    z-index: 10;
+    z-index: 20;
     animation: fade-in .6s ease-in forwards;
     animation-delay: 0.1s;
     opacity: 0;

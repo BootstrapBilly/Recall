@@ -27,7 +27,7 @@ export const Delete_confirmation = props => {
             <div className={classes.button_container}>
 
                 <div className={classes.button} style={{ background: colours.secondary }} onClick={props.cancel_delete}>NO - GO BACK</div>
-                <div className={classes.button} style={{ background: "#ff3333" }} onClick={() => handle_delete_click(dispatch, props.title, props.note_id, props)}>YES - DELETE IT</div>
+                <div className={classes.button} style={{ background: "#ff3333" }} onClick={() => handle_delete_click(dispatch, props.title, props.note_id, props, props.is_a_collection)}>YES - DELETE IT</div>
 
             </div>
 

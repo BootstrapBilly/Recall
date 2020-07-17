@@ -65,11 +65,11 @@ const handle_note_toggle = (state = initialState, action) => {
 
         case SET_DUPLICATE_TITLE:
 
-            return { ...state, duplicate_titles: [...state.duplicate_titles, action.payload] }
+            return { ...state, duplicate_titles: [...state.duplicate_titles, {id:action.payload.id, index:action.payload.index}] }
 
         case CLEAR_DUPLICATE_TITLE:
 
-            return { ...state, duplicate_titles: [...state.duplicate_titles.filter(title => title !== action.payload)] }
+            return { ...state, duplicate_titles: [...state.duplicate_titles.filter(note => note.index !== action.payload.index)] }
 
         default:
 

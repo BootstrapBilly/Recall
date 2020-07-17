@@ -235,13 +235,16 @@ export const disable_edit_mode_nested = (note_id, index) => {
 }
 
 
-export const set_duplicate_title = (note_id) => {
+export const set_duplicate_title = (note_id, index) => {
+
+    console.log(note_id)
+    console.log(index)
 
     return async dispatch => {
 
         try {
 
-            return dispatch({ type: SET_DUPLICATE_TITLE, payload: note_id })
+            return dispatch({ type: SET_DUPLICATE_TITLE, payload: {id:note_id, index:index}})
 
         }
 
@@ -255,13 +258,13 @@ export const set_duplicate_title = (note_id) => {
 
 }
 
-export const clear_duplicate_title = (note_id) => {
+export const clear_duplicate_title = (note_id, index) => {
 
     return async dispatch => {
 
         try {
 
-            return dispatch({ type: CLEAR_DUPLICATE_TITLE, payload: note_id })
+            return dispatch({ type: CLEAR_DUPLICATE_TITLE, payload: {id:note_id, index:index}})
 
         }
 

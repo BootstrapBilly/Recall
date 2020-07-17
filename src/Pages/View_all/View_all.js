@@ -41,10 +41,7 @@ export const View_all = () => {
 
     useEffect(() => {
 
-
         if (response && response.data.notes) {
-
-            // console.log(response.data)
 
             switch (filter) {
 
@@ -61,26 +58,33 @@ export const View_all = () => {
     useEffect(() => {
 
         if (position_change) {
+            
+            set_position_change(false)
 
             switch (filter) {
 
-                case "All":  set_notes(response.data.both)
-                case "Notes":  set_notes(response.data.notes)
-                case "Collections":  set_notes(response.data.processes)
-                default:  set_notes(response.data.both)
-            }
-
-            return set_position_change(false)
+                case "All": return set_notes(response.data.both)
+                case "Notes": return set_notes(response.data.notes)
+                case "Collections": return  set_notes(response.data.processes)
+                default: return  set_notes(response.data.both)
+            } 
 
         }
         
     },[position_change])
 
+    const handle_toggle_click = link => {
+
+        set_filter(link)
+        dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_all")) 
+
+    }
+
     return (
 
         <div className={classes.container}>
 
-            <TopBar handle_search_input={(string) => filter_notes_by_search(dispatch, string)} handle_toggle={(link) => set_filter(link)}
+            <TopBar handle_search_input={(string) => filter_notes_by_search(dispatch, string)} handle_toggle={(link) => handle_toggle_click(link)}
             />
 
             {notes &&
