@@ -32,6 +32,7 @@ import handle_save_click from "./Functions/handle_save_click"
 import handle_collapse from "./Functions/handle_collapse"
 import handle_tag_change from "./Functions/handle_tag_change"
 import handle_edit_click from "./Functions/handle_edit_click"
+import handle_response from "./Functions/handle_response"
 import fetch_note_id from "./Functions/fetch_note_id"
 import check_if_note_is_expanded from "./Functions/check_if_note_is_expanded"
 import check_if_note_is_in_edit_mode from "./Functions/check_if_note_is_in_edit_mode"
@@ -86,11 +87,7 @@ export const Note = props => {
 
     //called everytime a note is expanded or collapsed, the height of the div is extracted and set in the height state to resize the note
     // eslint-disable-next-line 
-    useEffect(() => {
-
-        set_height(ref.current.clientHeight)
-
-    })
+    useEffect(() => {set_height(ref.current.clientHeight)})
 
     // eslint-disable-next-line 
     useEffect(() => {//this is triggered by the handle_tag_change function which sets the resize state to true
@@ -102,65 +99,8 @@ export const Note = props => {
 
     }, [resize_note])
 
-    useEffect(() => {//this effect is triggered when they try to change a title to one that is already in use
-
-        if (response && response.data.message === "You already have a note with that title, please choose another") {
-
-            console.log(response)
-
-            //if the id on the response matches the id on the note, add the note to the array of duplicate titles to be displayed
-            if (response.data.id === note_id && response.data.index === props.index) { dispatch(set_duplicate_title(note_id, props.index)) }
-
-            alert("You already have a note with that title, please choose another", "error")
-
-            dispatch(clear_response())
-        }
-        // eslint-disable-next-line 
-    }, [response])
-
-    //this is triggered upon a success response after editing/deleting a note //*success responses
-    useEffect(() => {//used to update the note instantly after editing it
-
-        if (response && response.data.message === "note updated successfully" && response.data.id === note_id) {//if a success message is detected
-
-            if (response.data.position_changed) { props.handle_position_change() } //if the title has changed, meaning the notes position has changed, re-render every note
-
-            dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_all"))//fetch the notes again with the new data
-
-            props.inside_collection ? dispatch(disable_edit_mode_nested(note_id, props.index)) : dispatch(disable_edit_mode(note_id))//remove the note from the array of edit mode enabled notes
-
-        }
-
-        if (response && response.data.message === "process updated successfully" && response.data.id === note_id) {//if a success message is detected
-
-            if (response.data.position_changed) { props.handle_position_change() } //if the title has changed, meaning the notes position has changed, re-render every note
-
-            dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_all"))//fetch the notes again with the new data
-
-            dispatch(disable_edit_mode(note_id))//remove the note from the array of edit mode enabled notes
-
-            set_overwritten_values({// a state to hold the note information to be submitted to the backend for editing purposes
-
-                title: null,
-                subject: null,
-                search_tags: null,
-                body: null,
-                syntax: null,
-                notes: []
-
-            })
-
-        }
-
-        if (response && response.data.message === "note deleted successfully") {
-
-            dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_all"))
-            clear_response()//clear the response
-
-        }
-
-        //eslint-disable-next-line
-    }, [response])
+    //this effect listens for an api response and passes the handling of it to the handle_response function 
+    useEffect(() => {handle_response(response, note_id, props, set_overwritten_values, dispatch)}, [response])
 
     return (
 
@@ -191,7 +131,6 @@ export const Note = props => {
                 >
 
                 </div> : undefined
-
 
             }
 
@@ -243,9 +182,7 @@ export const Note = props => {
 
                             />
 
-                            {/* If theres syntax present, show a copy code button  */}
-
-                            {props.details.syntax ?
+                            {props.details.syntax ? /* If theres syntax present, show a copy code button  */
 
                                 <Syntax
 

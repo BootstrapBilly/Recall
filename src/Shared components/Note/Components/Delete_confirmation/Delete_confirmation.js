@@ -21,7 +21,14 @@ export const Delete_confirmation = props => {
 
         <div className={classes.container}>
 
-            <span className={classes.prompt_text}>You are about to delete this note and remove it from all collections which have it as a step.</span>
+            {props.is_a_collection ?
+
+                <span className={classes.prompt_text}>You are about to delete this collection, the notes inside will not be deleted.</span>
+
+                : <span className={classes.prompt_text}>You are about to delete this note and remove it from all collections which have it as a step.</span>
+
+            }
+
             <span className={classes.are_you_sure} style={{ color: colours.primary }}>Are you sure ?</span>
 
             <div className={classes.button_container}>
