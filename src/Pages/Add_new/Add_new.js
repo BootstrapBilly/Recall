@@ -34,6 +34,7 @@ export const Add_new = props => {
 
     //?selectors
     const response = useSelector(state => state.form.response)//grab the form submission response from the reducer
+    const user_id = useSelector(state => state.auth.user_id)//grab the user id from the reducer
 
     //*states
     //state to hold the current step of the form, if theyre adding a note it starts on title, if theyre adding a collection, it starts on note_selection
@@ -100,13 +101,23 @@ export const Add_new = props => {
 
     useEffect(() => {
 
-        if (response && response.data.message === "note deleted successfully") { reset_form(set_current_step, set_form_data, set_form_navigation_buttons) }
+        if (response && response.data.message === "note deleted successfully") { reset_form(set_current_step, set_form_data, set_form_navigation_buttons, form_data) }
+
+        if (response && response.data.message === "process deleted successfully") { reset_form(set_current_step, set_form_data, set_form_navigation_buttons, form_data) }
 
         if (response && response.data.message === "note updated successfully") {
 
             set_note_details({ ...response.data.note, title: response.data.title })
 
             dispatch(disable_edit_mode(response.data.note._id))//remove the note from the array of edit mode enabled notes
+
+        }
+
+        if (response && response.data.message === "process updated successfully") {
+
+            set_note_details({ ...response.data.process, title: response.data.title})
+
+            dispatch(disable_edit_mode(response.data.process._id))//remove the process from the array of edit mode enabled notes
 
         }
         // eslint-disable-next-line
@@ -232,7 +243,7 @@ export const Add_new = props => {
 
                                             : current_step === "success" ?
 
-                                                <Note details={note_details} />
+                                                <Note details={note_details} handle_position_change={()=> undefined}/>
 
                                                 : null}
 
@@ -258,7 +269,7 @@ export const Add_new = props => {
                             width="275px"
                             marginTop={"20px"}
                             type={form_navigation_buttons}
-                            on_click={(direction) => handle_form_navigation(direction, props.form_type, current_step, set_current_step, form_data, dispatch)}
+                            on_click={(direction) => handle_form_navigation(direction, props.form_type, current_step, set_current_step, form_data, dispatch, user_id)}
                             handle_reset={() => reset_form(set_current_step, set_form_data, set_form_navigation_buttons, form_data)}
                             
                         />

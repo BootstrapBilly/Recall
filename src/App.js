@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 //components
 import Auth from "./Pages/Auth/Auth"
@@ -13,7 +13,25 @@ import Account from "./Pages/Account/Account"
 //external
 import { BrowserRouter, Switch, Route } from "react-router-dom"
 
+//redux hooks
+import {useDispatch} from "react-redux"
+
+//redux action creators
+import {handle_successful_login} from "./Store/Actions/2_authentication_action"
+
 const App = () => {
+
+  const dispatch = useDispatch()
+
+  useEffect(()=> {
+
+    if(window.localStorage.getItem("user_id")){
+
+        dispatch(handle_successful_login(window.localStorage.getItem("token"), window.localStorage.getItem("user_id")))
+
+    }
+
+})
   
   return (
 

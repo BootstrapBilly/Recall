@@ -44,7 +44,7 @@ export const Input = props => {
                     : {//otherwise handle the styles here
 
                         border: props.grey && input_focused ? "1px solid grey"//grey input (indicates optional input)
-                            : input_focused ? `1px solid ${colours.primary}`//required input
+                            : input_focused ? `1px solid ${colours.secondary}`//required input
                                 : erroneous_field === props.label ? `3px solid red`//erroneus field, set the border to red
                                     : "transparent",
 

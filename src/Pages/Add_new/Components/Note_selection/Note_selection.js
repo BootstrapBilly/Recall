@@ -26,6 +26,7 @@ export const Note_selection = props => {
 
     //?selectors
     const response = useSelector(state => state.form.response)//grab the response from the api
+    const user_id = useSelector(state => state.auth.user_id)//grab the user id from the reducer
 
     //*states
     const [notes, set_notes] = useState([])//hold the notes to be displayed, all fetched initially, manipulated by searching and the toggle links
@@ -43,7 +44,7 @@ export const Note_selection = props => {
         if (search_value === "") set_notes([])//if its empty, render nothing
 
         //otherwise, run the search query on the backend (the response is handled by the next effect)
-        if (search_value) filter_notes_by_search(dispatch, search_value)
+        if (search_value) filter_notes_by_search(dispatch, search_value, user_id)
         // eslint-disable-next-line
     }, [search_value])
 

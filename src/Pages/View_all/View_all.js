@@ -26,6 +26,7 @@ export const View_all = () => {
 
     //?selectors
     const response = useSelector(state => state.form.response)//grab the response from the api
+    const user_id = useSelector(state => state.auth.user_id)//grab the user id from the reducer
 
     //-config
     const dispatch = useDispatch()//initialise the usedispatch hook
@@ -37,7 +38,7 @@ export const View_all = () => {
 
     //!Effects
     // eslint-disable-next-line
-    useEffect(() => { dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_all")) }, [])//fetch the notes on the first render of the page
+    useEffect(() => { dispatch(submit_form({ user_id: user_id }, "get_all")) }, [])//fetch the notes on the first render of the page
 
     useEffect(() => {
 
@@ -76,7 +77,7 @@ export const View_all = () => {
     const handle_toggle_click = link => {
 
         set_filter(link)
-        dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_all")) 
+        dispatch(submit_form({ user_id: user_id}, "get_all")) 
 
     }
 
@@ -84,7 +85,7 @@ export const View_all = () => {
 
         <div className={classes.container}>
 
-            <TopBar handle_search_input={(string) => filter_notes_by_search(dispatch, string)} handle_toggle={(link) => handle_toggle_click(link)}
+            <TopBar handle_search_input={(string) => filter_notes_by_search(dispatch, string, user_id)} handle_toggle={(link) => handle_toggle_click(link)}
             />
 
             {notes &&

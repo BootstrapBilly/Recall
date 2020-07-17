@@ -12,7 +12,7 @@ The last step of the form submits a new note request with all the info */
 
 import { submit_form } from "../Store/Actions/0_submit_form_action"
 
-const handle_form_navigation = (direction, form_type, form_step, set_form_step, form_data, dispatch, set_notes_search_string) => {
+const handle_form_navigation = (direction, form_type, form_step, set_form_step, form_data, dispatch, user_id) => {
 
     switch (form_step) {//switch the current step of the form
 
@@ -31,7 +31,7 @@ const handle_form_navigation = (direction, form_type, form_step, set_form_step, 
 
                 //submit the title to the backend, to see if it is valid and wait for the response 
                 //success (handled by line 105 add_new.js), error handled by the input component (line 53)
-                return dispatch(submit_form({ title: form_data.title, user_id: "5eecd941331a770017a74e44" }, "check_note_title"))
+                return dispatch(submit_form({ title: form_data.title, user_id: user_id }, "check_note_title"))
 
             }
 
@@ -41,14 +41,14 @@ const handle_form_navigation = (direction, form_type, form_step, set_form_step, 
                 //submit the title to the backend, to see if it is valid and wait for the response 
                 //success (handled by line 105 add_new.js), error handled by the input component (line 53)
 
-                return dispatch(submit_form({ title: form_data.title, user_id: "5eecd941331a770017a74e44" }, "check_process_title"))
+                return dispatch(submit_form({ title: form_data.title, user_id: user_id }, "check_process_title"))
 
             }
 
             //otherwise, they are adding a collection
             //submit the title to the backend to see if that note title is already in use, wait for the response
             //success (handled by line 105 add_new.js), error handled by the input component (line 53)
-            // else return dispatch(submit_form({ title: form_data.title, user_id: "5eecd941331a770017a74e44" }, "check_process_title"))
+            // else return dispatch(submit_form({ title: form_data.title, user_id: user_id }, "check_process_title"))
 
             break;
 
@@ -74,12 +74,7 @@ const handle_form_navigation = (direction, form_type, form_step, set_form_step, 
             //and they press the back button, navigate back to the body step
             if (direction === "back") return set_form_step("body")
 
-            
-
-            else 
-            
-            console.log(form_data)
-            return dispatch(submit_form({ ...form_data, user_id: "5eecd941331a770017a74e44" }, "processes"))
+            else return dispatch(submit_form({ ...form_data, user_id: user_id }, "processes"))
 
         case "syntax"://if they are on the syntax step (note only)
 
@@ -87,7 +82,7 @@ const handle_form_navigation = (direction, form_type, form_step, set_form_step, 
             if (direction === "back") return set_form_step("optionals")
 
             //otherwise, submit the request to add a new note
-            else return dispatch(submit_form({ ...form_data, user_id: "5eecd941331a770017a74e44" }, "notes"))
+            else return dispatch(submit_form({ ...form_data, user_id: user_id }, "notes"))
 
         default: return
 

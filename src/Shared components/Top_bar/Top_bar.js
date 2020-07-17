@@ -48,7 +48,7 @@ export const Top_bar = props => {
                         <span
 
                             className={classes.toggle_link}
-                            style={{ color: `${active_toggle_link === link ? colours.secondary : `${colours.secondary}BF`}` }}
+                            style={{ color: `${active_toggle_link === link ? colours.primary : `${colours.primary}BF`}` }}
                             onClick={() => handle_toggle_filter(link)}
                             key={link}
 

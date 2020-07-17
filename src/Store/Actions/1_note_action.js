@@ -12,7 +12,6 @@ export const DISABLE_EDIT_MODE_NESTED = "DISABLE_EDIT_MODE_NESTED";
 export const SET_DUPLICATE_TITLE = "SET_DUPLICATE_TITLE";
 export const CLEAR_DUPLICATE_TITLE = "CLEAR_DUPLICATE_TITLE";
 
-
 export const expand_note = (note_id) => {
 
     return async dispatch => {

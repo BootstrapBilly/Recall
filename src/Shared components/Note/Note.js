@@ -50,6 +50,7 @@ export const Note = props => {
 
     //?selectors
     const response = useSelector(state => state.form.response)//grab the response from the api
+    const user_id = useSelector(state => state.auth.user_id)//grab the user id from the reducer
     const expanded_notes = useSelector(state => state.note.expanded_notes)//grab the array of expanded notes from the reducer
     const expanded_selected_notes = useSelector(state => state.note.expanded_selected_notes)//grab the array of expanded notes from the reducer
     const expanded_nested_notes = useSelector(state => state.note.expanded_nested_notes)//grab the array of expanded notes from the reducer
@@ -100,7 +101,7 @@ export const Note = props => {
     }, [resize_note])
 
     //this effect listens for an api response and passes the handling of it to the handle_response function 
-    useEffect(() => {handle_response(response, note_id, props, set_overwritten_values, dispatch)}, [response])
+    useEffect(() => {handle_response(response, note_id, props, set_overwritten_values, dispatch, user_id)}, [response])
 
     return (
 
@@ -262,7 +263,7 @@ export const Note = props => {
 
                                     handle_cancel_click={() => handle_cancel_click(dispatch, note_id, set_overwritten_values, set_re_render, props.inside_collection, props.index)}
 
-                                    handle_save_click={() => handle_save_click(dispatch, overwritten_values, props, is_a_collection)}
+                                    handle_save_click={() => handle_save_click(dispatch, overwritten_values, props, is_a_collection, user_id)}
 
                                     handle_delete_click={(title) => set_show_delete_confirmation(title)}
 

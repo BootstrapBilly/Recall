@@ -19,14 +19,12 @@ import { useDispatch, useSelector } from "react-redux"
 
 //redux action creators
 import { submit_form } from "../../Store/Actions/0_submit_form_action"
+import {handle_successful_login} from "../../Store/Actions/2_authentication_action"
 
 //functions
 import toggle_input from "./Functions/toggle_input"
 
 export const Auth = () => {
-
-    console.log(window.innerHeight)
-    console.log(window.innerWidth)
 
     //-config
     const dispatch = useDispatch()//initialise the usedispatch hook
@@ -40,12 +38,21 @@ export const Auth = () => {
     const [facebook_response_data, set_facebook_response_data] = useState(null)// a state to hold the response data from facebook
 
     //!effects
+
+    useEffect(()=> {if(window.localStorage.getItem("user_id")) set_redirect("/dashboard")})
+
     useEffect(() => {
 
         if (response) {//if there is a form response
 
             //and it is a successul signup/login, redirect the user to the dashboard
-            if (response.data.message === "User created" || response.data.message === "Login successful") { set_redirect("/dashboard") }
+            if (response.data.message === "User created" || response.data.message === "Login successful") { 
+                
+                dispatch(handle_successful_login(response.data.token, response.data.user_id))
+
+                set_redirect("/dashboard")
+            
+            }
 
         }
     }, [response])//listen for any form response changes
@@ -100,7 +107,7 @@ export const Auth = () => {
 
                         test_handle="signup_button"
                         text={"Sign up for an account"}
-                        background_color={colours.primary}
+                        background_color={colours.secondary}
                         icon_name="user.svg"
                         onClick={() => toggle_input("signup", show_input, set_show_input)}
 

@@ -1,4 +1,13 @@
 .container{
     height: 100%;
-    background-color: red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item{
+    background-color: violet;
+    height: 50px;
+    width: 200px;
+    margin-top: 20px;
 }

@@ -1,13 +1,13 @@
 import { submit_form } from "../../../Store/Actions/0_submit_form_action"
 
 //This function is triggered when the user presses the save button during edit mode
-const handle_save_click = (dispatch, overwritten_values, props, is_a_collection) => {
+const handle_save_click = (dispatch, overwritten_values, props, is_a_collection, user_id) => {
 
     if (is_a_collection) {
 
         return dispatch(submit_form({//the current values of the form are saved into the overwritten_values state, then submited to the backend for processing
 
-            user_id: "5eecd941331a770017a74e44",
+            user_id: user_id,
             title: props.details.title,
             new_title: overwritten_values.title || props.details.title,
             new_subject: overwritten_values.subject || props.details.subject,
@@ -22,7 +22,7 @@ const handle_save_click = (dispatch, overwritten_values, props, is_a_collection)
 
     else return dispatch(submit_form({//the current values of the form are saved into the overwritten_values state, then submited to the backend for processing
 
-        user_id: "5eecd941331a770017a74e44",
+        user_id: user_id,
         title: props.details.title,
         new_title: overwritten_values.title || props.details.title,
         new_subject: overwritten_values.subject || props.details.subject,

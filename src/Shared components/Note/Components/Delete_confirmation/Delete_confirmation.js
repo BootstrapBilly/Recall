@@ -7,15 +7,18 @@ import classes from './Delete_confirmation.module.css'
 import colours from '../../../../util/colours'
 
 //redux hooks
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 //functions
 import handle_delete_click from "./Function/handle_delete_click"
 
 export const Delete_confirmation = props => {
 
-    //config
+    //_config
     const dispatch = useDispatch()
+
+    //?selectors
+    const user_id = useSelector(state => state.auth.user_id)
 
     return (
 
@@ -34,7 +37,7 @@ export const Delete_confirmation = props => {
             <div className={classes.button_container}>
 
                 <div className={classes.button} style={{ background: colours.secondary }} onClick={props.cancel_delete}>NO - GO BACK</div>
-                <div className={classes.button} style={{ background: "#ff3333" }} onClick={() => handle_delete_click(dispatch, props.title, props.note_id, props, props.is_a_collection)}>YES - DELETE IT</div>
+                <div className={classes.button} style={{ background: "#ff3333" }} onClick={() => handle_delete_click(dispatch, props.title, props.note_id, props, props.is_a_collection, user_id)}>YES - DELETE IT</div>
 
             </div>
 

@@ -17,27 +17,15 @@ export const Dashboard = () => {
 
     const dispatch = useDispatch()
 
-    const [notes, set_notes] = useState([])
-
+    //?selectors
     const response = useSelector(state => state.form.response)
+    const user_id = useSelector(state => state.auth.user_id)
 
-    useEffect(() => {
-     
-        dispatch(submit_form({ user_id: "5eecd941331a770017a74e44"}, "get_notes",))
-// eslint-disable-next-line
-    },[])
-
-    useEffect(()=> {
-
-        if(response){ set_notes(response.data.notes)}
-
-    }, [response])
+    console.log(user_id)
 
     return (
 
         <div className={classes.container}>
-
-            {notes && notes.map((note,index) => <NoteDetail index={index} details={note} />)}
 
             <Nav />
 

@@ -36,18 +36,20 @@
    id="namedview17"
    showgrid="false"
    inkscape:zoom="0.921875"
-   inkscape:cx="204.60364"
+   inkscape:cx="-517.83704"
    inkscape:cy="91.137349"
    inkscape:window-x="-8"
    inkscape:window-y="-8"
    inkscape:window-maximized="1"
    inkscape:current-layer="Capa_1" /><g
    id="g6"
-   transform="matrix(1,0,0,1.0550847,2.4802552e-7,-11.233986)">
+   transform="matrix(1,0,0,1.0550847,2.4802552e-7,-11.233986)"
+   style="fill:#c8c8c8;fill-opacity:1">
 	<g
-   id="g4">
+   id="g4"
+   style="fill:#c8c8c8;fill-opacity:1">
 		<path
-   style="fill:#ff4500"
+   style="fill:#c8c8c8;fill-opacity:1"
    inkscape:connector-curvature="0"
    id="path2"
    data-old_color="#000000"

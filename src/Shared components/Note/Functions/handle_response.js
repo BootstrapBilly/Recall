@@ -3,7 +3,7 @@ import {set_duplicate_title, disable_edit_mode, disable_edit_mode_nested} from "
 
 import alert from "easyalert"
 
-const handle_response = (response, note_id, props, set_overwritten_values, dispatch) => {
+const handle_response = (response, note_id, props, set_overwritten_values, dispatch, user_id) => {
 
     //!Duplicate title
     if (response && response.data.message === "You already have a note with that title, please choose another") {
@@ -22,7 +22,7 @@ const handle_response = (response, note_id, props, set_overwritten_values, dispa
 
         if (response.data.position_changed) { props.handle_position_change() } //if the title has changed, meaning the notes position has changed, re-render every note
 
-        dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_all"))//fetch the notes again with the new data
+        dispatch(submit_form({ user_id: user_id }, "get_all"))//fetch the notes again with the new data
 
         props.inside_collection ? dispatch(disable_edit_mode_nested(note_id, props.index)) : dispatch(disable_edit_mode(note_id))//remove the note from the array of edit mode enabled notes
 
@@ -44,7 +44,7 @@ const handle_response = (response, note_id, props, set_overwritten_values, dispa
 
         if (response.data.position_changed) { props.handle_position_change() } //if the title has changed, meaning the notes position has changed, re-render every note
 
-        dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_all"))//fetch the notes again with the new data
+        dispatch(submit_form({ user_id: user_id }, "get_all"))//fetch the notes again with the new data
 
         dispatch(disable_edit_mode(note_id))//remove the note from the array of edit mode enabled notes
 
@@ -64,7 +64,7 @@ const handle_response = (response, note_id, props, set_overwritten_values, dispa
     //=note deleted
     if (response && response.data.message === "note deleted successfully") {
 
-        dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_all"))
+        dispatch(submit_form({ user_id: user_id }, "get_all"))
         clear_response()//clear the response
 
     }
@@ -72,7 +72,7 @@ const handle_response = (response, note_id, props, set_overwritten_values, dispa
     //_collection deleted
     if (response && response.data.message === "process deleted successfully") {
 
-        dispatch(submit_form({ user_id: "5eecd941331a770017a74e44" }, "get_all"))
+        dispatch(submit_form({ user_id: user_id }, "get_all"))
         clear_response()//clear the response
 
     }

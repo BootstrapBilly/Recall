@@ -14,7 +14,7 @@ export const Tag = props => {
 
             test_handle={`${props.text.toUpperCase()}`}
             className={classes.container}
-            style={{ border: `1px solid ${props.selected ? "white" : colours.primary}`, color: props.selected ? "white" : colours.primary }}
+            style={{ border: `1px solid ${props.selected ? "white" : colours.secondary}`, color: props.selected ? "white" : colours.secondary }}
             onClick={props.edit_mode && props.handle_tag_removal.bind(this, props.text)}
 
         >
@@ -22,7 +22,7 @@ export const Tag = props => {
             {props.text.toUpperCase()}
 
             {/* If edit mode is enabled, show a cross to tell the user they can delete it */}
-            {props.edit_mode && <div className={classes.cross} style={{ background: colours.primary }}>X</div>}
+            {props.edit_mode && <div className={classes.cross} style={{ background: colours.secondary }}>X</div>}
 
         </div>
 
