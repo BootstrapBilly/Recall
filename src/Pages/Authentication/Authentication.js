@@ -15,20 +15,21 @@ export const Authentication = () => {
 
     return (
 
-        <div className={classes.container}>
+        <React.Fragment>
 
-            {
-                content === "landing" ?
+            <div className={classes.container}>
 
-                    <Landing handle_go_forward={()=> set_content("form")} />
-                    
-                    : content === "form" &&
+                <div className={[classes.landing_container, content === "landing" && classes.landing_in_view].join(" ")}>
+                    <Landing handle_go_forward={() => set_content("form")} />
+                </div>
 
-                    <AuthForm  handle_go_back={()=> set_content("landing")}/>
+                <div className={[classes.form_container, content === "form" && classes.form_in_view].join(" ")}>
+                    <AuthForm handle_go_back={() => set_content("landing")} />
+                </div>
 
-            }
+            </div>
 
-        </div>
+        </React.Fragment>
 
     )
 

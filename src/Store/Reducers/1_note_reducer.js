@@ -48,8 +48,7 @@ const handle_note_toggle = (state = initialState, action) => {
             return { ...state, expanded_notes: [] }
 
         case ENABLE_EDIT_MODE:
-            
-            console.log("inside")
+
             return { ...state, edit_mode_notes: [...state.edit_mode_notes, action.payload] }
 
         case ENABLE_EDIT_MODE_NESTED:
@@ -63,8 +62,6 @@ const handle_note_toggle = (state = initialState, action) => {
             return { ...state, edit_mode_notes: [...state.edit_mode_notes.filter(note => note !== action.payload)] }
 
         case DISABLE_EDIT_MODE_NESTED:
-
-            console.log("inside")
 
             return { ...state, edit_mode_nested_notes: [...state.edit_mode_nested_notes.filter(note => note.index !== action.payload.index)] }
 

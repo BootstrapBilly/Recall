@@ -13,7 +13,7 @@ import capitalizeFirstChar from '../../../../util/capitalize_first'
 
 export const Auth_form = props => {
 
-    const [current_action, set_current_action] = useState("login")
+    const [current_action, set_current_action] = useState("signup")
 
     const [user_details, set_user_details] = useState({//stores the user details and controls each input in the form
         email: "",

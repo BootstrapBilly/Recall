@@ -1,4 +1,4 @@
-.container{
+.container {
     width: 240px;
     background-color: whitesmoke;
     padding: 8px 5px;
@@ -10,12 +10,12 @@
     border: 1px solid;
 }
 
-.label{
+.label {
     font-size: 15px;
     font-weight: bold;
 }
 
-.input{
+.input {
     border: none;
     outline: none;
     display: flex;
@@ -26,24 +26,22 @@
     height: 20px;
 }
 
-.input::placeholder{
+.input::placeholder {
     color: rgba(0, 0, 0, 0.258);
     font-size: 14px;
     text-align: left;
-    position: relative;
-    left: -2px;
     top: 3px;
 }
 
-.input:focus::placeholder{
+.input:focus::placeholder {
     color: transparent;
 }
 
-.text_area{
+.text_area {
     line-height: 24px;
     box-sizing: border-box;
-	overflow: auto;
-	height: auto;
+    overflow: auto;
+    height: auto;
     border: none;
     outline: none;
     padding: 5px;
@@ -52,28 +50,36 @@
     width: 95%;
     background-color: whitesmoke;
     resize: none;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
     position: relative;
 }
 
 .text_area::-webkit-scrollbar {
     display: none;
-  }
+}
 
-.text_area::placeholder{
+.text_area::placeholder {
     color: rgba(0, 0, 0, 0.258);
     font-size: 15px;
     text-align: left;
 }
 
-.text_area:focus::placeholder{
+.text_area:focus::placeholder {
     color: transparent;
+}
+
+@media (min-width:500px) {
+    .input::placeholder {
+        position: relative;
+        left: -2px;
+    }
 }
 
 @supports (-webkit-touch-callout: none) {
     .input {
         margin-left: -1%;
     }
-
 }
