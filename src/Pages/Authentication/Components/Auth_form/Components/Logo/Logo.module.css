@@ -1,0 +1,29 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.top_section{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.logo {
+    height: 80px;
+    width: 80px;
+}
+
+.recall {
+    font-size: 40px;
+    font-weight: 500;
+    margin-top:15px;
+    margin-left: 5px;
+}
+
+.study_smarter{
+
+    margin-left: 20px;
+    margin-top: 5px;
+    font-size: 20px;
+}

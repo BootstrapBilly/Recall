@@ -1,4 +1,4 @@
-import {HANDLE_SUCCESSFUL_LOGIN} from "../Actions/2_authentication_action"
+import {HANDLE_SUCCESSFUL_LOGIN, HANDLE_LOGOUT} from "../Actions/2_authentication_action"
 
 const initialState = {//set the initial state
 
@@ -14,6 +14,10 @@ const submit_form = (state = initialState, action) => {
         case HANDLE_SUCCESSFUL_LOGIN:
 
         return {...state, user_id:action.payload.user_id, token:action.payload.token}
+
+        case HANDLE_LOGOUT:
+
+        return {...state, user_id:null, token:null}
 
         default:
 

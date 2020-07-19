@@ -39,19 +39,8 @@ export const Input = props => {
 
             style={
 
-                props.add_new ? input_style(props, input_focused, colours)//The input is used on the add new screen, inject the styles from the alt styles file
+                input_style(props, input_focused, colours)//The input is used on the add new screen, inject the styles from the alt styles file
 
-                    : {//otherwise handle the styles here
-
-                        border: props.grey && input_focused ? "1px solid grey"//grey input (indicates optional input)
-                            : input_focused ? `1px solid ${colours.secondary}`//required input
-                                : erroneous_field === props.label ? `3px solid red`//erroneus field, set the border to red
-                                    : "transparent",
-
-                        marginTop: props.marginTop,//apply the additional props margin 
-
-                        ...props.style//and style
-                    }
             }
 
         >
@@ -60,7 +49,7 @@ export const Input = props => {
 
                 test_handle="form_input_label"
                 className={classes.label}
-                style={{ color: props.grey ? "grey" : colours.primary, display: props.add_new && !props.optionals && "none" }}
+                style={{ color: props.grey ? "grey" : colours.primary, display: !props.label && "none" }}
 
             >
                 {props.label} {/* Display the label inside the input (Not rendered on the add new form - except the optionals page)*/}
@@ -97,8 +86,7 @@ export const Input = props => {
                     onBlur={() => set_input_focused(false)}
                     onChange={props.onChange}
                     value={props.value || ""}
-                    placeholder={`e.g. ${props.placeholder}`}
-                    style={{ color: colours.secondary }}
+                    placeholder={props.authentication ? props.placeholder === "none" ? undefined : props.placeholder : `e.g. ${props.placeholder}`}
                 />
 
             }

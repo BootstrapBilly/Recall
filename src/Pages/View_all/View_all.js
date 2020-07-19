@@ -33,7 +33,7 @@ export const View_all = () => {
 
     //*states
     const [notes, set_notes] = useState([])//hold the notes to be displayed, all fetched initially, manipulated by searching and the toggle links
-    const [filter, set_filter] = useState("All")
+    const [filter, set_filter] = useState("All")//hold the type of filter to seperate notes and processes (handled by the top bar links)
     const [position_change, set_position_change] = useState(false)
 
     //!Effects
@@ -58,7 +58,7 @@ export const View_all = () => {
 
     useEffect(() => {
 
-        if (position_change) {
+        if (position_change) { //position change is sent by the backend if a note or process title changes and it's order in the sorted array changes
             
             set_position_change(false)
 

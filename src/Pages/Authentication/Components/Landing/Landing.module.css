@@ -1,0 +1,86 @@
+.container {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.top_section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.outer_ring {
+    background-color: rgba(255, 255, 255, 0.274);
+    width: 150px;
+    height: 150px;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.inner_ring {
+    background-color: rgba(255, 255, 255, 0.314);
+    width: 130px;
+    height: 130px;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo_container {
+    background-color: white;
+    width: 110px;
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+}
+
+.recall {
+    color: white;
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+.study_smarter {
+    color: white;
+    font-size: 18px;
+}
+
+.note_container{
+    color: white;
+    position: relative;
+    margin-top: 40px;
+}
+
+.try_me_container{
+
+    position: absolute;
+    bottom: -35px;
+    right: 10px;
+}
+.try_me_arrow{
+    height: 30px;
+    width: 50px;
+    position: relative;
+    top: 5px;
+}
+
+.cta_button{
+    width: 250px;
+    padding: 10px 0px;
+    margin-top: 100px;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 50px;
+}

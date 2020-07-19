@@ -58,6 +58,31 @@
     top: 0;
 }
 
+.logout_button_container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+}
+
+.logout_button {
+
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 40px;
+    font-size: 17px;
+    border-radius: 5px;
+
+}
+
+.logout_button:hover{
+    cursor: pointer;
+}
+
 .toggle_button{
     writing-mode: vertical-lr;
     text-orientation: upright;

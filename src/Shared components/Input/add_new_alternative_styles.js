@@ -7,11 +7,11 @@ export const input_style = (props, input_focused, colours) => {
         background: "transparent",
         outline: "none",
         boxShadow: "none",
-        width: "200px",
+        width: props.authentication ? "90%" : "200px",
         color: colours.primary,
-        marginTop: props.label === "TAGS FOR EASIER SEARCHING" ? "0px" : "25px",
+        marginTop: props.label === "TAGS FOR EASIER SEARCHING" ? "0px" : props.authentication ? "15px" : "25px",
         marginBottom: "5px",
-        borderRadius: "0px"
+        borderRadius: "0px",
     }
 
 }

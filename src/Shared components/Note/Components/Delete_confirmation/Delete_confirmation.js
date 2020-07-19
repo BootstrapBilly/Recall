@@ -32,11 +32,11 @@ export const Delete_confirmation = props => {
 
             }
 
-            <span className={classes.are_you_sure} style={{ color: colours.primary }}>Are you sure ?</span>
+            <span className={classes.are_you_sure} style={{ color: colours.secondary }}>Are you sure ?</span>
 
             <div className={classes.button_container}>
 
-                <div className={classes.button} style={{ background: colours.secondary }} onClick={props.cancel_delete}>NO - GO BACK</div>
+                <div className={classes.button} style={{ background: colours.primary }} onClick={props.cancel_delete}>NO - GO BACK</div>
                 <div className={classes.button} style={{ background: "#ff3333" }} onClick={() => handle_delete_click(dispatch, props.title, props.note_id, props, props.is_a_collection, user_id)}>YES - DELETE IT</div>
 
             </div>

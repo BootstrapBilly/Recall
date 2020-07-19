@@ -165,7 +165,7 @@ export const Add_new = props => {
                                     value={form_data.title}
                                     onChange={e => set_form_data({ ...form_data, title: e.target.value })}
                                     marginTop="15px"
-                                    add_new
+                                    
 
                                 />
 
@@ -180,7 +180,7 @@ export const Add_new = props => {
                                         text_area
                                         onChange={e => set_form_data({ ...form_data, body: e.target.value })}
                                         marginTop="15px"
-                                        add_new
+                                        
 
                                     />
 
@@ -198,8 +198,7 @@ export const Add_new = props => {
                                                 grey
                                                 value={form_data.subject}
                                                 onChange={e => set_form_data({ ...form_data, subject: e.target.value })}
-                                                marginTop="10px"
-                                                add_new
+                                                marginTop="10px"                                               
                                                 optionals
 
                                             />
@@ -211,8 +210,7 @@ export const Add_new = props => {
                                                 label={form_information[2]}
                                                 grey
                                                 value={form_data.search_tags}
-                                                onChange={e => handle_search_tag_input(e, form_data, set_form_data)}
-                                                add_new
+                                                onChange={e => handle_search_tag_input(e, form_data, set_form_data)}                                 
                                                 optionals
 
                                             />
@@ -235,7 +233,7 @@ export const Add_new = props => {
                                                     text_area
                                                     onChange={e => set_form_data({ ...form_data, syntax: e.target.value })}
                                                     marginTop="10px"
-                                                    add_new
+                                                    
 
                                                 />
 

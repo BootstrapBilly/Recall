@@ -1,7 +1,10 @@
 import { submit_form } from "../../../Store/Actions/0_submit_form_action"
+import { disable_edit_mode } from "../../../Store/Actions/1_note_action"
 
 //This function is triggered when the user presses the save button during edit mode
 const handle_save_click = (dispatch, overwritten_values, props, is_a_collection, user_id) => {
+
+    if (props.example) return dispatch(disable_edit_mode(props.details._id))
 
     if (is_a_collection) {
 
@@ -30,7 +33,7 @@ const handle_save_click = (dispatch, overwritten_values, props, is_a_collection,
         new_search_tags: overwritten_values.search_tags || props.details.search_tags,
         new_syntax: overwritten_values.syntax || props.details.syntax,
         filter: props.filter,
-        index:props.index
+        index: props.index
     }
         , "update_note"))
 

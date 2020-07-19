@@ -1,7 +1,7 @@
 .container{
     width: 80%;
     box-shadow: 1px 1px 3px 1px rgba(128, 128, 128, 0.488);
-    padding: 10px 10px;
+    padding: 10px 0px;
     overflow: hidden;
     position: relative;
     background-color: rgba(255, 255, 255);
@@ -13,6 +13,8 @@
     height: auto;
     color: transparent;
     font-size: 18px;
+    white-space: pre-wrap;
+    
 }
 
 .text_area{
@@ -23,6 +25,7 @@
     top: 0;
     left: 0;
     font-size: 16px;
+    padding: 0;
     background-color: transparent;
     border: none;
     outline: none;

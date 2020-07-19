@@ -195,6 +195,8 @@ export const enable_edit_mode_nested = (note_id, index) => {
 
 export const disable_edit_mode = (note_id) => {
 
+    console.log(note_id)
+
     return async dispatch => {
 
         try {

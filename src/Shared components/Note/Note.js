@@ -86,6 +86,8 @@ export const Note = props => {
 
     //!effects
 
+    useEffect(()=> {console.log(edit_mode_enabled_notes)},[edit_mode_enabled_notes])
+
     //called everytime a note is expanded or collapsed, the height of the div is extracted and set in the height state to resize the note
     // eslint-disable-next-line 
     useEffect(() => {set_height(ref.current.clientHeight)})

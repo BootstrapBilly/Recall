@@ -20,15 +20,12 @@ body{
 }
 
 .background_image {
-    background-image: url("../../Assets/Image/Auth_background.svg");
-    background-size: auto;
     height: 100%;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
     opacity: 0.4;
-
 }
 
 .logo_container {
