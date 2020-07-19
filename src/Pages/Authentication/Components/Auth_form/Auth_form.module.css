@@ -47,6 +47,19 @@
     margin-top: 20px;
 }
 
+.error_wrapper{
+    width: 70%;
+    margin: auto;
+    border: 1px solid red;
+    display: flex;
+    color: red;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+    margin-top: 20px;
+    text-align: center;
+}
+
 .bottom_section{
     width: 100%;
     display: flex;
@@ -64,7 +77,10 @@
     color: white;
     font-size: 18px;
     height: 40px;
-    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.34);
+}
+
+.button:hover{
+    cursor: pointer;
 }
 
 .forgot_password{
@@ -72,4 +88,8 @@
     margin-top: 15px;
     color: grey;
     margin-bottom: 50px;
+}
+
+.forgot_password:hover{
+    cursor: pointer;
 }

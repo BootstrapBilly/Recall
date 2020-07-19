@@ -1,9 +1,9 @@
-export const input_style = (props, input_focused, colours) => {
+export const input_style = (props, input_focused, colours, erroneous_field) => {
 
     return {
         
         border: "none",
-        borderBottom: props.text_area ? "none" : `1px solid ${input_focused ? colours.primary : "rgba(128, 128, 128, 0.2)"}`,
+        borderBottom: props.text_area ? "none" : `1px solid ${input_focused ? colours.primary : erroneous_field === props.label ? "red" : "rgba(128, 128, 128, 0.2)"}`,
         background: "transparent",
         outline: "none",
         boxShadow: "none",
@@ -24,7 +24,8 @@ export const textarea_style = (props, input_focused, colours) => {
         padding: "5px 5px", paddingBottom: "15px",
         color: colours.secondary,
         width: "230px",
-        right: "15px"
+        right: "15px",
+        marginTop:"20px"
     }
 
 }

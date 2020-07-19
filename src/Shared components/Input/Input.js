@@ -39,8 +39,8 @@ export const Input = props => {
 
             style={
 
-                input_style(props, input_focused, colours)//The input is used on the add new screen, inject the styles from the alt styles file
-
+                input_style(props, input_focused, colours, erroneous_field)//The input is used on the add new screen, inject the styles from the alt styles file
+        
             }
 
         >

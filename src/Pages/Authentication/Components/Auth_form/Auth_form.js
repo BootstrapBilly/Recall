@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import classes from './Auth_form.module.css'
 
@@ -11,10 +11,24 @@ import Input from "../../../../Shared components/Input/Input"
 import colours from '../../../../util/colours'
 import capitalizeFirstChar from '../../../../util/capitalize_first'
 
+//redux hooks
+import { useDispatch, useSelector } from "react-redux"
+
+//redux action creators
+import { submit_form } from "../../../../Store/Actions/0_submit_form_action"
+
+
+
 export const Auth_form = props => {
 
-    const [current_action, set_current_action] = useState("signup")
+    //-config
+    const dispatch = useDispatch()
 
+    //?selectors
+    const response = useSelector(state => state.form.response)
+
+    //*states
+    const [current_action, set_current_action] = useState("signup")
     const [user_details, set_user_details] = useState({//stores the user details and controls each input in the form
         email: "",
         username: "",
@@ -24,8 +38,10 @@ export const Auth_form = props => {
 
     const handle_action_button_click = () => {
 
-        console.log(user_details)
+        dispatch(submit_form(user_details, current_action === "login" ? "login" : "user"))
+
     }
+
 
     return (
 
@@ -99,6 +115,7 @@ export const Auth_form = props => {
 
                             authentication
                             label={"Repeat password"}
+                            type="password"
                             placeholder={"Enter your password"}
                             value={user_details.repeat_password}
                             onChange={(e) => set_user_details({ ...user_details, repeat_password: e.target.value })}
@@ -106,6 +123,13 @@ export const Auth_form = props => {
                         />
 
                     }
+
+                </div>
+
+                {/* Error message */}
+                <div className={classes.error_wrapper} style={{ display: !response && "none" }}>
+
+                    {response && response.data.message}
 
                 </div>
 
