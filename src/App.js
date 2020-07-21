@@ -10,6 +10,7 @@ import AddNew from "./Pages/Add_new/Add_new"
 import ViewAll from "./Pages/View_all/View_all"
 import Friends from "./Pages/Friends/Friends"
 import Account from "./Pages/Account/Account"
+import ChangePassword from "./Pages/Change_password/Change_password"
 
 //external
 import { BrowserRouter, Switch, Route } from "react-router-dom"
@@ -48,6 +49,7 @@ const App = () => {
         <Route path="/view_all" component={ViewAll} />
         <Route path="/friends" component={Friends} />
         <Route path="/account" component={Account} />
+        <Route path="/change_password" component={ChangePassword} />
 
       </Switch>
 

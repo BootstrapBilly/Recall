@@ -6,7 +6,7 @@ import classes from './Landing.module.css'
 import colours from '../../../../util/colours'
 
 //components
-import Logo from "../../Components/Auth_form/Components/Logo/Logo"
+import Logo from "../../../../Shared components/Logo/Logo"
 import Note from "../../../../Shared components/Note/Note"
 
 //assets

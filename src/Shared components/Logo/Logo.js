@@ -3,7 +3,7 @@ import React from 'react'
 import classes from './Logo.module.css'
 
 //assets
-import head from "../../../../../../Assets/Icon/logo.svg"
+import head from "../../Assets/Icon/logo.svg"
 
 export const Logo = () => {
 

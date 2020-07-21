@@ -4,7 +4,7 @@ import classes from './Auth_form.module.css'
 
 //components
 import BackArrow from "../../../../Shared components/Back_arrow/Back_arrow"
-import Logo from "./Components/Logo/Logo"
+import Logo from "../../../../Shared components/Logo/Logo"
 import Input from "../../../../Shared components/Input/Input"
 
 //util
@@ -16,8 +16,6 @@ import { useDispatch, useSelector } from "react-redux"
 
 //redux action creators
 import { submit_form } from "../../../../Store/Actions/0_submit_form_action"
-
-
 
 export const Auth_form = props => {
 
