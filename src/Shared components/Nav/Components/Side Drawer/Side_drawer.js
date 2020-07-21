@@ -72,7 +72,7 @@ export const Side_drawer = props => {
 
             <div className={classes.logout_button_container}>
 
-                <div className={classes.logout_button} style={{ background: colours.primary }} onClick={() => handle_logout_click()}>LOG OUT</div>
+                <div test_handle="logout_button" className={classes.logout_button} style={{ background: colours.primary }} onClick={() => handle_logout_click()}>LOG OUT</div>
 
             </div>
 

@@ -6,10 +6,12 @@ import classes from './Auth_form.module.css'
 import BackArrow from "../../../../Shared components/Back_arrow/Back_arrow"
 import Logo from "../../../../Shared components/Logo/Logo"
 import Input from "../../../../Shared components/Input/Input"
+import PasswordCriteria from "../../../../Shared components/Password_criteria/Password_criteria"
 
 //util
 import colours from '../../../../util/colours'
 import capitalizeFirstChar from '../../../../util/capitalize_first'
+import validate_password from "../../../../util/validate_password"
 
 //redux hooks
 import { useDispatch, useSelector } from "react-redux"
@@ -26,6 +28,7 @@ export const Auth_form = props => {
     const response = useSelector(state => state.form.response)//grab the response from the api
 
     //*states
+    const [button_colour, set_button_colour] = useState("grey")
     const [current_action, set_current_action] = useState("signup")//dictates the type of form, signup/login/request new password
     const [user_details, set_user_details] = useState({//stores the user details and controls each input in the form
         email: "",
@@ -45,8 +48,35 @@ export const Auth_form = props => {
         else return dispatch(submit_form(user_details, current_action === "login" ? "login" : "user"))
 
     }
+        //!effects
+    useEffect(() => {
 
-    console.log(response)
+        if(current_action === "signup"){
+
+            const validation_result = validate_password(user_details.password, user_details.repeat_password)
+    
+            if (validation_result.all_met && user_details.email && user_details.username) set_button_colour(colours.primary)
+        
+            else set_button_colour("grey")
+        }
+
+        if(current_action === "login"){
+
+            if(user_details.email && user_details.password) set_button_colour(colours.primary)
+        
+            else set_button_colour("grey")
+
+        }
+
+        if(current_action === "recover password"){
+
+            if(email_for_reset) set_button_colour(colours.primary)
+        
+            else set_button_colour("grey")
+
+        }
+    
+    }, [user_details, email_for_reset])
 
     return (
 
@@ -83,7 +113,6 @@ export const Auth_form = props => {
                 </div>
 
                 <div className={classes.input_container}>
-
 
                     {current_action !== "recover password" && //username or email input
 
@@ -126,6 +155,7 @@ export const Auth_form = props => {
                             type="password"
                             value={user_details.password}
                             onChange={(e) => set_user_details({ ...user_details, password: e.target.value })}
+                            visiblity_toggleable
 
                         />
                     }
@@ -142,10 +172,14 @@ export const Auth_form = props => {
                             placeholder={"Enter your password"}
                             value={user_details.repeat_password}
                             onChange={(e) => set_user_details({ ...user_details, repeat_password: e.target.value })}
+                            visiblity_toggleable
 
                         />
 
                     }
+
+                    
+                    {current_action === "signup" && <PasswordCriteria password={user_details.password} repeat_password={user_details.repeat_password} signup />}
 
                     {current_action === "recover password" && //email input for recovering a password
 
@@ -165,7 +199,7 @@ export const Auth_form = props => {
                 </div>
 
                 {/* Response message */}
-                <div className={classes.error_wrapper} 
+                <div className={classes.error_wrapper} test_handle="input_error"
                 
                 style={{ 
 
@@ -189,8 +223,8 @@ export const Auth_form = props => {
 
                         test_handle="action_button"
                         className={classes.button}
-                        style={{ background: colours.primary }}
-                        onClick={() => handle_action_button_click()}
+                        style={{ background: button_colour}}
+                        onClick={() => button_colour === colours.primary && handle_action_button_click()}
                     >
 
                         {capitalizeFirstChar(current_action)}

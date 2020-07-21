@@ -30,7 +30,7 @@ export const Password_criteria = props => {
 
     return (
 
-        <div className={classes.container}>
+        <div className={classes.container} style={{marginLeft: props.signup && "-10px"}}>
 
             <span className={classes.title}>Remember, passwords must:</span>
 
@@ -40,7 +40,7 @@ export const Password_criteria = props => {
 
                     <div className={classes.requirement} >
 
-                        <img src={met_criteria[index] ? green_tick : grey_tick} alt="A tick" className={classes.icon} />
+                        <img test_handle={met_criteria[index] ? "green_tick" : "grey_tick"} src={met_criteria[index] ? green_tick : grey_tick} alt="A tick" className={classes.icon} />
                         {requirement}
 
                     </div>

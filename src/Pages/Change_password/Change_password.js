@@ -13,13 +13,13 @@ import PasswordCriteria from "../../Shared components/Password_criteria/Password
 import validate_password from "../../util/validate_password"
 
 //redux hooks
-import {useDispatch, useSelector} from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 //redux action creators
 import { submit_form, clear_response } from '../../Store/Actions/0_submit_form_action'
 
 //external
-import {Redirect} from "react-router-dom"
+import { Redirect } from "react-router-dom"
 import alert from "easyalert"
 
 export const Change_password = () => {
@@ -41,16 +41,16 @@ export const Change_password = () => {
     })
 
     //!effects
-    useEffect(()=> {
+    useEffect(() => {
 
-        if(response && response.data.message === "Your password has been updated"){
+        if (response && response.data.message === "Your password has been updated") {
 
             dispatch(clear_response())
             set_redirect("/")
             alert("Your password has been changed successfully", "success")
         }
 
-        else if(response && response.status > 400){
+        else if (response && response.status > 400) {
 
             dispatch(clear_response())
             set_redirect("/")
@@ -67,7 +67,7 @@ export const Change_password = () => {
 
         const user_id = url.split("userId=")[1]
 
-        const data = {...form_data, token:token, user_id:user_id}
+        const data = { ...form_data, token: token, user_id: user_id }
 
         return dispatch(submit_form(data, "change_password"))
     }
@@ -93,8 +93,6 @@ export const Change_password = () => {
             <span className={classes.title}>Reset Password</span>
 
             <div className={classes.form_wrapper}>
-
-                <PasswordCriteria password={form_data.password} repeat_password={form_data.repeat_password} />
 
                 <Input
 
@@ -122,11 +120,13 @@ export const Change_password = () => {
 
                 />
 
+                <PasswordCriteria password={form_data.password} repeat_password={form_data.repeat_password} />
+                
             </div>
 
             <div className={classes.reset_button} style={{ background: button_colour }} onClick={() => button_colour === colours.primary && handle_reset_password()}>Update Password</div>
 
-            {redirect && <Redirect to={redirect}/>}
+            {redirect && <Redirect to={redirect} />}
 
         </div>
 
