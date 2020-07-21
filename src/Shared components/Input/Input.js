@@ -15,6 +15,10 @@ import handle_input_focus from "./Functions/handle_input_focus"
 //util
 import { input_style, textarea_style } from "./add_new_alternative_styles"
 
+//assets
+import password_eye from "../../Assets/Icon/password_eye.svg"
+import password_eye_crossed from "../../Assets/Icon/password_eye_crossed.svg"
+
 export const Input = props => {
 
     //-config
@@ -27,6 +31,7 @@ export const Input = props => {
     const [input_focused, set_input_focused] = useState(false)//detect whether the input is focused to highlight it
     const [erroneous_field, set_erroneous_field] = useState(null)//detect whether there is an erroneus field to highlight it red after submission
     const [text_area_dimensions, set_text_area_dimensions] = useState({ rows: 5, minRows: 5, maxRows: 15 })//state to handle the dynamic sizing of the textarea
+    const [show_password, set_show_password] = useState(false)//determine whether to show the password or not on password inputs
 
     //!Effects
     //if there is a response, call the error highlighting function to highlight any erroneous fields in red
@@ -40,7 +45,7 @@ export const Input = props => {
             style={
 
                 input_style(props, input_focused, colours, erroneous_field)//The input is used on the add new screen, inject the styles from the alt styles file
-        
+
             }
 
         >
@@ -77,17 +82,26 @@ export const Input = props => {
 
                 : //otherwise if the props input type is an input, display an input
 
-                <input
+                <div className={classes.input_container}>
 
-                    test_handle={props.test_handle}
-                    className={classes.input}
-                    type={props.type ? props.type : "text"}
-                    onFocus={() => handle_input_focus(props, set_input_focused, erroneous_field, set_erroneous_field, dispatch)}
-                    onBlur={() => set_input_focused(false)}
-                    onChange={props.onChange}
-                    value={props.value || ""}
-                    placeholder={props.authentication ? props.placeholder === "none" ? undefined : props.placeholder : `e.g. ${props.placeholder}`}
-                />
+                    <input
+
+                        test_handle={props.test_handle}
+                        className={classes.input}
+                        type={props.type === "password" ? show_password ? "text" : "password" : "text"}
+                        onFocus={() => handle_input_focus(props, set_input_focused, erroneous_field, set_erroneous_field, dispatch)}
+                        onBlur={() => set_input_focused(false)}
+                        onChange={props.onChange}
+                        value={props.value || ""}
+                        placeholder={props.authentication ? props.placeholder === "none" ? undefined : props.placeholder : `e.g. ${props.placeholder}`}
+                    />
+
+                    {props.visiblity_toggleable &&
+                    
+                    <img src={show_password ? password_eye_crossed : password_eye} alt={"Make password visible"} className={classes.eye_icon} onClick={()=> set_show_password(!show_password)}/>
+                    
+                    }
+                </div>
 
             }
 
