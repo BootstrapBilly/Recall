@@ -59,7 +59,7 @@ export const Syntax = props => {
 
                     <div className={classes.editable_container}>
 
-                        <textarea className={classes.textarea} value={syntax} onChange={(event) => set_syntax(event.target.value)}></textarea>
+                        <textarea test_handle="syntax_box" className={classes.textarea} value={syntax} onChange={(event) => set_syntax(event.target.value)}></textarea>
 
                         <Buttons handle_cancel_click={() => handle_cancel_click()} handle_save_click={() => handle_save_click()} />
 
@@ -92,6 +92,7 @@ export const Syntax = props => {
                                 className={[classes.copy_button, props.edit_mode && classes.copy_button_animated].join(" ")}
                                 style={{ background: props.edit_mode ? colours.primary : colours.green }}
                                 onClick={() => handle_click()}
+                                test_handle="syntax_copy_button"
 
                             >
 

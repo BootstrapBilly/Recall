@@ -173,7 +173,7 @@ export const Note = props => {
 
                 {expanded ?
 
-                    show_delete_confimation ? <DeleteConfirmation cancel_delete={() => set_show_delete_confirmation(false)} title={show_delete_confimation} note_id={note_id} is_a_collection={is_a_collection} />
+                    show_delete_confimation ? <DeleteConfirmation cancel_delete={() => set_show_delete_confirmation(false)} title={show_delete_confimation} note_id={note_id} is_a_collection={is_a_collection} example={props.example}/>
 
                         : <div className={classes.expanded_content}>
 

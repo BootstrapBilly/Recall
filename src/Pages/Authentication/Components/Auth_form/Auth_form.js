@@ -59,9 +59,10 @@ export const Auth_form = props => {
 
                 <div className={classes.prompt_container}>
 
-                    <span className={classes.current_action}>{capitalizeFirstChar(current_action)}</span>
+                    <span test_handle="form_type" className={classes.current_action}>{capitalizeFirstChar(current_action)}</span>
 
                     <span
+                        test_handle="switch_form_type_text"
                         className={classes.switch_action_text}
                         onClick={() => set_current_action(current_action === "login" ? "signup" : "login")}
                     >
@@ -75,6 +76,7 @@ export const Auth_form = props => {
 
                     <Input
 
+                        test_handle="email_or_username_input"
                         authentication
                         label={current_action === "login" ? "Username or email" : "Email address"}
                         placeholder={"Example@test.com"}
@@ -87,6 +89,7 @@ export const Auth_form = props => {
 
                         <Input
 
+                            test_handle="username_input"
                             authentication
                             label={"Username"}
                             placeholder={"Johndoe12"}
@@ -99,6 +102,7 @@ export const Auth_form = props => {
 
                     <Input
 
+                        test_handle="password_input"
                         authentication
                         label={"Password"}
                         placeholder="Enter your password"
@@ -113,6 +117,7 @@ export const Auth_form = props => {
 
                         <Input
 
+                            test_handle="repeat_password_input"
                             authentication
                             label={"Repeat password"}
                             type="password"
@@ -135,7 +140,7 @@ export const Auth_form = props => {
 
                 <div className={classes.bottom_section}>
 
-                    <div className={classes.button} style={{ background: colours.primary }} onClick={() => handle_action_button_click()}>{capitalizeFirstChar(current_action)}</div>
+                    <div test_handle="action_button" className={classes.button} style={{ background: colours.primary }} onClick={() => handle_action_button_click()}>{capitalizeFirstChar(current_action)}</div>
 
                     <div className={classes.forgot_password}>Forgot password ?</div>
 

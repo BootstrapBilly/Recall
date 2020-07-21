@@ -4,6 +4,7 @@
     align-items: center;
     margin-top: 15px;
     margin-left: 10px;
+    width: fit-content;
 }
 
 .back_arrow{

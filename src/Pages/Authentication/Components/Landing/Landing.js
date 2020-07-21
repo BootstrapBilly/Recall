@@ -21,7 +21,7 @@ export const Landing = props => {
         search_tags: ["Javascript", "loops"],
         body: "A forEach loop iterates through an array, calling the specified logic on each element.",
         syntax: '["1", "2", "3"].forEach(element => console.log(element)).',
-        notes: [],
+        notes: null,
         _id: "hardcoded"
 
     }
@@ -65,7 +65,7 @@ export const Landing = props => {
 
             </div>
 
-            <div className={classes.cta_button} style={{background:colours.primary}} onClick={props.handle_go_forward}>Find out more</div>
+            <div test_handle={"CTA_button"} className={classes.cta_button} style={{background:colours.primary}} onClick={props.handle_go_forward}>Find out more</div>
 
         </div>
 
