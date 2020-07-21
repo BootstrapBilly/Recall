@@ -124,6 +124,37 @@ describe("@@@@@ AUTH PAGE @@@@@", () => {
 
         })
 
+        it("Password recovery toggle works", ()=> {
+
+            cy.get('[test_handle="forgot_password"]').click()
+
+            cy.get('[test_handle="form_type"]').should("have.text", "Recover password")
+
+            cy.get('[test_handle="email_or_username_input"]').should("not.be.visible")
+            cy.get('[test_handle="username_input"]').should("not.be.visible")
+            cy.get('[test_handle="password_input"]').should("not.be.visible")
+            cy.get('[test_handle="repeat_password_input"]').should("not.be.visible")
+
+            cy.get('[test_handle="recover_password_email_input"]').should("be.visible")
+
+        })
+
+        
+        it("Toggling back to login works", ()=> {
+
+            cy.get('[test_handle="switch_form_type_text"]').click()
+
+            cy.get('[test_handle="form_type"]').should("have.text", "Login")
+
+            cy.get('[test_handle="recover_password_email_input"]').should("not.be.visible")
+
+            cy.get('[test_handle="email_or_username_input"]').should("be.visible")
+            cy.get('[test_handle="username_input"]').should("not.be.visible")
+            cy.get('[test_handle="password_input"]').should("be.visible")
+            cy.get('[test_handle="repeat_password_input"]').should("not.be.visible")
+
+        })
+
     })
 
 })
