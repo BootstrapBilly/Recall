@@ -21,8 +21,6 @@ export const Dashboard = () => {
     const response = useSelector(state => state.form.response)
     const user_id = useSelector(state => state.auth.user_id)
 
-    console.log(user_id)
-
     return (
 
         <div className={classes.container}>

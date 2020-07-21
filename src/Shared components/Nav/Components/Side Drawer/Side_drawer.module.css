@@ -1,10 +1,10 @@
 .container{
-    width: 310px;
+    width: 250px;
     height: 100%;
     background-color: white;
     position: absolute;
     top: 0;
-    left: -311px;
+    left: -251px;
     transition: left 0.5s, opacity 0.8s ease-in-out;
     z-index: 200000;
     border-right: 1px solid rgba(128,128,128, 0.2);
@@ -54,7 +54,7 @@
     align-items: center;
     flex-direction: column;
     position: absolute;
-    left: 245px;
+    left: 185px;
     top: 0;
 }
 

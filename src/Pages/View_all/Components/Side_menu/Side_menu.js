@@ -5,7 +5,7 @@ import classes from './Side_menu.module.css'
 
 //assets
 import Toggle from "../../../../Assets/Icon/close.svg"
-import Add from "../../../../Assets/Icon/ADD NOTE.svg"
+import Add from "../../../../Assets/Icon/Add a note.svg"
 
 //util
 import colours from '../../../../util/colours'

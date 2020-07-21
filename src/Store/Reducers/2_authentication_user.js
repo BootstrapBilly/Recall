@@ -7,7 +7,7 @@ const initialState = {//set the initial state
 
 }
 
-const submit_form = (state = initialState, action) => {
+const login = (state = initialState, action) => {
 
     switch (action.type) {
 
@@ -26,4 +26,4 @@ const submit_form = (state = initialState, action) => {
 
 }
 
-export default submit_form
+export default login
