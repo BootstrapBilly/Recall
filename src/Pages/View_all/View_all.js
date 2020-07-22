@@ -38,7 +38,7 @@ export const View_all = () => {
 
     //!Effects
     // eslint-disable-next-line
-    useEffect(() => { dispatch(submit_form({ user_id: user_id }, "get_all")) }, [])//fetch the notes on the first render of the page
+    useEffect(() => { dispatch(submit_form({ user_id: user_id }, "get_all")) }, [user_id])//fetch the notes on the first render of the page
 
     useEffect(() => {
 
@@ -55,6 +55,9 @@ export const View_all = () => {
         }
 
     }, [response, filter])//update the notes if the response changes
+
+
+    console.log(response)
 
     useEffect(() => {
 
