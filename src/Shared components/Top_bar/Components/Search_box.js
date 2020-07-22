@@ -37,13 +37,14 @@ export const Search_box = props => {
             onChange={props.handle_change}
             onFocus={() => set_input_focused(true)}
             onBlur={() => handle_input_blur()}
-            style={{ borderColor: input_focused && colours.primary, color: colours.secondary }}
+            style={{ borderColor: input_focused && colours.primary }}
 
         />
 
     return (
 
-        <div className={[classes.container, props.expanded ? classes.container_expanded : props.no_collapse && classes.container_no_collapse].join(" ")}>
+        <div className={[classes.container, props.expanded ? classes.container_expanded : props.no_collapse && classes.container_no_collapse].join(" ")}
+        style={{marginTop:props.no_collapse && "10px"}}>
 
             {props.expanded ?  //if the search bar is expanded, display the input
 

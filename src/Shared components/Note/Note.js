@@ -113,10 +113,10 @@ export const Note = props => {
 
                 height: `${height}px`,
                 paddingBottom: expanded && "70px",
-                backgroundColor: props.selected ? colours.secondary : props.inside_collection && "transparent",
-                border: hover_border && `1px solid ${colours.secondary}`,
+                backgroundColor: props.selected ? colours.primary : props.inside_collection && "transparent",
+                border: hover_border && `1px solid ${colours.primary}`,
                 marginTop: props.inside_collection && "10px",
-                transform: props.inside_collection && "scale(0.9)"
+                transform: props.inside_collection && "scale(0.9)",
 
             }}
 

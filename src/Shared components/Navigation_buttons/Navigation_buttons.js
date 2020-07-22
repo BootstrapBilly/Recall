@@ -8,7 +8,7 @@ export const Navigation_buttons = props => {
     
     return (
 
-        <div className={classes.container} style={{ width: props.width, marginTop: props.marginTop }}>
+        <div className={classes.container} style={{ width: props.width, marginTop: props.marginTop, justifyContent:props.centered && "center" }}>
 
             {props.type !== "next" && props.type !== "success" &&
 
@@ -33,7 +33,7 @@ export const Navigation_buttons = props => {
                     test_handle="form_next_button"
                     className={[classes.next_button, classes.button].join(" ")}
                     onClick={props.type === "back" || props.type === "back_submit" ? null : props.on_click.bind(this, "next")}
-                    style={{ border: `3px solid ${props.type === "back" || props.type === "back_submit" || props.type === "grey_next" ? "grey" : props.type === "add" ? colours.green : colours.primary}`, background: props.type === "back" || props.type === "back_submit" || props.type === "grey_next" ? "grey" : props.type === "add" ? colours.green : colours.primary }}>
+                    style={{ border: `3px solid ${props.type === "back" || props.type === "back_submit" || props.type === "grey_next" ? "grey" : props.type === "add" ? colours.green : colours.primary}`, background: props.type === "back" || props.type === "back_submit" || props.type === "grey_next" ? "grey" : props.type === "add" ? colours.green : colours.primary, marginLeft: props.type !== "grey_next" && props.type !== "next" && "15px" }}>
 
                     {props.type === "back_submit" || props.type === "submit" ? "Sign up" : props.type === "skip" ? "Skip" : props.type === "add" ? "Finished" : "Next"}
 

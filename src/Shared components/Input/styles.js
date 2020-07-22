@@ -22,9 +22,9 @@ export const textarea_style = (props, input_focused, colours) => {
         background: props.add_new && "transparent",
         border: `1px solid ${input_focused ? colours.primary : "rgba(128, 128, 128, 0.2)"}`,
         padding: "5px 5px", paddingBottom: "15px",
-        color: colours.secondary,
-        width: "230px",
-        right: "15px",
+        color: "black",
+        width: "210px",
+        right: "5px",
         marginTop:"20px"
     }
 

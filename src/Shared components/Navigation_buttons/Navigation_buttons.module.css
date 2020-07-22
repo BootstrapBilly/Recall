@@ -1,10 +1,11 @@
 .container{
     width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center;
     margin-top: 15px;
     z-index: 1;
+    font-weight: 900;
 }
 
 .container:hover{
@@ -13,13 +14,14 @@ cursor: pointer;
 
 .button{
 
-    width: 35%;
+    width: 33%;
     height: 32px;
     border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
     animation: fadein 0.8s;
+    font-weight: 900;
 
 }
 

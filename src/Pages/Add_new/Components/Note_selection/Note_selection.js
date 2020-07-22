@@ -127,6 +127,7 @@ export const Note_selection = props => {
                     width="275px"
                     type={props.selected_notes.length >= 2 ? "next" : "grey_next"}
                     on_click={props.handle_next_click}
+                    centered
                 />
 
             </div>

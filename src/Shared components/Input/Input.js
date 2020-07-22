@@ -13,7 +13,7 @@ import handle_text_area_change from "../../util/handle_text_area_autosize"
 import handle_input_focus from "./Functions/handle_input_focus"
 
 //util
-import { input_style, textarea_style } from "./add_new_alternative_styles"
+import { input_style, textarea_style } from "./styles"
 
 //assets
 import password_eye from "../../Assets/Icon/password_eye.svg"
