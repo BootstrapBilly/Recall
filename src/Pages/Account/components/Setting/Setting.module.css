@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    background-color: white;
+    width: 200px;
+    margin-top: 17px;
+    border-radius: 15px;
+    padding: 10px;
+    position: relative;
+}
+
+.container:hover {
+    cursor: pointer;
+}
+
+.icon {
+    height: 32px;
+    width: 32px;
+    margin-right: 12px;
+}
+
+.text {
+    margin-top: 7px;
+}
+
+.arrow {
+    height: 12px;
+    width: 12px;
+    position: absolute;
+    right: 10px;
+    top: 22px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.arrow_flipped {
+    transform: rotate(180deg);
+}

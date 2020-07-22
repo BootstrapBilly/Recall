@@ -21,9 +21,17 @@
     font-size: 15px;
 }
 
+.text:hover{
+    cursor: pointer;
+}
+
 .icon{
     height: 50px;
     width: 50px;
     position: relative;
     top:-5px
+}
+
+.icon:hover{
+    cursor: pointer;
 }

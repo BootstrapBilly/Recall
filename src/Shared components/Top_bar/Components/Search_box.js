@@ -36,7 +36,7 @@ export const Search_box = props => {
             value={props.value}
             onChange={props.handle_change}
             onFocus={() => set_input_focused(true)}
-            onBlur={() => handle_input_blur()}
+            // onBlur={() => handle_input_blur()}
             style={{ borderColor: input_focused && colours.primary }}
 
         />
@@ -58,7 +58,7 @@ export const Search_box = props => {
                 src={search}
                 className={[classes.search_icon, props.expanded ? classes.search_icon_expanded : props.no_collapse && classes.search_icon_no_collapse].join(" ")}
                 alt="A search icon"
-                onClick={props.no_collapse ? undefined : props.handle_toggle}
+                onClick={props.no_collapse ? undefined : ()=> handle_input_blur()}
 
             />
 
