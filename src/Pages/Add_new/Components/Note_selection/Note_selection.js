@@ -83,7 +83,8 @@ export const Note_selection = props => {
 
                     breakpointCols={handle_column_assignment(selected_notes)}
                     className={classes.my_masonry_grid}
-                    columnClassName={classes.my_masonry_grid_column}>
+                    columnClassName={classes.my_masonry_grid_column}
+                    style={{paddingBottom:"0px"}}>
 
                     {
 

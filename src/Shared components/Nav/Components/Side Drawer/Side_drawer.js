@@ -42,6 +42,7 @@ export const Side_drawer = props => {
     const handle_logout_click = () => {
 
         dispatch(handle_logout())
+        dispatch(clear_response())
         set_redirect("/")
 
     }

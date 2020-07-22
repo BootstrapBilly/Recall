@@ -3,6 +3,8 @@ import {collapse_all} from "../Store/Actions/1_note_action"
 
 const filter_notes_by_search = (dispatch, string, user_id) => {
 
+    console.log(user_id)
+
     if(!string) return dispatch(submit_form({ user_id: user_id }, "get_all"))
 
     dispatch(collapse_all())

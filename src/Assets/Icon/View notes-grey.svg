@@ -35,7 +35,7 @@
    id="namedview83"
    showgrid="false"
    inkscape:zoom="0.4609375"
-   inkscape:cx="256"
+   inkscape:cx="-105.22034"
    inkscape:cy="256"
    inkscape:window-x="-8"
    inkscape:window-y="-8"
@@ -59,7 +59,7 @@
    id="stop4" />
 </linearGradient>
 <path
-   style="fill:#787878;fill-opacity:1"
+   style="fill:#5a5a5a;fill-opacity:1"
    d="M453.384,20.5l58.354,381.648c1.887,12.344-6.599,23.894-18.943,25.782l-381.648,58.354  c-12.344,1.887-23.894-6.599-25.782-18.943L27.011,85.693c-1.887-12.344,6.599-23.894,18.943-25.782L427.602,1.557  C439.946-0.33,451.496,8.156,453.384,20.5z"
    id="path7" />
 <linearGradient
@@ -80,7 +80,7 @@
    id="stop11" />
 </linearGradient>
 <path
-   style="fill:#5a5a5a;fill-opacity:1"
+   style="fill:#787878;fill-opacity:1"
    d="M457.455,50.956l29.261,384.973c0.947,12.452-8.391,23.325-20.842,24.272L80.901,489.462  c-12.452,0.947-23.325-8.391-24.272-20.842L27.368,83.647c-0.947-12.452,8.391-23.325,20.842-24.272l384.973-29.261  C445.635,29.167,456.509,38.504,457.455,50.956z"
    id="path14" />
 <linearGradient
@@ -101,7 +101,7 @@
    id="stop18" />
 </linearGradient>
 <path
-   style="fill:#787878;fill-opacity:1"
+   style="fill:#5a5a5a;fill-opacity:1"
    d="M459.207,81.633v386.083c0,12.488-10.135,22.622-22.622,22.622H50.502  c-12.488,0-22.622-10.135-22.622-22.622V81.633c0-12.488,10.135-22.622,22.622-22.622h386.083  C449.073,59.01,459.207,69.146,459.207,81.633z"
    id="path21" />
 <linearGradient
@@ -122,18 +122,18 @@
    id="stop25" />
 </linearGradient>
 <path
-   style="fill:#5a5a5a;fill-opacity:1"
+   style="fill:#787878;fill-opacity:1"
    d="M314.922,510.62L20.926,488.501c-12.459-0.938-21.798-11.797-20.861-24.256L29.029,79.25  c0.938-12.459,11.797-21.798,24.256-20.861l384.996,28.964c12.459,0.938,21.798,11.797,20.862,24.256L436.58,411.51  c-0.26,3.452-1.867,6.663-4.474,8.94l-94.716,82.691C331.202,508.541,323.11,511.235,314.922,510.62z"
    id="path28" />
 <g
    id="g36"
-   style="fill:#787878;fill-opacity:1">
+   style="fill:#5a5a5a;fill-opacity:1">
 	
 		<rect
    x="74.863998"
    y="201.70599"
    transform="matrix(-0.9971,-0.0756,0.0756,-0.9971,467.3999,446.2027)"
-   style="fill:#787878;fill-opacity:1"
+   style="fill:#5a5a5a;fill-opacity:1"
    width="334.564"
    height="25.096001"
    id="rect30" />
@@ -142,7 +142,7 @@
    x="70.035004"
    y="265.40601"
    transform="matrix(-0.9971,-0.0756,0.0756,-0.9971,452.9404,573.0537)"
-   style="fill:#787878;fill-opacity:1"
+   style="fill:#5a5a5a;fill-opacity:1"
    width="334.564"
    height="25.096001"
    id="rect32" />
@@ -151,7 +151,7 @@
    x="65.322998"
    y="325.80801"
    transform="matrix(-0.9971,-0.0756,0.0756,-0.9971,352.1519,690.0431)"
-   style="fill:#787878;fill-opacity:1"
+   style="fill:#5a5a5a;fill-opacity:1"
    width="247.62801"
    height="25.096001"
    id="rect34" />
