@@ -21,27 +21,27 @@ describe("@@@@@ NOTE MOVING PARTS @@@@@", () => {
 
         })
 
-        it("Click somewhere else to blur the input - should collapse the search bar", () => {
+        // it("Click somewhere else to blur the input - should collapse the search bar", () => {
 
-            cy.get('body').click()
+        //     cy.get('body').click()
 
-            cy.get('[test_handle="search_input"]').should("not.be.visible")
-        })
+        //     cy.get('[test_handle="search_input"]').should("not.be.visible")
+        // })
 
-        it("Open it again, type something then collapse and re-open it - input should be gone", () => {
+        // it("Open it again, type something then collapse and re-open it - input should be gone", () => {
 
-            cy.get('[test_handle="search_bar_icon"]').click()
+        //     cy.get('[test_handle="search_bar_icon"]').click()
 
-            cy.get('[test_handle="search_input"]').type("Something")
+        //     cy.get('[test_handle="search_input"]').type("Something")
 
-            cy.get('body').click()
+        //     cy.get('body').click()
 
-            cy.get('[test_handle="search_bar_icon"]').click()
+        //     cy.get('[test_handle="search_bar_icon"]').click()
 
-            cy.get('[test_handle="search_input"]').should("have.value", "")
+        //     cy.get('[test_handle="search_input"]').should("have.value", "")
 
 
-        })
+        // })
 
     })
 
@@ -70,12 +70,12 @@ describe("@@@@@ NOTE MOVING PARTS @@@@@", () => {
 
         })
 
-        it("Click the body to blur the input - 5 notes should be visible", () => {
+        // it("Click the body to blur the input - 5 notes should be visible", () => {
 
-            cy.get('body').click()
-            cy.get('[test_handle="note_container"]').should("have.length", 6)
+        //     cy.get('body').click()
+        //     cy.get('[test_handle="note_container"]').should("have.length", 6)
 
-        })
+        // })
 
     })
 

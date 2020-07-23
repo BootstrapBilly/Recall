@@ -11,6 +11,7 @@ import Logo from "../../../../Assets/Icon/logo.svg"
 
 //components
 import NavSquare from "./Components/Nav_square"
+import ProfileImage from "../../../../Shared components/Profile_image/Profile_image"
 
 //external
 import { Redirect } from "react-router-dom"
@@ -71,6 +72,8 @@ export const Side_drawer = props => {
 
             </div>
 
+            <div className={classes.photo_container}><ProfileImage /></div>
+            
             <div className={classes.logout_button_container}>
 
                 <div test_handle="logout_button" className={classes.logout_button} style={{ background: colours.primary }} onClick={() => handle_logout_click()}>LOG OUT</div>
