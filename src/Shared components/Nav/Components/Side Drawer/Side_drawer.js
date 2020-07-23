@@ -23,6 +23,7 @@ import { useDispatch } from "react-redux"
 import { clear_response } from "../../../../Store/Actions/0_submit_form_action"
 import { collapse_all } from "../../../../Store/Actions/1_note_action"
 import { handle_logout } from "../../../../Store/Actions/2_authentication_action"
+import { clear_uploaded_photo } from '../../../../Store/Actions/4_profile_image_handler'
 
 export const Side_drawer = props => {
 
@@ -44,6 +45,7 @@ export const Side_drawer = props => {
 
         dispatch(handle_logout())
         dispatch(clear_response())
+        dispatch(clear_uploaded_photo())
         set_redirect("/")
 
     }
@@ -73,7 +75,7 @@ export const Side_drawer = props => {
             </div>
 
             <div className={classes.photo_container}><ProfileImage /></div>
-            
+
             <div className={classes.logout_button_container}>
 
                 <div test_handle="logout_button" className={classes.logout_button} style={{ background: colours.primary }} onClick={() => handle_logout_click()}>LOG OUT</div>

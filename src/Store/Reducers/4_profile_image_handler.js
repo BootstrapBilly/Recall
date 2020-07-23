@@ -12,7 +12,7 @@ const photo_upload = (state = initialState, action) => {
 
         case UPLOAD_SUCCESS:return {...state, last_uploaded_photo: action.payload, image_url:action.payload}
         case UPLOAD_FAILURE:return {...state, error: action.payload}
-        case CLEAR_PHOTO:return {...state, last_uploaded_photo:null}
+        case CLEAR_PHOTO:return {...state, last_uploaded_photo:null, image_url:null}
         case SET_IMAGE_URL:return {...state, image_url:action.payload}
 
         default:return state;
