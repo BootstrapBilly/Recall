@@ -8,14 +8,17 @@ const handle_error_highlighting = (response, set_erroneous_field) => {
         case "Sorry, your password is incorrect":
             return set_erroneous_field("Password")
 
+        case "Sorry, your old password is incorrect":
+            return set_erroneous_field("Old password")//this may seem like a duplicate, however it is necessary for the field with "Old password" instead of "password"
+
         case "Sorry, that email is unavailable":
             return set_erroneous_field("Email address")
 
         case "Sorry, that username is unavailable":
             return set_erroneous_field("Username")
 
-        case "Sorry, that username is not available": //this may seem like a duplicate, however it is necessary for the field with "New username" instead of "username"
-            return set_erroneous_field("New username")
+        case "Sorry, that username is not available": 
+            return set_erroneous_field("New username")//this may seem like a duplicate, however it is necessary for the field with "New username" instead of "username"
 
         case "Your password must be at least 8 characters":
             return set_erroneous_field("Password")

@@ -38,7 +38,7 @@ export const Password_criteria = props => {
 
                 {["Be at least 8 characters", "Contain an uppercase letter", "Match"].map((requirement, index) =>
 
-                    <div className={classes.requirement} >
+                    <div className={classes.requirement} key={requirement} >
 
                         <img test_handle={met_criteria[index] ? "green_tick" : "grey_tick"} src={met_criteria[index] ? green_tick : grey_tick} alt="A tick" className={classes.icon} />
                         {requirement}

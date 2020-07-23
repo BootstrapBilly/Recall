@@ -8,7 +8,7 @@ import Nav from "../../Shared components/Nav/Nav"
 import Setting from "./components/Setting/Setting"
 import ChangePhoto from "./components/Change_photo/Change_photo"
 import ChangeUsername from "./components/Change_username/Change_username"
-import ChangePassword from "./components/Change_password/Change_password"
+import ChangePassword from "./components/Change_password_account/Change_password_account"
 import DeleteAccount from "./components/Delete_account/Delete_account"
 
 export const Account = () => {
@@ -40,7 +40,7 @@ export const Account = () => {
 
                 <Setting text={"Change password"} icon={"lock"} handle_toggle={() => set_open_settings({ ...open_settings, password: !open_settings.password })} open={open_settings.password}/>
 
-                {open_settings.password && <ChangePassword />}
+                {open_settings.password && <ChangePassword handle_success={()=> set_open_settings({...open_settings, password:false })} />}
 
                 <Setting text={"Delete account"} icon={"delete"} handle_toggle={() => set_open_settings({ ...open_settings, delete: !open_settings.delete })} open={open_settings.delete} />
 
