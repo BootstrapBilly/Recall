@@ -2,6 +2,8 @@ import {storage} from "../../../firebase/index"
 
 import {spinner} from "../../../Assets/Spinners/Photo_spinner.svg"
 
+import alert from "easyalert"
+
 import {handle_upload_error_action, reload_search_result_action, set_url_in_database, fetch_image_url} from "../../../Store/Actions/4_profile_image_handler"
 
 const upload_to_firebase = (event, user_id, state, set_state, dispatch) => {
@@ -35,6 +37,7 @@ const upload_to_firebase = (event, user_id, state, set_state, dispatch) => {
                
                     dispatch(set_url_in_database({ url: url, user_id:user_id}))//Add the new url to the mongodb database to be fetched with future requests
 
+                    alert("Image updated successfully", "success")
                 })
 
         });

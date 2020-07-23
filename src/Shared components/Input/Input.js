@@ -37,7 +37,6 @@ export const Input = props => {
     //if there is a response, call the error highlighting function to highlight any erroneous fields in red
     useEffect(() => { response && handle_error_highlighting(response, set_erroneous_field) }, [response])
 
-
     return (
 
         <div className={classes.container}

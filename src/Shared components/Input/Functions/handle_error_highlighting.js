@@ -14,6 +14,9 @@ const handle_error_highlighting = (response, set_erroneous_field) => {
         case "Sorry, that username is unavailable":
             return set_erroneous_field("Username")
 
+        case "Sorry, that username is not available": //this may seem like a duplicate, however it is necessary for the field with "New username" instead of "username"
+            return set_erroneous_field("New username")
+
         case "Your password must be at least 8 characters":
             return set_erroneous_field("Password")
 

@@ -11,7 +11,7 @@ export const Change_photo = () => {
 
         <div className={classes.container}>
 
-            <PhotoUploader/>
+            <PhotoUploader />
 
         </div>
 
