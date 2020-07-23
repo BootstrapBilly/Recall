@@ -30,7 +30,7 @@ export const Password_criteria = props => {
 
     return (
 
-        <div className={classes.container} style={{marginLeft: props.signup && "-10px"}}>
+        <div className={classes.container} style={{marginLeft: props.signup && "-10px", width:props.width, marginRight:props.marginRight}}>
 
             <span className={classes.title}>Remember, passwords must:</span>
 

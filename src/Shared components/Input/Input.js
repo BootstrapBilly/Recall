@@ -71,7 +71,7 @@ export const Input = props => {
                     type="text"
                     className={classes.text_area}
                     onChange={(e) => handle_text_area_change(e, text_area_dimensions, set_text_area_dimensions, props)}
-                    placeholder={`e.g. ${props.placeholder}`}
+                    placeholder={`${props.placeholder}`}
                     onFocus={() => handle_input_focus(props, set_input_focused, erroneous_field, set_erroneous_field, dispatch)}
                     onBlur={() => set_input_focused(false)}
                     style={textarea_style(props, input_focused, colours)}//Inject the styles from the add_new alt styles
@@ -93,7 +93,7 @@ export const Input = props => {
                         onBlur={() => set_input_focused(false)}
                         onChange={props.onChange}
                         value={props.value || ""}
-                        placeholder={props.authentication ? props.placeholder === "none" ? undefined : props.placeholder : `e.g. ${props.placeholder}`}
+                        placeholder={props.placeholder}
                     />
 
                     {props.visiblity_toggleable &&

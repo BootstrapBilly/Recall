@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    width: 300px;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.prompt_text {
+    text-align: center;
+    font-weight: 900;
+    color: red;
+    margin-bottom: 10px;
+}
+
+.button{
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    border-radius: 5px;
+    width: 130px;
+}
+
+.button:hover{
+    cursor: pointer;
+}
