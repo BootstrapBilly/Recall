@@ -15,7 +15,7 @@ import SearchBox from "./Components/Search_box"
 export const Top_bar = props => {
 
     //*states
-    const [active_toggle_link, set_active_toggle_link] = useState("All")//Store the currently active toggle filter/link
+    const [active_toggle_link, set_active_toggle_link] = useState(props.rendered_on_friends_page ? "Friends" : "All")//Store the currently active toggle filter/link
     const [search_expanded, set_search_expanded] = useState(false)//Determine whether the search box is expando
     const [search_value, set_search_value] = useState("")//Hold the value of the search input when it is expanded
 
@@ -30,35 +30,45 @@ export const Top_bar = props => {
         props.handle_toggle(link)
     }
 
+    let bar_links;
+
+    props.rendered_on_friends_page ?
+
+        bar_links = ["Friends", "Add New Friend"] :
+
+        bar_links = ["All", "Notes", "Collections"]
+
     return (
 
         <div className={classes.container} style={{ background: colours.white }}>
 
             <img src={logo} className={classes.logo} alt="The recall logo" />
 
-                <div
+            <div
 
-                    className={classes.toggle_link_container}
-                    style={{ color: colours.secondary, visibility: search_expanded && window.innerWidth < 500 && "hidden" }}
+                className={classes.toggle_link_container}
+                style={{ color: colours.primary, visibility: search_expanded && window.innerWidth < 500 && "hidden" }}
 
-                >
+            >
 
-                    {["All", "Notes", "Collections"].map(link =>
+                {bar_links.map(link =>
 
-                        <span
+                    <span
 
-                            className={classes.toggle_link}
-                            style={{ color: `${active_toggle_link === link ? colours.primary : `${colours.primary}BF`}` }}
-                            onClick={() => handle_toggle_filter(link)}
-                            key={link}
+                        className={classes.toggle_link}
+                        style={{ color: `${active_toggle_link === link ? colours.primary : `${colours.primary}80`}` }}
+                        onClick={() => handle_toggle_filter(link)}
+                        key={link}
 
-                        >
+                    >
 
-                            {link}
+                        {link}
 
-                        </span>)}
+                    </span>)}
 
-                </div>
+            </div>
+
+            {props.no_search ? undefined :
 
                 <SearchBox
 
@@ -69,8 +79,8 @@ export const Top_bar = props => {
                     no_collapse={props.no_collapse}
                     clear_input={() => set_search_value("")}
 
-                />
-            
+                />}
+
         </div>
 
     )

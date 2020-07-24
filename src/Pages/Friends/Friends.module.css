@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-height: 80vh;
+    padding-top: 80px;
+}
+
+.back_button_container{
+    margin-top: 10px;
+    margin-left: 10px;
+    height: 20px;
+    margin-right: 300px;
+}
+
+@media (min-width:1200px){
+
+    .back_button_container{
+        margin-right: 400px;
+    }
+
+}
+
