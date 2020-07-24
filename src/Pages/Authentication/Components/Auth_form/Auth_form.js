@@ -17,7 +17,7 @@ import validate_password from "../../../../util/validate_password"
 import { useDispatch, useSelector } from "react-redux"
 
 //redux action creators
-import { submit_form, clear_response } from "../../../../Store/Actions/0_submit_form_action"
+import { submit_form } from "../../../../Store/Actions/0_submit_form_action"
 
 export const Auth_form = props => {
 
@@ -75,7 +75,7 @@ export const Auth_form = props => {
             else set_button_colour("grey")
 
         }
-    
+    // eslint-disable-next-line
     }, [user_details, email_for_reset])
 
     return (

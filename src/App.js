@@ -29,11 +29,11 @@ const App = () => {
 
     if(window.localStorage.getItem("user_id")){
 
-        dispatch(handle_successful_login(window.localStorage.getItem("token"), window.localStorage.getItem("user_id")))
+        dispatch(handle_successful_login(window.localStorage.getItem("token"), window.localStorage.getItem("user_id"), window.localStorage.getItem("username")))
 
     }
 
-})
+},[window.localStorage])
   
   return (
 

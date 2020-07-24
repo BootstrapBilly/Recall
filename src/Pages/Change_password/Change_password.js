@@ -57,6 +57,7 @@ export const Change_password = () => {
             alert("Your reset link has expired, please request a new one.", "error")
         }
 
+        // eslint-disable-next-line
     }, [response])
 
     const handle_reset_password = () => {
@@ -70,6 +71,7 @@ export const Change_password = () => {
         const data = { ...form_data, token: token, user_id: user_id }
 
         return dispatch(submit_form(data, "change_password"))
+        
     }
 
 
@@ -82,6 +84,7 @@ export const Change_password = () => {
 
         else set_button_colour("grey")
 
+        // eslint-disable-next-line
     }, [form_data])
 
     return (
@@ -121,7 +124,7 @@ export const Change_password = () => {
                 />
 
                 <PasswordCriteria password={form_data.password} repeat_password={form_data.repeat_password} />
-                
+
             </div>
 
             <div className={classes.reset_button} style={{ background: button_colour }} onClick={() => button_colour === colours.primary && handle_reset_password()}>Update Password</div>

@@ -10,11 +10,11 @@ import Landing from "./Components/Landing/Landing"
 import { useSelector, useDispatch } from "react-redux"
 
 //redux action creators
-import { handle_successful_login} from "../../Store/Actions/2_authentication_action"
+import { handle_successful_login } from "../../Store/Actions/2_authentication_action"
 import { clear_response } from '../../Store/Actions/0_submit_form_action'
 
 //external
-import {Redirect} from "react-router-dom"
+import { Redirect } from "react-router-dom"
 
 export const Authentication = () => {
 
@@ -30,6 +30,7 @@ export const Authentication = () => {
 
     //!effects
 
+    // eslint-disable-next-line
     useEffect(() => { if (window.localStorage.getItem("user_id")) set_redirect("/dashboard") })
 
     useEffect(() => {
@@ -39,7 +40,7 @@ export const Authentication = () => {
             //and it is a successul signup/login, redirect the user to the dashboard
             if (response.data.message === "User created" || response.data.message === "Login successful") {
 
-                dispatch(handle_successful_login(response.data.token, response.data.user_id))
+                dispatch(handle_successful_login(response.data.token, response.data.user_id, response.data.username))
 
                 set_redirect("/dashboard")
 
@@ -48,6 +49,7 @@ export const Authentication = () => {
             }
 
         }
+        // eslint-disable-next-line
     }, [response])//listen for any form response changes
 
 

@@ -5,6 +5,7 @@ import classes from "./Side_drawer.module.css"
 
 //util
 import colours from "../../../../util/colours"
+import capitalizeFirstChar from '../../../../util/capitalize_first'
 
 //assets
 import Logo from "../../../../Assets/Icon/logo.svg"
@@ -24,6 +25,8 @@ import { clear_response } from "../../../../Store/Actions/0_submit_form_action"
 import { collapse_all } from "../../../../Store/Actions/1_note_action"
 import { handle_logout } from "../../../../Store/Actions/2_authentication_action"
 import { clear_uploaded_photo } from '../../../../Store/Actions/4_profile_image_handler'
+
+
 
 export const Side_drawer = props => {
 
@@ -73,6 +76,8 @@ export const Side_drawer = props => {
                 }
 
             </div>
+
+            <div className={classes.name} test_handle={"side-drawer-username"}>{window.localStorage.getItem("username") && capitalizeFirstChar(window.localStorage.getItem("username"))}</div>
 
             <div className={classes.photo_container}><ProfileImage /></div>
 

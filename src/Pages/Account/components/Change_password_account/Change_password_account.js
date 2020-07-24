@@ -65,18 +65,18 @@ export const Change_password = props => {
 
             props.handle_success()
 
-            dispatch(clear_response)
+            dispatch(clear_response())
 
             alert("Password changed successfully", "success")
         }
 
-
+        // eslint-disable-next-line
     }, [response])
 
     //_functions
     const handle_submit = () => {
 
-        if (button_colour !== colours.primary) return console.log("no")
+        if (button_colour !== colours.primary) return
 
         else dispatch(submit_form({ user_id: user_id, old_password: form_data.old_password, password: form_data.password, repeat_password: form_data.repeat_password }, "change_password_account"))
 
@@ -84,25 +84,25 @@ export const Change_password = props => {
 
     return (
 
-        <div className={classes.container}>
+        <div className={classes.container} test_handle="change_password_content">
 
             <Input placeholder={"Enter your old password"} visiblity_toggleable label="Old password" value={form_data.old_password} type="password"
-                onChange={(e) => set_form_data({ ...form_data, old_password: e.target.value })}
+                onChange={(e) => set_form_data({ ...form_data, old_password: e.target.value })} test_handle="old_password_input"
             />
 
             <Input placeholder={"Enter your new password"} visiblity_toggleable label="New password" value={form_data.password} type="password"
-                onChange={(e) => set_form_data({ ...form_data, password: e.target.value })}
+                onChange={(e) => set_form_data({ ...form_data, password: e.target.value })} test_handle="password_input"
             />
 
             <Input placeholder={"Repeat your new password"} visiblity_toggleable label="Repeat new password" value={form_data.repeat_password} type="password"
-                onChange={(e) => set_form_data({ ...form_data, repeat_password: e.target.value })}
+                onChange={(e) => set_form_data({ ...form_data, repeat_password: e.target.value })} test_handle="repeat_password_input"
             />
 
             <PasswordCriteria width="220px" marginRight="-20px" password={form_data.password} repeat_password={form_data.repeat_password} />
 
-            {response && response.status > 400 && <div className={classes.error_message}>{response.data.message}</div>}
+            {response && response.status > 400 && <div className={classes.error_message} test_handle="error_message">{response.data.message}</div>}
 
-            <div className={classes.button} style={{ background: button_colour }} onClick={() => handle_submit()}>Change Password</div>
+            <div className={classes.button} style={{ background: button_colour }} onClick={() => handle_submit()} test_handle="change_password_button">Change Password</div>
 
         </div>
 

@@ -57,8 +57,6 @@ const handle_note_toggle = (state = initialState, action) => {
 
         case DISABLE_EDIT_MODE:
 
-        console.log("inside")
-
             return { ...state, edit_mode_notes: [...state.edit_mode_notes.filter(note => note !== action.payload)] }
 
         case DISABLE_EDIT_MODE_NESTED:

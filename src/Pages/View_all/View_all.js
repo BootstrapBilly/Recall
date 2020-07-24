@@ -56,31 +56,28 @@ export const View_all = () => {
 
     }, [response, filter])//update the notes if the response changes
 
-
-    console.log(response)
-
     useEffect(() => {
 
         if (position_change) { //position change is sent by the backend if a note or process title changes and it's order in the sorted array changes
-            
+
             set_position_change(false)
 
             switch (filter) {
 
                 case "All": return set_notes(response.data.both)
                 case "Notes": return set_notes(response.data.notes)
-                case "Collections": return  set_notes(response.data.processes)
-                default: return  set_notes(response.data.both)
-            } 
+                case "Collections": return set_notes(response.data.processes)
+                default: return set_notes(response.data.both)
+            }
 
         }
-        
-    },[position_change])
+        // eslint-disable-next-line
+    }, [position_change])
 
     const handle_toggle_click = link => {
 
         set_filter(link)
-        dispatch(submit_form({ user_id: user_id}, "get_all")) 
+        dispatch(submit_form({ user_id: user_id }, "get_all"))
 
     }
 

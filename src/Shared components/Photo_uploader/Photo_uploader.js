@@ -23,7 +23,6 @@ export const Photo_uploader = props => {
 
     //?selectors
     const user_id = useSelector(state => state.auth.user_id)
-    const url = useSelector(state => state.profile_image.image_url)
 
     //- config
     const dispatch = useDispatch()

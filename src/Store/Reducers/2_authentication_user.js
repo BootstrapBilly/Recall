@@ -3,7 +3,8 @@ import {HANDLE_SUCCESSFUL_LOGIN, HANDLE_LOGOUT} from "../Actions/2_authenticatio
 const initialState = {//set the initial state
 
     user_id: null,
-    token:null
+    token:null,
+    username:null
 
 }
 
@@ -13,7 +14,7 @@ const login = (state = initialState, action) => {
 
         case HANDLE_SUCCESSFUL_LOGIN:
 
-        return {...state, user_id:action.payload.user_id, token:action.payload.token}
+        return {...state, user_id:action.payload.user_id, token:action.payload.token, username:action.payload.username}
 
         case HANDLE_LOGOUT:
 

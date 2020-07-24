@@ -23,8 +23,7 @@ import DeleteConfirmation from "./Components/Delete_confirmation/Delete_confirma
 import { useSelector, useDispatch } from "react-redux"
 
 //redux action creators
-import { submit_form, clear_response } from "../../Store/Actions/0_submit_form_action"
-import { expand_note, expand_selected_note, expand_nested_note, collapse_note, enable_edit_mode, enable_edit_mode_nested, disable_edit_mode, disable_edit_mode_nested, set_duplicate_title, clear_duplicate_title } from "../../Store/Actions/1_note_action"
+import { expand_note, expand_selected_note, expand_nested_note, collapse_note, clear_duplicate_title } from "../../Store/Actions/1_note_action"
 
 //functions
 import handle_cancel_click from "./Functions/handle_cancel_click"
@@ -39,9 +38,6 @@ import check_if_note_is_in_edit_mode from "./Functions/check_if_note_is_in_edit_
 
 //util
 import colours from '../../util/colours'
-
-//external
-import alert from "easyalert"
 
 export const Note = props => {
 
@@ -86,8 +82,6 @@ export const Note = props => {
 
     //!effects
 
-    useEffect(()=> {console.log(edit_mode_enabled_notes)},[edit_mode_enabled_notes])
-
     //called everytime a note is expanded or collapsed, the height of the div is extracted and set in the height state to resize the note
     // eslint-disable-next-line 
     useEffect(() => {set_height(ref.current.clientHeight)})
@@ -103,6 +97,7 @@ export const Note = props => {
     }, [resize_note])
 
     //this effect listens for an api response and passes the handling of it to the handle_response function 
+    // eslint-disable-next-line
     useEffect(() => {handle_response(response, note_id, props, set_overwritten_values, dispatch, user_id)}, [response])
 
     return (

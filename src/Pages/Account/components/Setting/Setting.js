@@ -11,7 +11,7 @@ export const Setting = props => {
 
     return (
 
-        <div className={classes.container} onClick={props.handle_toggle.bind(this, props.text)}>
+        <div className={classes.container} onClick={props.handle_toggle.bind(this, props.text)} test_handle={props.test_handle}>
 
             <img src={require(`../../../../Assets/Icon/${props.icon}.svg`)} className={classes.icon} alt={"Icon for this option"} />
 
