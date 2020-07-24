@@ -17,24 +17,24 @@ import alert from "easyalert"
 
 export const Delete_confirmation = props => {
 
-    //_config
-    const dispatch = useDispatch()
+    //-config
+    const dispatch = useDispatch()//initialise the usedispatch hook
 
     //?selectors
-    const user_id = useSelector(state => state.auth.user_id)
+    const user_id = useSelector(state => state.auth.user_id)//grab the userid from redux
 
-    console.log(props.example)
+    const handle_click_delete = () => {//this is called when the user clicks the confirm button
 
-    const handle_click_delete = () => {
+        if (props.example) {//if this note is an example (the one on the landing page)
 
-        if (props.example) {
-
+            //show an alert
             alert("This note is an example and cannot be deleted", "info")
 
-            return props.cancel_delete()
+            return props.cancel_delete()//and do not delete it
 
         }
 
+        //otherwise if its a normal note delete it
         else return handle_delete_click(dispatch, props.title, props.note_id, props, props.is_a_collection, user_id)
 
     }

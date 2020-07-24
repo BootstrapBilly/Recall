@@ -5,10 +5,14 @@ import classes from './Navigation_buttons.module.css'
 import colours from '../../util/colours'
 
 export const Navigation_buttons = props => {
+
+    /* This component takes a type from props which is set by the handle_form_navigation component
     
+    The prop type determines the text and colour of the button*/
+
     return (
 
-        <div className={classes.container} style={{ width: props.width, marginTop: props.marginTop, justifyContent:props.centered && "center" }}>
+        <div className={classes.container} style={{ width: props.width, marginTop: props.marginTop, justifyContent: props.centered && "center" }}>
 
             {props.type !== "next" && props.type !== "success" &&
 
@@ -18,7 +22,14 @@ export const Navigation_buttons = props => {
                     className={[classes.back_button, classes.button].join(" ")}
                     onClick={props.on_click.bind(this, "back")}
                     // eslint-disable-next-line
-                    style={{ border: `3px solid ${colours.secondary}`, color: colours.secondary, display:props.type === "next" || props.type === "grey_next" && "none" }}>
+
+                    style={{
+
+                        border: `3px solid ${colours.secondary}`,
+                        color: colours.secondary,
+                        display: props.type === "next" || props.type === "grey_next" && "none"
+
+                    }}>
 
                     Go Back
 
@@ -33,9 +44,26 @@ export const Navigation_buttons = props => {
                     test_handle="form_next_button"
                     className={[classes.next_button, classes.button].join(" ")}
                     onClick={props.type === "back" || props.type === "back_submit" ? null : props.on_click.bind(this, "next")}
-                    style={{ border: `3px solid ${props.type === "back" || props.type === "back_submit" || props.type === "grey_next" ? "grey" : props.type === "add" ? colours.green : colours.primary}`, background: props.type === "back" || props.type === "back_submit" || props.type === "grey_next" ? "grey" : props.type === "add" ? colours.green : colours.primary, marginLeft: props.type !== "grey_next" && props.type !== "next" && "15px" }}>
 
-                    {props.type === "back_submit" || props.type === "submit" ? "Sign up" : props.type === "skip" ? "Skip" : props.type === "add" ? "Finished" : "Next"}
+                    style={{
+
+                        border: `3px solid ${props.type === "back" || props.type === "back_submit" || props.type === "grey_next" ? "grey"
+                            : props.type === "add" ? colours.green
+                                : colours.primary}`,
+
+                        background: props.type === "back" || props.type === "back_submit" || props.type === "grey_next" ? "grey"
+                            : props.type === "add" ? colours.green
+                                : colours.primary,
+
+                        marginLeft: props.type !== "grey_next" && props.type !== "next" && "15px"
+
+                    }}>
+
+                    {//Text inside the button
+                        props.type === "back_submit" || props.type === "submit" ? "Sign up"
+                            : props.type === "skip" ? "Skip"
+                                : props.type === "add" ? "Finished" : "Next"
+                    }
 
                 </div>
             }
@@ -47,8 +75,8 @@ export const Navigation_buttons = props => {
                     test_handle="form_reset_button"
                     className={[classes.reset_button, classes.button].join(" ")}
                     onClick={props.handle_reset}
-                    style={{background:colours.green}}
-                    >
+                    style={{ background: colours.green }}
+                >
 
                     Add Another
 

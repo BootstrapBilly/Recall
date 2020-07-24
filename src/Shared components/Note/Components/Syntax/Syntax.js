@@ -12,11 +12,12 @@ import Buttons from "./Components/Buttons"
 export const Syntax = props => {
 
     //*states
-    const [edit_enabled, set_edit_enabled] = useState(false)
-    const [syntax, set_syntax] = useState(props.syntax)
+    const [edit_enabled, set_edit_enabled] = useState(false)//determine whether the syntax is in edit mode
+    const [syntax, set_syntax] = useState(props.syntax)//hold the value of the syntax
 
     const handle_click = () => {
 
+        //if the syntax is not in edit mode, set it to edit mode
         if (props.edit_mode) { set_edit_enabled(true) }
 
         else {//not edit mode

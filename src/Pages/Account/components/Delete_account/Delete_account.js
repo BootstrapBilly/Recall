@@ -20,33 +20,31 @@ import { handle_logout } from '../../../../Store/Actions/2_authentication_action
 export const Delete_account = () => {
 
     //?selectors
-    const response = useSelector(state => state.form.response)
-    const user_id = useSelector(state => state.auth.user_id)
+    const response = useSelector(state => state.form.response)//grab the response from the api
+
+    const user_id = useSelector(state => state.auth.user_id)//grab the userid from redux
 
     //-config
-    const dispatch = useDispatch()
+    const dispatch = useDispatch()//initialise the usedispatch hook
 
     //*states
-    const [password, set_password] = useState(null)
-    const [redirect, set_redirect] = useState(false)
+    const [password, set_password] = useState(null)//hold the password input value
+    const [redirect, set_redirect] = useState(false)//set upon a success response to redirect the user to the landing page
 
-    const handle_click = () => {
+    //submit the delete request to the backend
+    const handle_click = () => dispatch(submit_form({ user_id: user_id, password: password }, "delete_user"))
 
-        dispatch(submit_form({ user_id: user_id, password: password }, "delete_user"))
-
-    }
-
-    useEffect(() => {
+    useEffect(() => {//this effects listens for a sucessful deletion response
 
         if (response && response.data.message === "Account deleted") {
 
-            set_redirect("/")
+            set_redirect("/")//redirect them to the landing page
 
-            dispatch(handle_logout())
+            dispatch(handle_logout())//remove their local storage data
 
-            dispatch(clear_response())
+            dispatch(clear_response())//clear the response
 
-            alert("Your account has been deleted", "success")
+            alert("Your account has been deleted", "success")//alert them
         }
         // eslint-disable-next-line
     }, [response])

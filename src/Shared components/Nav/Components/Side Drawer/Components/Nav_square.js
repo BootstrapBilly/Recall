@@ -7,32 +7,42 @@ import classes from "./Nav_square.module.css"
 import colours from '../../../../../util/colours'
 
 //redux hooks
-import {useSelector, useDispatch} from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 
 //redux action creators
-import {set_active_link} from "../../../../../Store/Actions/3_active_nav_link_action"
+import { set_active_link } from "../../../../../Store/Actions/3_active_nav_link_action"
 
 export const Nav_square = props => {
 
-    const dispatch = useDispatch()
-    
-    const active_link = useSelector(state => state.nav.link)
+    //?selectors
+    const active_link = useSelector(state => state.nav.link)//get the currently active link so it is highlighted in the side drawer
 
-    const handle_click = () => {
+    //-config
+    const dispatch = useDispatch()//intitialise the usedispatch hook
 
-        dispatch(set_active_link(props.text))
-        props.onClick()
+    const handle_click = () => {//this is called when a navigation link is clicked
+
+        dispatch(set_active_link(props.text))//update the active link in redux to change the currently highlighted square
+        props.onClick()//call the props function to redirect them to their desired page
 
     }
 
     return (
 
-            <div className={classes.container} onClick={()=> handle_click()} test_handle={props.test_handle}>
+        <div className={classes.container} onClick={() => handle_click()} test_handle={props.test_handle}>
 
-                <img src={require(`../../../../../Assets/Icon/${active_link === props.text ? props.icon : `${props.icon}-grey`}.svg`)} alt={`${props.icon} navigation icon`} className={classes.icon} />
-                <div className={classes.text} style={{ color: colours.primary }}>{props.text}</div>
+            <img src={require(`../../../../../Assets/Icon/${
 
-            </div>
+                active_link === props.text ? props.icon : `${props.icon}-grey`}.svg`)//if this link is active, use the normal icon, if not use the greyed out one
+
+            }
+                alt={`${props.icon} navigation icon`}
+                className={classes.icon}
+            />
+
+            <div className={classes.text} style={{ color: colours.primary }}>{props.text}</div>
+
+        </div>
 
     )
 

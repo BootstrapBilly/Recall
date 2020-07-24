@@ -31,25 +31,25 @@ import { clear_uploaded_photo } from '../../../../Store/Actions/4_profile_image_
 export const Side_drawer = props => {
 
     //-config
-    const dispatch = useDispatch()
+    const dispatch = useDispatch()//initialise the usedispatch hook
 
     const [redirect, set_redirect] = useState(false)//state to hold the redirection (set by clicking a nav link)
 
-    const handle_navigation = (link) => {
+    const handle_navigation = (link) => {//this function is called whenever a nav square inside the menu is clicked
 
-        dispatch(clear_response())
-        dispatch(collapse_all())
-        set_redirect(link)
-        props.handle_toggle()
+        dispatch(clear_response())//clear the response
+        dispatch(collapse_all())//collapse all open notes
+        set_redirect(link)//redirect the user to their desired page
+        props.handle_toggle()//collapse the side drawer
 
     }
 
-    const handle_logout_click = () => {
+    const handle_logout_click = () => {//this is called when the user clicks the logout button
 
-        dispatch(handle_logout())
-        dispatch(clear_response())
-        dispatch(clear_uploaded_photo())
-        set_redirect("/")
+        dispatch(handle_logout())//remove their local storage data
+        dispatch(clear_response())//clear the response
+        dispatch(clear_uploaded_photo())//clear their profile picture
+        set_redirect("/")//redirect them to the landing page
 
     }
 
@@ -67,12 +67,23 @@ export const Side_drawer = props => {
             <div className={classes.square_container}>
 
                 {
-                    [["Home", "dashboard", "dashboard_nav_square"], ["Add a note", "add_new", "add_new_nav_square"], ["View notes", "view_all", "view_all_nav_square"], ["Combine notes", "combine_notes", "combine_notes_nav_square"], ["Friends", "friends", "friends_nav_square"], ["Account", "account", "account_nav_square"]]
+
+                    [
+
+                        ["Home", "dashboard", "dashboard_nav_square"],
+                        ["Add a note", "add_new", "add_new_nav_square"],
+                        ["View notes", "view_all", "view_all_nav_square"],
+                        ["Combine notes", "combine_notes", "combine_notes_nav_square"],
+                        ["Friends", "friends", "friends_nav_square"],
+                        ["Account", "account", "account_nav_square"]
+
+                    ]
                         .map(link =>
 
                             <NavSquare test_handle={link[2]} text={link[0]} icon={link[0]} key={link[0]} onClick={() => handle_navigation(link[1])} />
 
                         )
+
                 }
 
             </div>

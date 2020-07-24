@@ -11,7 +11,7 @@ import validate_password from "../../util/validate_password"
 
 export const Password_criteria = props => {
 
-    const [met_criteria, set_met_criteria] = useState({
+    const [met_criteria, set_met_criteria] = useState({//this is responsible for turning each tick green when the criteria is met, it is manipulated by the effect on line 25
 
         0: false,
         1: false,
@@ -20,17 +20,19 @@ export const Password_criteria = props => {
     })
 
     //!effects
-    useEffect(() => {
+    useEffect(() => {//this is called whenever the parent's input value changes
 
+        //it runs the input through the validator util function
         const validation_result = validate_password(props.password, props.repeat_password)
 
+        //then it updates the state accordling which then updates the tick for each criteria
         set_met_criteria({ 0: validation_result.length, 1: validation_result.uppercase, 2: validation_result.match })
 
     }, [props.password, props.repeat_password])
 
     return (
 
-        <div className={classes.container} style={{marginLeft: props.signup && "-10px", width:props.width, marginRight:props.marginRight}}>
+        <div className={classes.container} style={{ marginLeft: props.signup && "-10px", width: props.width, marginRight: props.marginRight }}>
 
             <span className={classes.title}>Remember, passwords must:</span>
 

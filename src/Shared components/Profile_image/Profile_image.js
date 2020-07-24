@@ -22,16 +22,18 @@ export const Profile_image = () => {
     const dispatch = useDispatch()
 
     //*states
-    const [image_url, set_image_url] = useState(placeholder)
+    const [image_url, set_image_url] = useState(placeholder)//holds the url of the profile image, fetched from the database
 
     //!effects
     useEffect(() => {
 
+        //if a userid is present, fetch the url for their profile picture
         if (user_id) { dispatch(fetch_image_url(user_id)) }
 
         // eslint-disable-next-line
     }, [user_id, url])
 
+    //if an image url is present, update the image url state to set the source of the image accordingly
     useEffect(() => { if (url) set_image_url(url) }, [url])
 
     return (

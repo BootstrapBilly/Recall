@@ -9,7 +9,6 @@ import colours from "../../../../util/colours"
 
 export const Buttons = props => {
 
-
     return (
 
         <div className={classes.container}>
