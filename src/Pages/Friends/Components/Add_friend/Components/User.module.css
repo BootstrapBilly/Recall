@@ -1,0 +1,50 @@
+.container{
+    display: flex;
+    width: 250px;
+    height: 60px;
+    margin-top: 10px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 9px 3px rgba(128,128,128,0.25);
+    background-color: white;
+    overflow: hidden;
+    align-items: center;
+    position: relative;
+}
+
+.container:hover{
+    cursor: pointer;
+}
+
+.name{
+    width: 170px;
+    font-size: 18px;
+    word-break: break-word; /* Chrome, Safari */
+    overflow-wrap: anywhere;
+    display: flex;
+    align-items: center;
+    padding: 1px;
+    margin-left: -10px;
+}
+
+.icon_container{
+
+    position: absolute;
+    right: 10px;
+    top: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    
+}
+
+.add_icon{
+    width: 15px;
+    height: 15px;
+    transform: rotate(180deg);
+}
+
+.caption{
+    font-size: 12px;
+}

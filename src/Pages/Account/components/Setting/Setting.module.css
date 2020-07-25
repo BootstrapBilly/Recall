@@ -6,6 +6,7 @@
     border-radius: 15px;
     padding: 10px;
     position: relative;
+    box-shadow: 3px 3px 9px 3px rgba(128,128,128,0.25);
 }
 
 .container:hover {
