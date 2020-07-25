@@ -19,8 +19,9 @@ import { submit_form } from "../../../../Store/Actions/0_submit_form_action"
 
 //external
 import Masonry from 'react-masonry-css'
+import Alert from "easyalert"
 
-export const Add_friend = () => {
+export const Add_friend = props => {
 
     //?selectors
     const user_id = useSelector(state => state.auth.user_id)//grab the user id from redux
@@ -43,15 +44,24 @@ export const Add_friend = () => {
 
     useEffect(() => {
 
-        if (response) set_users_to_display(response.data.users)
+        if(response && response.data.message === "Request sent") {
+
+            set_search_value("")
+            props.handle_toggle()
+            Alert("Friend request sent", "success")
+
+        }
+
+        if (response && response.data.message === "search executed") set_users_to_display(response.data.users)
 
     }, [response])
 
     const handle_add_user = details => {
 
-        console.log(details)
+        dispatch(submit_form({user_id:user_id, username:details.username}, "friend" ))
 
     }
+
     return (
 
         <div className={classes.container}>
@@ -84,14 +94,6 @@ export const Add_friend = () => {
                     }
 
                 </Masonry>
-
-
-
-
-
-
-
-
 
                 // <div className={classes.users_to_display_container}>
 

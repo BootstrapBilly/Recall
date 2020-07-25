@@ -35,7 +35,7 @@ export const Friends = () => {
             {
                 current_content === "Add New Friend" &&
 
-                <AddFriend />
+                <AddFriend handle_toggle={()=> set_current_content("Friends")}/>
 
             }
 
