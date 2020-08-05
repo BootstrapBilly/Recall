@@ -9,13 +9,13 @@ import handle_column_assignment from "../../../../util/handle_column_assignment"
 
 //components
 import SearchBox from "../../../../Shared components/Top_bar/Components/Search_box"
-import User from "./Components/User"
+import User from "../User/User"
 
 //redux hooks
 import { useSelector, useDispatch } from "react-redux"
 
 //redux action creators
-import { submit_form } from "../../../../Store/Actions/0_submit_form_action"
+import { submit_form, clear_response } from "../../../../Store/Actions/0_submit_form_action"
 
 //external
 import Masonry from 'react-masonry-css'
@@ -49,6 +49,7 @@ export const Add_friend = props => {
             set_search_value("")
             props.handle_toggle()
             Alert("Friend request sent", "success")
+            dispatch(clear_response())
 
         }
 
@@ -89,17 +90,11 @@ export const Add_friend = props => {
 
                     {
 
-                        users_to_display.map(user => <User details={user} key={user._id} onClick={(details)=> handle_add_user(details)}  />)
+                        users_to_display.map(user => <User details={user} key={user._id} onClick={(details)=> handle_add_user(details)} add_friend  />)
 
                     }
 
                 </Masonry>
-
-                // <div className={classes.users_to_display_container}>
-
-                //     {users_to_display.map(user => <User details={user} key={user._id} />)}
-
-                // </div>
 
             }
         </div>
