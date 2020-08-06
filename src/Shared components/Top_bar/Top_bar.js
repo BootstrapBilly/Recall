@@ -38,11 +38,11 @@ export const Top_bar = props => {
 
         bar_links = ["All", "Notes", "Collections"]
 
-        useEffect(()=> {
+    useEffect(() => {
 
-            if(props.current_content) set_active_toggle_link(props.current_content)
-            
-        },[props.current_content])
+        if (props.current_content) set_active_toggle_link(props.current_content)
+
+    }, [props.current_content])
 
     return (
 
@@ -63,7 +63,9 @@ export const Top_bar = props => {
 
                         test_handle={link}
                         className={classes.toggle_link}
-                        style={{ color: `${active_toggle_link === link ? colours.primary : `${colours.primary}80`}` }}
+                        style={{
+                            color: `${active_toggle_link === link ? colours.primary : `${colours.primary}80`}`,
+                        }}
                         onClick={() => handle_toggle_filter(link)}
                         key={link}
 

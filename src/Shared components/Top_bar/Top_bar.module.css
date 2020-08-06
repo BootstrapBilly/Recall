@@ -28,7 +28,8 @@
 }
 
 .toggle_link{
-    margin-left: 10px;
+    margin-left: 15px;
+    font-size: 22px;
 }
 
 .toggle_link:hover {

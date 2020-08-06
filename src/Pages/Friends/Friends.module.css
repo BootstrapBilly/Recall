@@ -3,14 +3,19 @@
     align-items: center;
     flex-direction: column;
     min-height: 80vh;
-    padding-top: 80px;
+    padding-top: 50px;
+    padding-bottom: 100px;
 }
 
-.back_button_container{
+.back_button_container {
     margin-top: 10px;
     margin-left: 10px;
     height: 20px;
     margin-right: 300px;
+}
+
+.friends_graphic {
+    display: none;
 }
 
 .my_masonry_grid {
@@ -19,28 +24,47 @@
     display: -ms-flexbox;
     /* Not needed if autoprefixing */
     display: flex;
-    margin-left: -30px;
     /* gutter size offset */
     width: auto;
     margin-top: 0px;
     position: relative;
     left: 0;
-    padding-bottom: 100px;
-    padding-left: 5px;
-    padding-right: 5px;
+    border-radius: 5px;
+    padding: 0px 10px;
 }
 
 .my_masonry_grid_column {
-    padding-left: 30px;
+    padding: 30px 10px;
+    padding-top: 10px;
     /* gutter size */
     background-clip: padding-box;
 }
 
-@media (min-width:1200px){
-
-    .back_button_container{
+@media (min-width:1200px) {
+    .back_button_container {
         margin-right: 400px;
     }
-
+    .container {
+        margin-top: 30px;
+    }
+    .friends_graphic {
+        display: block;
+        position: fixed;
+        bottom: 10px;
+        right: -30px;
+        z-index: 1;
+        width: 400px;
+    }
 }
 
+@media (min-width:1500px) {
+    .back_button_container {
+        margin-right: 400px;
+    }
+    .container {
+        margin-top: 30px;
+    }
+    .friends_graphic {
+        width: 550px;
+    }
+}

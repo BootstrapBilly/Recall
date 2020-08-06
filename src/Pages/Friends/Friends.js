@@ -25,6 +25,9 @@ import handle_column_assignment from "../../util/handle_column_assignment"
 //functions
 import handle_response from "./Functions/handle_response"
 
+//assets
+import friends_graphic from "../../Assets/Abstract/friends_graphic.svg"
+
 export const Friends = () => {
 
     //?selectors
@@ -39,10 +42,10 @@ export const Friends = () => {
     const [friends, set_friends] = useState([])
 
     //fetch the list of friends, pending and outgoing requests for the user on page load
-    useEffect(() => {dispatch(submit_form({ user_id: user_id }, "get_friends"))}, [user_id])
+    useEffect(() => { dispatch(submit_form({ user_id: user_id }, "get_friends")) }, [user_id])
 
     //handle the response when sending, cancelling, accepting, denying, fetching friends
-    useEffect(() => {if(response) handle_response(response, dispatch, set_friends, user_id)}, [response])
+    useEffect(() => { if (response) handle_response(response, dispatch, set_friends, user_id) }, [response])
 
     const handle_toggle_content = link => {
 
@@ -67,30 +70,30 @@ export const Friends = () => {
 
                 friends.length ?
 
-                    <Masonry
+                        <Masonry
 
-                        breakpointCols={handle_column_assignment(friends)}
-                        className={classes.my_masonry_grid}
-                        columnClassName={classes.my_masonry_grid_column}
-                        style={{ paddingBottom: "0px" }}>
+                            breakpointCols={handle_column_assignment(friends)}
+                            className={classes.my_masonry_grid}
+                            columnClassName={classes.my_masonry_grid_column}
+                            style={{ paddingBottom: "0px" }}>
 
-                        {
+                            {
 
-                            friends.map(user =>
+                                friends.map(user =>
 
-                                <User
+                                    <User
 
-                                    details={user}
-                                    key={user._id}
-                                    onClick={(details) => console.log(details)}
-                                    request_pending={user.pending ? "Pending" : user.request && "Request"}
-                                    populated
+                                        details={user}
+                                        key={user._id}
+                                        onClick={(details) => console.log(details)}
+                                        request_pending={user.pending ? "Pending" : user.request && "Request"}
+                                        populated
 
-                                />)
+                                    />)
 
-                        }
+                            }
 
-                    </Masonry>
+                        </Masonry>
 
                     : <NoFriendsPrompt /> : undefined
             }
@@ -101,6 +104,8 @@ export const Friends = () => {
                 <AddFriend handle_toggle={() => set_current_content("Friends")} />
 
             }
+
+            <img src={friends_graphic} alt="A picture of friends together" className={classes.friends_graphic} style={{display:!friends.length && "none"}} />
 
             <Nav />
 
