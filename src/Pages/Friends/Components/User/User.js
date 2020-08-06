@@ -39,7 +39,7 @@ export const User = props => {
 
                 <div className={classes.icon_container}>
 
-                    <img src={Arrow} alt="Add friend icon" className={classes.add_icon} />
+                    <img src={Arrow} alt="Add friend icon" className={[classes.add_icon, options_open && classes.icon_open].join(" ")} />
 
                 </div>
 
@@ -47,7 +47,7 @@ export const User = props => {
 
             </div>
 
-            {options_open && <UserOptions type={options_open} />}
+            {options_open && <UserOptions type={options_open} details={props.details.user_details} />}
 
         </React.Fragment>
     )

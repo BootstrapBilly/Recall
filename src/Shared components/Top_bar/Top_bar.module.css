@@ -9,6 +9,7 @@
     z-index: 10;
     top: 0;
     left: 0;
+    justify-content: center;
 }
 
 .logo {
@@ -20,7 +21,6 @@
 
 .toggle_link_container {
     display: flex;
-    margin-left: 50px;
     justify-content: space-evenly;
     font-size: 18px;
     margin-top: 10px;

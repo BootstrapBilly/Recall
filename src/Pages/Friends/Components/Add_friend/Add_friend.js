@@ -38,7 +38,7 @@ export const Add_friend = props => {
     useEffect(() => {
 
         if (!search_value) return set_users_to_display([])
-        dispatch(submit_form({ user_id: user_id, search_string: search_value }, "search_user"))
+        dispatch(submit_form({ user_id: user_id, search_string: search_value, unique:true }, "search_user"))
 
     }, [search_value])
 

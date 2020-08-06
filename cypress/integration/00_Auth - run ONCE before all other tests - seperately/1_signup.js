@@ -115,9 +115,9 @@
 
 //         it("Logout and go back to the signup form to test failure cases", () => {
 
-//             cy.get('[test_handle="menu_toggle"]').click({force:true})
+//             cy.get('[test_handle="menu_toggle"]').click({ force: true })
 
-//             cy.get('[test_handle="logout_button"]').click({force:true})
+//             cy.get('[test_handle="logout_button"]').click({ force: true })
 
 //             cy.get('[test_handle="CTA_button"]').click()
 
@@ -181,4 +181,129 @@
 //         })
 
 //     })
+
+//     context("Create another account - berny", ()=> {
+    
+//         it("Enter valid passwords", () => {
+    
+//             cy.get('[test_handle="password_input"]').type("1234567B")
+    
+//             cy.get('[test_handle="repeat_password_input"]').type("1234567B")
+    
+//         })
+    
+//         it("Enter email in use and username in use then submit", () => {
+    
+//             cy.get('[test_handle="email_or_username_input"]').type("test3@test.com")
+    
+//             cy.get('[test_handle="username_input"]').type("berny")
+    
+//             cy.get('[test_handle="action_button"]').click()
+    
+    
+//         })
+
+//     })
+
+//     context("Create another account - belinda", ()=> {
+
+//         it("Logout and go back to the signup form to test failure cases", () => {
+
+//             cy.get('[test_handle="menu_toggle"]').click({ force: true })
+    
+//             cy.get('[test_handle="logout_button"]').click({ force: true })
+    
+//             cy.get('[test_handle="CTA_button"]').click()
+    
+//         })
+    
+//         it("Enter valid passwords", () => {
+    
+//             cy.get('[test_handle="password_input"]').type("1234567B")
+    
+//             cy.get('[test_handle="repeat_password_input"]').type("1234567B")
+    
+//         })
+    
+//         it("Enter email in use and username in use then submit", () => {
+    
+//             cy.get('[test_handle="email_or_username_input"]').type("test4@test.com")
+    
+//             cy.get('[test_handle="username_input"]').type("belinda")
+    
+//             cy.get('[test_handle="action_button"]').click()
+    
+    
+//         })
+
+//     })
+
+//     context("Create another account - barney", ()=> {
+
+//         it("Logout and go back to the signup form to test failure cases", () => {
+
+//             cy.get('[test_handle="menu_toggle"]').click({ force: true })
+    
+//             cy.get('[test_handle="logout_button"]').click({ force: true })
+    
+//             cy.get('[test_handle="CTA_button"]').click()
+    
+//         })
+    
+//         it("Enter valid passwords", () => {
+    
+//             cy.get('[test_handle="password_input"]').type("1234567B")
+    
+//             cy.get('[test_handle="repeat_password_input"]').type("1234567B")
+    
+//         })
+    
+//         it("Enter email in use and username in use then submit", () => {
+    
+//             cy.get('[test_handle="email_or_username_input"]').type("test5@test.com")
+    
+//             cy.get('[test_handle="username_input"]').type("barney")
+    
+//             cy.get('[test_handle="action_button"]').click()
+    
+    
+//         })
+
+//     })
+
+//     context("Create another account - bianca", ()=> {
+
+//         it("Logout and go back to the signup form to test failure cases", () => {
+
+//             cy.get('[test_handle="menu_toggle"]').click({ force: true })
+    
+//             cy.get('[test_handle="logout_button"]').click({ force: true })
+    
+//             cy.get('[test_handle="CTA_button"]').click()
+    
+//         })
+    
+//         it("Enter valid passwords", () => {
+    
+//             cy.get('[test_handle="password_input"]').type("1234567B")
+    
+//             cy.get('[test_handle="repeat_password_input"]').type("1234567B")
+    
+//         })
+    
+//         it("Enter email in use and username in use then submit", () => {
+    
+//             cy.get('[test_handle="email_or_username_input"]').type("test6@test.com")
+    
+//             cy.get('[test_handle="username_input"]').type("bianca")
+    
+//             cy.get('[test_handle="action_button"]').click()
+    
+    
+//         })
+
+//     })
+
 // })
+
+

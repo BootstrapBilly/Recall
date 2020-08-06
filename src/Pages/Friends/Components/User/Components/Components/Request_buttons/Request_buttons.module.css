@@ -6,7 +6,7 @@
 }
 
 .button{
-    width: 75px;
+    width: 85px;
     height: 35px;
     display: flex;
     justify-content: center;
@@ -14,4 +14,8 @@
     border-radius: 5px;
     color: white;
     font-size: 18px;
+}
+
+.button:hover{
+    cursor: pointer;
 }

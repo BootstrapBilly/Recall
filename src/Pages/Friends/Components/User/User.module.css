@@ -1,8 +1,8 @@
 .container{
     display: flex;
-    width: 250px;
+    width: 260px;
     height: 60px;
-    margin-top: 10px;
+    margin-top: 20px;
     border-radius: 10px;
     box-shadow: 3px 3px 9px 3px rgba(128,128,128,0.25);
     background-color: white;
@@ -41,7 +41,12 @@
 .add_icon{
     width: 15px;
     height: 15px;
-    transform: rotate(180deg);
+    transform: rotate(270deg);
+    transition: transform 0.5s;
+}
+
+.icon_open{
+    transform: rotate(90deg);
 }
 
 .caption{
@@ -51,9 +56,10 @@
 .pending_tag{
     position: absolute;
     color: white;
-    top:-23px;
-    left: 20px;
+    top:-10px;
+    right: 0px;
     padding: 2px 5px;
+    font-size: 14px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }

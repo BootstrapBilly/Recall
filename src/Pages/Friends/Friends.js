@@ -22,6 +22,9 @@ import Masonry from 'react-masonry-css'
 //util
 import handle_column_assignment from "../../util/handle_column_assignment"
 
+//functions
+import handle_response from "./Functions/handle_response"
+
 export const Friends = () => {
 
     //?selectors
@@ -35,28 +38,11 @@ export const Friends = () => {
     const [current_content, set_current_content] = useState("Friends")
     const [friends, set_friends] = useState([])
 
-    useEffect(() => {
+    //fetch the list of friends, pending and outgoing requests for the user on page load
+    useEffect(() => {dispatch(submit_form({ user_id: user_id }, "get_friends"))}, [user_id])
 
-        dispatch(submit_form({ user_id: user_id }, "get_friends"))
-
-    }, [user_id])
-
-    useEffect(() => {
-
-        if (response && response.data.message === "Friends retreived") {
-
-            console.log(response)
-    
-            set_friends(response.data.friends)
-
-        }
-
-        if (response && response.data.message === "Request sent") {
-
-            dispatch(submit_form({ user_id: user_id }, "get_friends"))
-        }
-
-    }, [response])
+    //handle the response when sending, cancelling, accepting, denying, fetching friends
+    useEffect(() => {if(response) handle_response(response, dispatch, set_friends, user_id)}, [response])
 
     const handle_toggle_content = link => {
 
@@ -97,7 +83,6 @@ export const Friends = () => {
                                     details={user}
                                     key={user._id}
                                     onClick={(details) => console.log(details)}
-                                    marginTop={user.pending || user.request ? "35px" : undefined}
                                     request_pending={user.pending ? "Pending" : user.request && "Request"}
                                     populated
 
