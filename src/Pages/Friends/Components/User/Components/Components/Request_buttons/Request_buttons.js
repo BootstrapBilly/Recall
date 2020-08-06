@@ -24,14 +24,13 @@ export const Request_buttons = props => {
 
     }
 
-    
 
     return (
 
         <div className={classes.container}>
 
-           <div className={classes.button} style={{backgroundColor:colours.red}} onClick={()=> handle_process_friend_request(false)}>Deny</div>
-           <div className={classes.button} style={{backgroundColor:colours.green}} onClick={()=> handle_process_friend_request(true)}>Accept</div>
+           <div className={classes.button} test_handle="deny_button" style={{backgroundColor:colours.red}} onClick={()=> handle_process_friend_request(false)}>Deny</div>
+           <div className={classes.button} test_handle="accept_button"  style={{backgroundColor:colours.green}} onClick={()=> handle_process_friend_request(true)}>Accept</div>
             
         </div>
 

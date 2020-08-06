@@ -11,7 +11,7 @@ export const No_friends_prompt = () => {
     return (
 
 
-        <div className={classes.container}>
+        <div className={classes.container} test_handle="no_friends_prompt">
 
             <img src={Man_alone} alt="A man alone" className={classes.alone_man} />
 

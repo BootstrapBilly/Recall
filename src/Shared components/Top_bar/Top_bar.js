@@ -61,6 +61,7 @@ export const Top_bar = props => {
 
                     <span
 
+                        test_handle={link}
                         className={classes.toggle_link}
                         style={{ color: `${active_toggle_link === link ? colours.primary : `${colours.primary}80`}` }}
                         onClick={() => handle_toggle_filter(link)}

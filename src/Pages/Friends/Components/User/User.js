@@ -31,7 +31,7 @@ export const User = props => {
 
         <React.Fragment>
 
-            <div className={classes.container} onClick={() => props.add_friend ? props.onClick(props.details) : handle_show_options()} style={{ marginTop: props.marginTop }}>
+            <div className={classes.container} onClick={() => props.add_friend ? props.onClick(props.details) : handle_show_options()} style={{ marginTop: props.marginTop }} test_handle={props.details.username || props.details.user_details.username}>
 
                 <ProfilePic scale={0.5} marginLeft={"-10px"} source={props.populated ? props.details.user_details.image_url : props.details.image_url} user />
 

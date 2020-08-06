@@ -26,12 +26,13 @@ export const User_options = props => {
         <div className={classes.container}>
 
         {props.type === "Pending" && 
-        <div className={classes.button} style={{backgroundColor:colours.primary}} 
+        <div className={classes.button} style={{backgroundColor:colours.primary}}  test_handle="Cancel_request_button"
         onClick={()=> dispatch(submit_form({requester_id:user_id, requestee_id: props.details._id}, "cancel_request"))}>Cancel request</div>}
 
         {props.type === "Request" && <RequestButtons details={props.details}  />}
 
         {props.type !== "Request" && props.type !== "Pending" && <div className={classes.button} style={{backgroundColor:colours.red}} 
+        test_handle="Delete_friend_button"
         onClick={()=> dispatch(submit_form({user_id:user_id, user_to_delete_id: props.details._id}, "delete_friend"))}>Delete friend</div>}
 
         </div>
