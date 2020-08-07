@@ -18,6 +18,8 @@ import Input from "./Components/Input/Input"
 import Syntax from "./Components/Syntax/Syntax"
 import CollectionNotes from "./Components/Collection_notes/Collection_notes"
 import DeleteConfirmation from "./Components/Delete_confirmation/Delete_confirmation"
+import ShareWithFriend from "./Components/Share_with_friend/Share_with_friend"
+// import SharingModal from "./Components/Sharing_modal/Sharing_modal"
 
 //redux hooks
 import { useSelector, useDispatch } from "react-redux"
@@ -38,6 +40,9 @@ import check_if_note_is_in_edit_mode from "./Functions/check_if_note_is_in_edit_
 
 //util
 import colours from '../../util/colours'
+
+//external
+import alert from "easyalert"
 
 export const Note = props => {
 
@@ -84,7 +89,7 @@ export const Note = props => {
 
     //called everytime a note is expanded or collapsed, the height of the div is extracted and set in the height state to resize the note
     // eslint-disable-next-line 
-    useEffect(() => {set_height(ref.current.clientHeight)})
+    useEffect(() => { set_height(ref.current.clientHeight) })
 
     // eslint-disable-next-line 
     useEffect(() => {//this is triggered by the handle_tag_change function which sets the resize state to true
@@ -98,209 +103,224 @@ export const Note = props => {
 
     //this effect listens for an api response and passes the handling of it to the handle_response function 
     // eslint-disable-next-line
-    useEffect(() => {handle_response(response, note_id, props, set_overwritten_values, dispatch, user_id)}, [response])
+    useEffect(() => { handle_response(response, note_id, props, set_overwritten_values, dispatch, user_id) }, [response])
 
     return (
 
-        <div className={classes.container} test_handle={props.test_handle || "note_container"}
+        <React.Fragment>
 
-            style={{
+            <div className={classes.container} test_handle={props.test_handle || "note_container"}
 
-                height: `${height}px`,
-                paddingBottom: expanded && "70px",
-                backgroundColor: props.selected ? colours.primary : props.inside_collection && "transparent",
-                border: hover_border && `1px solid ${colours.primary}`,
-                marginTop: props.inside_collection && "10px",
-                transform: props.inside_collection && "scale(0.9)",
+                style={{
 
-            }}
+                    height: `${height}px`,
+                    paddingBottom: expanded && "70px",
+                    backgroundColor: props.selected ? colours.primary : props.inside_collection && "transparent",
+                    border: hover_border && `1px solid ${colours.primary}`,
+                    marginTop: props.inside_collection && "10px",
+                    transform: props.inside_collection && "scale(0.9)",
 
-        >
+                }}
 
-            {props.combine || props.selected ? //if the note is being rendered inside the note_selection component
+            >
 
-                <div className={classes.selected_clickable_area}//asign a clickable area so it can still be expanded without selecting it
+                {props.combine || props.selected ? //if the note is being rendered inside the note_selection component
 
-                    test_handle="note_clickable_area"
-                    onClick={props.combine ? props.handle_select.bind(this, props.details) : props.handle_remove.bind(this, props.details, props.index)}
-                    onMouseEnter={() => window.innerWidth > 1200 && props.combine && set_hover_border(true)}//when hovered, show an orange border
-                    onMouseLeave={() => props.combine && set_hover_border(false)}//when un-hovered remove it
+                    <div className={classes.selected_clickable_area}//asign a clickable area so it can still be expanded without selecting it
 
-                >
+                        test_handle="note_clickable_area"
+                        onClick={props.combine ? props.handle_select.bind(this, props.details) : props.handle_remove.bind(this, props.details, props.index)}
+                        onMouseEnter={() => window.innerWidth > 1200 && props.combine && set_hover_border(true)}//when hovered, show an orange border
+                        onMouseLeave={() => props.combine && set_hover_border(false)}//when un-hovered remove it
 
-                </div> : undefined
+                    >
 
-            }
+                    </div> : undefined
 
-            <div className={classes.measuring_wrapper} ref={ref} >
+                }
 
-                {props.details &&
+                <div className={classes.measuring_wrapper} ref={ref} >
 
-                    <div className={classes.collapsed_content}>
+                    {props.details &&
 
-                        <Input //title
+                        <div className={classes.collapsed_content}>
 
-                            value={overwritten_values.title === null ? props.details.title : overwritten_values.title}
-                            edit_mode={edit_mode}
-                            type="title"
-                            handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
-                            color={props.selected ? "White" : is_a_collection ? colours.secondary : colours.primary}
-                            id={note_id}
-                            duplicate_title={duplicate_title}
-                            //remove the title from the array of duplicate titles in the reducer
-                            handle_clear_duplicate_title={() => dispatch(clear_duplicate_title(note_id, props.index))}
+                            <Input //title
 
-                        />
-
-                        <Input //subject
-
-                            value={overwritten_values.subject === null ? props.details.subject || "No subject" : overwritten_values.subject}
-                            edit_mode={edit_mode}
-                            style={{ fontSize: "15px" }}
-                            type="subject"
-                            handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
-                            handle_edit_missing_subject={() => set_overwritten_values({ ...overwritten_values, subject: "" })}
-                            color={props.selected ? "#ffffff99" : "grey"}
-
-                        />
-
-                    </div>}
-
-                {expanded ?
-
-                    show_delete_confimation ? <DeleteConfirmation cancel_delete={() => set_show_delete_confirmation(false)} title={show_delete_confimation} note_id={note_id} is_a_collection={is_a_collection} example={props.example}/>
-
-                        : <div className={classes.expanded_content}>
-
-                            <Body
-
-                                value={overwritten_values.body === null ? props.details.body : overwritten_values.body}
+                                value={overwritten_values.title === null ? props.details.title : overwritten_values.title}
                                 edit_mode={edit_mode}
+                                type="title"
                                 handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
+                                color={props.selected ? "White" : is_a_collection ? colours.secondary : colours.primary}
+                                id={note_id}
+                                duplicate_title={duplicate_title}
+                                //remove the title from the array of duplicate titles in the reducer
+                                handle_clear_duplicate_title={() => dispatch(clear_duplicate_title(note_id, props.index))}
 
                             />
 
-                            {props.details.syntax ? /* If theres syntax present, show a copy code button  */
+                            <Input //subject
 
-                                <Syntax
+                                value={overwritten_values.subject === null ? props.details.subject || "No subject" : overwritten_values.subject}
+                                edit_mode={edit_mode}
+                                style={{ fontSize: "15px" }}
+                                type="subject"
+                                handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
+                                handle_edit_missing_subject={() => set_overwritten_values({ ...overwritten_values, subject: "" })}
+                                color={props.selected ? "#ffffff99" : "grey"}
 
-                                    combine={(props.combine || props.selected) && true}
+                            />
+
+                        </div>}
+
+                    {expanded ?
+
+                        show_delete_confimation ? <DeleteConfirmation cancel_delete={() => set_show_delete_confirmation(false)} title={show_delete_confimation} note_id={note_id} is_a_collection={is_a_collection} example={props.example} />
+
+                            : <div className={classes.expanded_content}>
+
+                                {!props.share_mode && !props.inside_sharing_modal &&
+
+                                    <ShareWithFriend onClick={() => {
+                                        props.toggle_share_mode(props.details)
+                                        handle_cancel_click(dispatch, note_id, set_overwritten_values, set_re_render, props.inside_collection, props.index)
+                                    }} />
+
+                                }
+
+                                <Body
+
+                                    value={overwritten_values.body === null ? props.details.body : overwritten_values.body}
                                     edit_mode={edit_mode}
-                                    syntax={overwritten_values.syntax || props.details.syntax}
-                                    handle_syntax_change={(syntax) => set_overwritten_values({ ...overwritten_values, syntax: syntax })}
-                                    re_render={re_render}
-                                    reset_re_render={() => set_re_render(false)}
+                                    handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
 
                                 />
 
-                                : !props.details.syntax && edit_mode && !is_a_collection ?
+                                {props.details.syntax ? /* If theres syntax present, show a copy code button  */
 
                                     <Syntax
 
                                         combine={(props.combine || props.selected) && true}
                                         edit_mode={edit_mode}
-                                        syntax={overwritten_values.syntax || ""}
+                                        syntax={overwritten_values.syntax || props.details.syntax}
                                         handle_syntax_change={(syntax) => set_overwritten_values({ ...overwritten_values, syntax: syntax })}
                                         re_render={re_render}
                                         reset_re_render={() => set_re_render(false)}
-                                        missing
-
 
                                     />
 
-                                    : undefined
-                            }
+                                    : !props.details.syntax && edit_mode && !is_a_collection ?
 
-                            {props.details.search_tags ? /* If theres search tags present, show them  */
+                                        <Syntax
 
-                                <SearchTags
+                                            combine={(props.combine || props.selected) && true}
+                                            edit_mode={edit_mode}
+                                            syntax={overwritten_values.syntax || ""}
+                                            handle_syntax_change={(syntax) => set_overwritten_values({ ...overwritten_values, syntax: syntax })}
+                                            re_render={re_render}
+                                            reset_re_render={() => set_re_render(false)}
+                                            missing
 
-                                    selected={props.selected}
-                                    search_tags={props.details.search_tags}
-                                    edit_mode={edit_mode}
-                                    handle_tag_change={(tags) => handle_tag_change(tags, set_overwritten_values, overwritten_values, set_resize_note)}
-                                    re_render={re_render}
-                                    reset_re_render={() => set_re_render(false)}
 
-                                />
+                                        />
 
-                                : !props.details.search_tags && edit_mode ? /* If theres no search tags, but edit mode is active, show the add new tag input  */
+                                        : undefined
+                                }
+
+                                {props.details.search_tags ? /* If theres search tags present, show them  */
 
                                     <SearchTags
 
                                         selected={props.selected}
-                                        search_tags={[]}
-                                        edit_mode={true}
+                                        search_tags={props.details.search_tags}
+                                        edit_mode={edit_mode}
                                         handle_tag_change={(tags) => handle_tag_change(tags, set_overwritten_values, overwritten_values, set_resize_note)}
                                         re_render={re_render}
                                         reset_re_render={() => set_re_render(false)}
 
                                     />
 
-                                    : undefined
-                            }
+                                    : !props.details.search_tags && edit_mode ? /* If theres no search tags, but edit mode is active, show the add new tag input  */
 
-                            {is_a_collection ?
+                                        <SearchTags
 
-                                <CollectionNotes notes={props.details.notes} handle_resize={() => set_resize_note(true)} handle_position_change={props.handle_position_change} /> : undefined
+                                            selected={props.selected}
+                                            search_tags={[]}
+                                            edit_mode={true}
+                                            handle_tag_change={(tags) => handle_tag_change(tags, set_overwritten_values, overwritten_values, set_resize_note)}
+                                            re_render={re_render}
+                                            reset_re_render={() => set_re_render(false)}
 
-                            }
+                                        />
 
-                            {props.selected || props.combine ? undefined :
+                                        : undefined
+                                }
 
-                                <Buttons
+                                {is_a_collection ?
 
-                                    expanded={expanded}
-                                    title={props.details.title}
-                                    reset_expanded={() => dispatch(collapse_note(note_id))}
+                                    <CollectionNotes notes={props.details.notes} handle_resize={() => set_resize_note(true)} handle_position_change={props.handle_position_change} /> : undefined
 
-                                    handle_edit_click={() => handle_edit_click(props, note_id, dispatch)}
+                                }
 
-                                    edit_mode={edit_mode}
+                                {props.selected || props.combine ? undefined :
 
-                                    handle_cancel_click={() => handle_cancel_click(dispatch, note_id, set_overwritten_values, set_re_render, props.inside_collection, props.index)}
+                                    <Buttons
 
-                                    handle_save_click={() => handle_save_click(dispatch, overwritten_values, props, is_a_collection, user_id)}
+                                        expanded={expanded}
+                                        title={props.details.title}
+                                        reset_expanded={() => dispatch(collapse_note(note_id))}
 
-                                    handle_delete_click={(title) => set_show_delete_confirmation(title)}
+                                        handle_edit_click={() => handle_edit_click(props, note_id, dispatch)}
 
-                                />}
+                                        edit_mode={edit_mode}
 
-                        </div> : undefined
+                                        handle_cancel_click={() => handle_cancel_click(dispatch, note_id, set_overwritten_values, set_re_render, props.inside_collection, props.index)}
 
-                }
+                                        handle_save_click={() => handle_save_click(dispatch, overwritten_values, props, is_a_collection, user_id)}
 
-                <ToggleIcon
+                                        handle_delete_click={(title) => {
+                                            if(props.inside_sharing_modal) return alert("Notes cannot be deleted while sharing", "info")
+                                            set_show_delete_confirmation(title)
+                                        }}
 
-                    expanded={expanded}
+                                    />}
 
-                    handle_collapse={() => handle_collapse(dispatch, props, props.selected, props.inside_collection, props.index, note_id, is_a_collection)}
+                            </div> : undefined
 
-                    handle_expand={() => {
+                    }
 
-                        props.inside_collection ?
+                    <ToggleIcon
 
-                            dispatch(expand_nested_note(props.details._id, props.index))
+                        expanded={expanded}
 
-                            :
+                        handle_collapse={() => handle_collapse(dispatch, props, props.selected, props.inside_collection, props.index, note_id, is_a_collection)}
 
+                        handle_expand={() => {
 
-                            props.selected ? dispatch(expand_selected_note(note_id, props.index))
+                            props.inside_collection ?
+
+                                dispatch(expand_nested_note(props.details._id, props.index))
 
                                 :
 
-                                dispatch(expand_note(note_id))
 
-                    }}
+                                props.selected ? dispatch(expand_selected_note(note_id, props.index))
 
-                    selected={props.selected}
+                                    :
 
-                />
+                                    dispatch(expand_note(note_id))
+
+                        }}
+
+                        selected={props.selected}
+
+                    />
+
+                </div>
 
             </div>
 
-        </div>
-
+        </React.Fragment>
     )
 
 }

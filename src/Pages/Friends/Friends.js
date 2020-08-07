@@ -7,7 +7,7 @@ import classes from "./Friends.module.css"
 import Nav from "../../Shared components/Nav/Nav"
 import TopBar from "../../Shared components/Top_bar/Top_bar"
 import NoFriendsPrompt from "./Components/No_friends_prompt/No_friends_prompt"
-import AddFriend from "./Components/Add_friend/Add_friend"
+import SearchUsers from "./Components/Search_users/Search_users"
 import User from "./Components/User/User"
 
 //Redux hooks
@@ -101,7 +101,7 @@ export const Friends = () => {
             {
                 current_content === "Add New Friend" &&
 
-                <AddFriend handle_toggle={() => set_current_content("Friends")} />
+                <SearchUsers handle_toggle={() => set_current_content("Friends")} />
 
             }
 

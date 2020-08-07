@@ -1,0 +1,22 @@
+.container{
+    position: absolute;
+    top:10px;
+    right: 5px;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.icon{
+    height: 18px;
+    width: 18px;
+    margin-right: 5px;
+}
+
+.container:hover{
+    cursor: pointer;
+    z-index: 10000000;
+}

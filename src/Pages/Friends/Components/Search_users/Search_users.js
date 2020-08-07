@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 //css
-import classes from './Add_friend.module.css'
+import classes from './Search_users.module.css'
 
 //util
 import colours from '../../../../util/colours'
@@ -57,9 +57,11 @@ export const Add_friend = props => {
 
     }, [response])
 
-    const handle_add_user = details => {
+    const handle_select_user = details => {
 
-        dispatch(submit_form({user_id:user_id, username:details.username}, "friend" ))
+        if (props.share_mode) return props.handle_select_user(details)
+
+        else dispatch(submit_form({user_id:user_id, username:details.username}, "friend" ))
 
     }
 
@@ -67,7 +69,7 @@ export const Add_friend = props => {
 
         <div className={classes.container}>
 
-            <span className={classes.title} style={{ color: colours.primary }}>Who would you like to add ?</span>
+    <span className={classes.title} style={{ color: props.colour || colours.primary }}>{props.title ? props.title : "Who would you like to add ?"}</span>
 
             <SearchBox
 
@@ -90,7 +92,7 @@ export const Add_friend = props => {
 
                     {
 
-                        users_to_display.map(user => <User details={user} key={user._id} onClick={(details)=> handle_add_user(details)} add_friend  />)
+                        users_to_display.map(user => <User details={user} key={user._id} onClick={(details)=> handle_select_user(details)} add_friend  />)
 
                     }
 

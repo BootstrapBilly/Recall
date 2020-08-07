@@ -8,6 +8,7 @@ import Nav from "../../Shared components/Nav/Nav"
 import Note from "../../Shared components/Note/Note"
 import TopBar from "../../Shared components/Top_bar/Top_bar"
 import SideMenu from "./Components/Side_menu/Side_menu"
+import SharingModal from "./Components/Sharing_modal/Sharing_modal"
 
 //redux action creators
 import { submit_form } from "../../Store/Actions/0_submit_form_action"
@@ -35,6 +36,7 @@ export const View_all = () => {
     const [notes, set_notes] = useState([])//hold the notes to be displayed, all fetched initially, manipulated by searching and the toggle links
     const [filter, set_filter] = useState("All")//hold the type of filter to seperate notes and processes (handled by the top bar links)
     const [position_change, set_position_change] = useState(false)
+    const [share_mode, set_share_mode] = useState({active:false, details:null})//used to show the share note modal if the user presses share
 
     //!Effects
     // eslint-disable-next-line
@@ -85,25 +87,36 @@ export const View_all = () => {
 
         <div className={classes.container}>
 
-            <TopBar handle_search_input={(string) => filter_notes_by_search(dispatch, string, user_id)} handle_toggle={(link) => handle_toggle_click(link)}
-            />
+            {share_mode.active ?
 
-            {notes &&
+                <SharingModal details={share_mode.details} handle_close={()=> set_share_mode(false)}/>
+                
+                :
 
-                <Masonry
+                <React.Fragment>
 
-                    breakpointCols={handle_column_assignment(notes)}
-                    className={classes.my_masonry_grid}
-                    columnClassName={classes.my_masonry_grid_column}>
-                    {notes.map((note, index) => <Note key={index} filter={filter} index={index} details={note} handle_position_change={() => set_position_change(true)} />)}
+                    <TopBar handle_search_input={(string) => filter_notes_by_search(dispatch, string, user_id)} handle_toggle={(link) => handle_toggle_click(link)}
+                    />
 
-                </Masonry>
+                    {notes &&
+
+                        <Masonry
+
+                            breakpointCols={handle_column_assignment(notes)}
+                            className={classes.my_masonry_grid}
+                            columnClassName={classes.my_masonry_grid_column}>
+                            {notes.map((note, index) => <Note key={index} filter={filter} index={index} details={note} handle_position_change={() => set_position_change(true)} toggle_share_mode={(details)=> set_share_mode({active:true, details:details})} />)}
+
+                        </Masonry>
+
+                    }
+
+                </React.Fragment>
 
             }
 
-            <Nav />
-
             <SideMenu />
+            <Nav />
 
         </div>
 
