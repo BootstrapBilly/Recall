@@ -19,6 +19,7 @@ import Syntax from "./Components/Syntax/Syntax"
 import CollectionNotes from "./Components/Collection_notes/Collection_notes"
 import DeleteConfirmation from "./Components/Delete_confirmation/Delete_confirmation"
 import ShareWithFriend from "./Components/Share_with_friend/Share_with_friend"
+import SharedBy from "./Components/Shared_by/Shared_by"
 // import SharingModal from "./Components/Sharing_modal/Sharing_modal"
 
 //redux hooks
@@ -66,6 +67,10 @@ export const Note = props => {
     const edit_mode = check_if_note_is_in_edit_mode(props, edit_mode_enabled_notes, edit_mode_enabled_nested_notes, note_id)
     const expanded = check_if_note_is_expanded(props, expanded_nested_notes, expanded_selected_notes, expanded_notes, note_id)
     const duplicate_title = duplicate_titles.find(note => note.id === note_id && note.index === props.index)//check if the instance of this note is in the array of duplicates
+
+    let has_been_granted;//Set to true if this note has been granted to, and not created by the user where it is being displayed
+    !props.example && props.details.created_by._id !== user_id ? has_been_granted = true : has_been_granted = false//if the created by does not match the user id, its granted
+
 
     //*states
     const [height, set_height] = useState(0)//dynamically set the height of the note to be animated upon expansion to fit content without a predefined height
@@ -151,7 +156,7 @@ export const Note = props => {
                                 edit_mode={edit_mode}
                                 type="title"
                                 handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
-                                color={props.selected ? "White" : is_a_collection ? colours.secondary : colours.primary}
+                                color={props.selected ? "White" : is_a_collection ? colours.secondary : has_been_granted ? colours.green : colours.primary}
                                 id={note_id}
                                 duplicate_title={duplicate_title}
                                 //remove the title from the array of duplicate titles in the reducer
@@ -175,11 +180,23 @@ export const Note = props => {
 
                     {expanded ?
 
-                        show_delete_confimation ? <DeleteConfirmation cancel_delete={() => set_show_delete_confirmation(false)} title={show_delete_confimation} note_id={note_id} is_a_collection={is_a_collection} example={props.example} />
+                        show_delete_confimation ?
+
+                            <DeleteConfirmation
+
+                                cancel_delete={() => set_show_delete_confirmation(false)}
+                                title={show_delete_confimation}
+                                note_id={note_id}
+                                is_a_collection={is_a_collection}
+                                example={props.example}
+                                has_been_granted={has_been_granted}
+                                details={props.details}
+
+                            />
 
                             : <div className={classes.expanded_content}>
 
-                                {!props.share_mode && !props.inside_sharing_modal &&
+                                {!props.share_mode && !props.inside_sharing_modal && !has_been_granted &&
 
                                     <ShareWithFriend onClick={() => {
                                         props.toggle_share_mode(props.details)
@@ -262,6 +279,8 @@ export const Note = props => {
 
                                 }
 
+                                {has_been_granted && <SharedBy details={props.details} />}
+
                                 {props.selected || props.combine ? undefined :
 
                                     <Buttons
@@ -279,9 +298,12 @@ export const Note = props => {
                                         handle_save_click={() => handle_save_click(dispatch, overwritten_values, props, is_a_collection, user_id)}
 
                                         handle_delete_click={(title) => {
-                                            if(props.inside_sharing_modal) return alert("Notes cannot be deleted while sharing", "info")
+                                            if (props.inside_sharing_modal) return alert("Notes cannot be deleted while sharing", "info")
                                             set_show_delete_confirmation(title)
                                         }}
+
+                                        has_been_granted={has_been_granted}
+                                        handle_remove_access={() => set_show_delete_confirmation("Access")}
 
                                     />}
 

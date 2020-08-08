@@ -5,7 +5,7 @@ const handle_response = (response, dispatch, set_friends, user_id) => {
 
     switch (response.data.message) {
 
-        case "Friends retreived": return set_friends(response.data.friends)
+        case "Friends, pending and outgoing retreived": return set_friends(response.data.friends)
 
         case "Request sent":
 

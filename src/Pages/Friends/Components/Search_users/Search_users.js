@@ -37,14 +37,17 @@ export const Add_friend = props => {
     //!effects
     useEffect(() => {
 
-        if (!search_value) return set_users_to_display([])
-        dispatch(submit_form({ user_id: user_id, search_string: search_value, unique:true }, "search_user"))
+        if (!search_value) return set_users_to_display([])//if the search value is empty, show nothing
+
+        if (props.share_mode) dispatch(submit_form({ user_id: user_id, search_string: search_value }, "search_friends"))
+
+        else dispatch(submit_form({ user_id: user_id, search_string: search_value, unique: true }, "search_user"))
 
     }, [search_value])
 
     useEffect(() => {
 
-        if(response && response.data.message === "Request sent") {
+        if (response && response.data.message === "Request sent") {
 
             set_search_value("")
             props.handle_toggle()
@@ -55,13 +58,15 @@ export const Add_friend = props => {
 
         if (response && response.data.message === "search executed") set_users_to_display(response.data.users)
 
+        if (response && response.data.message === "Search through friends executed") set_users_to_display(response.data.friends)
+
     }, [response])
 
     const handle_select_user = details => {
 
         if (props.share_mode) return props.handle_select_user(details)
 
-        else dispatch(submit_form({user_id:user_id, username:details.username}, "friend" ))
+        else dispatch(submit_form({ user_id: user_id, username: details.username }, "friend"))
 
     }
 
@@ -69,7 +74,7 @@ export const Add_friend = props => {
 
         <div className={classes.container}>
 
-    <span className={classes.title} style={{ color: props.colour || colours.primary }}>{props.title ? props.title : "Who would you like to add ?"}</span>
+            <span className={classes.title} style={{ color: props.colour || colours.primary }}>{props.title ? props.title : "Who would you like to add ?"}</span>
 
             <SearchBox
 
@@ -92,7 +97,7 @@ export const Add_friend = props => {
 
                     {
 
-                        users_to_display.map(user => <User details={user} key={user._id} onClick={(details)=> handle_select_user(details)} add_friend  />)
+                        users_to_display.map(user => <User details={user} key={user._id} onClick={(details) => handle_select_user(details)} add_friend />)
 
                     }
 

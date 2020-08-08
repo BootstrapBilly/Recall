@@ -14,6 +14,7 @@ import handle_delete_click from "./Function/handle_delete_click"
 
 //external
 import alert from "easyalert"
+import { submit_form } from '../../../../Store/Actions/0_submit_form_action'
 
 export const Delete_confirmation = props => {
 
@@ -34,6 +35,8 @@ export const Delete_confirmation = props => {
 
         }
 
+        else if (props.has_been_granted) return dispatch(submit_form({user_id:props.details.created_by._id, friend_id:user_id, note_or_process_id: props.details._id, type:props.details.notes ? "process" : "note" }, "remove_access"))
+
         //otherwise if its a normal note delete it
         else return handle_delete_click(dispatch, props.title, props.note_id, props, props.is_a_collection, user_id)
 
@@ -47,7 +50,11 @@ export const Delete_confirmation = props => {
 
                 <span className={classes.prompt_text}>You are about to delete this collection, the notes inside will not be deleted.</span>
 
-                : <span className={classes.prompt_text}>You are about to delete this note and remove it from any collections which have it as a step.</span>
+                : props.has_been_granted ?
+
+                    <span className={classes.prompt_text}>You are about to hide this note, if you wish to see it again, it will need to be shared again by the owner.</span>
+
+                    : <span className={classes.prompt_text}>You are about to delete this note and remove it from any collections which have it as a step.</span>
 
             }
 
@@ -56,7 +63,7 @@ export const Delete_confirmation = props => {
             <div className={classes.button_container}>
 
                 <div test_handle="cancel_delete" className={classes.button} style={{ background: colours.primary }} onClick={props.cancel_delete}>NO - GO BACK</div>
-                <div test_handle="confirm_delete" className={classes.button} style={{ background: "#ff3333" }} onClick={() => handle_click_delete()}>YES - DELETE IT</div>
+                <div test_handle="confirm_delete" className={classes.button} style={{ background: "#ff3333" }} onClick={() => handle_click_delete()}>YES - {props.has_been_granted ? "HIDE" : "DELETE"} IT</div>
 
             </div>
 

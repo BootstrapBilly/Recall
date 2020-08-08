@@ -20,11 +20,11 @@ export const Buttons = props => {
 
             </div>
 
-            <div className={classes.button} style={{ background: colours.green}} test_handle="syntax_save_button"
+            <div className={classes.button} style={{ background: colours.primary}} test_handle="syntax_save_button"
 
                 onClick={props.handle_save_click}>
 
-                SAVE
+                FINISHED
 
             </div>
 
