@@ -23,7 +23,7 @@ import handle_column_assignment from "../../util/handle_column_assignment"
 //external
 import Masonry from 'react-masonry-css'
 
-export const View_all = () => {
+export const View_all = props => {
 
     //?selectors
     const response = useSelector(state => state.form.response)//grab the response from the api
@@ -36,7 +36,7 @@ export const View_all = () => {
     const [notes, set_notes] = useState([])//hold the notes to be displayed, all fetched initially, manipulated by searching and the toggle links
     const [filter, set_filter] = useState("All")//hold the type of filter to seperate notes and processes (handled by the top bar links)
     const [position_change, set_position_change] = useState(false)
-    const [share_mode, set_share_mode] = useState({active:false, details:null})//used to show the share note modal if the user presses share
+    const [share_mode, set_share_mode] = useState({ active: false, details: null })//used to show the share note modal if the user presses share
 
     //!Effects
     // eslint-disable-next-line
@@ -83,14 +83,26 @@ export const View_all = () => {
 
     }
 
+    //!effects
+    useEffect(() => {
+
+        if (props.location.state) {
+
+            set_share_mode({ active: true, details: props.location.state.details })
+            console.log(props.location.state.details)
+
+        }
+
+    }, [props.location])
+
     return (
 
         <div className={classes.container}>
 
             {share_mode.active ?
 
-                <SharingModal details={share_mode.details} handle_close={()=> set_share_mode(false)}/>
-                
+                <SharingModal details={share_mode.details} handle_close={() => set_share_mode(false)} />
+
                 :
 
                 <React.Fragment>
@@ -105,7 +117,7 @@ export const View_all = () => {
                             breakpointCols={handle_column_assignment(notes)}
                             className={classes.my_masonry_grid}
                             columnClassName={classes.my_masonry_grid_column}>
-                            {notes.map((note, index) => <Note key={index} filter={filter} index={index} details={note} handle_position_change={() => set_position_change(true)} toggle_share_mode={(details)=> set_share_mode({active:true, details:details})} />)}
+                            {notes.map((note, index) => <Note key={index} filter={filter} index={index} details={note} handle_position_change={() => set_position_change(true)} toggle_share_mode={(details) => set_share_mode({ active: true, details: details })} />)}
 
                         </Masonry>
 

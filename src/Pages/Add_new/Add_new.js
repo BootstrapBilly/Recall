@@ -15,6 +15,7 @@ import colours from '../../util/colours'
 
 //external
 import { useDispatch, useSelector } from "react-redux"
+import {Redirect} from "react-router-dom"
 
 //functions
 import handle_form_navigation from "../../util/handle_form_navigation"
@@ -41,6 +42,7 @@ export const Add_new = props => {
     const [current_step, set_current_step] = useState(props.form_type === "note" ? "title" : "note_selection")
     const [form_navigation_buttons, set_form_navigation_buttons] = useState(false)//show different buttons depending on input/step of the form
     const [note_details, set_note_details] = useState(null)//used to hold the details of the note when added successfully, to render it instantly
+    const [redirect, set_redirect] = useState(false)
 
     const [form_data, set_form_data] = useState({// a state to hold the note information to be submitted to the backend
 
@@ -86,14 +88,14 @@ export const Add_new = props => {
         if (response && response.data.message === "Note added successfully") {//if a 201 is detected
 
             set_current_step("success")
-            set_note_details(response.data.note)
+            set_note_details({...response.data.note, displayed_on_add_new_form:true})
 
         }
 
         if (response && response.data.message === "process added successfully") {//if a 201 is detected
 
             set_current_step("success")
-            set_note_details(response.data.process)
+            set_note_details({...response.data.process, displayed_on_add_new_form:true})
 
         }
 
@@ -241,7 +243,8 @@ export const Add_new = props => {
 
                                             : current_step === "success" ?
 
-                                                <Note details={note_details} handle_position_change={()=> undefined}/>
+                                                <Note details={note_details} handle_position_change={()=> undefined} 
+                                                toggle_share_mode={(details)=> set_redirect({data:details})}/>
 
                                                 : null}
 
@@ -278,6 +281,8 @@ export const Add_new = props => {
                 </div>
 
             </div>
+
+            {redirect && <Redirect to={{pathname: "/view_all", state:{details : redirect.data}}} />}
 
             <Nav />
 

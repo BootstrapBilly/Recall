@@ -68,6 +68,7 @@ export const Note = props => {
     const expanded = check_if_note_is_expanded(props, expanded_nested_notes, expanded_selected_notes, expanded_notes, note_id)
     const duplicate_title = duplicate_titles.find(note => note.id === note_id && note.index === props.index)//check if the instance of this note is in the array of duplicates
 
+
     let has_been_granted;//Set to true if this note has been granted to, and not created by the user where it is being displayed
     !props.example && props.details.created_by._id !== user_id ? has_been_granted = true : has_been_granted = false//if the created by does not match the user id, its granted
 
