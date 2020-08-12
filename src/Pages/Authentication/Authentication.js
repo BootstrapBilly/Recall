@@ -52,7 +52,6 @@ export const Authentication = () => {
         // eslint-disable-next-line
     }, [response])//listen for any form response changes
 
-
     return (
 
         <React.Fragment>

@@ -47,9 +47,9 @@ export const Side_drawer = props => {
     const handle_logout_click = () => {//this is called when the user clicks the logout button
 
         dispatch(handle_logout())//remove their local storage data
-        dispatch(clear_response())//clear the response
         dispatch(clear_uploaded_photo())//clear their profile picture
         set_redirect("/")//redirect them to the landing page
+        dispatch(clear_response())//clear the response
 
     }
 

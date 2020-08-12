@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux"
 
 //redux action creators
 import { submit_form } from "../../../../Store/Actions/0_submit_form_action"
+import { clear_response } from '../../../../Store/Actions/0_submit_form_action'
 
 export const Auth_form = props => {
 
@@ -77,7 +78,7 @@ export const Auth_form = props => {
         }
     // eslint-disable-next-line
     }, [user_details, email_for_reset])
-
+    
     return (
 
         <div className={classes.container}>
@@ -203,9 +204,9 @@ export const Auth_form = props => {
                 
                 style={{ 
 
-                    display: !response && "none", 
-                    color: response && response.status < 300 && colours.primary, 
-                    borderColor: response && response.status < 300 && colours.primary  
+                    display: (!response || response.status < 401) && "none", 
+                    color: response && response.status < 401 && colours.primary, 
+                    borderColor: response && response.status < 401 && colours.primary  
                     
                     }}
 
