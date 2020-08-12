@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.current_note {
+    position: relative;
+    top: -10px;
+    font-size: 20px;
+}
+
+.number_container {
+    display: flex;
+    width: 330px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.indicator {
+    margin-left: 5px;
+    font-size: 20px;
+}
+
+.arrow_left, .arrow_right {
+    height: 20px;
+    position: absolute;
+    left: 5px;
+}
+
+.arrow_right {
+    left: unset;
+    right: 5px;
+    transform: rotate(180deg);
+}
+
+.arrow_left, .arrow_right {
+    cursor: pointer;
+}

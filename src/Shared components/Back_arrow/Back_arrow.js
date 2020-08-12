@@ -13,7 +13,7 @@ export const Back_arrow = props => {
         <div className={classes.container} onClick={props.onClick} test_handle="back_arrow_button">
 
             <img src={left_arrow} alt="back_arrow" className={classes.back_arrow} />
-            <span className={classes.back_text}>Back</span>
+            <span className={classes.back_text}>Go Back</span>
 
         </div>
     )

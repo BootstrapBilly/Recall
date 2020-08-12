@@ -8,7 +8,6 @@ import capitalizeFirstChar from '../../../../util/capitalize_first'
 
 export const Shared_by = props => {
 
-    console.log(props.details)
 
     return (
 

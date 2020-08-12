@@ -86,10 +86,10 @@ export const View_all = props => {
     //!effects
     useEffect(() => {
 
-        if (props.location.state) {
+        if (props.location.state && props.location.state.details) {
 
             set_share_mode({ active: true, details: props.location.state.details })
-            console.log(props.location.state.details)
+            props.history.replace('/view_all', null);
 
         }
 

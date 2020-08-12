@@ -16,7 +16,6 @@ import ToggleIcon from "../Note/Components/Toggle_icon/Toggle_icon"
 import SearchTags from "./Components/Search_tags/Search_tags"
 import Input from "./Components/Input/Input"
 import Syntax from "./Components/Syntax/Syntax"
-import CollectionNotes from "./Components/Collection_notes/Collection_notes"
 import DeleteConfirmation from "./Components/Delete_confirmation/Delete_confirmation"
 import ShareWithFriend from "./Components/Share_with_friend/Share_with_friend"
 import SharedBy from "./Components/Shared_by/Shared_by"
@@ -44,6 +43,7 @@ import colours from '../../util/colours'
 
 //external
 import alert from "easyalert"
+import { Link } from "react-router-dom"
 
 export const Note = props => {
 
@@ -78,6 +78,7 @@ export const Note = props => {
     const [resize_note, set_resize_note] = useState(false)//used to resize the note if content gets added or deleted from it
     const [hover_border, set_hover_border] = useState(false)//used to highlight a note when hovering it
     const [show_delete_confimation, set_show_delete_confirmation] = useState(false)//determine whether to show the delete prompt after the user presses delete
+    const [redirect, set_redirect] = useState(false)//determine whether to show the full collection detail with all the notes visible
 
     const [overwritten_values, set_overwritten_values] = useState({// a state to hold the note information to be submitted to the backend for editing purposes
 
@@ -120,7 +121,7 @@ export const Note = props => {
 
                     height: `${height}px`,
                     paddingBottom: expanded && "70px",
-                    backgroundColor: props.selected ? colours.primary : props.inside_collection && "transparent",
+                    backgroundColor: props.selected ? colours.primary : props.inside_collection ? "white" : props.inside_collection && "transparent",
                     border: hover_border && `1px solid ${colours.primary}`,
                     marginTop: props.inside_collection && "10px",
                     transform: props.inside_collection && "scale(0.9)",
@@ -196,7 +197,7 @@ export const Note = props => {
 
                             : <div className={classes.expanded_content}>
 
-                                {!props.share_mode && !props.inside_sharing_modal && !has_been_granted &&
+                                {!props.share_mode && !props.inside_sharing_modal && !has_been_granted && !props.inside_collection &&
 
                                     <ShareWithFriend onClick={() => {
                                         props.toggle_share_mode(props.details)
@@ -275,7 +276,11 @@ export const Note = props => {
 
                                 {is_a_collection ?
 
-                                    <CollectionNotes notes={props.details.notes} handle_resize={() => set_resize_note(true)} handle_position_change={props.handle_position_change} /> : undefined
+                                    <Link to={{ pathname: "/collection_detail", state: { notes: props.details.notes } }} style={{ textDecoration: "none", backgroundColor: colours.green }} className={classes.view_notes_button} >
+
+                                        <div onClick={() => set_redirect(true)}>View Notes</div>
+
+                                    </Link> : undefined
 
                                 }
 

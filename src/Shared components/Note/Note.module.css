@@ -90,3 +90,14 @@
         -webkit-opacity: 1;
     }
 }
+
+.view_notes_button{
+    margin: auto;
+    width: 80%;
+    text-align: center;
+    color: white;
+    padding: 10px;
+    margin-top: 20px;
+    display: block;
+    border-radius: 0px;
+}

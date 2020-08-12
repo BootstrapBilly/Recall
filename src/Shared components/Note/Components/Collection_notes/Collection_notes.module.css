@@ -1,9 +1,16 @@
-.container{
+.container {
     z-index: 20;
     margin-top: 0px;
     margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
 }
 
-.measuring_wrapper{
+.back_button_container{
+    width: 330px;
 
 }
