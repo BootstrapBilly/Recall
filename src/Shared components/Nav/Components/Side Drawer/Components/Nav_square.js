@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 //css
 import classes from "./Nav_square.module.css"
@@ -11,6 +11,9 @@ import { useSelector, useDispatch } from "react-redux"
 
 //redux action creators
 import { set_active_link } from "../../../../../Store/Actions/3_active_nav_link_action"
+
+//functions
+import set_active_link_on_render from "./Functions/set_active_link_on_render"
 
 export const Nav_square = props => {
 
@@ -26,6 +29,8 @@ export const Nav_square = props => {
         props.onClick()//call the props function to redirect them to their desired page
 
     }
+    
+    useEffect(() => {set_active_link_on_render(dispatch)}, [window.location.href])//whenever the url changes, set the active nav link
 
     return (
 
@@ -33,7 +38,7 @@ export const Nav_square = props => {
 
             <img src={require(`../../../../../Assets/Icon/${
 
-                active_link === props.text ? props.icon : `${props.icon}-grey`}.svg`)//if this link is active, use the normal icon, if not use the greyed out one
+                active_link.toString().toLowerCase() === props.text.toString().toLowerCase() ? props.icon : `${props.icon}-grey`}.svg`)//if this link is active, use the normal icon, if not use the greyed out one
 
             }
                 alt={`${props.icon} navigation icon`}

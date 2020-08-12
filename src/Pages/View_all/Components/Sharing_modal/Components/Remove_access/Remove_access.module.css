@@ -1,0 +1,17 @@
+.container{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+}
+
+.title {
+    font-size: 20px;
+    width: 80%;
+    font-family: 'Exo 2', sans-serif;
+}
+
+.title_prompt{
+    color: grey;
+    margin-top: 10px;
+}

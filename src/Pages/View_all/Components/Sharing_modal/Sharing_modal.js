@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import classes from './Sharing_modal.module.css'
 
@@ -6,21 +6,24 @@ import classes from './Sharing_modal.module.css'
 import Note from "../../../../Shared components/Note/Note"
 import SearchUsers from "../../../Friends/Components/Search_users/Search_users"
 import BackArrow from "../../../../Shared components/Back_arrow/Back_arrow"
+import RemoveAccess from "./Components/Remove_access/Remove_access"
 
 //redux hooks
 import { useDispatch, useSelector } from "react-redux"
 import { submit_form } from '../../../../Store/Actions/0_submit_form_action'
+import colours from '../../../../util/colours'
 
 export const Sharing_modal = props => {
 
     //?selectors
     const user_id = useSelector(state => state.auth.user_id)
-    const response = useSelector(state => state.form.response)
 
     //-config
     const dispatch = useDispatch()
 
-    if(response){ console.log(response)}
+    //*states
+    const [active_toggle_link, set_active_toggle_link] = useState("Share")
+
 
     return (
 
@@ -30,26 +33,42 @@ export const Sharing_modal = props => {
 
             <div className={classes.top_section}>
 
+                <span className={classes.title} style={{ color: colours.primary }}>Share with friends</span>
+
                 <Note details={props.details} inside_sharing_modal />
+
+            </div>
+
+            <div className={classes.toggle_bar} style={{ backgroundColor: colours.green }}>
+
+                {["Share", "Unshare"].map(link =>
+
+                    <span className={classes.toggle_link} style={{ color: `${active_toggle_link === link ? colours.white : `${colours.white}80`}` }} onClick={() => set_active_toggle_link(link)}>{link}</span>
+
+                )}
 
             </div>
 
             <div className={classes.bottom_section}>
 
-                <SearchUsers title={"Who would you like to share it with?"} colour="black" share_mode
+                {active_toggle_link === "Share" ?
 
-                    handle_select_user={(details) =>
+                    <SearchUsers title={"Who would you like to share it with?"} colour="black" share_mode note_details={props.details}
 
-                        dispatch(submit_form(
+                        handle_select_user={(details) =>
 
-                            {
-                                user_id: user_id,
-                                friend_id: details._id,
-                                note_or_process_id: props.details._id,
-                                type: props.details.notes ? "process" : "note"
-                            }
-                            ,
-                            "share_access"))} />
+                            dispatch(submit_form(
+
+                                {
+                                    user_id: user_id,
+                                    friend_id: details._id,
+                                    note_or_process_id: props.details._id,
+                                    type: props.details.notes ? "process" : "note"
+                                }
+                                ,
+                                "share_access"))} />
+
+                    : <RemoveAccess users={props.details.access_rights} note_details={props.details} />}
 
             </div>
 

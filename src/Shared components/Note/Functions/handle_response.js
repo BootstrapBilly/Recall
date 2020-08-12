@@ -77,15 +77,6 @@ const handle_response = (response, note_id, props, set_overwritten_values, dispa
 
     }
 
-    //access rights removed
-    if (response && response.data.message === "Rights removed") {
-
-        dispatch(submit_form({ user_id: user_id }, "get_all"))
-        clear_response()//clear the response
-
-    }
-
-   
 
 }
 
