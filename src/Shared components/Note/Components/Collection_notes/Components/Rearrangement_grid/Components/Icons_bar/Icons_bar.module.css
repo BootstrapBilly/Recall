@@ -1,0 +1,29 @@
+.container {
+    position: absolute;
+    height: 100%;
+    width: 20px;
+    top: 0;
+    right: -100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    font-family: 'Exo 2', sans-serif;
+}
+
+.icon_container:hover{
+    cursor: pointer;
+}
+
+.icon{
+    height: 45px;
+    width: 45px;
+}

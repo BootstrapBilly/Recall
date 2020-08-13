@@ -11,7 +11,7 @@ export const Body = props => {
 If edit mode is active, the textarea changes from disabled to not disabled to allow the user to edit the value*/
 
     return (
-        <div className={classes.container} style={{ background: colours.white, height: props.value === "" && "22px" }} test_handle="note_body_wrapper">
+        <div className={classes.container} style={{ background: colours.white, height: props.value === "" && "22px", maxHeight:props.re_arrange && "30px" }} test_handle="note_body_wrapper">
 
             {props.value //used to set the size of the text area - color is transparent / css hack
             }

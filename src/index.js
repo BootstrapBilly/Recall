@@ -14,6 +14,7 @@ import NoteToggleReducer from "./Store/Reducers/1_note_reducer"
 import AuthenticationReducer from "./Store/Reducers/2_authentication_user"
 import ActiveNavReducer from "./Store/Reducers/3_active_nav_link_reducer"
 import ProfileImageReducer from "./Store/Reducers/4_profile_image_handler"
+import DragAndDropReducer from "./Store/Reducers/5_drag_and_drop_reducer"
 
 const rootReducer = combineReducers({ //combine all the state reducers into one root reducer
 
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({ //combine all the state reducers into one 
   note: NoteToggleReducer,
   auth:AuthenticationReducer,
   nav:ActiveNavReducer,
-  profile_image: ProfileImageReducer
+  profile_image: ProfileImageReducer,
+  drag_and_drop: DragAndDropReducer
 
 })
 

@@ -101,3 +101,11 @@
     display: block;
     border-radius: 0px;
 }
+
+.click_prevention_overlay{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    z-index: 99;
+}

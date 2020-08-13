@@ -6,15 +6,18 @@ import classes from './Collection_notes.module.css'
 import Note from "../../Note"
 import BackButton from "../../../../Shared components/Back_arrow/Back_arrow"
 import ProgressBar from "./Components/Progress_bar/Progress_bar"
+import RearrangementGrid from "./Components/Rearrangement_grid/Rearrangement_grid"
 
 //external
 import { withRouter } from "react-router-dom"
+import Alert from "easyalert"
 
 //redux hooks
 import { useSelector, useDispatch } from "react-redux"
 
 //redux acttion creators
 import { submit_form } from "../../../../Store/Actions/0_submit_form_action"
+import colours from '../../../../util/colours'
 
 export const Collection_notes = props => {
 
@@ -30,6 +33,7 @@ export const Collection_notes = props => {
     const [current_note_in_view_index, set_current_note_in_view_index] = useState(0)
     const [notes_to_display, set_notes_to_display] = useState([])
     const [progress_numbers, set_progress_numbers] = useState([])
+    const [rearrange_mode, set_rearrange_mode] = useState(false)
 
     //!effects
     useEffect(() => {
@@ -60,20 +64,32 @@ export const Collection_notes = props => {
 
     useEffect(() => {
 
-        if(response && response.data.message === "note updated successfully") dispatch(submit_form({ user_id: user_id, collection_id: collection_id }, "get_single_collection"))
+        if (response && response.data.message === "note updated successfully") dispatch(submit_form({ user_id: user_id, collection_id: collection_id }, "get_single_collection"))
 
         if (response && response.data.message === "Collection retrieved successfully") set_notes_to_display(response.data.collection.notes)
 
+
     }, [response])
 
+    const handle_cancel = () => {
+
+        dispatch(submit_form({ user_id: user_id, collection_id: collection_id }, "get_single_collection"))
+        set_rearrange_mode(false)
+    }
+
+    const handle_save = reordered_notes => {
+  
+        dispatch(submit_form({user_id:user_id, collection_id:collection_id, reordered_notes:reordered_notes}, "reorder_collection_notes"))
+        set_rearrange_mode(false)
+    }
 
     return (
 
         <div className={classes.container}>
 
-            <div className={classes.back_button_container}> <BackButton onClick={() => props.history.goBack()} /></div>
+            <div className={classes.back_button_container} style={{display: rearrange_mode && "none"}}> <BackButton onClick={() => props.history.goBack()} /></div>
 
-            {notes_to_display.length > 0 &&
+            {notes_to_display.length > 0 && !rearrange_mode &&
 
                 <React.Fragment>
 
@@ -86,9 +102,14 @@ export const Collection_notes = props => {
 
                     />
 
+                    <div className={classes.re_arrange_button} style={{backgroundColor:colours.green}}
+                    onClick={()=> set_rearrange_mode(true)}>Change order of notes</div>
+
                 </React.Fragment>
 
             }
+
+            {notes_to_display.length && rearrange_mode && <RearrangementGrid notes={notes_to_display} handle_save={(reordered_notes)=> handle_save(reordered_notes)} handle_cancel={()=> handle_cancel()} />}
 
         </div >
 

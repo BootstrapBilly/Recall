@@ -123,12 +123,14 @@ export const Note = props => {
                     paddingBottom: expanded && "70px",
                     backgroundColor: props.selected ? colours.primary : props.inside_collection ? "white" : props.inside_collection && "transparent",
                     border: hover_border && `1px solid ${colours.primary}`,
-                    marginTop: props.inside_collection && "10px",
+                    marginTop: props.inside_collection ? "10px" : props.re_arrange && "0px",
                     transform: props.inside_collection && "scale(0.9)",
 
                 }}
 
             >
+                
+            {props.re_arrange && <div className={classes.click_prevention_overlay}></div>}
 
                 {props.combine || props.selected ? //if the note is being rendered inside the note_selection component
 
@@ -197,7 +199,7 @@ export const Note = props => {
 
                             : <div className={classes.expanded_content}>
 
-                                {!props.share_mode && !props.inside_sharing_modal && !has_been_granted && !props.inside_collection &&
+                                {!props.share_mode && !props.inside_sharing_modal && !has_been_granted && !props.inside_collection && !props.re_arrange &&
 
                                     <ShareWithFriend onClick={() => {
                                         props.toggle_share_mode(props.details)
@@ -211,6 +213,7 @@ export const Note = props => {
                                     value={overwritten_values.body === null ? props.details.body : overwritten_values.body}
                                     edit_mode={edit_mode}
                                     handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
+                                    re_arrange={props.re_arrange}
 
                                 />
 

@@ -20,7 +20,7 @@ const handle_response = (response, note_id, props, set_overwritten_values, dispa
     //?Note updated
     if (response && response.data.message === "note updated successfully" && response.data.id === note_id) {//if a success message is detected
 
-        if (response.data.position_changed) { props.handle_position_change() } //if the title has changed, meaning the notes position has changed, re-render every note
+        if (response.data.position_changed && !window.location.href.includes("collection_detail")) { props.handle_position_change() } //if the title has changed, meaning the notes position has changed, re-render every note
 
         dispatch(submit_form({ user_id: user_id }, "get_all"))//fetch the notes again with the new data
 
