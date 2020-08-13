@@ -276,9 +276,9 @@ export const Note = props => {
 
                                 {is_a_collection ?
 
-                                    <Link to={{ pathname: "/collection_detail", state: { notes: props.details.notes } }} style={{ textDecoration: "none", backgroundColor: colours.green }} className={classes.view_notes_button} >
+                                    <Link to={{ pathname: "/collection_detail", state: { id: props.details._id } }} style={{ textDecoration: "none", backgroundColor: colours.green }} className={classes.view_notes_button} >
 
-                                        <div onClick={() => set_redirect(true)}>View Notes</div>
+                                        <span>View Notes</span>
 
                                     </Link> : undefined
 

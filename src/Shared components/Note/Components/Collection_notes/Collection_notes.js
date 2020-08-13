@@ -1,8 +1,6 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import classes from './Collection_notes.module.css'
-
-import { useSelector } from "react-redux"
 
 //components
 import Note from "../../Note"
@@ -10,67 +8,89 @@ import BackButton from "../../../../Shared components/Back_arrow/Back_arrow"
 import ProgressBar from "./Components/Progress_bar/Progress_bar"
 
 //external
-import {withRouter} from "react-router-dom"
-import colours from '../../../../util/colours'
+import { withRouter } from "react-router-dom"
+
+//redux hooks
+import { useSelector, useDispatch } from "react-redux"
+
+//redux acttion creators
+import { submit_form } from "../../../../Store/Actions/0_submit_form_action"
 
 export const Collection_notes = props => {
 
+    //-config
+    const collection_id = props.location.state.id
+    const dispatch = useDispatch()
+
+    //?selectors
+    const response = useSelector(state => state.form.response)
+    const user_id = useSelector(state => state.auth.user_id)
+
     //*states
     const [current_note_in_view_index, set_current_note_in_view_index] = useState(0)
-    const [current_note_in_view_details, set_current_note_in_view_details] = useState(props.location.state.notes[current_note_in_view_index])
+    const [notes_to_display, set_notes_to_display] = useState([])
     const [progress_numbers, set_progress_numbers] = useState([])
 
     //!effects
     useEffect(() => {
 
-        const array = []//define an empty array to set the state to because it cannot be manipulated directly
+        if (notes_to_display.length) {
 
-        props.location.state.notes.forEach((note, index) => array.push(index + 1))//loop through each nested note, populating the array with the current index
+            const array = []//define an empty array to set the state to because it cannot be manipulated directly
 
-        set_progress_numbers(array)//set the progress number state to the populate array, so it shows how many notes there
+            notes_to_display.forEach((note, index) => array.push(index + 1))//loop through each nested note, populating the array with the current index
 
-    }, [props.location.state.notes])
+            set_progress_numbers(array)//set the progress number state to the populate array, so it shows how many notes there
+        }
 
-    //_+functions
+    }, [notes_to_display])
+
+    useEffect(() => {
+
+        dispatch(submit_form({ user_id: user_id, collection_id: collection_id }, "get_single_collection"))
+
+    }, [props.location.state.id])
+
+    // //_+functions
     const handle_navigate = (change) => {
 
         set_current_note_in_view_index(current_note_in_view_index + change)
-        set_current_note_in_view_details(props.location.state.notes[current_note_in_view_index + change])
 
     }
+
+    useEffect(() => {
+
+        if(response && response.data.message === "note updated successfully") dispatch(submit_form({ user_id: user_id, collection_id: collection_id }, "get_single_collection"))
+
+        if (response && response.data.message === "Collection retrieved successfully") set_notes_to_display(response.data.collection.notes)
+
+    }, [response])
+
 
     return (
 
         <div className={classes.container}>
 
-            <div className={classes.back_button_container}> <BackButton onClick={()=> props.history.goBack()}/></div>
+            <div className={classes.back_button_container}> <BackButton onClick={() => props.history.goBack()} /></div>
 
-            <ProgressBar numbers={progress_numbers} handle_navigate={change => handle_navigate(change)} current_note_in_view_index={current_note_in_view_index} total_num_notes={props.location.state.notes.length}/>
+            {notes_to_display.length > 0 &&
 
-            {/* <div className={classes.indicator_container}>
+                <React.Fragment>
 
-                <span className={classes.current_note} style={{color:colours.secondary}}>Current note :</span>
+                    <ProgressBar numbers={progress_numbers} handle_navigate={change => handle_navigate(change)} current_note_in_view_index={current_note_in_view_index} total_num_notes={notes_to_display.length} />
 
-                <div className={classes.number_container}>
+                    <Note
 
-                    <img src={arrow} alt="View previous note" className={classes.arrow_left} style={{ display: current_note_in_view_index < 1 ? "none" : "flex" }} onClick={() => handle_navigate(-1)} />
+                        details={notes_to_display[current_note_in_view_index]}
+                        inside_collection
 
-                    {progress_numbers.map((number, index) => <span className={classes.indicator} key={index} style={{ opacity: current_note_in_view_index !== index && "0.3" }}>{number}</span>)}
+                    />
 
-                    <img src={arrow} alt="View next note" className={classes.arrow_right} onClick={() => handle_navigate(1)} style={{ display: current_note_in_view_index === props.location.state.notes.length - 1 && "none" }} />
+                </React.Fragment>
 
-                </div>
+            }
 
-            </div> */}
-
-            <Note
-
-                details={current_note_in_view_details}
-                inside_collection
-
-            />
-
-        </div>
+        </div >
 
     )
 
