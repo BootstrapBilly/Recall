@@ -54,13 +54,31 @@ export const Note_selection = props => {
     //This is called when selected notes changes in the parent, it updates the state in here to render them
     useEffect(() => { if (props.selected_notes) set_selected_notes(props.selected_notes) }, [props.selected_notes])
 
+    const set_button_type = () => {
+
+        if (props.from_collection_detail){
+
+            if(props.selected_notes.length < 1) return "grey_add_to_collection"
+
+            else return "add_to_collection"
+
+        }
+
+        else {
+
+            if(props.selected_notes.length >= 2) return "next"
+            else return "grey_next"
+
+        }
+    }
+
     return (
 
-        <div className={classes.container}>
+        <div className={classes.container} style={{ paddingTop: !props.part_of_add_new_form && "75px" }}>
 
             <div className={classes.sticky_top_section}>
 
-                <span className={classes.title} style={{ color: colours.primary }}>{data[0]}</span>
+                <span className={classes.title} style={{ color: colours.primary }}>{props.from_collection_detail ? "Which notes would you like to add to the collection ?" : data[0]}</span>
 
                 <div className={classes.search_container}>
 
@@ -84,7 +102,7 @@ export const Note_selection = props => {
                     breakpointCols={handle_column_assignment(selected_notes)}
                     className={classes.my_masonry_grid}
                     columnClassName={classes.my_masonry_grid_column}
-                    style={{paddingBottom:"0px"}}>
+                    style={{ paddingBottom: "0px" }}>
 
                     {
 
@@ -124,8 +142,9 @@ export const Note_selection = props => {
             <div className={classes.button_container}>
 
                 <NavigationButtons
+
                     width="275px"
-                    type={props.selected_notes.length >= 2 ? "next" : "grey_next"}
+                    type={set_button_type()}
                     on_click={props.handle_next_click}
                     centered
                 />

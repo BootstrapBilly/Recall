@@ -1,0 +1,31 @@
+.container {
+    background-color: white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.button {
+    color: white;
+    font-size: 18px;
+    margin: 25px 20px;
+    width: 200px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    box-shadow: 1px 1px 3px 1px rgba(128, 128, 128, 0.61);
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+@media (min-width:1200px) {
+    .button {
+        display: flex;
+    }
+}

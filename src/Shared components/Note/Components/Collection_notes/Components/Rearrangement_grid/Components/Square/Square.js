@@ -26,7 +26,8 @@ export const Square = props => {
 
             className={classes.container}
             style={{ backgroundColor: has_dragover && colours.primary }}
-            draggable={props.note ? "true" : "false"} //only make it draggable if it has a note thumbnail inside
+            draggable={(props.note && ! props.removal_mode) ? "true" : "false"} //only make it draggable if it has a note thumbnail inside
+            onClick={props.removal_mode && props.handle_removal.bind(this, props.note)}
 
             onDragStart={() => {
 

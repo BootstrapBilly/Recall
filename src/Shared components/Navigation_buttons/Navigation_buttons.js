@@ -27,7 +27,9 @@ export const Navigation_buttons = props => {
 
                         border: `3px solid ${colours.secondary}`,
                         color: colours.secondary,
-                        display: props.type === "next" || props.type === "grey_next" && "none"
+                        display: props.type === "next" || props.type === "grey_next" && "none",
+                        transform: props.type === "grey_add_to_collection" || props.type === "add_to_collection" ? "scale(1.3)" : undefined,
+                        marginRight: props.type === "grey_add_to_collection" || props.type === "add_to_collection" ? "30px" : undefined,
 
                     }}>
 
@@ -47,22 +49,30 @@ export const Navigation_buttons = props => {
 
                     style={{
 
-                        border: `3px solid ${props.type === "back" || props.type === "back_submit" || props.type === "grey_next" ? "grey"
-                            : props.type === "add" ? colours.green
+                        border: `3px solid ${props.type === "back" || props.type === "back_submit" || props.type === "grey_next" || props.type === "grey_add_to_collection" ? "grey"
+
+                            : props.type === "add" || props.type === "add_to_collection" ? colours.green
+
                                 : colours.primary}`,
 
-                        background: props.type === "back" || props.type === "back_submit" || props.type === "grey_next" ? "grey"
-                            : props.type === "add" ? colours.green
+                        background: props.type === "back" || props.type === "back_submit" || props.type === "grey_next" || props.type === "grey_add_to_collection" ? "grey"
+
+                            : props.type === "add" || props.type === "add_to_collection" ? colours.green
+
                                 : colours.primary,
 
-                        marginLeft: props.type !== "grey_next" && props.type !== "next" && "15px"
+                        marginLeft: props.type !== "grey_next" && props.type !== "next" && "15px",
+
+                        transform: props.type === "grey_add_to_collection" || props.type === "add_to_collection" || props.type === "grey_next" || props.type === "next" ? "scale(1.3)" : undefined
 
                     }}>
 
                     {//Text inside the button
                         props.type === "back_submit" || props.type === "submit" ? "Sign up"
                             : props.type === "skip" ? "Skip"
-                                : props.type === "add" ? "Finished" : "Next"
+                                : props.type === "add" ? "Finished"
+                                    : props.type === "grey_add_to_collection" || props.type === "add_to_collection" ? "Add Notes"
+                                : "Next"
                     }
 
                 </div>

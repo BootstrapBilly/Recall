@@ -14,7 +14,7 @@ cursor: pointer;
 
 .button{
 
-    width: 33%;
+    width: 100px;
     height: 32px;
     border-radius: 5px;
     display: flex;
@@ -22,6 +22,7 @@ cursor: pointer;
     align-items: center;
     animation: fadein 0.8s;
     font-weight: 900;
+    font-size: 18px;
 
 }
 

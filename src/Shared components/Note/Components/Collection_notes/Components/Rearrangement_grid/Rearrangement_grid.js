@@ -50,6 +50,11 @@ export const Rearrangement_grid = props => {
 
     }
 
+    const handle_remove_note = note => {
+
+        set_notes_to_display([...notes_to_display.filter(notes => notes !== note)])
+    }
+
     useEffect(() => {
 
         if (props.notes) set_notes_to_display(props.notes)
@@ -62,12 +67,12 @@ export const Rearrangement_grid = props => {
 
             <div className={classes.grid_container}>
 
-                <span className={classes.title}>Drag a note on to where you want to move it</span>
+                <span className={classes.title}>{props.removal_mode ? "Click on a note to remove it" : "Drag a note on to where you want to move it"}</span>
 
                 <div className={classes.notes_container}>
 
                     {
-                        notes_to_display.map((note, index) => <Square key={index} position={index} note={note.title ? note : undefined} index={index} handle_drop={(note, position) => { handle_drop(note, position) }} />)
+                        notes_to_display.map((note, index) => <Square key={index} position={index} note={note.title ? note : undefined} index={index} handle_drop={(note, position) => { handle_drop(note, position) }} removal_mode={props.removal_mode} handle_removal={(note) => handle_remove_note(note)} />)
                     }
 
                 </div>

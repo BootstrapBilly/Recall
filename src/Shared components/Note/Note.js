@@ -279,7 +279,7 @@ export const Note = props => {
 
                                 {is_a_collection ?
 
-                                    <Link to={{ pathname: "/collection_detail", state: { id: props.details._id } }} style={{ textDecoration: "none", backgroundColor: colours.green }} className={classes.view_notes_button} >
+                                    <Link to={{ pathname: "/collection_detail", state: { id: props.details._id, title:props.details.title } }} style={{ textDecoration: "none", backgroundColor: colours.green }} className={classes.view_notes_button} >
 
                                         <span>View Notes</span>
 

@@ -4,13 +4,13 @@
     width: 100%;
     align-items: center;
     margin-top: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .current_note {
     position: relative;
     top: -10px;
-    font-size: 20px;
+    font-size: 24px;
 }
 
 .number_container {
@@ -24,6 +24,10 @@
 .indicator {
     margin-left: 5px;
     font-size: 20px;
+}
+
+.indicator:hover{
+    cursor: pointer;
 }
 
 .arrow_left, .arrow_right {

@@ -130,7 +130,7 @@
 @media (min-width: 1200px) {
     
     .my_masonry_grid{
-        top: 70px;
+        top: 20px;
     }
 
     .button_container{
@@ -142,7 +142,7 @@
     }
     
     .sticky_top_section{
-        margin-top: 100px;
+        padding-top: 50px;
     }
     .container{
         margin-top: 100px;

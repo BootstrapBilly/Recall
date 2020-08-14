@@ -15,7 +15,7 @@ import colours from '../../util/colours'
 
 //external
 import { useDispatch, useSelector } from "react-redux"
-import {Redirect} from "react-router-dom"
+import { Redirect } from "react-router-dom"
 
 //functions
 import handle_form_navigation from "../../util/handle_form_navigation"
@@ -32,6 +32,9 @@ import { disable_edit_mode } from "../../Store/Actions/1_note_action"
 import man_pointing from "../../Assets/Abstract/man-pointing.svg"
 
 export const Add_new = props => {
+
+    //-config
+    //const from_collection_detail = props.location.state.from_collection_detail//detect if the user has been redirected from the insert note button in  collection
 
     //?selectors
     const response = useSelector(state => state.form.response)//grab the form submission response from the reducer
@@ -88,14 +91,14 @@ export const Add_new = props => {
         if (response && response.data.message === "Note added successfully") {//if a 201 is detected
 
             set_current_step("success")
-            set_note_details({...response.data.note, displayed_on_add_new_form:true})
+            set_note_details({ ...response.data.note, displayed_on_add_new_form: true })
 
         }
 
         if (response && response.data.message === "process added successfully") {//if a 201 is detected
 
             set_current_step("success")
-            set_note_details({...response.data.process, displayed_on_add_new_form:true})
+            set_note_details({ ...response.data.process, displayed_on_add_new_form: true })
 
         }
 
@@ -117,7 +120,7 @@ export const Add_new = props => {
 
         if (response && response.data.message === "process updated successfully") {
 
-            set_note_details({ ...response.data.process, title: response.data.title})
+            set_note_details({ ...response.data.process, title: response.data.title })
 
             dispatch(disable_edit_mode(response.data.process._id))//remove the process from the array of edit mode enabled notes
 
@@ -146,7 +149,8 @@ export const Add_new = props => {
 
                             <NoteSelection
 
-                                handle_next_click={() => set_current_step("title")}
+                                part_of_add_new_form
+                                handle_next_click={() => form_data.selected_notes.length >= 2 && set_current_step("title")}
                                 selected_notes={form_data.selected_notes}
                                 handle_select_note={(note) => set_form_data({ ...form_data, selected_notes: [...form_data.selected_notes, note] })}
 
@@ -167,7 +171,7 @@ export const Add_new = props => {
                                     value={form_data.title}
                                     onChange={e => set_form_data({ ...form_data, title: e.target.value })}
                                     marginTop="15px"
-                                    
+
 
                                 />
 
@@ -182,7 +186,7 @@ export const Add_new = props => {
                                         text_area
                                         onChange={e => set_form_data({ ...form_data, body: e.target.value })}
                                         marginTop="15px"
-                                        
+
 
                                     />
 
@@ -200,7 +204,7 @@ export const Add_new = props => {
                                                 grey
                                                 value={form_data.subject}
                                                 onChange={e => set_form_data({ ...form_data, subject: e.target.value })}
-                                                marginTop="10px"                                               
+                                                marginTop="10px"
                                                 optionals
 
                                             />
@@ -212,7 +216,7 @@ export const Add_new = props => {
                                                 label={form_information[2]}
                                                 grey
                                                 value={form_data.search_tags}
-                                                onChange={e => handle_search_tag_input(e, form_data, set_form_data)}                                 
+                                                onChange={e => handle_search_tag_input(e, form_data, set_form_data)}
                                                 optionals
 
                                             />
@@ -235,7 +239,7 @@ export const Add_new = props => {
                                                     text_area
                                                     onChange={e => set_form_data({ ...form_data, syntax: e.target.value })}
                                                     marginTop="10px"
-                                                    
+
 
                                                 />
 
@@ -243,8 +247,8 @@ export const Add_new = props => {
 
                                             : current_step === "success" ?
 
-                                                <Note details={note_details} handle_position_change={()=> undefined} 
-                                                toggle_share_mode={(details)=> set_redirect({data:details})}/>
+                                                <Note details={note_details} handle_position_change={() => undefined}
+                                                    toggle_share_mode={(details) => set_redirect({ data: details })} />
 
                                                 : null}
 
@@ -273,7 +277,7 @@ export const Add_new = props => {
                             on_click={(direction) => handle_form_navigation(direction, props.form_type, current_step, set_current_step, form_data, dispatch, user_id)}
                             handle_reset={() => reset_form(set_current_step, set_form_data, set_form_navigation_buttons, form_data)}
                             centered={form_navigation_buttons === "success" && true}
-                            
+
                         />
 
                     }
@@ -282,7 +286,7 @@ export const Add_new = props => {
 
             </div>
 
-            {redirect && <Redirect to={{pathname: "/view_all", state:{details : redirect.data}}} />}
+            {redirect && <Redirect to={{ pathname: "/view_all", state: { details: redirect.data } }} />}
 
             <Nav />
 

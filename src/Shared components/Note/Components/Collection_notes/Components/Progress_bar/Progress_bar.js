@@ -35,6 +35,7 @@ export const Progress_bar = props => {
                             className={classes.indicator}
                             key={index}
                             style={{ opacity: props.current_note_in_view_index !== index && "0.3" }}
+                            onClick={props.handle_number_click.bind(this, index)}
                         >
                             {number}
 

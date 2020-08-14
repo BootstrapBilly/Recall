@@ -2,7 +2,7 @@
     z-index: 20;
     margin-top: 0px;
     margin-bottom: 20px;
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -12,30 +12,13 @@
     padding-bottom: 100px;
 }
 
-.back_button_container{
+.back_button_container {
     width: 330px;
     z-index: 3;
 }
 
-.re_arrange_button{
-    padding: 10px 20px;
-    color: white;
-    font-size: 20px;
-    margin-top: 50px;
-    display: none;
+.title {
+    font-size: 36px;
+    margin-top: 20px;
 }
 
-.re_arrange_button:hover{
-    cursor: pointer;
-
-}
-
-@media (min-width:1200px){
-    .re_arrange_button{
-        display: flex;
-    }
-
-    .container{
-        margin-top: 3%;
-    }
-}
