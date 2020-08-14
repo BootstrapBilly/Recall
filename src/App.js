@@ -3,7 +3,6 @@ import React, {useEffect} from 'react';
 //components
 // import Auth from "./Pages/Auth/Auth"
 import Authentication from "./Pages/Authentication/Authentication"
-import Landing from "./Pages/Landing/Landing"
 import Dashboard from "./Pages/Dashboard/Dashboard"
 import AddNew from "./Pages/Add_new/Add_new"
 // import CombineNotes from "./Pages/Combine Notes/Combine_notes"
@@ -43,7 +42,6 @@ const App = () => {
       <Switch>
 
         <Route path="/" exact component={Authentication} />
-        <Route path="/landing" component={Landing} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/add_new" component={()=> <AddNew form_type="note"/>} />
         <Route path="/combine_notes" component={()=> <AddNew form_type="collection"/>}  />

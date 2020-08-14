@@ -1,0 +1,122 @@
+.container{
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 25px;
+    flex-direction: column;
+}
+
+.note_container{
+    position: relative;
+}
+
+.description_title{
+    font-weight: 900;
+    color:black;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 20px;
+}
+
+.description{
+    font-size: 18px;
+    width: 250px;
+    color: grey;
+    background-color: white;
+    box-shadow: 1px 1px 3px 1px rgba(128, 128, 128, 0.37);
+    padding: 5px 10px;
+    position: absolute;
+}
+
+.title{
+    top: 20px;
+    left: -350px;
+}
+
+.line{
+    width: 90px;
+    position: absolute; 
+}
+
+.title_line{
+    top: -27px;
+    right: -97px;
+    transform: rotate(5deg);
+}
+
+.subject{
+    top: 77px;
+    left: -350px;
+}
+
+.subject_line{
+    transform: rotate(-20deg);
+    width: 90px;
+    right:-97px;
+    top: -37px;
+}
+
+.body{
+    left: -350px;
+    top: 157px;
+}
+
+.body_line{
+    right: -97px;
+    top: -43px;
+    transform: rotate(-20deg);
+}
+
+.tags{
+    left: -350px;
+    top: 240px;
+}
+
+.tags_line{
+    right: -97px;
+    top: -3px;
+    transform: rotate(10deg);
+}
+
+.delete{
+    left: -350px;
+    top: 330px;
+}
+
+.delete_line{
+    right: -97px;
+    top: -33px;
+    transform: rotate(-10deg);
+}
+
+.share{
+    right: -390px;
+    top: 10px;
+}
+
+.share_line{
+    left: -97px;
+    top: -23px;
+    transform: rotate(-10deg);
+}
+
+.code{
+    right: -390px;
+    top: 200px;
+}
+
+.code_line{
+    left: -97px;
+    top: -23px;
+    transform: rotate(-10deg);
+}
+
+.edit{
+    position: relative;
+    margin-top: 85px;
+}
+
+.edit_line{
+    position: absolute;
+    top: -95px;
+    left: 130px;
+    transform: rotate(90deg);
+}
