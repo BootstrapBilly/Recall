@@ -35,7 +35,7 @@ export const Input = props => {
 
     return (
 
-        <div className={[classes.container, props.title && classes.container_title].join(" ")}
+        <div className={[classes.container, props.title && props.expanded && !props.edit_mode && classes.container_title].join(" ")}
 
             style={{
                 ...props.style,

@@ -57,7 +57,7 @@ export const Side_drawer = props => {
 
         <div test_handle="nav_menu_container" className={[classes.container, props.drawer_open && classes.container_open].join(" ")}>
 
-            <div className={classes.top_bar} style={{ color: colours.primary }} onClick={() => set_redirect("/landing")}>
+            <div className={classes.top_bar} style={{ color: colours.primary }}>
 
                 <img src={Logo} alt={"A Logo icon"} className={classes.logo} />
                 <span className={classes.recall}>RECALL</span>

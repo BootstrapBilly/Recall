@@ -10,13 +10,23 @@
     top: 0;
     left: 0;
     justify-content: center;
+    z-index: 99999998;
 }
 
 .logo {
     width: 40px;
     height: 40px;
-    position: absolute;
+}
+
+.link {
+    position: fixed;
     left: 10px;
+    top: 8px;
+    padding: 5px;
+}
+
+.link:hover {
+    cursor: pointer;
 }
 
 .toggle_link_container {
@@ -27,7 +37,7 @@
     font-weight: bold;
 }
 
-.toggle_link, .title{
+.toggle_link, .title {
     margin-left: 15px;
     font-size: 22px;
 }

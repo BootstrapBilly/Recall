@@ -6,6 +6,7 @@
     left: 0;
     top: 0;
     padding-bottom: 100%;
+    z-index: 99999999;
     
 }
 

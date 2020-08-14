@@ -1,0 +1,36 @@
+.container{
+    color: gray;
+}
+
+.icon_container{
+    width: 100%;
+    display: flex;
+    margin: 20px 0;
+}
+
+.toggle_button{
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    position: relative;
+    left: -3px;
+    padding: 15px 10px;
+    padding-left: 5px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    color: white;
+    z-index: 1;
+}
+
+.section_title{
+    color: black;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.section_title:hover{
+    cursor: pointer;
+}
+
+.logo{
+    height: 50px;
+}

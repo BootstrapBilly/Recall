@@ -1,0 +1,12 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.section_title{
+    font-size: 20px;
+}
+
+.section_title:hover{
+    cursor: pointer;
+}

@@ -12,6 +12,9 @@ import logo from "../../Assets/Icon/logo.svg"
 //components
 import SearchBox from "./Components/Search_box"
 
+//external
+import { Link } from "react-router-dom"
+
 export const Top_bar = props => {
 
     //*states
@@ -46,9 +49,13 @@ export const Top_bar = props => {
 
     return (
 
-        <div className={classes.container}>
+        <div className={classes.container} style={{ background: colours.white }}>
 
-            <img src={logo} className={classes.logo} alt="The recall logo" />
+            <Link to={{ pathname: "/dashboard" }} className={classes.link} style={{ textDecoration: "none" }}>
+                
+                <img src={logo} className={classes.logo} alt="The recall logo" />
+
+            </Link>
 
             <div
 

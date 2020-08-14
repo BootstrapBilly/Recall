@@ -164,6 +164,7 @@ export const Note = props => {
                                 //remove the title from the array of duplicate titles in the reducer
                                 handle_clear_duplicate_title={() => dispatch(clear_duplicate_title(note_id, props.index))}
                                 title
+                                expanded={expanded}
 
                             />
 
@@ -199,7 +200,7 @@ export const Note = props => {
 
                             : <div className={classes.expanded_content}>
 
-                                {!props.share_mode && !props.inside_sharing_modal && !has_been_granted && !props.inside_collection && !props.re_arrange &&
+                                {!props.share_mode && !props.inside_sharing_modal && !has_been_granted && !props.inside_collection && !props.re_arrange && !edit_mode &&
 
                                     <ShareWithFriend onClick={() => {
                                         props.toggle_share_mode(props.details)
