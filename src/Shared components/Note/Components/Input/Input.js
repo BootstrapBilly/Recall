@@ -26,21 +26,21 @@ export const Input = props => {
     const handle_click_input = () => {
 
         //if they click the "No subject" input, call the parent props function to delete the value and resize it
-        if(props.edit_mode && props.type === "subject" && props.value === "No subject") return props.handle_edit_missing_subject()
-         
+        if (props.edit_mode && props.type === "subject" && props.value === "No subject") return props.handle_edit_missing_subject()
+
         //if they click the title after it is showing an error from trying to submit a duplicate, call the parent function to remove the red error highlighting
-        if(props.edit_mode && props.type === "title" && props.duplicate_title) return props.handle_clear_duplicate_title()
+        if (props.edit_mode && props.type === "title" && props.duplicate_title) return props.handle_clear_duplicate_title()
 
     }
 
     return (
 
-        <div className={classes.container}
+        <div className={[classes.container, props.title && classes.container_title].join(" ")}
 
             style={{
                 ...props.style,
                 background: props.edit_mode && "wheat",
-                border:props.duplicate_title && "2px solid red", 
+                border: props.duplicate_title && "2px solid red",
                 color: props.edit_mode ? "transparent" : props.color,
                 width: handle_empty_value("width"),
                 height: handle_empty_value("height")
@@ -58,9 +58,9 @@ export const Input = props => {
                 className={classes.input}
                 value={capitalise_first(props.value)}
                 disabled={props.edit_mode ? false : true}
-                style={{...props.style, color: props.edit_mode ? props.color : "transparent" }}
+                style={{ ...props.style, color: props.edit_mode ? props.color : "transparent" }}
                 onChange={props.handle_change.bind(this, props.type)}
-                onClick={()=> handle_click_input()}
+                onClick={() => handle_click_input()}
 
             />
 

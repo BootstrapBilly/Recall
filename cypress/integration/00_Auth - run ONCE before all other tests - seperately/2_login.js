@@ -1,6 +1,6 @@
 describe("@@@@@ LOGIN TESTING @@@@@", () => {
 
-    context("Isolation form steps - comment out when running all tests together", () => {
+
 
         it("get the form ready", () => {
 
@@ -8,7 +8,6 @@ describe("@@@@@ LOGIN TESTING @@@@@", () => {
             cy.get('[test_handle="CTA_button"]').click()
         })
 
-    })
 
     context("Login with a username/email which doesn't exist", () => {
 

@@ -27,7 +27,7 @@
     font-weight: bold;
 }
 
-.toggle_link{
+.toggle_link, .title{
     margin-left: 15px;
     font-size: 22px;
 }

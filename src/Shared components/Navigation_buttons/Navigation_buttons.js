@@ -63,7 +63,7 @@ export const Navigation_buttons = props => {
 
                         marginLeft: props.type !== "grey_next" && props.type !== "next" && "15px",
 
-                        transform: props.type === "grey_add_to_collection" || props.type === "add_to_collection" || props.type === "grey_next" || props.type === "next" ? "scale(1.3)" : undefined
+                        transform: props.type === "grey_add_to_collection" || props.type === "add_to_collection" ? "scale(1.3)" : undefined
 
                     }}>
 

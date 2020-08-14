@@ -1,6 +1,6 @@
 describe("@@@@@ SIGNUP TESTING @@@@@", () => {
 
-    context("Isolation form steps - comment out when running all tests together", () => {
+
 
         it("get the form ready", () => {
 
@@ -9,7 +9,6 @@ describe("@@@@@ SIGNUP TESTING @@@@@", () => {
             cy.get('[test_handle="switch_form_type_text"]').click()
         })
 
-    })
 
     context("Checking the password criteria", () => {
 

@@ -20,6 +20,34 @@
     margin-top: 75px;
 }
 
+.prompt_container{
+  display: flex;
+  height: 85vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.prompt_text{
+    width: 250px;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.no_notes_prompt_image{
+    width: 300px;
+    margin-top: 40px;
+}
+
+.notes_graphic{
+    width: 250px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 900;
+}
+
 @media (orientation: landscape){
 
     .note_container{

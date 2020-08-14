@@ -23,3 +23,10 @@
     color: black;
     font-weight: 500;
 }
+
+.container_title{
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    white-space: nowrap;
+    width: 65%;
+}

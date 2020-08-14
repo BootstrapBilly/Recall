@@ -10,6 +10,7 @@
     scrollbar-width: none;
     /* Firefox */
     position: relative;
+    padding-top: 50px;
 }
 
 .background_overlay{
@@ -200,7 +201,7 @@
         z-index: 2;
     }
     .container{
-        padding-top: 120px;
+        padding-top: 90px;
     }
 
     .bottom_section{
@@ -230,4 +231,9 @@
         left: 15%;
     } */
     }
+}
+
+.char_limit{
+    margin-top: 20px;
+    margin-left: 5px;
 }

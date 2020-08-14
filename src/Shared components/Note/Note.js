@@ -78,7 +78,6 @@ export const Note = props => {
     const [resize_note, set_resize_note] = useState(false)//used to resize the note if content gets added or deleted from it
     const [hover_border, set_hover_border] = useState(false)//used to highlight a note when hovering it
     const [show_delete_confimation, set_show_delete_confirmation] = useState(false)//determine whether to show the delete prompt after the user presses delete
-    const [redirect, set_redirect] = useState(false)//determine whether to show the full collection detail with all the notes visible
 
     const [overwritten_values, set_overwritten_values] = useState({// a state to hold the note information to be submitted to the backend for editing purposes
 
@@ -158,12 +157,13 @@ export const Note = props => {
                                 value={overwritten_values.title === null ? props.details.title : overwritten_values.title}
                                 edit_mode={edit_mode}
                                 type="title"
-                                handle_change={(type, e) => set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}
+                                handle_change={(type, e) => {set_overwritten_values({ ...overwritten_values, [type]: e.target.value })}}
                                 color={props.selected ? "White" : is_a_collection ? colours.secondary : has_been_granted ? colours.green : colours.primary}
                                 id={note_id}
                                 duplicate_title={duplicate_title}
                                 //remove the title from the array of duplicate titles in the reducer
                                 handle_clear_duplicate_title={() => dispatch(clear_duplicate_title(note_id, props.index))}
+                                title
 
                             />
 

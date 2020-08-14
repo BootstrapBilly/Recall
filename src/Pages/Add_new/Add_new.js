@@ -9,6 +9,7 @@ import Nav from "../../Shared components/Nav/Nav"
 import Input from "../../Shared components/Input/Input"
 import NavigationButtons from "../../Shared components/Navigation_buttons/Navigation_buttons"
 import Note from "../../Shared components/Note/Note"
+import TopBar from "../../Shared components/Top_bar/Top_bar"
 
 //util
 import colours from '../../util/colours'
@@ -29,7 +30,7 @@ import { clear_response } from "../../Store/Actions/0_submit_form_action"
 import { disable_edit_mode } from "../../Store/Actions/1_note_action"
 
 //assets
-import man_pointing from "../../Assets/Abstract/man-pointing.svg"
+import man_pointing from "../../Assets/Graphics/man-pointing.svg"
 
 export const Add_new = props => {
 
@@ -134,6 +135,8 @@ export const Add_new = props => {
 
             <div className={classes.container}>
 
+                <TopBar title={`Add a new ${props.form_type}`} no_search />
+
                 <div className={classes.background_overlay}></div>
 
                 <div className={classes.form_wrapper}>
@@ -163,17 +166,16 @@ export const Add_new = props => {
 
                             : current_step === "title" ?
 
-                                <Input
+                                    <Input
 
-                                    test_handle="title_input"
-                                    placeholder="Writing a for each loop"
-                                    label={form_information[1]}
-                                    value={form_data.title}
-                                    onChange={e => set_form_data({ ...form_data, title: e.target.value })}
-                                    marginTop="15px"
+                                        test_handle="title_input"
+                                        placeholder="Writing a for each loop"
+                                        label={form_information[1]}
+                                        value={form_data.title}
+                                        onChange={e => {set_form_data({ ...form_data, title: e.target.value })}}
+                                        marginTop="15px"
 
-
-                                />
+                                    />
 
                                 : current_step === "body" ?
 

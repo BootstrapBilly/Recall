@@ -46,7 +46,7 @@ export const Top_bar = props => {
 
     return (
 
-        <div className={classes.container} style={{ background: colours.white }}>
+        <div className={classes.container}>
 
             <img src={logo} className={classes.logo} alt="The recall logo" />
 
@@ -57,23 +57,25 @@ export const Top_bar = props => {
 
             >
 
-                {bar_links.map(link =>
+                {props.title ? <span className={classes.title}>{props.title}</span> :
 
-                    <span
+                    bar_links.map(link =>
 
-                        test_handle={link}
-                        className={classes.toggle_link}
-                        style={{
-                            color: `${active_toggle_link === link ? colours.primary : `${colours.primary}80`}`,
-                        }}
-                        onClick={() => handle_toggle_filter(link)}
-                        key={link}
+                        <span
 
-                    >
+                            test_handle={link}
+                            className={classes.toggle_link}
+                            style={{
+                                color: `${active_toggle_link === link ? colours.primary : `${colours.primary}80`}`,
+                            }}
+                            onClick={() => handle_toggle_filter(link)}
+                            key={link}
 
-                        {link}
+                        >
 
-                    </span>)}
+                            {link}
+
+                        </span>)}
 
             </div>
 

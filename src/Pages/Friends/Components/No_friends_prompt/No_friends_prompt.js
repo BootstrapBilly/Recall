@@ -4,7 +4,7 @@ import React from 'react'
 import classes from './No_friends_prompt.module.css'
 
 //assets
-import Man_alone from "../../../../Assets/Abstract/alone.svg"
+import Man_alone from "../../../../Assets/Graphics/alone.svg"
 
 export const No_friends_prompt = () => {
 

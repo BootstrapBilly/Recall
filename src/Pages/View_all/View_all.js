@@ -23,6 +23,10 @@ import handle_column_assignment from "../../util/handle_column_assignment"
 //external
 import Masonry from 'react-masonry-css'
 
+//assets
+import NoNotesPrompt from "../../Assets/Graphics/no_notes.svg"
+import EmptySearch from "../../Assets/Graphics/empty_search.svg"
+
 export const View_all = props => {
 
     //?selectors
@@ -122,6 +126,38 @@ export const View_all = props => {
                         </Masonry>
 
                     }
+
+                    {!notes.length &&
+
+                        <div className={classes.prompt_container}>
+
+
+                            {response && response.data.message === "Nothing found" ?
+
+                                <React.Fragment>
+
+                                    <span className={classes.prompt_text}>No matching notes/collections found</span>
+
+                                    <img src={EmptySearch} alt="No search results prompt" className={classes.no_notes_prompt_image} />
+
+                                </React.Fragment>
+
+                                :
+
+                                <React.Fragment>
+
+                                    <span className={classes.prompt_text}>{`You have no ${filter === "Collections" ? "collections" : "notes"}`}</span>
+                                    <span className={classes.prompt_text}>You can add some from the menu on the left</span>
+                                    <img src={NoNotesPrompt} alt="You have no notes prompt" className={classes.no_notes_prompt_image} />
+
+
+                                </React.Fragment>
+
+                            }
+
+
+
+                        </div>}
 
                 </React.Fragment>
 

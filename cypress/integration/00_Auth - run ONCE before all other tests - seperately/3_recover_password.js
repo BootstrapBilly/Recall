@@ -1,6 +1,6 @@
 describe("@@@@@ RECOVER PASSWORD TESTING @@@@@", () => {
 
-    context("Isolation form steps - comment out when running all tests together", () => {
+
 
         it("get the form ready", () => {
 
@@ -8,7 +8,7 @@ describe("@@@@@ RECOVER PASSWORD TESTING @@@@@", () => {
             cy.get('[test_handle="CTA_button"]').click()
         })
 
-    })
+    
 
     context("Check the recover password form is working correctly", () => {
 

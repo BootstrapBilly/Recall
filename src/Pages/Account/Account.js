@@ -10,6 +10,7 @@ import ChangePhoto from "./components/Change_photo/Change_photo"
 import ChangeUsername from "./components/Change_username/Change_username"
 import ChangePassword from "./components/Change_password_account/Change_password_account"
 import DeleteAccount from "./components/Delete_account/Delete_account"
+import TopBar from "../../Shared components/Top_bar/Top_bar"
 
 export const Account = () => {
 
@@ -26,7 +27,7 @@ export const Account = () => {
 
         <div className={classes.container}>
 
-            <div className={classes.title}>Account settings</div>
+            <TopBar title={"Account management"} no_search />
 
             <div className={classes.options_container}>
 
@@ -71,7 +72,7 @@ export const Account = () => {
                     handle_toggle={() => set_open_settings({ ...open_settings, delete: !open_settings.delete })}
                     open={open_settings.delete}
                     test_handle="delete_account_option"
-                    
+
                 />
 
                 {open_settings.delete && <DeleteAccount />}

@@ -26,7 +26,7 @@ import handle_column_assignment from "../../util/handle_column_assignment"
 import handle_response from "./Functions/handle_response"
 
 //assets
-import friends_graphic from "../../Assets/Abstract/friends_graphic.svg"
+import friends_graphic from "../../Assets/Graphics/friends_graphic.svg"
 
 export const Friends = () => {
 
