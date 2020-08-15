@@ -19,6 +19,7 @@
     border-bottom-right-radius: 20px;
     color: white;
     z-index: 1;
+    margin: auto;
 }
 
 .section_title{
@@ -33,4 +34,13 @@
 
 .logo{
     height: 50px;
+    margin: auto;
+}
+
+.white_background_provider{
+    background-color: white;
+    padding: 15px;
+    position: relative;
+    left: -15px;
+    box-shadow: 1px 1px 3px 1px rgba(128, 128, 128, 0.315);
 }

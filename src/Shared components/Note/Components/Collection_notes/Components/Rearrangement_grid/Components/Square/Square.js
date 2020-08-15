@@ -7,7 +7,7 @@ import colours from '../../../../../../../../util/colours'
 import Note from "../../../../../../Note"
 
 //redux hooks
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { set_currently_being_dragged, clear_currently_being_dragged } from '../../../../../../../../Store/Actions/5_drag_and_drop_action'
 
 //redux action creators
@@ -26,15 +26,15 @@ export const Square = props => {
 
             className={classes.container}
             style={{ backgroundColor: has_dragover && colours.primary }}
-            draggable={(props.note && ! props.removal_mode) ? "true" : "false"} //only make it draggable if it has a note thumbnail inside
+            draggable={(props.note && !props.removal_mode) ? "true" : "false"} //only make it draggable if it has a note thumbnail inside
             onClick={props.removal_mode && props.handle_removal.bind(this, props.note)}
 
             onDragStart={() => {
 
-                dispatch(set_currently_being_dragged({note:props.note, index:props.index}))
+                dispatch(set_currently_being_dragged({ note: props.note, index: props.index }))
 
             }}
-            
+
 
             onDragEnd={() => dispatch(clear_currently_being_dragged())}
 

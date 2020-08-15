@@ -59,7 +59,7 @@ export const Collection_notes = props => {
     useEffect(() => {
 
         dispatch(submit_form({ user_id: user_id, collection_id: collection_id }, "get_single_collection"))
-
+// eslint-disable-next-line
     }, [props.location.state.id])
 
     // //_+functions
@@ -82,7 +82,7 @@ export const Collection_notes = props => {
             set_notes_to_display(response.data.collection.notes)
             set_add_new_mode(false)
         }
-
+// eslint-disable-next-line
     }, [response])
 
     const handle_cancel = () => {

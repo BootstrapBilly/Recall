@@ -21,7 +21,7 @@ export const Getting_around = () => {
 
             {visiting_expanded &&
 
-                <React.Fragment>
+                <div className={classes.white_background_provider}>
 
                     <span>You can select which page you want by clicking this menu icon :</span>
 
@@ -33,15 +33,15 @@ export const Getting_around = () => {
 
                     <span>It will always be on the left of the screen.</span>
 
-                </React.Fragment>
+                </div>
 
             }
 
-            <div className={classes.section_title} style={{ color: colours.primary, marginTop:"15px" }} onClick={() => set_returning_expanded(!returning_expanded)}>Returning to this page </div>
+            <div className={classes.section_title} style={{ color: colours.primary, marginTop: "15px" }} onClick={() => set_returning_expanded(!returning_expanded)}>Returning to this page </div>
 
             {returning_expanded &&
 
-                <React.Fragment>
+                <div className={classes.white_background_provider}>
 
                     <span>You can return to this page anywhere in the app by clicking this icon</span>
 
@@ -53,7 +53,7 @@ export const Getting_around = () => {
 
                     <span>It will always be in the top left corner of the screen.</span>
 
-                </React.Fragment>
+                </div>
 
             }
 

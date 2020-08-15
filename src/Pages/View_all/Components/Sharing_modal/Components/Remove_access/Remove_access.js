@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 
 //css
 import classes from './Remove_access.module.css'
@@ -22,23 +22,23 @@ export const Users_with_access = props => {
     //*states
     const [users, set_users] = useState(null)
 
-    useEffect(()=> {
+    useEffect(() => {
 
-        dispatch(submit_form({user_id:user_id, note_id: props.note_details._id}, "get_single_note"))
+        dispatch(submit_form({ user_id: user_id, note_id: props.note_details._id }, "get_single_note"))
+        // eslint-disable-next-line
+    }, [])
 
-    },[])
+    useEffect(() => {
 
-    useEffect(()=> {
+        if (response && response.data.message === "Rights removed") dispatch(submit_form({ user_id: user_id, note_id: props.note_details._id }, "get_single_note"))
 
-        if(response && response.data.message === "Rights removed") dispatch(submit_form({user_id:user_id, note_id: props.note_details._id}, "get_single_note"))
-
-        if(response && response.data.message === "Note retrieved successfully") set_users(response.data.note.access_rights) 
-
+        if (response && response.data.message === "Note retrieved successfully") set_users(response.data.note.access_rights)
+        // eslint-disable-next-line
     }, [response])
 
     const handle_revoke_access = user => {
 
-        dispatch(submit_form({ user_id: user_id, friend_id: user._id, note_or_process_id:props.note_details._id, type:props.note_details.notes ? "process" : "note"}, "remove_access"))
+        dispatch(submit_form({ user_id: user_id, friend_id: user._id, note_or_process_id: props.note_details._id, type: props.note_details.notes ? "process" : "note" }, "remove_access"))
 
     }
 

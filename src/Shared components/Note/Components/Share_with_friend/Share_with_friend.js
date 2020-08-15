@@ -12,7 +12,7 @@ export const Share_with_friend = props => {
 
     return (
 
-        <div className={classes.container} style={{background:colours.green}} onClick={props.onClick}>
+        <div className={classes.container} style={{background:colours.green, ...props.style}} onClick={props.onClick}>
 
             <img src={share_icon} alt="A sharing icon" className={classes.icon}/>
             

@@ -1,0 +1,45 @@
+.note_container{
+    position: relative;
+    left: -15px;
+}
+
+.description{
+    font-size: 18px;
+    width: 250px;
+    color: grey;
+    background-color: white;
+    box-shadow: 1px 1px 3px 1px rgba(128, 128, 128, 0.37);
+    padding: 5px 10px;
+    position: absolute;
+    display: none;
+    top: 10px;
+    left: -350px;
+}
+
+.view_notes{
+    top: 170px;
+}
+
+@media(min-width:1200px){
+    .description{
+        display: block;
+    }
+}
+.line{
+    width: 90px;
+    position: absolute; 
+    top: -30px;
+    right: -95px;
+}
+
+.line_view{
+    top: 1px;
+}
+
+
+.description_title{
+    font-weight: 900;
+    color:black;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 20px;
+}

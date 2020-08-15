@@ -9,6 +9,9 @@ import TopBar from "../../Shared components/Top_bar/Top_bar"
 import CollapsibleSection from "./Components/Collapsible_section/Collapsible_section"
 import GettingAround from "./Components/Getting_around/Getting_around"
 import NotesInfo from "./Components/Notes_info/Notes_info"
+import CollectionsInfo from './Components/Collections_info/Collections_info'
+import FriendsInfo from "./Components/Friends_info/Friends_info"
+import AccountInfo from './Components/Account_info/Account_info'
 
 export const Dashboard = () => {
 
@@ -34,7 +37,9 @@ export const Dashboard = () => {
                 {[
                     { title: "Getting around", component: <GettingAround /> },
                     { title: "Notes", component: <NotesInfo /> },
-                    { title: "Collections", component: <GettingAround /> }
+                    { title: "Collections", component: <CollectionsInfo /> },
+                    { title: "Friends", component: <FriendsInfo /> },
+                    { title: "Account", component: <AccountInfo /> },
 
                 ].map((section, index) =>
 

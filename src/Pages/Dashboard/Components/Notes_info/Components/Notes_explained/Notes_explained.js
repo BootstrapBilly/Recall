@@ -1,6 +1,6 @@
 import React from 'react'
 
-import classes from './Whats.module.css'
+import classes from './Notes_explained.module.css'
 
 //components
 import Note from "../../../../../../Shared components/Note/Note"

@@ -23,6 +23,10 @@
     font-size: 24px;
 }
 
+.top_row:hover{
+    cursor: pointer;
+}
+
 .arrow{
     width: 20px;
     position: absolute;
@@ -37,4 +41,15 @@
 
 .component_container{
     margin-top: 20px;
+    animation:fade-in 0.3s forwards;
+    opacity: 0;
+}
+
+@keyframes fade-in {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
 }

@@ -7,6 +7,17 @@
 
 .note_container{
     position: relative;
+    animation:fade-in 1s forwards;
+    opacity: 0;
+}
+
+@keyframes fade-in {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
 }
 
 .description_title{
@@ -24,8 +35,14 @@
     box-shadow: 1px 1px 3px 1px rgba(128, 128, 128, 0.37);
     padding: 5px 10px;
     position: absolute;
+    display: none;
 }
 
+@media(min-width:1200px){
+    .description{
+        display: block;
+    }
+}
 .title{
     top: 20px;
     left: -350px;

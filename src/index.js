@@ -20,8 +20,8 @@ const rootReducer = combineReducers({ //combine all the state reducers into one 
 
   form: SubmitFormReducer,
   note: NoteToggleReducer,
-  auth:AuthenticationReducer,
-  nav:ActiveNavReducer,
+  auth: AuthenticationReducer,
+  nav: ActiveNavReducer,
   profile_image: ProfileImageReducer,
   drag_and_drop: DragAndDropReducer
 

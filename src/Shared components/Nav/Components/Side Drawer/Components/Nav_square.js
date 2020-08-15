@@ -30,6 +30,7 @@ export const Nav_square = props => {
 
     }
     
+    // eslint-disable-next-line
     useEffect(() => {set_active_link_on_render(dispatch)}, [window.location.href])//whenever the url changes, set the active nav link
 
     return (

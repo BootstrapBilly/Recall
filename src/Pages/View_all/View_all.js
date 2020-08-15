@@ -96,7 +96,7 @@ export const View_all = props => {
             props.history.replace('/view_all', null);
 
         }
-
+// eslint-disable-next-line
     }, [props.location])
 
     return (

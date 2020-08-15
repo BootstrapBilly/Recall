@@ -42,9 +42,11 @@ export const Friends = () => {
     const [friends, set_friends] = useState([])
 
     //fetch the list of friends, pending and outgoing requests for the user on page load
+    // eslint-disable-next-line
     useEffect(() => { dispatch(submit_form({ user_id: user_id }, "get_friends")) }, [user_id])
 
     //handle the response when sending, cancelling, accepting, denying, fetching friends
+    // eslint-disable-next-line
     useEffect(() => { if (response) handle_response(response, dispatch, set_friends, user_id) }, [response])
 
     const handle_toggle_content = link => {
@@ -105,7 +107,7 @@ export const Friends = () => {
 
             }
 
-            <img src={friends_graphic} alt="A picture of friends together" className={classes.friends_graphic} style={{display:!friends.length && "none"}} />
+            <img src={friends_graphic} alt="A graphic of friends together" className={classes.friends_graphic} style={{display:!friends.length && "none"}} />
 
             <Nav />
 

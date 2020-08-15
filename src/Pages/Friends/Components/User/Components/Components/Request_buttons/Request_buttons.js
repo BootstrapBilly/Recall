@@ -13,7 +13,6 @@ export const Request_buttons = props => {
 
     //?selectors
     const user_id = useSelector(state => state.auth.user_id)
-    const response = useSelector(state => state.form.response)
 
     //-config
     const dispatch = useDispatch()//intialise the dispatch hook

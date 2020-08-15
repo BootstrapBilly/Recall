@@ -27,9 +27,9 @@ export const Navigation_buttons = props => {
 
                         border: `3px solid ${colours.secondary}`,
                         color: colours.secondary,
-                        display: props.type === "next" || props.type === "grey_next" && "none",
-                        transform: props.type === "grey_add_to_collection" || props.type === "add_to_collection" ? "scale(1.3)" : undefined,
-                        marginRight: props.type === "grey_add_to_collection" || props.type === "add_to_collection" ? "30px" : undefined,
+                        display: (props.type === "next" || props.type === "grey_next") && "none",
+                        transform: (props.type === "grey_add_to_collection" || props.type === "add_to_collection") ? "scale(1.3)" : undefined,
+                        marginRight: (props.type === "grey_add_to_collection" || props.type === "add_to_collection") ? "30px" : undefined,
 
                     }}>
 
