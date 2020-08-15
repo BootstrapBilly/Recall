@@ -114,7 +114,7 @@ export const View_all = props => {
                     <TopBar handle_search_input={(string) => filter_notes_by_search(dispatch, string, user_id)} handle_toggle={(link) => handle_toggle_click(link)}
                     />
 
-                    {notes &&
+                    {notes && notes !== "Empty" &&
 
                         <Masonry
 
@@ -127,10 +127,12 @@ export const View_all = props => {
 
                     }
 
-                    {!notes.length &&
+
+                    {// eslint-disable-next-line
+                    (response && response.data.message === "No notes or collections found" || response && response.data.message === "Nothing found" || response && response.data.message === "No collections found" 
+                    ) &&
 
                         <div className={classes.prompt_container}>
-
 
                             {response && response.data.message === "Nothing found" ?
 
@@ -142,11 +144,22 @@ export const View_all = props => {
 
                                 </React.Fragment>
 
-                                :
+                                : response && response.data.message === "No notes or collections found" ?
 
                                 <React.Fragment>
 
                                     <span className={classes.prompt_text}>{`You have no ${filter === "Collections" ? "collections" : "notes"}`}</span>
+                                    <span className={classes.prompt_text}>You can add some from the menu on the left</span>
+                                    <img src={NoNotesPrompt} alt="You have no notes prompt" className={classes.no_notes_prompt_image} />
+
+
+                                </React.Fragment>
+
+                                : response && response.data.message === "No collections found" && filter === "Collections" &&
+
+                                <React.Fragment>
+
+                                    <span className={classes.prompt_text}>{`You have no collections`}</span>
                                     <span className={classes.prompt_text}>You can add some from the menu on the left</span>
                                     <img src={NoNotesPrompt} alt="You have no notes prompt" className={classes.no_notes_prompt_image} />
 

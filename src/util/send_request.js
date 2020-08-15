@@ -1,7 +1,7 @@
 import axios from "axios"
 
-export const production = "http://localhost:4000/"//dev
-//export const production = "https://get-recall.herokuapp.com/"//production
+//export const production = "http://localhost:4000/"//dev
+export const production = "https://get-recall.herokuapp.com/"//production
 
 const sendPost = (url, body, type) => {
 
@@ -16,7 +16,7 @@ const sendPost = (url, body, type) => {
             }
         }
     )
-
+    
     else return axios.post(`${production}${url}`,
 
         body,

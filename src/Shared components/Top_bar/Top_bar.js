@@ -49,7 +49,7 @@ export const Top_bar = props => {
 
     return (
 
-        <div className={classes.container} style={{ background: colours.white }}>
+        <div className={classes.container}>
 
             <Link to={{ pathname: "/dashboard" }} className={classes.link} style={{ textDecoration: "none" }}>
                 
