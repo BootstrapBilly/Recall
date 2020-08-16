@@ -16,8 +16,11 @@ export const Nav = props => {
 
             <div className={[classes.container, drawer_open && classes.container_open].join(" ")} onClick={() => drawer_open && set_drawer_open(false)}></div>
 
-            <SideDrawer drawer_open={drawer_open} handle_toggle={() => set_drawer_open(!drawer_open)}/>
-            
+            <SideDrawer drawer_open={drawer_open} handle_toggle={() => {
+                set_drawer_open(!drawer_open)
+
+            }} />
+
         </React.Fragment>
     )
 

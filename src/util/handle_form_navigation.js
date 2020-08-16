@@ -12,13 +12,13 @@ The last step of the form submits a new note request with all the info */
 
 import { submit_form } from "../Store/Actions/0_submit_form_action"
 
-const handle_form_navigation = (direction, form_type, form_step, set_form_step, form_data, dispatch, user_id) => {
+const handle_form_navigation = (direction, combine_notes, form_step, set_form_step, form_data, dispatch, user_id) => {
 
     switch (form_step) {//switch the current step of the form
 
         case "title"://if they are on the title step
 
-            if (direction === "back" && form_type === "collection") {//and they press the back button
+            if (direction === "back" && combine_notes) {//and they press the back button
 
                 return set_form_step("note_selection")
 
@@ -27,16 +27,17 @@ const handle_form_navigation = (direction, form_type, form_step, set_form_step, 
             /* Otherwise, if they pressed next */
 
             //and they are adding a note,
-            else if (form_type === "note" && form_data.title) {
+            else if (!combine_notes && form_data.title) {
 
-                //submit the title to the backend, to see if it is valid and wait for the response 
-                //success (handled by line 105 add_new.js), error handled by the input component (line 53)
+                // set_form_step("body")
+                // //submit the title to the backend, to see if it is valid and wait for the response 
+                // //success (handled by line 105 add_new.js), error handled by the input component (line 53)
                 return dispatch(submit_form({ title: form_data.title, user_id: user_id }, "check_note_title"))
 
             }
 
             //and they are adding a note,
-            else if (form_type === "collection" && form_data.title) {
+            else if (combine_notes && form_data.title) {
 
                 //submit the title to the backend, to see if it is valid and wait for the response 
                 //success (handled by line 105 add_new.js), error handled by the input component (line 53)
@@ -63,7 +64,7 @@ const handle_form_navigation = (direction, form_type, form_step, set_form_step, 
 
         case "optionals"://if they are on the optionals step
 
-            if (form_type === "note") {
+            if (!combine_notes) {
 
                 //and they press the back button, navigate back to the body step
                 if (direction === "back") return set_form_step("body")
@@ -84,7 +85,6 @@ const handle_form_navigation = (direction, form_type, form_step, set_form_step, 
             //otherwise, submit the request to add a new note
             else return dispatch(submit_form({ ...form_data, user_id: user_id }, "notes"))
 
-        default: return
 
     }
 }

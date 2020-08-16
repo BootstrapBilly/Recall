@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Authentication from "./Pages/Authentication/Authentication"
 import Dashboard from "./Pages/Dashboard/Dashboard"
 import AddNew from "./Pages/Add_new/Add_new"
+import CombineNotes from "./Pages/Combine_notes/Combine_notes"
 import ViewAll from "./Pages/View_all/View_all"
 import Friends from "./Pages/Friends/Friends"
 import Account from "./Pages/Account/Account"
@@ -27,8 +28,10 @@ import { submit_form } from './Store/Actions/0_submit_form_action';
 const App = () => {
 
   //?selectors
-  const response = useSelector(state => state.form.response)
-  const user_id =  useSelector(state => state.auth.user_id)
+   const response = useSelector(state => state.form.response)
+  const user_id = useSelector(state => state.auth.user_id)
+
+  // console.log(response)
 
   //-config
   const dispatch = useDispatch()
@@ -40,23 +43,26 @@ const App = () => {
 
   useEffect(() => {
 
-    if(response) console.log(response)
+  if(response) console.log(response)
 
-    if (response && response.data.message === "expired") {
+  if (response && response.data.message === "expired") {
 
-       dispatch(submit_form({ user_id: user_id, refresh_token:window.localStorage.getItem("refresh_token") }, "refresh_jwt"))
+     dispatch(submit_form({ user_id: user_id, refresh_token:window.localStorage.getItem("refresh_token") }, "refresh_jwt"))
 
-    }
+  }
 
-    if (response && response.data.message === "Token refreshed") {
+  if (response && response.data.message === "Token refreshed") {
 
-      window.localStorage.setItem("token", response.data.token)
-      window.localStorage.setItem("refresh_token", response.data.refresh_token)
+    console.log("refresh")
 
-    }
+    window.localStorage.setItem("token", response.data.token)
+    window.localStorage.setItem("refresh_token", response.data.refresh_token)
+    window.location.reload()
 
-    // eslint-disable-next-line 
-  }, [response])
+  }
+
+  //eslint-disable-next-line 
+  })
 
   useEffect(() => {
 
@@ -98,14 +104,19 @@ const App = () => {
           <Switch>
 
             <Route path="/" exact component={Authentication} />
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/add_new" component={() => <AddNew form_type="note" />} />
-            <Route path="/combine_notes" component={() => <AddNew form_type="collection" />} />
-            <Route path="/view_all" component={ViewAll} />
-            <Route path="/friends" component={Friends} />
-            <Route path="/account" component={Account} />
-            <Route path="/change_password" component={ChangePassword} />
-            <Route path="/collection_detail" component={CollectionDetail} />
+            <Route path="/dashboard" exact component={Dashboard} />
+            {/* <Route path="/add_new" exact component={() => <AddNew form_type="note" />} /> */}
+
+            <Route path="/add_new" exact component={AddNew} />
+
+            <Route path="/combine_notes" exact component={CombineNotes} />
+            {/* <Route path="/combine_notes" exact component={() => <AddNew form_type="collection" />} /> */}
+
+            <Route path="/view_all" exact component={ViewAll} />
+            <Route path="/friends" exact component={Friends} />
+            <Route path="/account" exact component={Account} />
+            <Route path="/change_password" exact component={ChangePassword} />
+            <Route path="/collection_detail" exact component={CollectionDetail} />
 
           </Switch>
 

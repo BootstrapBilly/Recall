@@ -31,8 +31,6 @@ const handle_response = (response, dispatch, set_friends, user_id) => {
 
             alert("Friend removed", "success")
             return dispatch(submit_form({ user_id: user_id }, "get_friends"))
-
-        default: return
     }
 
 

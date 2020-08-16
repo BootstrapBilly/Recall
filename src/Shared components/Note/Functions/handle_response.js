@@ -8,6 +8,8 @@ const handle_response = (response, note_id, props, set_overwritten_values, dispa
     //!Duplicate title
     if (response && response.data.message === "You already have a note with that title, please choose another") {
 
+        console.log("inside")
+
         //if the id on the response matches the id on the note, add the note to the array of duplicate titles to be displayed
         if (response.data.id === note_id && response.data.index === props.index) { dispatch(set_duplicate_title(note_id, props.index)) }
 

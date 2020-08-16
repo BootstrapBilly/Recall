@@ -1,4 +1,4 @@
-const handle_dynamic_button_display = (form_type, form_data, form_step, set_show_form_navigation_buttons, selected_notes) => {
+const handle_dynamic_button_display = (combine_notes, form_data, form_step, set_show_form_navigation_buttons, selected_notes) => {
 
     switch (form_step) {//switch the current step of the form
         
@@ -8,7 +8,7 @@ const handle_dynamic_button_display = (form_type, form_data, form_step, set_show
 
         case "title"://title step
 
-            if (form_type === "note") {
+            if (!combine_notes) {
                 //if the title is truish, show both buttons,                            if not, show only the back button
                 if (form_data.title) return set_show_form_navigation_buttons("next"); else return set_show_form_navigation_buttons("grey_next")
             }
@@ -22,7 +22,7 @@ const handle_dynamic_button_display = (form_type, form_data, form_step, set_show
 
         case "optionals"://subject and search tags step
 
-            if (form_type === "note") {
+            if (!combine_notes) {
 
                 //if the subject or search tags are truish, show both buttons,                            if not, show skip button
                 if (form_data.subject || form_data.search_tags) return set_show_form_navigation_buttons("both"); else return set_show_form_navigation_buttons("skip")

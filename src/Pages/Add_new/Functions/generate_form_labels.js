@@ -1,4 +1,4 @@
-const generate_form_labels = (form_step, form_type) => {
+const generate_form_labels = (form_step, combine_notes) => {
 
     switch (form_step) {
 
@@ -10,15 +10,15 @@ const generate_form_labels = (form_step, form_type) => {
 
         case "title":
 
-            return ["What's the title ?", `TITLE OF ${form_type.toUpperCase()}`]
+            return ["What's the title ?", `TITLE OF ${combine_notes ? "COLLECTION" : "NOTE"}`]
 
         case "body":
 
-            return ["What's it about ?", `DESCRIPTION OF ${form_type.toUpperCase()}`]
+            return ["What's it about ?", `DESCRIPTION OF ${combine_notes ? "COLLECTION" : "NOTE"}`]
 
         case "optionals":
 
-            return ["Additional information", `SUBJECT OF ${form_type.toUpperCase()}`, `TAGS FOR EASIER SEARCHING`]
+            return ["Additional information", `SUBJECT OF ${combine_notes ? "COLLECTION" : "NOTE"}`, `TAGS FOR EASIER SEARCHING`]
 
         case "syntax"://only when adding a note
 
