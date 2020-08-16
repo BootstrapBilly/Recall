@@ -4,7 +4,8 @@ const initialState = {//set the initial state
 
     user_id: null,
     token:null,
-    username:null
+    username:null,
+    refresh_token:null
 
 }
 
@@ -14,11 +15,11 @@ const login = (state = initialState, action) => {
 
         case HANDLE_SUCCESSFUL_LOGIN:
 
-        return {...state, user_id:action.payload.user_id, token:action.payload.token, username:action.payload.username}
+        return {...state, user_id:action.payload.user_id, token:action.payload.token, username:action.payload.username, refresh_token:action.payload.refresh_token}
 
         case HANDLE_LOGOUT:
 
-        return {...state, user_id:null, token:null}
+        return {...state, user_id:null, token:null, username:null, refresh_token:null}
 
         default:
 

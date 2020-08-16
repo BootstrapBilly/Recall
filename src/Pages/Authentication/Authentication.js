@@ -29,7 +29,6 @@ export const Authentication = () => {
     const [redirect, set_redirect] = useState(false)
 
     //!effects
-
     // eslint-disable-next-line
     useEffect(() => { if (window.localStorage.getItem("user_id")) set_redirect("/dashboard") })
 
@@ -40,7 +39,7 @@ export const Authentication = () => {
             //and it is a successul signup/login, redirect the user to the dashboard
             if (response.data.message === "User created" || response.data.message === "Login successful") {
 
-                dispatch(handle_successful_login(response.data.token, response.data.user_id, response.data.username))
+                dispatch(handle_successful_login(response.data.token, response.data.user_id, response.data.username, response.data.refresh_token))
 
                 set_redirect("/dashboard")
 

@@ -15,15 +15,20 @@ import WakeUpScreen from "./Wake_up_screen"
 import { BrowserRouter, Switch, Route } from "react-router-dom"
 
 //redux hooks
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 //redux action creators
 import { handle_successful_login } from "./Store/Actions/2_authentication_action"
 
 //util
 import send_request from "./util/send_request"
+import { submit_form } from './Store/Actions/0_submit_form_action';
 
 const App = () => {
+
+  //?selectors
+  const response = useSelector(state => state.form.response)
+  const user_id =  useSelector(state => state.auth.user_id)
 
   //-config
   const dispatch = useDispatch()
@@ -32,11 +37,32 @@ const App = () => {
   const [server_is_awake, set_server_is_awake] = useState(false)
 
   //!effects
+
+  useEffect(() => {
+
+    if(response) console.log(response)
+
+    if (response && response.data.message === "expired") {
+
+       dispatch(submit_form({ user_id: user_id, refresh_token:window.localStorage.getItem("refresh_token") }, "refresh_jwt"))
+
+    }
+
+    if (response && response.data.message === "Token refreshed") {
+
+      window.localStorage.setItem("token", response.data.token)
+      window.localStorage.setItem("refresh_token", response.data.refresh_token)
+
+    }
+
+    // eslint-disable-next-line 
+  }, [response])
+
   useEffect(() => {
 
     if (window.localStorage.getItem("user_id")) {
 
-      dispatch(handle_successful_login(window.localStorage.getItem("token"), window.localStorage.getItem("user_id"), window.localStorage.getItem("username")))
+      dispatch(handle_successful_login(window.localStorage.getItem("token"), window.localStorage.getItem("user_id"), window.localStorage.getItem("username"), window.localStorage.getItem("refresh_token")))
 
     }
     // eslint-disable-next-line
