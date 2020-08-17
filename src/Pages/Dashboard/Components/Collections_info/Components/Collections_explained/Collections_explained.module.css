@@ -7,8 +7,7 @@
     font-size: 18px;
     width: 250px;
     color: grey;
-    background-color: white;
-    box-shadow: 1px 1px 3px 1px rgba(128, 128, 128, 0.37);
+    border:1px dotted black;
     padding: 5px 10px;
     position: absolute;
     display: none;
@@ -19,6 +18,8 @@
 .view_notes{
     top: 170px;
 }
+
+
 
 @media(min-width:1200px){
     .description{

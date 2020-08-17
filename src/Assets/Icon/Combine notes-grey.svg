@@ -8,9 +8,9 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    id="Flat"
-   height="512"
-   viewBox="0 0 512 512"
-   width="512"
+   height="50"
+   viewBox="0 0 50 50"
+   width="50"
    version="1.1"
    sodipodi:docname="Combine notes-grey.svg"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
@@ -22,6 +22,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -40,44 +41,43 @@
      inkscape:window-height="1017"
      id="namedview17"
      showgrid="false"
-     inkscape:zoom="0.4609375"
-     inkscape:cx="256"
-     inkscape:cy="256"
-     inkscape:window-x="-8"
+     inkscape:zoom="2.6074563"
+     inkscape:cx="46.377959"
+     inkscape:cy="-25.772769"
+     inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:current-layer="Flat" />
   <rect
-     height="224"
-     rx="32"
-     width="272"
-     x="216"
-     y="72"
+     height="23.148355"
+     rx="3.3069081"
+     width="28.108719"
+     x="20.830517"
+     y="6.404645"
      id="rect2"
-     fill="#f7cc38"
-     style="fill:#5a5a5a;fill-opacity:1" />
+     style="fill:#5a5a5a;fill-opacity:1;stroke-width:0.10334088" />
   <path
-     d="m216 312a32 32 0 0 0 32 32h208a32 32 0 0 0 32-32v-160a32 32 0 0 0 -32-32h-112v-64a32 32 0 0 0 -32-32h-64a32 32 0 0 0 -32 32z"
+     d="m 20.830515,31.206454 a 3.3069079,3.3069079 0 0 0 3.306908,3.306909 h 21.494901 a 3.3069079,3.3069079 0 0 0 3.306909,-3.306909 V 14.671915 A 3.3069079,3.3069079 0 0 0 45.632324,11.365006 H 34.058147 V 4.7511909 A 3.3069079,3.3069079 0 0 0 30.751239,1.4442824 h -6.613816 a 3.3069079,3.3069079 0 0 0 -3.306908,3.3069085 z"
      id="path4"
-     style="fill:#787878;fill-opacity:1"
-     fill="#fbdc44" />
+     style="fill:#787878;fill-opacity:1;stroke-width:0.10334088"
+     inkscape:connector-curvature="0" />
   <rect
-     fill="#f7cc38"
-     height="224"
-     rx="32"
-     width="272"
-     x="24"
-     y="216"
+     height="23.148355"
+     rx="3.3069081"
+     width="28.108719"
+     x="0.98906744"
+     y="21.28573"
      id="rect6"
-     style="fill:#5a5a5a;fill-opacity:1" />
+     style="fill:#5a5a5a;fill-opacity:1;stroke-width:0.10334088" />
   <path
-     d="m24 456a32 32 0 0 0 32 32h208a32 32 0 0 0 32-32v-160a32 32 0 0 0 -32-32h-112v-64a32 32 0 0 0 -32-32h-64a32 32 0 0 0 -32 32z"
-     fill="#fbe36a"
+     d="m 0.9890674,46.08754 a 3.3069079,3.3069079 0 0 0 3.3069077,3.306908 H 25.790876 A 3.3069079,3.3069079 0 0 0 29.097785,46.08754 V 29.553 A 3.3069079,3.3069079 0 0 0 25.790876,26.246092 H 14.216699 V 19.632276 A 3.3069079,3.3069079 0 0 0 10.909791,16.325369 H 4.2959751 a 3.3069079,3.3069079 0 0 0 -3.3069077,3.306907 z"
      id="path8"
-     style="fill:#787878;fill-opacity:1" />
+     style="fill:#787878;fill-opacity:1;stroke-width:0.10334088"
+     inkscape:connector-curvature="0" />
   <g
      id="g14"
-     style="fill:#5a5a5a;fill-opacity:1">
+     style="fill:#5a5a5a;fill-opacity:1"
+     transform="matrix(0.10334087,0,0,0.10334087,-1.4911134,-1.0358984)">
     <path
        d="m 408,416 v -24 l -64,48 64,48 v -24 h 72 v -48 z"
        id="path10"

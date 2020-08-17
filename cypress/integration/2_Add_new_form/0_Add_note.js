@@ -146,15 +146,6 @@ describe("@@@@@ ADD NEW NOTE @@@@@", () => {
 
         it("Submit the form without entering syntax - should display the note", () => {
 
-            cy.on('uncaught:exception', (err, runnable) => {
-
-                done()
-            
-                // return false to prevent the error from
-                // failing this test
-                return false
-              })
-
             cy.get('[test_handle="form_next_button"]').click()
 
             cy.get('[test_handle="note_container"]').should("be.visible")

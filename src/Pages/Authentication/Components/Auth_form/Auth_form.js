@@ -106,7 +106,7 @@ export const Auth_form = props => {
 
                     >
 
-                        {current_action === "login" ? "Need to create an account ? Sign up" : "Already have an account ? Log in"}
+                        {current_action === "login" ? `Need to create an account ? Sign up `: "Already have an account ? Log in"}
 
                     </span>
 

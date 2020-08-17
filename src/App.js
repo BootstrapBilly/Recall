@@ -24,14 +24,14 @@ import { handle_successful_login } from "./Store/Actions/2_authentication_action
 //util
 import send_request from "./util/send_request"
 import { submit_form } from './Store/Actions/0_submit_form_action';
+import { mark_server_awake } from './Store/Actions/6_wake_up_server_action';
 
 const App = () => {
 
   //?selectors
-   const response = useSelector(state => state.form.response)
+  const response = useSelector(state => state.form.response)
   const user_id = useSelector(state => state.auth.user_id)
-
-  // console.log(response)
+  const server_awake = useSelector(state => state.awake.awake)
 
   //-config
   const dispatch = useDispatch()
@@ -43,25 +43,24 @@ const App = () => {
 
   useEffect(() => {
 
-  if(response) console.log(response)
+    if (response) console.log(response)
 
-  if (response && response.data.message === "expired") {
+    if (response && response.data.message === "expired") {
 
-     dispatch(submit_form({ user_id: user_id, refresh_token:window.localStorage.getItem("refresh_token") }, "refresh_jwt"))
+      dispatch(submit_form({ user_id: user_id, refresh_token: window.localStorage.getItem("refresh_token") }, "refresh_jwt"))
 
-  }
+    }
 
-  if (response && response.data.message === "Token refreshed") {
+    if (response && response.data.message === "Token refreshed") {
 
-    console.log("refresh")
 
-    window.localStorage.setItem("token", response.data.token)
-    window.localStorage.setItem("refresh_token", response.data.refresh_token)
-    window.location.reload()
+      window.localStorage.setItem("token", response.data.token)
+      window.localStorage.setItem("refresh_token", response.data.refresh_token)
+      window.location.reload()
 
-  }
+    }
 
-  //eslint-disable-next-line 
+    //eslint-disable-next-line 
   })
 
   useEffect(() => {
@@ -83,14 +82,15 @@ const App = () => {
       if (wake_up_sent.data.message === "Server is awake") {
 
         set_server_is_awake(true)
+        dispatch(mark_server_awake())
 
       }
 
     }
 
-    wake_up_server()
-
-  }, [])
+    if (!server_awake) { wake_up_server() }
+// eslint-disable-next-line
+  }, [server_awake])
 
 
   return (

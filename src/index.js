@@ -15,6 +15,7 @@ import AuthenticationReducer from "./Store/Reducers/2_authentication_user"
 import ActiveNavReducer from "./Store/Reducers/3_active_nav_link_reducer"
 import ProfileImageReducer from "./Store/Reducers/4_profile_image_handler"
 import DragAndDropReducer from "./Store/Reducers/5_drag_and_drop_reducer"
+import MarkServerAwakeReducer from "./Store/Reducers/6_wake_up_server_reducer"
 
 const rootReducer = combineReducers({ //combine all the state reducers into one root reducer
 
@@ -23,7 +24,8 @@ const rootReducer = combineReducers({ //combine all the state reducers into one 
   auth: AuthenticationReducer,
   nav: ActiveNavReducer,
   profile_image: ProfileImageReducer,
-  drag_and_drop: DragAndDropReducer
+  drag_and_drop: DragAndDropReducer,
+  awake:MarkServerAwakeReducer
 
 })
 

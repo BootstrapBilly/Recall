@@ -85,6 +85,7 @@ const handle_form_navigation = (direction, combine_notes, form_step, set_form_st
             //otherwise, submit the request to add a new note
             else return dispatch(submit_form({ ...form_data, user_id: user_id }, "notes"))
 
+            default:return
 
     }
 }
