@@ -5,6 +5,9 @@ These snippets and collections can then be shared with your friends and colleagu
 # How to run it 
 npm start
 
+# Live Site
+https://get-recall.web.app/
+
 # The API
 https://github.com/BootstrapBilly/Recall_API
 
@@ -19,7 +22,7 @@ https://github.com/BootstrapBilly/Recall_API
 #### Combine multiple code snippets into a collection
 #### Search for specific code snippets and collections
 
-<img src="./ReadNePhotos/note.png" height="640" width="360">
+<img src="./ReadMePhotos/note.png" height="440" width="360">
 
 ## Collections
 #### Create, read, update and delete collections of code snippets
