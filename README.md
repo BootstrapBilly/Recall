@@ -6,22 +6,22 @@ These snippets and collections can then be shared with your friends and colleagu
 npm start
 
 # Features
-### Account
+## Account
 #### Signup and login to your personalised account
 #### Delete your account
 #### Change your profile picture, username and password
 
-### Code Snippets
+## Code Snippets
 #### Create, read, update and delete code snippets
 #### Combine multiple code snippets into a collection
 #### Search for specific code snippets and collections
 
-### Collections
+## Collections
 #### Create, read, update and delete collections of code snippets
 #### Rearrange the order of code snippets inside a collection
 #### Add and remove code snippets from a collection
 
-### Social
+## Social
 #### Add and remove friends
 #### Share code snippets and collections with your friends
 #### Unshare with your friends
