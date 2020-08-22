@@ -3,7 +3,10 @@ A code snippet manager where you can store your code snippets and combine multip
 These snippets and collections can then be shared with your friends and colleagues.
 
 # How to run it 
+
+```javascript 
 npm start
+```
 
 # Live Site
 https://get-recall.web.app/
