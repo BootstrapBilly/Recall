@@ -37,7 +37,7 @@ const App = () => {
   const dispatch = useDispatch()
 
   //*states
-  const [server_is_awake, set_server_is_awake] = useState(false)
+  const [server_is_awake, set_server_is_awake] = useState(true)
 
   //!effects
 

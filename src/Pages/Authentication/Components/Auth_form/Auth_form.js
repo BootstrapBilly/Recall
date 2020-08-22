@@ -203,7 +203,7 @@ export const Auth_form = props => {
                 
                 style={{ 
 
-                    display: (!response || response.status < 401) && "none", 
+                    display: ( !response || (response.status < 401 && response.status > 200)) ? "none" : response && response.data.message === "If your email address was found, we just sent you an email with instructions to reset your password" && "flex", 
                     color: response && response.status < 401 && colours.primary, 
                     borderColor: response && response.status < 401 && colours.primary  
                     
